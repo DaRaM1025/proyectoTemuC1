@@ -1,0 +1,1314 @@
+package co.edu.unbosque.model.persistence;
+
+import java.util.ArrayList;
+
+import co.edu.unbosque.model.Calzado;
+import co.edu.unbosque.model.CalzadoDTO;
+import co.edu.unbosque.model.Camiseta;
+import co.edu.unbosque.model.CamisetaDTO;
+import co.edu.unbosque.model.Celular;
+import co.edu.unbosque.model.CelularDTO;
+import co.edu.unbosque.model.CintaAdhesiva;
+import co.edu.unbosque.model.CintaAdhesivaDTO;
+import co.edu.unbosque.model.Computador;
+import co.edu.unbosque.model.ComputadorDTO;
+import co.edu.unbosque.model.Corrector;
+import co.edu.unbosque.model.CorrectorDTO;
+import co.edu.unbosque.model.Cuaderno;
+import co.edu.unbosque.model.CuadernoDTO;
+import co.edu.unbosque.model.InstrumentoCuerda;
+import co.edu.unbosque.model.InstrumentoCuerdaDTO;
+import co.edu.unbosque.model.InstrumentoPercusion;
+import co.edu.unbosque.model.InstrumentoPercusionDTO;
+import co.edu.unbosque.model.InstrumentoViento;
+import co.edu.unbosque.model.InstrumentoVientoDTO;
+import co.edu.unbosque.model.Labial;
+import co.edu.unbosque.model.LabialDTO;
+import co.edu.unbosque.model.Lego;
+import co.edu.unbosque.model.LegoDTO;
+import co.edu.unbosque.model.Marcador;
+import co.edu.unbosque.model.MarcadorDTO;
+import co.edu.unbosque.model.Pantalon;
+import co.edu.unbosque.model.PantalonDTO;
+import co.edu.unbosque.model.Peluche;
+import co.edu.unbosque.model.PelucheDTO;
+import co.edu.unbosque.model.PistolaAgua;
+import co.edu.unbosque.model.PistolaAguaDTO;
+import co.edu.unbosque.model.Sombra;
+import co.edu.unbosque.model.SombraDTO;
+import co.edu.unbosque.model.Televisor;
+import co.edu.unbosque.model.TelevisorDTO;
+import co.edu.unbosque.model.Usuario;
+import co.edu.unbosque.model.UsuarioDTO;
+
+/**
+ * Clase que se encarga de la conversión entre entidades y sus respectivos DTOs.
+ * Facilita la transferencia de datos entre la capa de presentación y la capa de
+ * persistencia.
+ *
+ * @author Nataly Rengifo
+ */
+
+public class DataMapper {
+
+	/**
+	 * Convierte un UsuarioDTO a un Usuario.
+	 *
+	 * @param dto El DTO a convertir.
+	 * @return La entidad Usuario correspondiente, o null si el DTO es null.
+	 */
+	public static Usuario usuarioDTOToUsuario(UsuarioDTO dto) {
+		return new Usuario(dto.getNombre(), dto.getTelefono(), dto.getEmail(), dto.getUsername(), dto.getPassword(),
+				dto.getFechaNacimiento());
+	}
+
+	public static UsuarioDTO usuarioToUsuarioDTO(Usuario entity) {
+		return new UsuarioDTO(entity.getNombre(), entity.getTelefono(), entity.getEmail(), entity.getUsername(),
+				entity.getPassword(), entity.getFechaNacimiento());
+	}
+
+	public static ArrayList<UsuarioDTO> listaUsuarioToListaUsuarioDTO(ArrayList<Usuario> entityList) {
+		ArrayList<UsuarioDTO> dtoList = new ArrayList<>();
+		for (Usuario u : entityList) {
+			dtoList.add(new UsuarioDTO(u.getNombre(), u.getTelefono(), u.getEmail(), u.getUsername(), u.getPassword(),
+					u.getFechaNacimiento()));
+		}
+		return dtoList;
+	}
+
+	public static ArrayList<UsuarioDTO> listaUsuarioDTOToListaUsuario(ArrayList<UsuarioDTO> dtoList) {
+		ArrayList<UsuarioDTO> entityList = new ArrayList<>();
+		for (UsuarioDTO d : dtoList) {
+			entityList.add(new UsuarioDTO(d.getNombre(), d.getTelefono(), d.getEmail(), d.getUsername(),
+					d.getPassword(), d.getFechaNacimiento()));
+		}
+		return entityList;
+	}
+
+	/**
+	 * Convierte un CamisetaDTO a un Camiseta.
+	 *
+	 * @param dto El DTO a convertir.
+	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
+	 *         null.
+	 */
+	public static Camiseta camisetaDTOtoCamiseta(CamisetaDTO dto) {
+		if (dto == null) {
+			return null;
+		}
+		return new Camiseta(dto.getNombre(), dto.getMarca(), dto.getTipoProducto(), dto.getDescripcion(),
+				dto.getUrlImagen(), dto.getPrecio(), dto.getCantidad(), dto.getId(), dto.getTalla(), dto.getGenero(),
+				dto.getMaterial(), dto.getTipoManga(), dto.getCuello(), dto.isEstampado());
+	}
+
+	/**
+	 * Convierte un Camiseta a un CamisetaDTO.
+	 *
+	 * @param entidad La entidad a convertir.
+	 * @return El DTO correspondiente, o null si la entidad es null.
+	 */
+	public static CamisetaDTO camisetaToCamisetaDTO(Camiseta ent) {
+		if (ent == null) {
+			return null;
+		}
+		return new CamisetaDTO(ent.getNombre(), ent.getMarca(), ent.getTipoProducto(), ent.getDescripcion(),
+				ent.getUrlImagen(), ent.getPrecio(), ent.getCantidad(), ent.getId(), ent.getTalla(), ent.getGenero(),
+				ent.getMaterial(), ent.getTipoManga(), ent.getCuello(), ent.isEstampado());
+	}
+
+	/**
+	 * Convierte una lista de Camiseta a una lista de CamisetaDTO.
+	 *
+	 * @param listaEntidad La lista de entidades a convertir.
+	 * @return La lista de DTOs correspondiente, o una lista vacía si la entrada es
+	 *         null.
+	 */
+	public static ArrayList<CamisetaDTO> listaCamisetaToListaCamisetaDTO(ArrayList<Camiseta> listaEntidad) {
+		ArrayList<CamisetaDTO> listaDTO = new ArrayList<>();
+		if (listaEntidad == null) {
+			return listaDTO;
+		}
+		for (Camiseta cam : listaEntidad) {
+			listaDTO.add(camisetaToCamisetaDTO(cam));
+		}
+		return listaDTO;
+	}
+
+	/**
+	 * Convierte una lista de CamisetaDTO a una lista de Camiseta.
+	 *
+	 * @param listaDTO La lista de DTOs a convertir.
+	 * @return La lista de entidades correspondiente, o una lista vacía si la
+	 *         entrada es null.
+	 */
+	public static ArrayList<Camiseta> listaCamisetaDTOToListaCamiseta(ArrayList<CamisetaDTO> listaDTO) {
+		ArrayList<Camiseta> listaEntidad = new ArrayList<>();
+		if (listaDTO == null) {
+			return listaEntidad;
+		}
+		for (CamisetaDTO camDto : listaDTO) {
+			listaEntidad.add(camisetaDTOtoCamiseta(camDto));
+		}
+		return listaEntidad;
+	}
+
+	/**
+	 * Convierte un CalzadoDTO a un Calzado.
+	 *
+	 * @param dto El DTO a convertir.
+	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
+	 *         null.
+	 */
+	public static Calzado calzadoDTOtoCalzado(CalzadoDTO dto) {
+		if (dto == null) {
+			return null;
+		}
+		return new Calzado(dto.getNombre(), dto.getMarca(), dto.getTipoProducto(), dto.getDescripcion(),
+				dto.getUrlImagen(), dto.getPrecio(), dto.getCantidad(), dto.getId(), dto.getTalla(), dto.getGenero(),
+				dto.getMaterial(), dto.getTipoCalzado(), dto.getOcasion(), dto.getMaterialSuela(),
+				dto.getAlturaSuela());
+	}
+
+	/**
+	 * Convierte un Calzado a un CalzadoDTO.
+	 *
+	 * @param entidad La entidad a convertir.
+	 * @return El DTO correspondiente, o null si la entidad es null.
+	 */
+	public static CalzadoDTO calzadoToCalzadoDTO(Calzado ent) {
+		if (ent == null) {
+			return null;
+		}
+		return new CalzadoDTO(ent.getNombre(), ent.getMarca(), ent.getTipoProducto(), ent.getDescripcion(),
+				ent.getUrlImagen(), ent.getPrecio(), ent.getCantidad(), ent.getId(), ent.getTalla(), ent.getGenero(),
+				ent.getMaterial(), ent.getTipoCalzado(), ent.getOcasion(), ent.getMaterialSuela(),
+				ent.getAlturaSuela());
+	}
+
+	/**
+	 * Convierte una lista de Calzado a una lista de CalzadoDTO.
+	 *
+	 * @param listaEntidad La lista de entidades a convertir.
+	 * @return La lista de DTOs correspondiente, o una lista vacía si la entrada es
+	 *         null.
+	 */
+	public static ArrayList<CalzadoDTO> listaCalzadoToListaCalzadoDTO(ArrayList<Calzado> listaEntidad) {
+		ArrayList<CalzadoDTO> listaDTO = new ArrayList<>();
+		if (listaEntidad == null) {
+			return listaDTO;
+		}
+		for (Calzado cal : listaEntidad) {
+			listaDTO.add(calzadoToCalzadoDTO(cal));
+		}
+		return listaDTO;
+	}
+
+	/**
+	 * Convierte una lista de CalzadoDTO a una lista de Calzado.
+	 *
+	 * @param listaDTO La lista de DTOs a convertir.
+	 * @return La lista de entidades correspondiente, o una lista vacía si la
+	 *         entrada es null.
+	 */
+	public static ArrayList<Calzado> listaCalzadoDTOToListaCalzado(ArrayList<CalzadoDTO> listaDTO) {
+		ArrayList<Calzado> listaEntidad = new ArrayList<>();
+		if (listaDTO == null) {
+			return listaEntidad;
+		}
+		for (CalzadoDTO calDto : listaDTO) {
+			listaEntidad.add(calzadoDTOtoCalzado(calDto));
+		}
+		return listaEntidad;
+	}
+
+	/**
+	 * Convierte un CelularDTO a un Celular.
+	 *
+	 * @param dto El DTO a convertir.
+	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
+	 *         null.
+	 */
+	public static Celular celularDTOtoCelular(CelularDTO dto) {
+		if (dto == null) {
+			return null;
+		}
+		return new Celular(dto.getNombre(), dto.getMarca(), dto.getTipoProducto(), dto.getDescripcion(),
+				dto.getUrlImagen(), dto.getPrecio(), dto.getCantidad(), dto.getId(), dto.getPulgadas(),
+				dto.getResolucion(), dto.getSistemaOperativo(), dto.getAlmacenamiento(), dto.getRam(),
+				dto.getCantidadCamaras(), dto.isDualSim());
+	}
+
+	/**
+	 * Convierte un Celular a un CelularDTO.
+	 *
+	 * @param entidad La entidad a convertir.
+	 * @return El DTO correspondiente, o null si la entidad es null.
+	 */
+	public static CelularDTO celularToCelularDTO(Celular ent) {
+		if (ent == null) {
+			return null;
+		}
+		return new CelularDTO(ent.getNombre(), ent.getMarca(), ent.getTipoProducto(), ent.getDescripcion(),
+				ent.getUrlImagen(), ent.getPrecio(), ent.getCantidad(), ent.getId(), ent.getPulgadas(),
+				ent.getResolucion(), ent.getSistemaOperativo(), ent.getAlmacenamiento(), ent.getRam(),
+				ent.getCantidadCamaras(), ent.isDualSim());
+	}
+
+	/**
+	 * Convierte una lista de Celular a una lista de CelularDTO.
+	 *
+	 * @param listaEntidad La lista de entidades a convertir.
+	 * @return La lista de DTOs correspondiente, o una lista vacía si la entrada es
+	 *         null.
+	 */
+	public static ArrayList<CelularDTO> listaCelularToListaCelularDTO(ArrayList<Celular> listaEntidad) {
+		ArrayList<CelularDTO> listaDTO = new ArrayList<>();
+		if (listaEntidad == null) {
+			return listaDTO;
+		}
+		for (Celular cel : listaEntidad) {
+			listaDTO.add(celularToCelularDTO(cel));
+		}
+		return listaDTO;
+	}
+
+	/**
+	 * Convierte una lista de CelularDTO a una lista de Celular.
+	 *
+	 * @param listaDTO La lista de DTOs a convertir.
+	 * @return La lista de entidades correspondiente, o una lista vacía si la
+	 *         entrada es null.
+	 */
+	public static ArrayList<Celular> listaCelularDTOToListaCelular(ArrayList<CelularDTO> listaDTO) {
+		ArrayList<Celular> listaEntidad = new ArrayList<>();
+		if (listaDTO == null) {
+			return listaEntidad;
+		}
+		for (CelularDTO celDto : listaDTO) {
+			listaEntidad.add(celularDTOtoCelular(celDto));
+		}
+		return listaEntidad;
+	}
+
+	/**
+	 * Convierte un CintaAdhesivaDTO a un CintaAdhesiva.
+	 *
+	 * @param dto El DTO a convertir.
+	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
+	 *         null.
+	 */
+	public static CintaAdhesiva cintaAdhesivaDTOtoCintaAdhesiva(CintaAdhesivaDTO dto) {
+		if (dto == null) {
+			return null;
+		}
+		return new CintaAdhesiva(dto.getNombre(), dto.getMarca(), dto.getTipoProducto(), dto.getDescripcion(),
+				dto.getUrlImagen(), dto.getPrecio(), dto.getCantidad(), dto.getId(), dto.getTipoPresentacion(),
+				dto.isEsAdhesivoReposicionable(), dto.getAncho(), dto.getTipoCinta());
+	}
+
+	/**
+	 * Convierte un CintaAdhesiva a un CintaAdhesivaDTO.
+	 *
+	 * @param entidad La entidad a convertir.
+	 * @return El DTO correspondiente, o null si la entidad es null.
+	 */
+	public static CintaAdhesivaDTO cintaAdhesivaToCintaAdhesivaDTO(CintaAdhesiva ent) {
+		if (ent == null) {
+			return null;
+		}
+		return new CintaAdhesivaDTO(ent.getNombre(), ent.getMarca(), ent.getTipoProducto(), ent.getDescripcion(),
+				ent.getUrlImagen(), ent.getPrecio(), ent.getCantidad(), ent.getId(), ent.getTipoPresentacion(),
+				ent.isEsAdhesivoReposicionable(), ent.getAncho(), ent.getTipoCinta());
+	}
+
+	/**
+	 * Convierte una lista de CintaAdhesiva a una lista de CintaAdhesivaDTO.
+	 *
+	 * @param listaEntidad La lista de entidades a convertir.
+	 * @return La lista de DTOs correspondiente, o una lista vacía si la entrada es
+	 *         null.
+	 */
+	public static ArrayList<CintaAdhesivaDTO> listaCintaAdhesivaToListaCintaAdhesivaDTO(
+			ArrayList<CintaAdhesiva> listaEntidad) {
+		ArrayList<CintaAdhesivaDTO> listaDTO = new ArrayList<>();
+		if (listaEntidad == null) {
+			return listaDTO;
+		}
+		for (CintaAdhesiva cint : listaEntidad) {
+			listaDTO.add(cintaAdhesivaToCintaAdhesivaDTO(cint));
+		}
+		return listaDTO;
+	}
+
+	/**
+	 * Convierte una lista de CintaAdhesivaDTO a una lista de CintaAdhesiva.
+	 *
+	 * @param listaDTO La lista de DTOs a convertir.
+	 * @return La lista de entidades correspondiente, o una lista vacía si la
+	 *         entrada es null.
+	 */
+	public static ArrayList<CintaAdhesiva> listaCintaAdhesivaDTOToListaCintaAdhesiva(
+			ArrayList<CintaAdhesivaDTO> listaDTO) {
+		ArrayList<CintaAdhesiva> listaEntidad = new ArrayList<>();
+		if (listaDTO == null) {
+			return listaEntidad;
+		}
+		for (CintaAdhesivaDTO cintDto : listaDTO) {
+			listaEntidad.add(cintaAdhesivaDTOtoCintaAdhesiva(cintDto));
+		}
+		return listaEntidad;
+	}
+
+	/**
+	 * Convierte un ComputadorDTO a un Computador.
+	 *
+	 * @param dto El DTO a convertir.
+	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
+	 *         null.
+	 */
+	public static Computador computadorDTOtoComputador(ComputadorDTO dto) {
+		if (dto == null) {
+			return null;
+		}
+		return new Computador(dto.getNombre(), dto.getMarca(), dto.getTipoProducto(), dto.getDescripcion(),
+				dto.getUrlImagen(), dto.getPrecio(), dto.getCantidad(), dto.getId(), dto.getPulgadas(),
+				dto.getResolucion(), dto.getSistemaOperativo(), dto.getAlmacenamiento(), dto.getRam(),
+				dto.getProcesador(), dto.getTarjetaGrafica());
+	}
+
+	/**
+	 * Convierte un Computador a un ComputadorDTO.
+	 *
+	 * @param entidad La entidad a convertir.
+	 * @return El DTO correspondiente, o null si la entidad es null.
+	 */
+	public static ComputadorDTO computadorToComputadorDTO(Computador ent) {
+		if (ent == null) {
+			return null;
+		}
+		return new ComputadorDTO(ent.getNombre(), ent.getMarca(), ent.getTipoProducto(), ent.getDescripcion(),
+				ent.getUrlImagen(), ent.getPrecio(), ent.getCantidad(), ent.getId(), ent.getPulgadas(),
+				ent.getResolucion(), ent.getSistemaOperativo(), ent.getAlmacenamiento(), ent.getRam(),
+				ent.getProcesador(), ent.getTarjetaGrafica());
+	}
+
+	/**
+	 * Convierte una lista de Computador a una lista de ComputadorDTO.
+	 *
+	 * @param listaEntidad La lista de entidades a convertir.
+	 * @return La lista de DTOs correspondiente, o una lista vacía si la entrada es
+	 *         null.
+	 */
+	public static ArrayList<ComputadorDTO> listaComputadorToListaComputadorDTO(ArrayList<Computador> listaEntidad) {
+		ArrayList<ComputadorDTO> listaDTO = new ArrayList<>();
+		if (listaEntidad == null) {
+			return listaDTO;
+		}
+		for (Computador comp : listaEntidad) {
+			listaDTO.add(computadorToComputadorDTO(comp));
+		}
+		return listaDTO;
+	}
+
+	/**
+	 * Convierte una lista de ComputadorDTO a una lista de Computador.
+	 *
+	 * @param listaDTO La lista de DTOs a convertir.
+	 * @return La lista de entidades correspondiente, o una lista vacía si la
+	 *         entrada es null.
+	 */
+	public static ArrayList<Computador> listaComputadorDTOToListaComputador(ArrayList<ComputadorDTO> listaDTO) {
+		ArrayList<Computador> listaEntidad = new ArrayList<>();
+		if (listaDTO == null) {
+			return listaEntidad;
+		}
+		for (ComputadorDTO compDto : listaDTO) {
+			listaEntidad.add(computadorDTOtoComputador(compDto));
+		}
+		return listaEntidad;
+	}
+
+	/**
+	 * Convierte un CorrectorDTO a un Corrector.
+	 *
+	 * @param dto El DTO a convertir.
+	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
+	 *         null.
+	 */
+	public static Corrector correctorDTOtoCorrector(CorrectorDTO dto) {
+		if (dto == null) {
+			return null;
+		}
+		return new Corrector(dto.getNombre(), dto.getMarca(), dto.getTipoProducto(), dto.getDescripcion(),
+				dto.getUrlImagen(), dto.getPrecio(), dto.getCantidad(), dto.getId(), dto.getTipoPiel(),
+				dto.isEsApruebaDeAgua(), dto.getFechaVencimiento(), dto.getCobertura(), dto.getFormato());
+	}
+
+	/**
+	 * Convierte un Corrector a un CorrectorDTO.
+	 *
+	 * @param entidad La entidad a convertir.
+	 * @return El DTO correspondiente, o null si la entidad es null.
+	 */
+	public static CorrectorDTO correctorToCorrectorDTO(Corrector ent) {
+		if (ent == null) {
+			return null;
+		}
+		return new CorrectorDTO(ent.getNombre(), ent.getMarca(), ent.getTipoProducto(), ent.getDescripcion(),
+				ent.getUrlImagen(), ent.getPrecio(), ent.getCantidad(), ent.getId(), ent.getTipoPiel(),
+				ent.isEsApruebaDeAgua(), ent.getFechaVencimiento(), ent.getCobertura(), ent.getFormato());
+	}
+
+	/**
+	 * Convierte una lista de Corrector a una lista de CorrectorDTO.
+	 *
+	 * @param listaEntidad La lista de entidades a convertir.
+	 * @return La lista de DTOs correspondiente, o una lista vacía si la entrada es
+	 *         null.
+	 */
+	public static ArrayList<CorrectorDTO> listaCorrectorToListaCorrectorDTO(ArrayList<Corrector> listaEntidad) {
+		ArrayList<CorrectorDTO> listaDTO = new ArrayList<>();
+		if (listaEntidad == null) {
+			return listaDTO;
+		}
+		for (Corrector corr : listaEntidad) {
+			listaDTO.add(correctorToCorrectorDTO(corr));
+		}
+		return listaDTO;
+	}
+
+	/**
+	 * Convierte una lista de CorrectorDTO a una lista de Corrector.
+	 *
+	 * @param listaDTO La lista de DTOs a convertir.
+	 * @return La lista de entidades correspondiente, o una lista vacía si la
+	 *         entrada es null.
+	 */
+	public static ArrayList<Corrector> listaCorrectorDTOToListaCorrector(ArrayList<CorrectorDTO> listaDTO) {
+		ArrayList<Corrector> listaEntidad = new ArrayList<>();
+		if (listaDTO == null) {
+			return listaEntidad;
+		}
+		for (CorrectorDTO corrDto : listaDTO) {
+			listaEntidad.add(correctorDTOtoCorrector(corrDto));
+		}
+		return listaEntidad;
+	}
+
+	/**
+	 * Convierte un CuadernoDTO a un Cuaderno.
+	 *
+	 * @param dto El DTO a convertir.
+	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
+	 *         null.
+	 */
+	public static Cuaderno cuadernoDTOtoCuaderno(CuadernoDTO dto) {
+		if (dto == null) {
+			return null;
+		}
+		return new Cuaderno(dto.getNombre(), dto.getMarca(), dto.getTipoProducto(), dto.getDescripcion(),
+				dto.getUrlImagen(), dto.getPrecio(), dto.getCantidad(), dto.getId(), dto.getTipoPresentacion(),
+				dto.getTipoHojas(), dto.getCantidadHojas(), dto.isPastaDura());
+	}
+
+	/**
+	 * Convierte un Cuaderno a un CuadernoDTO.
+	 *
+	 * @param entidad La entidad a convertir.
+	 * @return El DTO correspondiente, o null si la entidad es null.
+	 */
+	public static CuadernoDTO cuadernoToCuadernoDTO(Cuaderno ent) {
+		if (ent == null) {
+			return null;
+		}
+		return new CuadernoDTO(ent.getNombre(), ent.getMarca(), ent.getTipoProducto(), ent.getDescripcion(),
+				ent.getUrlImagen(), ent.getPrecio(), ent.getCantidad(), ent.getId(), ent.getTipoPresentacion(),
+				ent.getTipoHojas(), ent.getCantidadHojas(), ent.isPastaDura());
+	}
+
+	/**
+	 * Convierte una lista de Cuaderno a una lista de CuadernoDTO.
+	 *
+	 * @param listaEntidad La lista de entidades a convertir.
+	 * @return La lista de DTOs correspondiente, o una lista vacía si la entrada es
+	 *         null.
+	 */
+	public static ArrayList<CuadernoDTO> listaCuadernoToListaCuadernoDTO(ArrayList<Cuaderno> listaEntidad) {
+		ArrayList<CuadernoDTO> listaDTO = new ArrayList<>();
+		if (listaEntidad == null) {
+			return listaDTO;
+		}
+		for (Cuaderno cua : listaEntidad) {
+			listaDTO.add(cuadernoToCuadernoDTO(cua));
+		}
+		return listaDTO;
+	}
+
+	/**
+	 * Convierte una lista de CuadernoDTO a una lista de Cuaderno.
+	 *
+	 * @param listaDTO La lista de DTOs a convertir.
+	 * @return La lista de entidades correspondiente, o una lista vacía si la
+	 *         entrada es null.
+	 */
+	public static ArrayList<Cuaderno> listaCuadernoDTOToListaCuaderno(ArrayList<CuadernoDTO> listaDTO) {
+		ArrayList<Cuaderno> listaEntidad = new ArrayList<>();
+		if (listaDTO == null) {
+			return listaEntidad;
+		}
+		for (CuadernoDTO cuaDto : listaDTO) {
+			listaEntidad.add(cuadernoDTOtoCuaderno(cuaDto));
+		}
+		return listaEntidad;
+	}
+
+	/**
+	 * Convierte un InstrumentoCuerdaDTO a un InstrumentoCuerda.
+	 *
+	 * @param dto El DTO a convertir.
+	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
+	 *         null.
+	 */
+	public static InstrumentoCuerda instrumentoCuerdaDTOtoInstrumentoCuerda(InstrumentoCuerdaDTO dto) {
+		if (dto == null) {
+			return null;
+		}
+		return new InstrumentoCuerda(dto.getNombre(), dto.getMarca(), dto.getTipoProducto(), dto.getDescripcion(),
+				dto.getUrlImagen(), dto.getPrecio(), dto.getCantidad(), dto.getId(), dto.isIncluyeEstuche(),
+				dto.getTipoInstrumentoCuerda(), dto.getNumeroCuerdas(), dto.getTipoCuerda(),
+				dto.isTieneCajaResonancia());
+	}
+
+	/**
+	 * Convierte un InstrumentoCuerda a un InstrumentoCuerdaDTO.
+	 *
+	 * @param entidad La entidad a convertir.
+	 * @return El DTO correspondiente, o null si la entidad es null.
+	 */
+	public static InstrumentoCuerdaDTO instrumentoCuerdaToInstrumentoCuerdaDTO(InstrumentoCuerda ent) {
+		if (ent == null) {
+			return null;
+		}
+		return new InstrumentoCuerdaDTO(ent.getNombre(), ent.getMarca(), ent.getTipoProducto(), ent.getDescripcion(),
+				ent.getUrlImagen(), ent.getPrecio(), ent.getCantidad(), ent.getId(), ent.isIncluyeEstuche(),
+				ent.getTipoInstrumentoCuerda(), ent.getNumeroCuerdas(), ent.getTipoCuerda(),
+				ent.isTieneCajaResonancia());
+	}
+
+	/**
+	 * Convierte una lista de InstrumentoCuerda a una lista de InstrumentoCuerdaDTO.
+	 *
+	 * @param listaEntidad La lista de entidades a convertir.
+	 * @return La lista de DTOs correspondiente, o una lista vacía si la entrada es
+	 *         null.
+	 */
+	public static ArrayList<InstrumentoCuerdaDTO> listaInstrumentoCuerdaToListaInstrumentoCuerdaDTO(
+			ArrayList<InstrumentoCuerda> listaEntidad) {
+		ArrayList<InstrumentoCuerdaDTO> listaDTO = new ArrayList<>();
+		if (listaEntidad == null) {
+			return listaDTO;
+		}
+		for (InstrumentoCuerda cua : listaEntidad) {
+			listaDTO.add(instrumentoCuerdaToInstrumentoCuerdaDTO(cua));
+		}
+		return listaDTO;
+	}
+
+	/**
+	 * Convierte una lista de InstrumentoCuerdaDTO a una lista de InstrumentoCuerda.
+	 *
+	 * @param listaDTO La lista de DTOs a convertir.
+	 * @return La lista de entidades correspondiente, o una lista vacía si la
+	 *         entrada es null.
+	 */
+	public static ArrayList<InstrumentoCuerda> listaInstrumentoCuerdaDTOToListaInstrumentoCuerda(
+			ArrayList<InstrumentoCuerdaDTO> listaDTO) {
+		ArrayList<InstrumentoCuerda> listaEntidad = new ArrayList<>();
+		if (listaDTO == null) {
+			return listaEntidad;
+		}
+		for (InstrumentoCuerdaDTO cuaDto : listaDTO) {
+			listaEntidad.add(instrumentoCuerdaDTOtoInstrumentoCuerda(cuaDto));
+		}
+		return listaEntidad;
+	}
+
+	/**
+	 * Convierte un InstrumentoVientoDTO a un InstrumentoViento.
+	 *
+	 * @param dto El DTO a convertir.
+	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
+	 *         null.
+	 */
+	public static InstrumentoViento instrumentoVientoDTOtoInstrumentoViento(InstrumentoVientoDTO dto) {
+		if (dto == null) {
+			return null;
+		}
+		return new InstrumentoViento(dto.getNombre(), dto.getMarca(), dto.getTipoProducto(), dto.getDescripcion(),
+				dto.getUrlImagen(), dto.getPrecio(), dto.getCantidad(), dto.getId(), dto.isIncluyeEstuche(),
+				dto.getTipoInstrumentoViento(), dto.getAfinacion(), dto.getNumeroValvulas(), dto.isRequiereBoquilla());
+	}
+
+	/**
+	 * Convierte un InstrumentoViento a un InstrumentoVientoDTO.
+	 *
+	 * @param entidad La entidad a convertir.
+	 * @return El DTO correspondiente, o null si la entidad es null.
+	 */
+	public static InstrumentoVientoDTO instrumentoVientoToInstrumentoVientoDTO(InstrumentoViento ent) {
+		if (ent == null) {
+			return null;
+		}
+		return new InstrumentoVientoDTO(ent.getNombre(), ent.getMarca(), ent.getTipoProducto(), ent.getDescripcion(),
+				ent.getUrlImagen(), ent.getPrecio(), ent.getCantidad(), ent.getId(), ent.isIncluyeEstuche(),
+				ent.getTipoInstrumentoViento(), ent.getAfinacion(), ent.getNumeroValvulas(), ent.isRequiereBoquilla());
+	}
+
+	/**
+	 * Convierte una lista de InstrumentoViento a una lista de InstrumentoVientoDTO.
+	 *
+	 * @param listaEntidad La lista de entidades a convertir.
+	 * @return La lista de DTOs correspondiente, o una lista vacía si la entrada es
+	 *         null.
+	 */
+	public static ArrayList<InstrumentoVientoDTO> listaInstrumentoVientoToListaInstrumentoVientoDTO(
+			ArrayList<InstrumentoViento> listaEntidad) {
+		ArrayList<InstrumentoVientoDTO> listaDTO = new ArrayList<>();
+		if (listaEntidad == null) {
+			return listaDTO;
+		}
+		for (InstrumentoViento cua : listaEntidad) {
+			listaDTO.add(instrumentoVientoToInstrumentoVientoDTO(cua));
+		}
+		return listaDTO;
+	}
+
+	/**
+	 * Convierte una lista de InstrumentoVientoDTO a una lista de InstrumentoViento.
+	 *
+	 * @param listaDTO La lista de DTOs a convertir.
+	 * @return La lista de entidades correspondiente, o una lista vacía si la
+	 *         entrada es null.
+	 */
+	public static ArrayList<InstrumentoViento> listaInstrumentoVientoDTOToListaInstrumentoViento(
+			ArrayList<InstrumentoVientoDTO> listaDTO) {
+		ArrayList<InstrumentoViento> listaEntidad = new ArrayList<>();
+		if (listaDTO == null) {
+			return listaEntidad;
+		}
+		for (InstrumentoVientoDTO cuaDto : listaDTO) {
+			listaEntidad.add(instrumentoVientoDTOtoInstrumentoViento(cuaDto));
+		}
+		return listaEntidad;
+	}
+
+	/**
+	 * Convierte un InstrumentoPercusionDTO a un InstrumentoPercusion.
+	 *
+	 * @param dto El DTO a convertir.
+	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
+	 *         null.
+	 */
+	public static InstrumentoPercusion instrumentoPercusionDTOtoInstrumentoPercusion(InstrumentoPercusionDTO dto) {
+		if (dto == null) {
+			return null;
+		}
+		return new InstrumentoPercusion(dto.getNombre(), dto.getMarca(), dto.getTipoProducto(), dto.getDescripcion(),
+				dto.getUrlImagen(), dto.getPrecio(), dto.getCantidad(), dto.getId(), dto.isIncluyeEstuche(),
+				dto.getTipoInstrumentoPercusion(), dto.isUsoBaquetas(), dto.getTipoPercusion(),
+				dto.getCantSuperficiesSonoras());
+	}
+
+	/**
+	 * Convierte un InstrumentoPercusion a un InstrumentoPercusionDTO.
+	 *
+	 * @param entidad La entidad a convertir.
+	 * @return El DTO correspondiente, o null si la entidad es null.
+	 */
+	public static InstrumentoPercusionDTO instrumentoPercusionToInstrumentoPercusionDTO(InstrumentoPercusion ent) {
+		if (ent == null) {
+			return null;
+		}
+		return new InstrumentoPercusionDTO(ent.getNombre(), ent.getMarca(), ent.getTipoProducto(), ent.getDescripcion(),
+				ent.getUrlImagen(), ent.getPrecio(), ent.getCantidad(), ent.getId(), ent.isIncluyeEstuche(),
+				ent.getTipoInstrumentoPercusion(), ent.isUsoBaquetas(), ent.getTipoPercusion(),
+				ent.getCantSuperficiesSonoras());
+	}
+
+	/**
+	 * Convierte una lista de InstrumentoPercusion a una lista de
+	 * InstrumentoPercusionDTO.
+	 *
+	 * @param listaEntidad La lista de entidades a convertir.
+	 * @return La lista de DTOs correspondiente, o una lista vacía si la entrada es
+	 *         null.
+	 */
+	public static ArrayList<InstrumentoPercusionDTO> listaInstrumentoPercusionToListaInstrumentoPercusionDTO(
+			ArrayList<InstrumentoPercusion> listaEntidad) {
+		ArrayList<InstrumentoPercusionDTO> listaDTO = new ArrayList<>();
+		if (listaEntidad == null) {
+			return listaDTO;
+		}
+		for (InstrumentoPercusion cua : listaEntidad) {
+			listaDTO.add(instrumentoPercusionToInstrumentoPercusionDTO(cua));
+		}
+		return listaDTO;
+	}
+
+	/**
+	 * Convierte una lista de InstrumentoPercusionDTO a una lista de
+	 * InstrumentoPercusion.
+	 *
+	 * @param listaDTO La lista de DTOs a convertir.
+	 * @return La lista de entidades correspondiente, o una lista vacía si la
+	 *         entrada es null.
+	 */
+	public static ArrayList<InstrumentoPercusion> listaInstrumentoPercusionDTOToListaInstrumentoPercusion(
+			ArrayList<InstrumentoPercusionDTO> listaDTO) {
+		ArrayList<InstrumentoPercusion> listaEntidad = new ArrayList<>();
+		if (listaDTO == null) {
+			return listaEntidad;
+		}
+		for (InstrumentoPercusionDTO cuaDto : listaDTO) {
+			listaEntidad.add(instrumentoPercusionDTOtoInstrumentoPercusion(cuaDto));
+		}
+		return listaEntidad;
+	}
+
+	/**
+	 * Convierte un LabialDTO a un Labial.
+	 *
+	 * @param dto El DTO a convertir.
+	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
+	 *         null.
+	 */
+	public static Labial labialDTOtoLabial(LabialDTO dto) {
+		if (dto == null) {
+			return null;
+		}
+		return new Labial(dto.getNombre(), dto.getMarca(), dto.getTipoProducto(), dto.getDescripcion(),
+				dto.getUrlImagen(), dto.getPrecio(), dto.getCantidad(), dto.getId(), dto.getTipoPiel(),
+				dto.isEsApruebaDeAgua(), dto.getFechaVencimiento(), dto.getDuracion(), dto.isEsHidratante());
+	}
+
+	/**
+	 * Convierte un Labial a un LabialDTO.
+	 *
+	 * @param entidad La entidad a convertir.
+	 * @return El DTO correspondiente, o null si la entidad es null.
+	 */
+	public static LabialDTO labialToLabialDTO(Labial ent) {
+		if (ent == null) {
+			return null;
+		}
+		return new LabialDTO(ent.getNombre(), ent.getMarca(), ent.getTipoProducto(), ent.getDescripcion(),
+				ent.getUrlImagen(), ent.getPrecio(), ent.getCantidad(), ent.getId(), ent.getTipoPiel(),
+				ent.isEsApruebaDeAgua(), ent.getFechaVencimiento(), ent.getDuracion(), ent.isEsHidratante());
+	}
+
+	/**
+	 * Convierte una lista de Labial a una lista de LabialDTO.
+	 *
+	 * @param listaEntidad La lista de entidades a convertir.
+	 * @return La lista de DTOs correspondiente, o una lista vacía si la entrada es
+	 *         null.
+	 */
+	public static ArrayList<LabialDTO> listaLabialToListaLabialDTO(ArrayList<Labial> listaEntidad) {
+		ArrayList<LabialDTO> listaDTO = new ArrayList<>();
+		if (listaEntidad == null) {
+			return listaDTO;
+		}
+		for (Labial lab : listaEntidad) {
+			listaDTO.add(labialToLabialDTO(lab));
+		}
+		return listaDTO;
+	}
+
+	/**
+	 * Convierte una lista de LabialDTO a una lista de Labial.
+	 *
+	 * @param listaDTO La lista de DTOs a convertir.
+	 * @return La lista de entidades correspondiente, o una lista vacía si la
+	 *         entrada es null.
+	 */
+	public static ArrayList<Labial> listaLabialDTOToListaLabial(ArrayList<LabialDTO> listaDTO) {
+		ArrayList<Labial> listaEntidad = new ArrayList<>();
+		if (listaDTO == null) {
+			return listaEntidad;
+		}
+		for (LabialDTO labDto : listaDTO) {
+			listaEntidad.add(labialDTOtoLabial(labDto));
+		}
+		return listaEntidad;
+	}
+
+	/**
+	 * Convierte un LegoDTO a un Lego.
+	 *
+	 * @param dto El DTO a convertir.
+	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
+	 *         null.
+	 */
+	public static Lego legoDTOtoLego(LegoDTO dto) {
+		if (dto == null) {
+			return null;
+		}
+		return new Lego(dto.getNombre(), dto.getMarca(), dto.getTipoProducto(), dto.getDescripcion(),
+				dto.getUrlImagen(), dto.getPrecio(), dto.getCantidad(), dto.getId(), dto.getEdadRecomendada(),
+				dto.getTema(), dto.getNumeroPiezas(), dto.isTieneMinifiguras());
+	}
+
+	/**
+	 * Convierte un Lego a un LegoDTO.
+	 *
+	 * @param entidad La entidad a convertir.
+	 * @return El DTO correspondiente, o null si la entidad es null.
+	 */
+	public static LegoDTO legoToLegoDTO(Lego ent) {
+		if (ent == null) {
+			return null;
+		}
+		return new LegoDTO(ent.getNombre(), ent.getMarca(), ent.getTipoProducto(), ent.getDescripcion(),
+				ent.getUrlImagen(), ent.getPrecio(), ent.getCantidad(), ent.getId(), ent.getEdadRecomendada(),
+				ent.getTema(), ent.getNumeroPiezas(), ent.isTieneMinifiguras());
+	}
+
+	/**
+	 * Convierte una lista de Lego a una lista de LegoDTO.
+	 *
+	 * @param listaEntidad La lista de entidades a convertir.
+	 * @return La lista de DTOs correspondiente, o una lista vacía si la entrada es
+	 *         null.
+	 */
+	public static ArrayList<LegoDTO> listaLegoToListaLegoDTO(ArrayList<Lego> listaEntidad) {
+		ArrayList<LegoDTO> listaDTO = new ArrayList<>();
+		if (listaEntidad == null) {
+			return listaDTO;
+		}
+		for (Lego leg : listaEntidad) {
+			listaDTO.add(legoToLegoDTO(leg));
+		}
+		return listaDTO;
+	}
+
+	/**
+	 * Convierte una lista de LegoDTO a una lista de Lego.
+	 *
+	 * @param listaDTO La lista de DTOs a convertir.
+	 * @return La lista de entidades correspondiente, o una lista vacía si la
+	 *         entrada es null.
+	 */
+	public static ArrayList<Lego> listaLegoDTOToListaLego(ArrayList<LegoDTO> listaDTO) {
+		ArrayList<Lego> listaEntidad = new ArrayList<>();
+		if (listaDTO == null) {
+			return listaEntidad;
+		}
+		for (LegoDTO legoDto : listaDTO) {
+			listaEntidad.add(legoDTOtoLego(legoDto));
+		}
+		return listaEntidad;
+	}
+
+	/**
+	 * Convierte un MarcadorDTO a un Marcador.
+	 *
+	 * @param dto El DTO a convertir.
+	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
+	 *         null.
+	 */
+	public static Marcador marcadorDTOtoMarcador(MarcadorDTO dto) {
+		if (dto == null) {
+			return null;
+		}
+		return new Marcador(dto.getNombre(), dto.getMarca(), dto.getTipoProducto(), dto.getDescripcion(),
+				dto.getUrlImagen(), dto.getPrecio(), dto.getCantidad(), dto.getId(), dto.getTipoPresentacion(),
+				dto.getTipoPunta(), dto.isPermanente(), dto.getTipoMarcador());
+	}
+
+	/**
+	 * Convierte un Marcador a un MarcadorDTO.
+	 *
+	 * @param entidad La entidad a convertir.
+	 * @return El DTO correspondiente, o null si la entidad es null.
+	 */
+	public static MarcadorDTO marcadorToMarcadorDTO(Marcador ent) {
+		if (ent == null) {
+			return null;
+		}
+		return new MarcadorDTO(ent.getNombre(), ent.getMarca(), ent.getTipoProducto(), ent.getDescripcion(),
+				ent.getUrlImagen(), ent.getPrecio(), ent.getCantidad(), ent.getId(), ent.getTipoPresentacion(),
+				ent.getTipoPunta(), ent.isPermanente(), ent.getTipoMarcador());
+	}
+
+	/**
+	 * Convierte una lista de Marcador a una lista de MarcadorDTO.
+	 *
+	 * @param listaEntidad La lista de entidades a convertir.
+	 * @return La lista de DTOs correspondiente, o una lista vacía si la entrada es
+	 *         null.
+	 */
+	public static ArrayList<MarcadorDTO> listaMarcadorToListaMarcadorDTO(ArrayList<Marcador> listaEntidad) {
+		ArrayList<MarcadorDTO> listaDTO = new ArrayList<>();
+		if (listaEntidad == null) {
+			return listaDTO;
+		}
+		for (Marcador mar : listaEntidad) {
+			listaDTO.add(marcadorToMarcadorDTO(mar));
+		}
+		return listaDTO;
+	}
+
+	/**
+	 * Convierte una lista de MarcadorDTO a una lista de Marcador.
+	 *
+	 * @param listaDTO La lista de DTOs a convertir.
+	 * @return La lista de entidades correspondiente, o una lista vacía si la
+	 *         entrada es null.
+	 */
+	public static ArrayList<Marcador> listaMarcadorDTOToListaMarcador(ArrayList<MarcadorDTO> listaDTO) {
+		ArrayList<Marcador> listaEntidad = new ArrayList<>();
+		if (listaDTO == null) {
+			return listaEntidad;
+		}
+		for (MarcadorDTO marDto : listaDTO) {
+			listaEntidad.add(marcadorDTOtoMarcador(marDto));
+		}
+		return listaEntidad;
+	}
+
+	/**
+	 * Convierte un PantalonDTO a un Pantalon.
+	 *
+	 * @param dto El DTO a convertir.
+	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
+	 *         null.
+	 */
+	public static Pantalon pantalonDTOtoPantalon(PantalonDTO dto) {
+		if (dto == null) {
+			return null;
+		}
+		return new Pantalon(dto.getNombre(), dto.getMarca(), dto.getTipoProducto(), dto.getDescripcion(),
+				dto.getUrlImagen(), dto.getPrecio(), dto.getCantidad(), dto.getId(), dto.getTalla(),
+				dto.getGenero(), dto.getMaterial(), dto.getTipoPantalon(), dto.getCorte(), dto.getLargo());
+	}
+
+	/**
+	 * Convierte un Pantalon a un PantalonDTO.
+	 *
+	 * @param entidad La entidad a convertir.
+	 * @return El DTO correspondiente, o null si la entidad es null.
+	 */
+	public static PantalonDTO pantalonToPantalonDTO(Pantalon ent) {
+		if (ent == null) {
+			return null;
+		}
+		return new PantalonDTO(ent.getNombre(), ent.getMarca(), ent.getTipoProducto(), ent.getDescripcion(),
+				ent.getUrlImagen(), ent.getPrecio(), ent.getCantidad(), ent.getId(), ent.getTalla(),
+				ent.getGenero(), ent.getMaterial(), ent.getTipoPantalon(), ent.getCorte(), ent.getLargo());
+	}
+
+	/**
+	 * Convierte una lista de Pantalon a una lista de PantalonDTO.
+	 *
+	 * @param listaEntidad La lista de entidades a convertir.
+	 * @return La lista de DTOs correspondiente, o una lista vacía si la entrada es
+	 *         null.
+	 */
+	public static ArrayList<PantalonDTO> listaPantalonToListaPantalonDTO(ArrayList<Pantalon> listaEntidad) {
+		ArrayList<PantalonDTO> listaDTO = new ArrayList<>();
+		if (listaEntidad == null) {
+			return listaDTO;
+		}
+		for (Pantalon pan : listaEntidad) {
+			listaDTO.add(pantalonToPantalonDTO(pan));
+		}
+		return listaDTO;
+	}
+
+	/**
+	 * Convierte una lista de PantalonDTO a una lista de Pantalon.
+	 *
+	 * @param listaDTO La lista de DTOs a convertir.
+	 * @return La lista de entidades correspondiente, o una lista vacía si la
+	 *         entrada es null.
+	 */
+	public static ArrayList<Pantalon> listaPantalonDTOToListaPantalon(ArrayList<PantalonDTO> listaDTO) {
+		ArrayList<Pantalon> listaEntidad = new ArrayList<>();
+		if (listaDTO == null) {
+			return listaEntidad;
+		}
+		for (PantalonDTO panDto : listaDTO) {
+			listaEntidad.add(pantalonDTOtoPantalon(panDto));
+		}
+		return listaEntidad;
+	}
+	
+	/**
+	 * Convierte un PelucheDTO a un Peluche.
+	 *
+	 * @param dto El DTO a convertir.
+	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
+	 *         null.
+	 */
+	public static Peluche pelucheDTOtoPeluche(PelucheDTO dto) {
+		if (dto == null) {
+			return null;
+		}
+		return new Peluche(dto.getNombre(), dto.getMarca(), dto.getTipoProducto(), dto.getDescripcion(),
+				dto.getUrlImagen(), dto.getPrecio(), dto.getCantidad(), dto.getId(), dto.getEdadRecomendada(),
+				dto.isTieneSonido(),dto.getTipoRelleno(), dto.isLavadoMaquina());
+	}
+
+	/**
+	 * Convierte un Peluche a un PelucheDTO.
+	 *
+	 * @param entidad La entidad a convertir.
+	 * @return El DTO correspondiente, o null si la entidad es null.
+	 */
+	public static PelucheDTO pelucheToPelucheDTO(Peluche ent) {
+		if (ent == null) {
+			return null;
+		}
+		return new PelucheDTO(ent.getNombre(), ent.getMarca(), ent.getTipoProducto(), ent.getDescripcion(),
+				ent.getUrlImagen(), ent.getPrecio(), ent.getCantidad(), ent.getId(),  ent.getEdadRecomendada(),
+				ent.isTieneSonido(),ent.getTipoRelleno(), ent.isLavadoMaquina());
+	}
+
+	/**
+	 * Convierte una lista de Peluche a una lista de PelucheDTO.
+	 *
+	 * @param listaEntidad La lista de entidades a convertir.
+	 * @return La lista de DTOs correspondiente, o una lista vacía si la entrada es
+	 *         null.
+	 */
+	public static ArrayList<PelucheDTO> listaPelucheToListaPelucheDTO(ArrayList<Peluche> listaEntidad) {
+		ArrayList<PelucheDTO> listaDTO = new ArrayList<>();
+		if (listaEntidad == null) {
+			return listaDTO;
+		}
+		for (Peluche pel : listaEntidad) {
+			listaDTO.add(pelucheToPelucheDTO(pel));
+		}
+		return listaDTO;
+	}
+
+	/**
+	 * Convierte una lista de PelucheDTO a una lista de Peluche.
+	 *
+	 * @param listaDTO La lista de DTOs a convertir.
+	 * @return La lista de entidades correspondiente, o una lista vacía si la
+	 *         entrada es null.
+	 */
+	public static ArrayList<Peluche> listaPelucheDTOToListaPeluche(ArrayList<PelucheDTO> listaDTO) {
+		ArrayList<Peluche> listaEntidad = new ArrayList<>();
+		if (listaDTO == null) {
+			return listaEntidad;
+		}
+		for (PelucheDTO pelDto : listaDTO) {
+			listaEntidad.add(pelucheDTOtoPeluche(pelDto));
+		}
+		return listaEntidad;
+	}
+	
+	/**
+	 * Convierte un PistolaAguaDTO a un PistolaAgua.
+	 *
+	 * @param dto El DTO a convertir.
+	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
+	 *         null.
+	 */
+	public static PistolaAgua pistolaAguaDTOtoPistolaAgua(PistolaAguaDTO dto) {
+		if (dto == null) {
+			return null;
+		}
+		return new PistolaAgua(dto.getNombre(), dto.getMarca(), dto.getTipoProducto(), dto.getDescripcion(),
+				dto.getUrlImagen(), dto.getPrecio(), dto.getCantidad(), dto.getId(), dto.getEdadRecomendada(),
+				dto.getCapacidadAgua(),dto.getCantidadChorros(), dto.getAlcanceMaximo());
+	}
+
+	/**
+	 * Convierte un PistolaAgua a un PistolaAguaDTO.
+	 *
+	 * @param entidad La entidad a convertir.
+	 * @return El DTO correspondiente, o null si la entidad es null.
+	 */
+	public static PistolaAguaDTO pistolaAguaToPistolaAguaDTO(PistolaAgua ent) {
+		if (ent == null) {
+			return null;
+		}
+		return new PistolaAguaDTO(ent.getNombre(), ent.getMarca(), ent.getTipoProducto(), ent.getDescripcion(),
+				ent.getUrlImagen(), ent.getPrecio(), ent.getCantidad(), ent.getId(),  ent.getEdadRecomendada(),
+				ent.getCapacidadAgua(),ent.getCantidadChorros(), ent.getAlcanceMaximo());
+	}
+
+	/**
+	 * Convierte una lista de PistolaAgua a una lista de PistolaAguaDTO.
+	 *
+	 * @param listaEntidad La lista de entidades a convertir.
+	 * @return La lista de DTOs correspondiente, o una lista vacía si la entrada es
+	 *         null.
+	 */
+	public static ArrayList<PistolaAguaDTO> listaPistolaAguaToListaPistolaAguaDTO(ArrayList<PistolaAgua> listaEntidad) {
+		ArrayList<PistolaAguaDTO> listaDTO = new ArrayList<>();
+		if (listaEntidad == null) {
+			return listaDTO;
+		}
+		for (PistolaAgua pis : listaEntidad) {
+			listaDTO.add(pistolaAguaToPistolaAguaDTO(pis));
+		}
+		return listaDTO;
+	}
+
+	/**
+	 * Convierte una lista de PistolaAguaDTO a una lista de PistolaAgua.
+	 *
+	 * @param listaDTO La lista de DTOs a convertir.
+	 * @return La lista de entidades correspondiente, o una lista vacía si la
+	 *         entrada es null.
+	 */
+	public static ArrayList<PistolaAgua> listaPistolaAguaDTOToListaPistolaAgua(ArrayList<PistolaAguaDTO> listaDTO) {
+		ArrayList<PistolaAgua> listaEntidad = new ArrayList<>();
+		if (listaDTO == null) {
+			return listaEntidad;
+		}
+		for (PistolaAguaDTO pisDto : listaDTO) {
+			listaEntidad.add(pistolaAguaDTOtoPistolaAgua(pisDto));
+		}
+		return listaEntidad;
+	}
+	
+	/**
+	 * Convierte un TelevisorDTO a un Televisor.
+	 *
+	 * @param dto El DTO a convertir.
+	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
+	 *         null.
+	 */
+	public static Televisor televisorDTOtoTelevisor(TelevisorDTO dto) {
+		if (dto == null) {
+			return null;
+		}
+		return new Televisor(dto.getNombre(), dto.getMarca(), dto.getTipoProducto(), dto.getDescripcion(),
+				dto.getUrlImagen(), dto.getPrecio(), dto.getCantidad(), dto.getId(), dto.getPulgadas(),
+				dto.getResolucion(),dto.getSistemaOperativo(), dto.getCantPuertosHDMI(), dto.getFrecuenciaHz(), dto.getAsistenteVirtual());
+	}
+	
+	/**
+	 * Convierte un Televisor a un TelevisorDTO.
+	 *
+	 * @param entidad La entidad a convertir.
+	 * @return El DTO correspondiente, o null si la entidad es null.
+	 */
+	public static TelevisorDTO televisorToTelevisorDTO(Televisor ent) {
+		if (ent == null) {
+			return null;
+		}
+		return new TelevisorDTO(ent.getNombre(), ent.getMarca(), ent.getTipoProducto(), ent.getDescripcion(),
+				ent.getUrlImagen(), ent.getPrecio(), ent.getCantidad(), ent.getId(), ent.getPulgadas(),
+				ent.getResolucion(),ent.getSistemaOperativo(), ent.getCantPuertosHDMI(), ent.getFrecuenciaHz(), ent.getAsistenteVirtual());
+	}
+
+	/**
+	 * Convierte una lista de Televisor a una lista de TelevisorDTO.
+	 *
+	 * @param listaEntidad La lista de entidades a convertir.
+	 * @return La lista de DTOs correspondiente, o una lista vacía si la entrada es
+	 *         null.
+	 */
+	public static ArrayList<TelevisorDTO> listaSombraToListaTelevisorDTO(ArrayList<Televisor> listaEntidad) {
+		ArrayList<TelevisorDTO> listaDTO = new ArrayList<>();
+		if (listaEntidad == null) {
+			return listaDTO;
+		}
+		for (Televisor tel : listaEntidad) {
+			listaDTO.add(televisorToTelevisorDTO(tel));
+		}
+		return listaDTO;
+	}
+
+	/**
+	 * Convierte una lista de TelevisorDTO a una lista de Televisor.
+	 *
+	 * @param listaDTO La lista de DTOs a convertir.
+	 * @return La lista de entidades correspondiente, o una lista vacía si la
+	 *         entrada es null.
+	 */
+	public static ArrayList<Televisor> listaTelevisorDTOToListaTelevisor(ArrayList<TelevisorDTO> listaDTO) {
+		ArrayList<Televisor> listaEntidad = new ArrayList<>();
+		if (listaDTO == null) {
+			return listaEntidad;
+		}
+		for (TelevisorDTO telDto : listaDTO) {
+			listaEntidad.add(televisorDTOtoTelevisor(telDto));
+		}
+		return listaEntidad;
+	}
+	
+	/**
+	 * Convierte un SombraDTO a un Sombra.
+	 *
+	 * @param dto El DTO a convertir.
+	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
+	 *         null.
+	 */
+	public static Sombra sombraDTOtoSombra(SombraDTO dto) {
+		if (dto == null) {
+			return null;
+		}
+		return new Sombra(dto.getNombre(), dto.getMarca(), dto.getTipoProducto(), dto.getDescripcion(),
+				dto.getUrlImagen(), dto.getPrecio(), dto.getCantidad(), dto.getId(), dto.getTipoPiel(), dto.isEsApruebaDeAgua(),
+				dto.getFechaVencimiento(),dto.getCantidadColores(), dto.getAcabado());
+	}
+	
+	/**
+	 * Convierte un Sombra a un SombraDTO.
+	 *
+	 * @param entidad La entidad a convertir.
+	 * @return El DTO correspondiente, o null si la entidad es null.
+	 */
+	public static SombraDTO sombraToSombraDTO(Sombra ent) {
+		if (ent == null) {
+			return null;
+		}
+		return new SombraDTO(ent.getNombre(), ent.getMarca(), ent.getTipoProducto(), ent.getDescripcion(),
+				ent.getUrlImagen(), ent.getPrecio(), ent.getCantidad(), ent.getId(), ent.getTipoPiel(), ent.isEsApruebaDeAgua(),
+				ent.getFechaVencimiento(),ent.getCantidadColores(), ent.getAcabado());
+	}
+
+	/**
+	 * Convierte una lista de Sombra a una lista de SombraDTO.
+	 *
+	 * @param listaEntidad La lista de entidades a convertir.
+	 * @return La lista de DTOs correspondiente, o una lista vacía si la entrada es
+	 *         null.
+	 */
+	public static ArrayList<SombraDTO> listaSombraToListaSombraDTO(ArrayList<Sombra> listaEntidad) {
+		ArrayList<SombraDTO> listaDTO = new ArrayList<>();
+		if (listaEntidad == null) {
+			return listaDTO;
+		}
+		for (Sombra som : listaEntidad) {
+			listaDTO.add(sombraToSombraDTO(som));
+		}
+		return listaDTO;
+	}
+
+	/**
+	 * Convierte una lista de SombraDTO a una lista de Sombra.
+	 *
+	 * @param listaDTO La lista de DTOs a convertir.
+	 * @return La lista de entidades correspondiente, o una lista vacía si la
+	 *         entrada es null.
+	 */
+	public static ArrayList<Sombra> listaSombraDTOToListaTelevisor(ArrayList<SombraDTO> listaDTO) {
+		ArrayList<Sombra> listaEntidad = new ArrayList<>();
+		if (listaDTO == null) {
+			return listaEntidad;
+		}
+		for (SombraDTO somDto : listaDTO) {
+			listaEntidad.add(sombraDTOtoSombra(somDto));
+		}
+		return listaEntidad;
+	}
+	
+}
