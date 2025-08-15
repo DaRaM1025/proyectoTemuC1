@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-public class InstrumentoPercusionDTO extends InstrumentoMusical {
+public class InstrumentoPercusionDTO extends InstrumentoMusicalDTO {
 	private String tipoInstrumentoPercusion; // Posible enum
 	private boolean usoBaquetas;
 	private String tipoPercusion; // Posible enum

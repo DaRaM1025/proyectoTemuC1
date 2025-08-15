@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-public class PelucheDTO extends Juguete {
+public class PelucheDTO extends JugueteDTO {
     private boolean tieneSonido;
     private String tipoRelleno; //Posible enum
     private boolean lavadoMaquina;

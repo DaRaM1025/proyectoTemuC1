@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-public class DispositivoElectronicoDTO extends Producto {
+public class DispositivoElectronicoDTO extends ProductoDTO {
 	protected double pulgadas;
 	protected String resolucion;
 	protected String sistemaOperativo;

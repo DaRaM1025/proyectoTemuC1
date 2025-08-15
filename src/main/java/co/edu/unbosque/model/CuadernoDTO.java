@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-public class CuadernoDTO extends Papeleria {
+public class CuadernoDTO extends PapeleriaDTO {
 	private String tipoHojas; //Posible enum
 	private int cantidadHojas;
 	private boolean isPastaDura;

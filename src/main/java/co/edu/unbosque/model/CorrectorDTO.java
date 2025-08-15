@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-public class CorrectorDTO extends Maquillaje {
+public class CorrectorDTO extends MaquillajeDTO {
     private String cobertura;
     private String formato;
 

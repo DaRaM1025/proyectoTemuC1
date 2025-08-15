@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-public class CelularDTO extends DispositivoElectronico {
+public class CelularDTO extends DispositivoElectronicoDTO {
 	private String almacenamiento;
 	private String ram;
 	private int cantidadCamaras;

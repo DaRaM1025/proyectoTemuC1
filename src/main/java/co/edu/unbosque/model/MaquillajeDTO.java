@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-public class MaquillajeDTO extends Producto {
+public class MaquillajeDTO extends ProductoDTO {
     protected String tipoPiel; //Posible enum
     protected boolean esApruebaDeAgua;
     protected String fechaVencimiento;

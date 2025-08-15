@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-public class PapeleriaDTO extends Producto {
+public class PapeleriaDTO extends ProductoDTO {
 	protected String tipoPresentacion; // Posible enum
 
 	public PapeleriaDTO() {

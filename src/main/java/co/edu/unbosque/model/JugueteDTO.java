@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-public class JugueteDTO extends Producto {
+public class JugueteDTO extends ProductoDTO {
 	protected int edadRecomendada;
 
 	public JugueteDTO() {

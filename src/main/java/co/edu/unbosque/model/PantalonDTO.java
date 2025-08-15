@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-public class PantalonDTO extends Ropa {
+public class PantalonDTO extends RopaDTO {
     private String tipoPantalon; //Posible enum
     private String corte;
     private String largo;

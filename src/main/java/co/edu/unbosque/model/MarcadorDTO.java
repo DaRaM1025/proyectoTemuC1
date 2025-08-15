@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-public class MarcadorDTO extends Papeleria {
+public class MarcadorDTO extends PapeleriaDTO {
 	private String tipoPunta; //Posible enum
 	private boolean isPermanente;
 	private String tipoMarcador; //Posible enum

@@ -1,7 +1,7 @@
 package co.edu.unbosque.model;
 
 
-public class RopaDTO extends Producto {
+public class RopaDTO extends ProductoDTO {
     protected String talla;
     protected String genero; //Posible enum
     protected String material;

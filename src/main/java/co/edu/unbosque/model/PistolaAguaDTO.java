@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-public class PistolaAguaDTO extends Juguete {
+public class PistolaAguaDTO extends JugueteDTO {
 	private double capacidadAgua;
 	private int cantidadChorros;
 	private double alcanceMaximo;

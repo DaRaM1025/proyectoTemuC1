@@ -26,9 +26,7 @@ public class UsuarioDAO implements OperacionDAO<UsuarioDTO, Usuario> {
 	}
 
 	private void escribirArchivoSerializado() {
-		
 		FileManager.escribirArchivoSerializado(SERIAL_FILE_NAME, listaUsuarios);
-		
 	}
 
 	private void leerArchivoSerializado() {
@@ -36,8 +34,6 @@ public class UsuarioDAO implements OperacionDAO<UsuarioDTO, Usuario> {
 		if (listaUsuarios == null) {
 			listaUsuarios = new ArrayList<>();
 		}
-	
-
 	}
 
 	@Override

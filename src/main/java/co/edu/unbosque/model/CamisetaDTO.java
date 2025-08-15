@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-public class CamisetaDTO extends Ropa {
+public class CamisetaDTO extends RopaDTO {
 	private String tipoManga; // Posible enum
 	private String cuello;
 	private boolean isEstampado;

@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-public class SombraDTO extends Maquillaje {
+public class SombraDTO extends MaquillajeDTO {
     private int cantidadColores;
     private String acabado;
 

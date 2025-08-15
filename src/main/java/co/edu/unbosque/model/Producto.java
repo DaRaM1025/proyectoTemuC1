@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-public class Producto {
+public abstract class Producto {
 	protected String nombre;
 	protected String marca;
 	protected String tipoProducto; //Posible enum
@@ -90,5 +90,4 @@ public class Producto {
 	public void setId(String id) {
 		this.id = id;
 	}
-
 }

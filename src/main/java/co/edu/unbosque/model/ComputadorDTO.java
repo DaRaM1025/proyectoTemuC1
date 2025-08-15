@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-public class ComputadorDTO extends DispositivoElectronico {
+public class ComputadorDTO extends DispositivoElectronicoDTO {
 	private String almacenamiento;
 	private String ram;
 	private String procesador;

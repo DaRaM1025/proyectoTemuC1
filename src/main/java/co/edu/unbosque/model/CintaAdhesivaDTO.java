@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-public class CintaAdhesivaDTO extends Papeleria {
+public class CintaAdhesivaDTO extends PapeleriaDTO {
 	private boolean esAdhesivoReposicionable;
 	private double ancho;
 	private String tipoCinta; //Posible enum

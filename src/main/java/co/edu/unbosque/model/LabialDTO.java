@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-public class LabialDTO extends Maquillaje {
+public class LabialDTO extends MaquillajeDTO {
     private String duracion;
     private boolean esHidratante;
 

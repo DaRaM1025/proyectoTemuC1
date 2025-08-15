@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-public class LegoDTO extends Juguete {
+public class LegoDTO extends JugueteDTO {
 	private String tema;
 	private int numeroPiezas;
 	private boolean tieneMinifiguras;

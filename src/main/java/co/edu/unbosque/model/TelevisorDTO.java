@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-public class TelevisorDTO extends DispositivoElectronico {
+public class TelevisorDTO extends DispositivoElectronicoDTO {
 	private int cantPuertosHDMI;
 	private int frecuenciaHz;
 	private String asistenteVirtual;

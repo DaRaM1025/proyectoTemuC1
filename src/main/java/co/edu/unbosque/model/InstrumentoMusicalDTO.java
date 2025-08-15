@@ -1,7 +1,7 @@
 package co.edu.unbosque.model;
 
 
-public class InstrumentoMusicalDTO extends Producto {
+public class InstrumentoMusicalDTO extends ProductoDTO {
 	protected boolean incluyeEstuche;
 
 	public InstrumentoMusicalDTO() {
