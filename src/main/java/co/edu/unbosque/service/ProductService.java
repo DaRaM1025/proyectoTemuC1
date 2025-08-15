@@ -9,6 +9,8 @@ import java.util.UUID;
 import co.edu.unbosque.model.InventoryStatus;
 import co.edu.unbosque.model.Product;
 import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Named;
 
 @Named
 @ApplicationScoped
