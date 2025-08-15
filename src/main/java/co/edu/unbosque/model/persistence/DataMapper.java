@@ -16,24 +16,38 @@ import co.edu.unbosque.model.Corrector;
 import co.edu.unbosque.model.CorrectorDTO;
 import co.edu.unbosque.model.Cuaderno;
 import co.edu.unbosque.model.CuadernoDTO;
+import co.edu.unbosque.model.DispositivoElectronico;
+import co.edu.unbosque.model.DispositivoElectronicoDTO;
 import co.edu.unbosque.model.InstrumentoCuerda;
 import co.edu.unbosque.model.InstrumentoCuerdaDTO;
+import co.edu.unbosque.model.InstrumentoMusical;
+import co.edu.unbosque.model.InstrumentoMusicalDTO;
 import co.edu.unbosque.model.InstrumentoPercusion;
 import co.edu.unbosque.model.InstrumentoPercusionDTO;
 import co.edu.unbosque.model.InstrumentoViento;
 import co.edu.unbosque.model.InstrumentoVientoDTO;
+import co.edu.unbosque.model.Juguete;
+import co.edu.unbosque.model.JugueteDTO;
 import co.edu.unbosque.model.Labial;
 import co.edu.unbosque.model.LabialDTO;
 import co.edu.unbosque.model.Lego;
 import co.edu.unbosque.model.LegoDTO;
+import co.edu.unbosque.model.Maquillaje;
+import co.edu.unbosque.model.MaquillajeDTO;
 import co.edu.unbosque.model.Marcador;
 import co.edu.unbosque.model.MarcadorDTO;
 import co.edu.unbosque.model.Pantalon;
 import co.edu.unbosque.model.PantalonDTO;
+import co.edu.unbosque.model.Papeleria;
+import co.edu.unbosque.model.PapeleriaDTO;
 import co.edu.unbosque.model.Peluche;
 import co.edu.unbosque.model.PelucheDTO;
 import co.edu.unbosque.model.PistolaAgua;
 import co.edu.unbosque.model.PistolaAguaDTO;
+import co.edu.unbosque.model.Producto;
+import co.edu.unbosque.model.ProductoDTO;
+import co.edu.unbosque.model.Ropa;
+import co.edu.unbosque.model.RopaDTO;
 import co.edu.unbosque.model.Sombra;
 import co.edu.unbosque.model.SombraDTO;
 import co.edu.unbosque.model.Televisor;
@@ -92,7 +106,7 @@ public class DataMapper {
 	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
 	 *         null.
 	 */
-	public static Camiseta camisetaDTOtoCamiseta(CamisetaDTO dto) {
+	public static Camiseta dtoToCamiseta(CamisetaDTO dto) {
 		if (dto == null) {
 			return null;
 		}
@@ -147,7 +161,7 @@ public class DataMapper {
 			return listaEntidad;
 		}
 		for (CamisetaDTO camDto : listaDTO) {
-			listaEntidad.add(camisetaDTOtoCamiseta(camDto));
+			listaEntidad.add(dtoToCamiseta(camDto));
 		}
 		return listaEntidad;
 	}
@@ -159,7 +173,7 @@ public class DataMapper {
 	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
 	 *         null.
 	 */
-	public static Calzado calzadoDTOtoCalzado(CalzadoDTO dto) {
+	public static Calzado dtoToCalzado(CalzadoDTO dto) {
 		if (dto == null) {
 			return null;
 		}
@@ -216,7 +230,7 @@ public class DataMapper {
 			return listaEntidad;
 		}
 		for (CalzadoDTO calDto : listaDTO) {
-			listaEntidad.add(calzadoDTOtoCalzado(calDto));
+			listaEntidad.add(dtoToCalzado(calDto));
 		}
 		return listaEntidad;
 	}
@@ -228,7 +242,7 @@ public class DataMapper {
 	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
 	 *         null.
 	 */
-	public static Celular celularDTOtoCelular(CelularDTO dto) {
+	public static Celular dtoToCelular(CelularDTO dto) {
 		if (dto == null) {
 			return null;
 		}
@@ -285,7 +299,7 @@ public class DataMapper {
 			return listaEntidad;
 		}
 		for (CelularDTO celDto : listaDTO) {
-			listaEntidad.add(celularDTOtoCelular(celDto));
+			listaEntidad.add(dtoToCelular(celDto));
 		}
 		return listaEntidad;
 	}
@@ -297,7 +311,7 @@ public class DataMapper {
 	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
 	 *         null.
 	 */
-	public static CintaAdhesiva cintaAdhesivaDTOtoCintaAdhesiva(CintaAdhesivaDTO dto) {
+	public static CintaAdhesiva dtoToCintaAdhesiva(CintaAdhesivaDTO dto) {
 		if (dto == null) {
 			return null;
 		}
@@ -354,7 +368,7 @@ public class DataMapper {
 			return listaEntidad;
 		}
 		for (CintaAdhesivaDTO cintDto : listaDTO) {
-			listaEntidad.add(cintaAdhesivaDTOtoCintaAdhesiva(cintDto));
+			listaEntidad.add(dtoToCintaAdhesiva(cintDto));
 		}
 		return listaEntidad;
 	}
@@ -366,7 +380,7 @@ public class DataMapper {
 	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
 	 *         null.
 	 */
-	public static Computador computadorDTOtoComputador(ComputadorDTO dto) {
+	public static Computador dtoToComputador(ComputadorDTO dto) {
 		if (dto == null) {
 			return null;
 		}
@@ -423,7 +437,7 @@ public class DataMapper {
 			return listaEntidad;
 		}
 		for (ComputadorDTO compDto : listaDTO) {
-			listaEntidad.add(computadorDTOtoComputador(compDto));
+			listaEntidad.add(dtoToComputador(compDto));
 		}
 		return listaEntidad;
 	}
@@ -435,7 +449,7 @@ public class DataMapper {
 	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
 	 *         null.
 	 */
-	public static Corrector correctorDTOtoCorrector(CorrectorDTO dto) {
+	public static Corrector dtoToCorrector(CorrectorDTO dto) {
 		if (dto == null) {
 			return null;
 		}
@@ -490,7 +504,7 @@ public class DataMapper {
 			return listaEntidad;
 		}
 		for (CorrectorDTO corrDto : listaDTO) {
-			listaEntidad.add(correctorDTOtoCorrector(corrDto));
+			listaEntidad.add(dtoToCorrector(corrDto));
 		}
 		return listaEntidad;
 	}
@@ -502,7 +516,7 @@ public class DataMapper {
 	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
 	 *         null.
 	 */
-	public static Cuaderno cuadernoDTOtoCuaderno(CuadernoDTO dto) {
+	public static Cuaderno dtoToCuaderno(CuadernoDTO dto) {
 		if (dto == null) {
 			return null;
 		}
@@ -557,7 +571,7 @@ public class DataMapper {
 			return listaEntidad;
 		}
 		for (CuadernoDTO cuaDto : listaDTO) {
-			listaEntidad.add(cuadernoDTOtoCuaderno(cuaDto));
+			listaEntidad.add(dtoToCuaderno(cuaDto));
 		}
 		return listaEntidad;
 	}
@@ -569,7 +583,7 @@ public class DataMapper {
 	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
 	 *         null.
 	 */
-	public static InstrumentoCuerda instrumentoCuerdaDTOtoInstrumentoCuerda(InstrumentoCuerdaDTO dto) {
+	public static InstrumentoCuerda dtoToInstrumentoCuerda(InstrumentoCuerdaDTO dto) {
 		if (dto == null) {
 			return null;
 		}
@@ -585,7 +599,7 @@ public class DataMapper {
 	 * @param entidad La entidad a convertir.
 	 * @return El DTO correspondiente, o null si la entidad es null.
 	 */
-	public static InstrumentoCuerdaDTO instrumentoCuerdaToInstrumentoCuerdaDTO(InstrumentoCuerda ent) {
+	public static InstrumentoCuerdaDTO entityToInstrumentoCuerdaDTO(InstrumentoCuerda ent) {
 		if (ent == null) {
 			return null;
 		}
@@ -609,7 +623,7 @@ public class DataMapper {
 			return listaDTO;
 		}
 		for (InstrumentoCuerda cua : listaEntidad) {
-			listaDTO.add(instrumentoCuerdaToInstrumentoCuerdaDTO(cua));
+			listaDTO.add(entityToInstrumentoCuerdaDTO(cua));
 		}
 		return listaDTO;
 	}
@@ -628,7 +642,7 @@ public class DataMapper {
 			return listaEntidad;
 		}
 		for (InstrumentoCuerdaDTO cuaDto : listaDTO) {
-			listaEntidad.add(instrumentoCuerdaDTOtoInstrumentoCuerda(cuaDto));
+			listaEntidad.add(dtoToInstrumentoCuerda(cuaDto));
 		}
 		return listaEntidad;
 	}
@@ -640,7 +654,7 @@ public class DataMapper {
 	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
 	 *         null.
 	 */
-	public static InstrumentoViento instrumentoVientoDTOtoInstrumentoViento(InstrumentoVientoDTO dto) {
+	public static InstrumentoViento dtoToInstrumentoViento(InstrumentoVientoDTO dto) {
 		if (dto == null) {
 			return null;
 		}
@@ -697,7 +711,7 @@ public class DataMapper {
 			return listaEntidad;
 		}
 		for (InstrumentoVientoDTO cuaDto : listaDTO) {
-			listaEntidad.add(instrumentoVientoDTOtoInstrumentoViento(cuaDto));
+			listaEntidad.add(dtoToInstrumentoViento(cuaDto));
 		}
 		return listaEntidad;
 	}
@@ -709,7 +723,7 @@ public class DataMapper {
 	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
 	 *         null.
 	 */
-	public static InstrumentoPercusion instrumentoPercusionDTOtoInstrumentoPercusion(InstrumentoPercusionDTO dto) {
+	public static InstrumentoPercusion dtoToInstrumentoPercusion(InstrumentoPercusionDTO dto) {
 		if (dto == null) {
 			return null;
 		}
@@ -770,7 +784,7 @@ public class DataMapper {
 			return listaEntidad;
 		}
 		for (InstrumentoPercusionDTO cuaDto : listaDTO) {
-			listaEntidad.add(instrumentoPercusionDTOtoInstrumentoPercusion(cuaDto));
+			listaEntidad.add(dtoToInstrumentoPercusion(cuaDto));
 		}
 		return listaEntidad;
 	}
@@ -782,7 +796,7 @@ public class DataMapper {
 	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
 	 *         null.
 	 */
-	public static Labial labialDTOtoLabial(LabialDTO dto) {
+	public static Labial dtoToLabial(LabialDTO dto) {
 		if (dto == null) {
 			return null;
 		}
@@ -837,7 +851,7 @@ public class DataMapper {
 			return listaEntidad;
 		}
 		for (LabialDTO labDto : listaDTO) {
-			listaEntidad.add(labialDTOtoLabial(labDto));
+			listaEntidad.add(dtoToLabial(labDto));
 		}
 		return listaEntidad;
 	}
@@ -849,7 +863,7 @@ public class DataMapper {
 	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
 	 *         null.
 	 */
-	public static Lego legoDTOtoLego(LegoDTO dto) {
+	public static Lego dtoToLego(LegoDTO dto) {
 		if (dto == null) {
 			return null;
 		}
@@ -904,7 +918,7 @@ public class DataMapper {
 			return listaEntidad;
 		}
 		for (LegoDTO legoDto : listaDTO) {
-			listaEntidad.add(legoDTOtoLego(legoDto));
+			listaEntidad.add(dtoToLego(legoDto));
 		}
 		return listaEntidad;
 	}
@@ -916,7 +930,7 @@ public class DataMapper {
 	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
 	 *         null.
 	 */
-	public static Marcador marcadorDTOtoMarcador(MarcadorDTO dto) {
+	public static Marcador dtoToMarcador(MarcadorDTO dto) {
 		if (dto == null) {
 			return null;
 		}
@@ -971,7 +985,7 @@ public class DataMapper {
 			return listaEntidad;
 		}
 		for (MarcadorDTO marDto : listaDTO) {
-			listaEntidad.add(marcadorDTOtoMarcador(marDto));
+			listaEntidad.add(dtoToMarcador(marDto));
 		}
 		return listaEntidad;
 	}
@@ -983,7 +997,7 @@ public class DataMapper {
 	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
 	 *         null.
 	 */
-	public static Pantalon pantalonDTOtoPantalon(PantalonDTO dto) {
+	public static Pantalon dtoToPantalon(PantalonDTO dto) {
 		if (dto == null) {
 			return null;
 		}
@@ -1038,7 +1052,7 @@ public class DataMapper {
 			return listaEntidad;
 		}
 		for (PantalonDTO panDto : listaDTO) {
-			listaEntidad.add(pantalonDTOtoPantalon(panDto));
+			listaEntidad.add(dtoToPantalon(panDto));
 		}
 		return listaEntidad;
 	}
@@ -1050,7 +1064,7 @@ public class DataMapper {
 	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
 	 *         null.
 	 */
-	public static Peluche pelucheDTOtoPeluche(PelucheDTO dto) {
+	public static Peluche dtoToPeluche(PelucheDTO dto) {
 		if (dto == null) {
 			return null;
 		}
@@ -1105,7 +1119,7 @@ public class DataMapper {
 			return listaEntidad;
 		}
 		for (PelucheDTO pelDto : listaDTO) {
-			listaEntidad.add(pelucheDTOtoPeluche(pelDto));
+			listaEntidad.add(dtoToPeluche(pelDto));
 		}
 		return listaEntidad;
 	}
@@ -1117,7 +1131,7 @@ public class DataMapper {
 	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
 	 *         null.
 	 */
-	public static PistolaAgua pistolaAguaDTOtoPistolaAgua(PistolaAguaDTO dto) {
+	public static PistolaAgua dtoToPistolaAgua(PistolaAguaDTO dto) {
 		if (dto == null) {
 			return null;
 		}
@@ -1172,7 +1186,7 @@ public class DataMapper {
 			return listaEntidad;
 		}
 		for (PistolaAguaDTO pisDto : listaDTO) {
-			listaEntidad.add(pistolaAguaDTOtoPistolaAgua(pisDto));
+			listaEntidad.add(dtoToPistolaAgua(pisDto));
 		}
 		return listaEntidad;
 	}
@@ -1184,7 +1198,7 @@ public class DataMapper {
 	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
 	 *         null.
 	 */
-	public static Televisor televisorDTOtoTelevisor(TelevisorDTO dto) {
+	public static Televisor dtoToTelevisor(TelevisorDTO dto) {
 		if (dto == null) {
 			return null;
 		}
@@ -1215,7 +1229,7 @@ public class DataMapper {
 	 * @return La lista de DTOs correspondiente, o una lista vacía si la entrada es
 	 *         null.
 	 */
-	public static ArrayList<TelevisorDTO> listaSombraToListaTelevisorDTO(ArrayList<Televisor> listaEntidad) {
+	public static ArrayList<TelevisorDTO> listaToListaTelevisorDTO(ArrayList<Televisor> listaEntidad) {
 		ArrayList<TelevisorDTO> listaDTO = new ArrayList<>();
 		if (listaEntidad == null) {
 			return listaDTO;
@@ -1239,7 +1253,7 @@ public class DataMapper {
 			return listaEntidad;
 		}
 		for (TelevisorDTO telDto : listaDTO) {
-			listaEntidad.add(televisorDTOtoTelevisor(telDto));
+			listaEntidad.add(dtoToTelevisor(telDto));
 		}
 		return listaEntidad;
 	}
@@ -1251,7 +1265,7 @@ public class DataMapper {
 	 * @return La entidad UsuarioAdministrador correspondiente, o null si el DTO es
 	 *         null.
 	 */
-	public static Sombra sombraDTOtoSombra(SombraDTO dto) {
+	public static Sombra dtoToSombra(SombraDTO dto) {
 		if (dto == null) {
 			return null;
 		}
@@ -1306,9 +1320,135 @@ public class DataMapper {
 			return listaEntidad;
 		}
 		for (SombraDTO somDto : listaDTO) {
-			listaEntidad.add(sombraDTOtoSombra(somDto));
+			listaEntidad.add(dtoToSombra(somDto));
 		}
 		return listaEntidad;
+	}
+	
+	// metodos realizados por David, no modificar nada
+	
+	//Este metodo convierte todos los subproductos en forma de DTO en productos Entidad
+	public static Producto productoDTOToEntity(ProductoDTO dto) {
+			return switch (dto) {
+			case RopaDTO ropaDto -> dtoToRopa((RopaDTO) dto);
+			case JugueteDTO jugueteDto -> dtoToJuguete((JugueteDTO)dto);
+			case MaquillajeDTO maquillajeDto -> dtoToMaquillaje((MaquillajeDTO) dto);
+			case PapeleriaDTO papeleriaDto -> dtoToPapeleria((PapeleriaDTO) dto);
+			case InstrumentoMusicalDTO insMusicalDto -> dtoToInstrumentoMusical((InstrumentoMusicalDTO)dto);
+			case DispositivoElectronicoDTO dispElectronicoDto -> dtoToDispositivoElectronico((DispositivoElectronicoDTO) dto);
+			default ->
+			throw new IllegalArgumentException("Unexpected value: " + dto.getClass().getName());
+			};
+	}
+	
+	public static Ropa dtoToRopa(RopaDTO dto) {
+		 return switch (dto) {
+		case CalzadoDTO calzDto -> { 
+			Ropa ropa = (dtoToCalzado((CalzadoDTO) dto));
+			yield ropa;
+		}
+		case CamisetaDTO camistaDto -> { 
+			Ropa ropa = dtoToCamiseta((CamisetaDTO) dto);
+			yield ropa;
+		}
+		case PantalonDTO pantsDto -> { 
+			Ropa ropa = (dtoToPantalon((PantalonDTO) dto));
+			yield ropa;
+		}
+		default ->
+		throw new IllegalArgumentException("Unexpected value: " + dto.getClass().getName());
+		};
+	}
+	public static Juguete dtoToJuguete(JugueteDTO dto) {
+		return switch (dto) {
+		case PelucheDTO pelucheDto -> { 
+			Juguete juguete = (dtoToPeluche((PelucheDTO) dto));
+			yield juguete;
+		}
+		case LegoDTO legoDto -> { 
+			Juguete juguete = (dtoToLego((LegoDTO) dto));
+			yield juguete;
+		}
+		case PistolaAguaDTO pAguaDto -> { 
+			Juguete juguete = (dtoToPistolaAgua((PistolaAguaDTO) dto));
+			yield juguete;
+		}
+		default ->
+		throw new IllegalArgumentException("Unexpected value: " + dto.getClass().getName());
+		};
+	}
+	
+	public static Maquillaje dtoToMaquillaje(MaquillajeDTO dto) {
+		return switch (dto) {
+		case SombraDTO sombraDto -> { 
+			Maquillaje maquillaje = (dtoToSombra((SombraDTO) dto));
+			yield maquillaje;
+		}
+		case LabialDTO labialDto -> { 
+			Maquillaje maquillaje = (dtoToLabial((LabialDTO) dto));
+			yield maquillaje;
+		}
+		case CorrectorDTO correctorDto -> { 
+			Maquillaje maquillaje = (dtoToCorrector((CorrectorDTO) dto));
+			yield maquillaje;
+		}
+		default ->
+		throw new IllegalArgumentException("Unexpected value: " + dto.getClass().getName());
+		};
+	}
+	public static Papeleria dtoToPapeleria(PapeleriaDTO dto) {
+		return switch (dto) {
+		case MarcadorDTO marcadorDto -> { 
+			Papeleria papeleria = (dtoToMarcador((MarcadorDTO) dto));
+			yield papeleria;
+		}
+		case CintaAdhesivaDTO cintaDto -> { 
+			Papeleria papeleria = (dtoToCintaAdhesiva((CintaAdhesivaDTO) dto));
+			yield papeleria;
+		}
+		case CuadernoDTO cuadernoDto -> { 
+			Papeleria papeleria = (dtoToCuaderno((CuadernoDTO) dto));
+			yield papeleria;
+		}
+		default ->
+		throw new IllegalArgumentException("Unexpected value: " + dto.getClass().getName());
+		};
+	}
+	public static InstrumentoMusical dtoToInstrumentoMusical(InstrumentoMusicalDTO dto) {
+		return switch (dto) {
+		case InstrumentoCuerdaDTO instMusicalDto -> { 
+			InstrumentoMusical instrumento = (dtoToInstrumentoCuerda((InstrumentoCuerdaDTO) dto));
+			yield instrumento;
+		}
+		case InstrumentoPercusionDTO insPerscusionDto -> { 
+			InstrumentoMusical instrumento = (dtoToInstrumentoPercusion((InstrumentoPercusionDTO) dto));
+			yield instrumento;
+		}
+		case InstrumentoVientoDTO cuadernoDto -> { 
+			InstrumentoMusical instrumento = (dtoToInstrumentoViento((InstrumentoVientoDTO) dto));
+			yield instrumento;
+		}
+		default ->
+		throw new IllegalArgumentException("Unexpected value: " + dto.getClass().getName());
+		};
+	}
+	public static DispositivoElectronico dtoToDispositivoElectronico(DispositivoElectronicoDTO dto) {
+		return switch (dto) {
+		case CelularDTO celularDto -> { 
+			DispositivoElectronico dispElectronico = (dtoToCelular((CelularDTO) dto));
+			yield dispElectronico;
+		}
+		case ComputadorDTO computadorDto -> { 
+			DispositivoElectronico dispElectronico = (dtoToComputador((ComputadorDTO)dto));
+			yield dispElectronico;
+		}
+		case TelevisorDTO televisorDto -> { 
+			DispositivoElectronico dispElectronico = (dtoToTelevisor((TelevisorDTO)dto));
+			yield dispElectronico;
+		}
+		default ->
+		throw new IllegalArgumentException("Unexpected value: " + dto.getClass().getName());
+		};
 	}
 	
 }
