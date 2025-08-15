@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"> <h:head>
+	<meta charset="UTF-8"></meta>
+	<title>⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖Temu⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖</title>
+	<link href="css/estilos.css" rel="stylesheet"></link>
+
+</h:head> <h:body style="background-image: url('assets/fondoPrincipal.png')">
+
+	<div class="contenedor-principal"> <div class="formulario-login">
+	<h:form>
+
+		<!-- Campo ppara el username-->
+		<div class="campo-username"> <div class="card"> <div
+			class="ui-inputgroup"> <div class="ui-inputgroup-addon"
+			style="line-height: 40px; color: #333;"> <i class="pi pi-user"></i>
+		</div> <p:inputText placeholder="🔅Username😉🔅" styleClass="input-username"
+			style="width:500px; height:60px; background-color: #000000; font-size:30px; color: white " />
+		</div> </div> </div>
+
+		<!-- Campo para password -->
+		<div class="campo-password"> <p:password id="toggle"
+			value="#{passwordView.password6}" toggleMask="true" redisplay="true"
+			style="width:538px; height:60px; font-size:30px; background-color:#000000; color:white; margin-top: 20px" />
+		</div>
+
+		<!-- Boton de inicio de sesion -->
+		<div class="campo-boton"> <h:link outcome="index">
+			<h:graphicImage value="assets/btnLogIn.png"
+				style="width:550px; height:60px;" />
+		</h:link> </div>
+		
+		<!-- Boton para ir al signup -->
+
+		<div> <h:link outcome="signup">
+			<h:graphicImage value="assets/btnIrSignUp.png"
+				style="width:610px; height:80px; margin-top:790px; margin-left:440px; position: absolute" />
+		</h:link> </div>
+
+	</h:form> </div> <!-- Video de temu --> <div class="video-container"> <iframe
+		src="https://www.youtube.com/embed/5Od0aOse1wc?autoplay=1&amp;mute=0&amp;loop=1&amp;playlist=5Od0aOse1wc"
+		frameborder="0" allow="autoplay; encrypted-media"
+		allowfullscreen="true"></iframe> </div> </div>
+</h:body> </html>
