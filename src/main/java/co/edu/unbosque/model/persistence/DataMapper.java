@@ -121,7 +121,7 @@ public class DataMapper {
 	 * @param entidad La entidad a convertir.
 	 * @return El DTO correspondiente, o null si la entidad es null.
 	 */
-	public static CamisetaDTO camisetaToCamisetaDTO(Camiseta ent) {
+	public static CamisetaDTO entityToCamisetaDTO(Camiseta ent) {
 		if (ent == null) {
 			return null;
 		}
@@ -143,7 +143,7 @@ public class DataMapper {
 			return listaDTO;
 		}
 		for (Camiseta cam : listaEntidad) {
-			listaDTO.add(camisetaToCamisetaDTO(cam));
+			listaDTO.add(entityToCamisetaDTO(cam));
 		}
 		return listaDTO;
 	}
@@ -189,7 +189,7 @@ public class DataMapper {
 	 * @param entidad La entidad a convertir.
 	 * @return El DTO correspondiente, o null si la entidad es null.
 	 */
-	public static CalzadoDTO calzadoToCalzadoDTO(Calzado ent) {
+	public static CalzadoDTO entityToCalzadoDTO(Calzado ent) {
 		if (ent == null) {
 			return null;
 		}
@@ -212,7 +212,7 @@ public class DataMapper {
 			return listaDTO;
 		}
 		for (Calzado cal : listaEntidad) {
-			listaDTO.add(calzadoToCalzadoDTO(cal));
+			listaDTO.add(entityToCalzadoDTO(cal));
 		}
 		return listaDTO;
 	}
@@ -258,7 +258,7 @@ public class DataMapper {
 	 * @param entidad La entidad a convertir.
 	 * @return El DTO correspondiente, o null si la entidad es null.
 	 */
-	public static CelularDTO celularToCelularDTO(Celular ent) {
+	public static CelularDTO entityToCelularDTO(Celular ent) {
 		if (ent == null) {
 			return null;
 		}
@@ -281,7 +281,7 @@ public class DataMapper {
 			return listaDTO;
 		}
 		for (Celular cel : listaEntidad) {
-			listaDTO.add(celularToCelularDTO(cel));
+			listaDTO.add(entityToCelularDTO(cel));
 		}
 		return listaDTO;
 	}
@@ -326,7 +326,7 @@ public class DataMapper {
 	 * @param entidad La entidad a convertir.
 	 * @return El DTO correspondiente, o null si la entidad es null.
 	 */
-	public static CintaAdhesivaDTO cintaAdhesivaToCintaAdhesivaDTO(CintaAdhesiva ent) {
+	public static CintaAdhesivaDTO entityToCintaAdhesivaDTO(CintaAdhesiva ent) {
 		if (ent == null) {
 			return null;
 		}
@@ -349,7 +349,7 @@ public class DataMapper {
 			return listaDTO;
 		}
 		for (CintaAdhesiva cint : listaEntidad) {
-			listaDTO.add(cintaAdhesivaToCintaAdhesivaDTO(cint));
+			listaDTO.add(entityToCintaAdhesivaDTO(cint));
 		}
 		return listaDTO;
 	}
@@ -396,7 +396,7 @@ public class DataMapper {
 	 * @param entidad La entidad a convertir.
 	 * @return El DTO correspondiente, o null si la entidad es null.
 	 */
-	public static ComputadorDTO computadorToComputadorDTO(Computador ent) {
+	public static ComputadorDTO entityToComputadorDTO(Computador ent) {
 		if (ent == null) {
 			return null;
 		}
@@ -419,7 +419,7 @@ public class DataMapper {
 			return listaDTO;
 		}
 		for (Computador comp : listaEntidad) {
-			listaDTO.add(computadorToComputadorDTO(comp));
+			listaDTO.add(entityToComputadorDTO(comp));
 		}
 		return listaDTO;
 	}
@@ -464,7 +464,7 @@ public class DataMapper {
 	 * @param entidad La entidad a convertir.
 	 * @return El DTO correspondiente, o null si la entidad es null.
 	 */
-	public static CorrectorDTO correctorToCorrectorDTO(Corrector ent) {
+	public static CorrectorDTO entityToCorrectorDTO(Corrector ent) {
 		if (ent == null) {
 			return null;
 		}
@@ -486,7 +486,7 @@ public class DataMapper {
 			return listaDTO;
 		}
 		for (Corrector corr : listaEntidad) {
-			listaDTO.add(correctorToCorrectorDTO(corr));
+			listaDTO.add(entityToCorrectorDTO(corr));
 		}
 		return listaDTO;
 	}
@@ -531,7 +531,7 @@ public class DataMapper {
 	 * @param entidad La entidad a convertir.
 	 * @return El DTO correspondiente, o null si la entidad es null.
 	 */
-	public static CuadernoDTO cuadernoToCuadernoDTO(Cuaderno ent) {
+	public static CuadernoDTO entityToCuadernoDTO(Cuaderno ent) {
 		if (ent == null) {
 			return null;
 		}
@@ -553,7 +553,7 @@ public class DataMapper {
 			return listaDTO;
 		}
 		for (Cuaderno cua : listaEntidad) {
-			listaDTO.add(cuadernoToCuadernoDTO(cua));
+			listaDTO.add(entityToCuadernoDTO(cua));
 		}
 		return listaDTO;
 	}
@@ -669,7 +669,7 @@ public class DataMapper {
 	 * @param entidad La entidad a convertir.
 	 * @return El DTO correspondiente, o null si la entidad es null.
 	 */
-	public static InstrumentoVientoDTO instrumentoVientoToInstrumentoVientoDTO(InstrumentoViento ent) {
+	public static InstrumentoVientoDTO entityToInstrumentoVientoDTO(InstrumentoViento ent) {
 		if (ent == null) {
 			return null;
 		}
@@ -692,7 +692,7 @@ public class DataMapper {
 			return listaDTO;
 		}
 		for (InstrumentoViento cua : listaEntidad) {
-			listaDTO.add(instrumentoVientoToInstrumentoVientoDTO(cua));
+			listaDTO.add(entityToInstrumentoVientoDTO(cua));
 		}
 		return listaDTO;
 	}
@@ -739,7 +739,7 @@ public class DataMapper {
 	 * @param entidad La entidad a convertir.
 	 * @return El DTO correspondiente, o null si la entidad es null.
 	 */
-	public static InstrumentoPercusionDTO instrumentoPercusionToInstrumentoPercusionDTO(InstrumentoPercusion ent) {
+	public static InstrumentoPercusionDTO entityToInstrumentoPercusionDTO(InstrumentoPercusion ent) {
 		if (ent == null) {
 			return null;
 		}
@@ -764,7 +764,7 @@ public class DataMapper {
 			return listaDTO;
 		}
 		for (InstrumentoPercusion cua : listaEntidad) {
-			listaDTO.add(instrumentoPercusionToInstrumentoPercusionDTO(cua));
+			listaDTO.add(entityToInstrumentoPercusionDTO(cua));
 		}
 		return listaDTO;
 	}
@@ -811,7 +811,7 @@ public class DataMapper {
 	 * @param entidad La entidad a convertir.
 	 * @return El DTO correspondiente, o null si la entidad es null.
 	 */
-	public static LabialDTO labialToLabialDTO(Labial ent) {
+	public static LabialDTO entityToLabialDTO(Labial ent) {
 		if (ent == null) {
 			return null;
 		}
@@ -833,7 +833,7 @@ public class DataMapper {
 			return listaDTO;
 		}
 		for (Labial lab : listaEntidad) {
-			listaDTO.add(labialToLabialDTO(lab));
+			listaDTO.add(entityToLabialDTO(lab));
 		}
 		return listaDTO;
 	}
@@ -878,7 +878,7 @@ public class DataMapper {
 	 * @param entidad La entidad a convertir.
 	 * @return El DTO correspondiente, o null si la entidad es null.
 	 */
-	public static LegoDTO legoToLegoDTO(Lego ent) {
+	public static LegoDTO entityToLegoDTO(Lego ent) {
 		if (ent == null) {
 			return null;
 		}
@@ -900,7 +900,7 @@ public class DataMapper {
 			return listaDTO;
 		}
 		for (Lego leg : listaEntidad) {
-			listaDTO.add(legoToLegoDTO(leg));
+			listaDTO.add(entityToLegoDTO(leg));
 		}
 		return listaDTO;
 	}
@@ -945,7 +945,7 @@ public class DataMapper {
 	 * @param entidad La entidad a convertir.
 	 * @return El DTO correspondiente, o null si la entidad es null.
 	 */
-	public static MarcadorDTO marcadorToMarcadorDTO(Marcador ent) {
+	public static MarcadorDTO entityToMarcadorDTO(Marcador ent) {
 		if (ent == null) {
 			return null;
 		}
@@ -967,7 +967,7 @@ public class DataMapper {
 			return listaDTO;
 		}
 		for (Marcador mar : listaEntidad) {
-			listaDTO.add(marcadorToMarcadorDTO(mar));
+			listaDTO.add(entityToMarcadorDTO(mar));
 		}
 		return listaDTO;
 	}
@@ -1012,7 +1012,7 @@ public class DataMapper {
 	 * @param entidad La entidad a convertir.
 	 * @return El DTO correspondiente, o null si la entidad es null.
 	 */
-	public static PantalonDTO pantalonToPantalonDTO(Pantalon ent) {
+	public static PantalonDTO entityToPantalonDTO(Pantalon ent) {
 		if (ent == null) {
 			return null;
 		}
@@ -1034,7 +1034,7 @@ public class DataMapper {
 			return listaDTO;
 		}
 		for (Pantalon pan : listaEntidad) {
-			listaDTO.add(pantalonToPantalonDTO(pan));
+			listaDTO.add(entityToPantalonDTO(pan));
 		}
 		return listaDTO;
 	}
@@ -1079,7 +1079,7 @@ public class DataMapper {
 	 * @param entidad La entidad a convertir.
 	 * @return El DTO correspondiente, o null si la entidad es null.
 	 */
-	public static PelucheDTO pelucheToPelucheDTO(Peluche ent) {
+	public static PelucheDTO entityToPelucheDTO(Peluche ent) {
 		if (ent == null) {
 			return null;
 		}
@@ -1101,7 +1101,7 @@ public class DataMapper {
 			return listaDTO;
 		}
 		for (Peluche pel : listaEntidad) {
-			listaDTO.add(pelucheToPelucheDTO(pel));
+			listaDTO.add(entityToPelucheDTO(pel));
 		}
 		return listaDTO;
 	}
@@ -1146,7 +1146,7 @@ public class DataMapper {
 	 * @param entidad La entidad a convertir.
 	 * @return El DTO correspondiente, o null si la entidad es null.
 	 */
-	public static PistolaAguaDTO pistolaAguaToPistolaAguaDTO(PistolaAgua ent) {
+	public static PistolaAguaDTO entityToPistolaAguaDTO(PistolaAgua ent) {
 		if (ent == null) {
 			return null;
 		}
@@ -1168,7 +1168,7 @@ public class DataMapper {
 			return listaDTO;
 		}
 		for (PistolaAgua pis : listaEntidad) {
-			listaDTO.add(pistolaAguaToPistolaAguaDTO(pis));
+			listaDTO.add(entityToPistolaAguaDTO(pis));
 		}
 		return listaDTO;
 	}
@@ -1213,7 +1213,7 @@ public class DataMapper {
 	 * @param entidad La entidad a convertir.
 	 * @return El DTO correspondiente, o null si la entidad es null.
 	 */
-	public static TelevisorDTO televisorToTelevisorDTO(Televisor ent) {
+	public static TelevisorDTO entityToTelevisorDTO(Televisor ent) {
 		if (ent == null) {
 			return null;
 		}
@@ -1235,7 +1235,7 @@ public class DataMapper {
 			return listaDTO;
 		}
 		for (Televisor tel : listaEntidad) {
-			listaDTO.add(televisorToTelevisorDTO(tel));
+			listaDTO.add(entityToTelevisorDTO(tel));
 		}
 		return listaDTO;
 	}
@@ -1280,7 +1280,7 @@ public class DataMapper {
 	 * @param entidad La entidad a convertir.
 	 * @return El DTO correspondiente, o null si la entidad es null.
 	 */
-	public static SombraDTO sombraToSombraDTO(Sombra ent) {
+	public static SombraDTO entityToSombraDTO(Sombra ent) {
 		if (ent == null) {
 			return null;
 		}
@@ -1302,7 +1302,7 @@ public class DataMapper {
 			return listaDTO;
 		}
 		for (Sombra som : listaEntidad) {
-			listaDTO.add(sombraToSombraDTO(som));
+			listaDTO.add(entityToSombraDTO(som));
 		}
 		return listaDTO;
 	}
@@ -1451,4 +1451,83 @@ public class DataMapper {
 		};
 	}
 	
+	//conversion de entidad a dtos
+	public static ProductoDTO productoEntityToDTO(Producto entity) {
+	    return switch (entity) {
+	        case Ropa ropa -> ropaToDTO(ropa);
+	        case Juguete juguete -> jugueteToDTO(juguete);
+	        case Maquillaje maquillaje -> maquillajeToDTO(maquillaje);
+	        case Papeleria papeleria -> papeleriaToDTO(papeleria);
+	        case InstrumentoMusical instrumento -> instrumentoMusicalToDTO(instrumento);
+	        case DispositivoElectronico dispElectronico -> dispositivoElectronicoToDTO(dispElectronico);
+	        default ->
+	            throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
+	    };
+	}
+
+	// ================== ROPA ==================
+	public static RopaDTO ropaToDTO(Ropa entity) {
+	    return switch (entity) {
+	        case Calzado calzado -> entityToCalzadoDTO(calzado);
+	        case Camiseta camiseta -> entityToCamisetaDTO(camiseta);
+	        case Pantalon pantalon -> entityToPantalonDTO(pantalon);
+	        default ->
+	            throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
+	    };
+	}
+
+	// ================== JUGUETE ==================
+	public static JugueteDTO jugueteToDTO(Juguete entity) {
+	    return switch (entity) {
+	        case Peluche peluche -> entityToPelucheDTO(peluche);
+	        case Lego lego -> entityToLegoDTO(lego);
+	        case PistolaAgua pistolaAgua -> entityToPistolaAguaDTO(pistolaAgua);
+	        default ->
+	            throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
+	    };
+	}
+
+	// ================== MAQUILLAJE ==================
+	public static MaquillajeDTO maquillajeToDTO(Maquillaje entity) {
+	    return switch (entity) {
+	        case Sombra sombra -> entityToSombraDTO(sombra);
+	        case Labial labial -> entityToLabialDTO(labial);
+	        case Corrector corrector -> entityToCorrectorDTO(corrector);
+	        default ->
+	            throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
+	    };
+	}
+
+	// ================== PAPELERIA ==================
+	public static PapeleriaDTO papeleriaToDTO(Papeleria entity) {
+	    return switch (entity) {
+	        case Marcador marcador -> entityToMarcadorDTO(marcador);
+	        case CintaAdhesiva cinta -> entityToCintaAdhesivaDTO(cinta);
+	        case Cuaderno cuaderno -> entityToCuadernoDTO(cuaderno);
+	        default ->
+	            throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
+	    };
+	}
+
+	// ================== INSTRUMENTO MUSICAL ==================
+	public static InstrumentoMusicalDTO instrumentoMusicalToDTO(InstrumentoMusical entity) {
+	    return switch (entity) {
+	        case InstrumentoCuerda instCuerda -> entityToInstrumentoCuerdaDTO(instCuerda);
+	        case InstrumentoPercusion instPercusion -> entityToInstrumentoPercusionDTO(instPercusion);
+	        case InstrumentoViento instViento -> entityToInstrumentoVientoDTO(instViento);
+	        default ->
+	            throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
+	    };
+	}
+
+	// ================== DISPOSITIVO ELECTRONICO ==================
+	public static DispositivoElectronicoDTO dispositivoElectronicoToDTO(DispositivoElectronico entity) {
+	    return switch (entity) {
+	        case Celular celular -> entityToCelularDTO(celular);
+	        case Computador computador -> entityToComputadorDTO(computador);
+	        case Televisor televisor -> entityToTelevisorDTO(televisor);
+	        default ->
+	            throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
+	    };
+	}
 }
