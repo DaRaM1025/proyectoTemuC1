@@ -1,38 +1,169 @@
 package co.edu.unbosque.model.persistence;
 
+import java.util.ArrayList;
+
 import co.edu.unbosque.model.Computador;
 import co.edu.unbosque.model.ComputadorDTO;
 
-public class ComputadorDAO implements OperacionDAO<ComputadorDTO, Computador>{
+public class ComputadorDAO implements OperacionDAO<ComputadorDTO, Computador> {
+
+	private ArrayList<Computador> listaComputador;
+	private final String SERIAL_FILE_NAME = "computador.dat";
+	private final String CALZADO_FILE_NAME = "computador.csv";
+
+	public ComputadorDAO() {
+		listaComputador = new ArrayList<>();
+		cargarDesdeArchivo();
+	}
+
+	public ArrayList<Computador> getListaComputador() {
+		return listaComputador;
+	}
+
+	public void setListaComputador(ArrayList<Computador> listaComputador) {
+		this.listaComputador = listaComputador;
+	}
+
+	public String getSERIAL_FILE_NAME() {
+		return SERIAL_FILE_NAME;
+	}
+
+	public String getCALZADO_FILE_NAME() {
+		return CALZADO_FILE_NAME;
+	}
 
 	@Override
 	public boolean crear(ComputadorDTO nuevo) {
-		// TODO Auto-generated method stub
+		Computador entidad = DataMapper.dtoToComputador(nuevo);
+		Computador encontrado = find(entidad);
+
+		if (encontrado == null) {
+			listaComputador.add(entidad);
+			System.out.println("EXITO" + listaComputador.size());
+			escribirEnArchivo();
+			escribirArchivoSerializado();
+			return true;
+		}
+		System.out.println("COMPUTADOR YA EXISTE");
 		return false;
 	}
 
 	@Override
 	public boolean eliminar(ComputadorDTO eliminado) {
-		// TODO Auto-generated method stub
+		Computador entidad = DataMapper.dtoToComputador(eliminado);
+		Computador encontrado = find(entidad);
+		if (encontrado != null) {
+			listaComputador.remove(encontrado);
+			escribirEnArchivo();
+			escribirArchivoSerializado();
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public Computador find(Computador toFind) {
-		// TODO Auto-generated method stub
+		if (!listaComputador.isEmpty()) {
+			for (Computador compu : listaComputador) {
+				if (compu.getId().equals(toFind.getId())) {
+					System.out.println("COMPUTADOR IGUAL ENCONTRADO");
+					return compu;
+				}
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public boolean update(ComputadorDTO previo, ComputadorDTO nuevo) {
-		// TODO Auto-generated method stub
+		Computador entidadPrevio = DataMapper.dtoToComputador(previo);
+		Computador entidadNuevo = DataMapper.dtoToComputador(nuevo);
+		Computador encontrado = find(entidadPrevio);
+		if (encontrado != null) {
+			listaComputador.remove(encontrado);
+			listaComputador.add(entidadNuevo);
+			escribirEnArchivo();
+			escribirArchivoSerializado();
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public String mostrar() {
-		// TODO Auto-generated method stub
-		return null;
+		if (listaComputador.isEmpty()) {
+			return "No hay computadores en la lista";
+		}
+		StringBuilder rta = new StringBuilder();
+		for (Computador compu : listaComputador) {
+			rta.append(compu.toString()).append("\n");
+		}
+		return rta.toString();
+	}
+
+	private void escribirArchivoSerializado() {
+		FileManager.escribirArchivoSerializado(SERIAL_FILE_NAME, listaComputador);
+	}
+
+	private void leerArchivoSerializado() {
+		listaComputador = (ArrayList<Computador>) FileManager.leerArchivoSerializado(SERIAL_FILE_NAME);
+		if (listaComputador == null) {
+			listaComputador = new ArrayList<>();
+		}
+
+	}
+
+	public void escribirEnArchivo() {
+		String contenido = "";
+		for (int i = 0; i < listaComputador.size(); i++) {
+			contenido += listaComputador.get(i).getNombre() + ";";
+			contenido += listaComputador.get(i).getMarca() + ";";
+			contenido += listaComputador.get(i).getTipoProducto() + ";";
+			contenido += listaComputador.get(i).getDescripcion() + ";";
+			contenido += listaComputador.get(i).getUrlImagen() + ";";
+			contenido += listaComputador.get(i).getPrecio() + ";";
+			contenido += listaComputador.get(i).getCantidad() + ";";
+			contenido += listaComputador.get(i).getId() + ";";
+			contenido += listaComputador.get(i).getPulgadas() + ";";
+			contenido += listaComputador.get(i).getResolucion() + ";";
+			contenido += listaComputador.get(i).getSistemaOperativo() + ";";
+			contenido += listaComputador.get(i).getAlmacenamiento() + ";";
+			contenido += listaComputador.get(i).getRam() + ";";
+			contenido += listaComputador.get(i).getProcesador() + ";";
+			contenido += listaComputador.get(i).getTarjetaGrafica() + "\n";
+		}
+
+		FileManager.escribirEnArchivoTexto(CALZADO_FILE_NAME, contenido);
+	}
+
+	public void cargarDesdeArchivo() {
+		String contenido = FileManager.leerArchivoTexto(CALZADO_FILE_NAME);
+
+		if (contenido.isBlank() || contenido.isEmpty()) {
+			return;
+		}
+
+		String[] filas = contenido.split("\n");
+		for (int i = 0; i < filas.length; i++) {
+			String[] columnas = filas[i].split(";");
+			String nombre = columnas[0];
+			String marca = columnas[1];
+			String tipoProducto = columnas[2];
+			String descripcion = columnas[3];
+			String urlImagen = columnas[4];
+			double precio = Double.parseDouble(columnas[5]);
+			int cantidad = Integer.parseInt(columnas[6]);
+			String id = columnas[7];
+			double pulgadas = Double.parseDouble(columnas[8]);
+			String resolucion = columnas[9];
+			String sistemaOperativo = columnas[10];
+			String almacenamiento = columnas[11];
+			String ram = columnas[12];
+			String procesador = columnas[13];
+			String tarjetaGrafica = columnas[14];
+			listaComputador.add(new Computador(nombre, marca, tipoProducto, descripcion, urlImagen, precio, cantidad,
+					id, pulgadas, resolucion, sistemaOperativo, almacenamiento, ram, procesador, tarjetaGrafica));
+		}
 	}
 
 }
