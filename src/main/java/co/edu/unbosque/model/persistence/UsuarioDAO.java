@@ -73,7 +73,7 @@ public class UsuarioDAO implements OperacionDAO<UsuarioDTO, Usuario> {
 	    if (!listaUsuarios.isEmpty()) {
 	        for (Usuario usuario : listaUsuarios) {
 	          if (usuario.getUsername().equals(toFind.getUsername())) {
-	                System.out.println("USAURIO IGUAL ENCONTRADO");
+	                System.out.println("USUARIO IGUAL ENCONTRADO");
 	                return usuario;
 	            }
 	        }
