@@ -1,38 +1,160 @@
 package co.edu.unbosque.model.persistence;
 
+import java.util.ArrayList;
+
 import co.edu.unbosque.model.Marcador;
 import co.edu.unbosque.model.MarcadorDTO;
 
 public class MarcadorDAO implements OperacionDAO<MarcadorDTO, Marcador>{
+	private ArrayList<Marcador> listaMarcadores;
+	private final String SERIAL_FILE_NAME = "Marcador.dat";
+	private final String MARCADOR_FILE_NAME = "Marcador.csv";
+
+	public MarcadorDAO() {
+		listaMarcadores = new ArrayList<Marcador>();
+		cargarDesdeArchivo();
+	}
 
 	@Override
 	public boolean crear(MarcadorDTO nuevo) {
-		// TODO Auto-generated method stub
+		Marcador entidad = DataMapper.dtoToMarcador(nuevo);
+		Marcador encontrado = find(entidad);
+
+		if (encontrado == null) {
+			listaMarcadores.add(entidad);
+			System.out.println("EXITO" + listaMarcadores.size());
+			escribirEnArchivo();
+			escribirArchivoSerializado();
+			return true;
+		}
+		System.out.println("Marcador YA EXISTE");
 		return false;
 	}
 
 	@Override
 	public boolean eliminar(MarcadorDTO eliminado) {
-		// TODO Auto-generated method stub
+		Marcador entidad = DataMapper.dtoToMarcador(eliminado);
+		Marcador encontrado = find(entidad);
+		if (encontrado != null) {
+			listaMarcadores.remove(encontrado);
+			escribirEnArchivo();
+			escribirArchivoSerializado();
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public Marcador find(Marcador toFind) {
-		// TODO Auto-generated method stub
+		if (!listaMarcadores.isEmpty()) {
+			for (Marcador cal : listaMarcadores) {
+				if (cal.getId().equals(toFind.getId())) {
+					System.out.println("Marcador IGUAL ENCONTRADO");
+					return cal;
+				}
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public boolean update(MarcadorDTO previo, MarcadorDTO nuevo) {
-		// TODO Auto-generated method stub
+		Marcador entidadPrevio = DataMapper.dtoToMarcador(previo);
+		Marcador entidadNuevo = DataMapper.dtoToMarcador(nuevo);
+		Marcador encontrado = find(entidadPrevio);
+		if (encontrado != null) {
+			listaMarcadores.remove(encontrado);
+			listaMarcadores.add(entidadNuevo);
+			escribirEnArchivo();
+			escribirArchivoSerializado();
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public String mostrar() {
-		// TODO Auto-generated method stub
-		return null;
+		if (listaMarcadores.isEmpty()) {
+			return "No hay Marcadors en la lista";
+		}
+		StringBuilder rta = new StringBuilder();
+		for (Marcador cal : listaMarcadores) {
+			rta.append(cal.toString()).append("\n");
+		}
+		return rta.toString();
 	}
 
+	private void escribirArchivoSerializado() {
+		FileManager.escribirArchivoSerializado(SERIAL_FILE_NAME, listaMarcadores);
+	}
+
+	private void leerArchivoSerializado() {
+		listaMarcadores = (ArrayList<Marcador>) FileManager.leerArchivoSerializado(SERIAL_FILE_NAME);
+		if (listaMarcadores == null) {
+			listaMarcadores = new ArrayList<>();
+		}
+	}
+
+	public void escribirEnArchivo() {
+		String contenido = "";
+		for (int i = 0; i < listaMarcadores.size(); i++) {
+			contenido += listaMarcadores.get(i).getNombre() + ";";
+			contenido += listaMarcadores.get(i).getMarca() + ";";
+			contenido += listaMarcadores.get(i).getTipoProducto() + ";";
+			contenido += listaMarcadores.get(i).getDescripcion() + ";";
+			contenido += listaMarcadores.get(i).getUrlImagen() + ";";
+			contenido += listaMarcadores.get(i).getPrecio() + ";";
+			contenido += listaMarcadores.get(i).getCantidad() + ";";
+			contenido += listaMarcadores.get(i).getId() + ";";
+			contenido += listaMarcadores.get(i).getTipoPresentacion() + ";";
+			contenido += listaMarcadores.get(i).getTipoPunta() + ";";
+			contenido += listaMarcadores.get(i).isPermanente() + ";";
+			contenido += listaMarcadores.get(i).getTipoMarcador() + ";";
+		}
+		FileManager.escribirEnArchivoTexto(MARCADOR_FILE_NAME, contenido);
+	}
+
+	public void cargarDesdeArchivo() {
+		String contenido = FileManager.leerArchivoTexto(MARCADOR_FILE_NAME);
+
+		if (contenido.isBlank() || contenido.isEmpty()) {
+			return;
+		}
+
+		String[] filas = contenido.split("\n");
+		for (int i = 0; i < filas.length; i++) {
+			String[] columnas = filas[i].split(";");
+			String nombre = columnas[0];
+			String marca = columnas[1];
+			String tipoProducto = columnas[2];
+			String descripcion = columnas[3];
+			String urlImagen = columnas[4];
+			double precio = Double.parseDouble(columnas[5]);
+			int cantidad = Integer.parseInt(columnas[6]);
+			String id = columnas[7];
+			String tipoPresentacion = columnas[9];
+			String tipoPunta = columnas[10];
+			boolean permanente = Boolean.parseBoolean(columnas[11]);
+			String tipoMarcador = columnas[10];
+			listaMarcadores.add(new Marcador(nombre, marca, tipoProducto, descripcion, urlImagen, precio, cantidad, id,
+					tipoPresentacion, tipoPunta, permanente, tipoMarcador));
+		}
+	}
+
+	public ArrayList<Marcador> getlistaMarcadores() {
+		return listaMarcadores;
+	}
+
+	public void setlistaMarcadores(ArrayList<Marcador> listaMarcadores) {
+		this.listaMarcadores = listaMarcadores;
+	}
+
+	public String getSERIAL_FILE_NAME() {
+		return SERIAL_FILE_NAME;
+	}
+
+	public String getMARCADOR_FILE_NAME() {
+		return MARCADOR_FILE_NAME;
+	}
+	
 }
