@@ -1,7 +1,4 @@
 package co.edu.unbosque.model;
-
-
-
 import co.edu.unbosque.model.persistence.UsuarioDAO;
 
 public class ModelFacadeUser {
@@ -9,13 +6,8 @@ public class ModelFacadeUser {
 	private UsuarioDAO usuariodao;
 
 	public ModelFacadeUser() {
-		
 		 this.usuariodao = new UsuarioDAO();
-	
-
 	}
-
-	
 
 	public UsuarioDAO getUsuariodao() {
 		return usuariodao;

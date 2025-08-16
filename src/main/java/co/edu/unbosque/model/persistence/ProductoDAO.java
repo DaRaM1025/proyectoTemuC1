@@ -26,8 +26,8 @@ public class ProductoDAO implements OperacionDAO<ProductoDTO, Producto> {
 
 	@Override
 	public boolean crear(ProductoDTO nuevo) {
-		// TODO Auto-generated method stub
-		return false;
+		FileManager.escribirArchivoSerializado(SERIAL_FILE_NAME, listaProductos);
+		return true;
 	}
 
 	@Override
