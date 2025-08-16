@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8"></meta>
+	<h:title>Carrito</h:title>
+	<style>
+.contenedor-panel {
+	width: 80%;
+	margin: 50px auto;
+}
+
+.tabla-productos .ui-panel-content {
+	padding: 2rem;
+}
+
+.imagen-producto {
+	width: 80px;
+	height: 80px;
+	object-fit: cover;
+	border-radius: 5px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.boton-compra {
+	margin-top: 20px;
+	text-align: center;
+}
+</style>
+</h:head>
+
+<ui:composition template="templates/template.xhtml">
+
+	<ui:define name="content">
+		<h:form>
+			<div class="contenedor-panel">
+				<p:panel header="Catálogo de Productos" styleClass="tabla-productos">
+					<p:dataTable id="tablaProductos" var="producto"
+						value="#{productoBean.productos}" rows="4" paginator="false"
+						style="width:100%">
+						<p:column headerText="Nombre">
+							<h:outputText value="#{producto.nombre}" />
+						</p:column>
+
+						<p:column headerText="ID">
+							<h:outputText value="#{producto.id}" />
+						</p:column>
+
+						<p:column headerText="Imagen">
+							<p:graphicImage value="#{producto.imagen}"
+								styleClass="imagen-producto" />
+						</p:column>
+
+						<p:column headerText="Cantidad">
+							<p:spinner value="#{producto.cantidad}" min="0" max="3"
+								onchange="PF('cantidadAjax').click()" />
+							<p:commandButton id="cantidadAjax" style="display:none"
+								action="#{productoBean.verificarCantidad}"
+								update="tablaProductos" process="@this" />
+						</p:column>
+
+					</p:dataTable>
+
+					<div class="boton-compra">
+						<p:commandButton value="Realizar compra"
+							action="compra.xhtml?faces-redirect=true"
+							icon="pi pi-shopping-cart"/>
+					</div>
+				</p:panel>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>
