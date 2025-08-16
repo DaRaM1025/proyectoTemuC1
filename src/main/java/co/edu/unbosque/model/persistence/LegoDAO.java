@@ -4,19 +4,83 @@ import java.util.ArrayList;
 
 import co.edu.unbosque.model.Lego;
 import co.edu.unbosque.model.LegoDTO;
-
+/**
+ * Clase {@code LegoDAO} que implementa las operaciones CRUD para la gestión de objetos {@link Lego}.
+ * <p>
+ * Esta clase utiliza archivos de texto (CSV) y archivos serializados para
+ * la persistencia de datos. El mapeo entre {@link LegoDTO} y {@link Lego} se realiza
+ * mediante la clase {@link DataMapper}.
+ * </p>
+ *
+ * <p>Características principales:</p>
+ * <ul>
+ *   <li>Permite crear, actualizar, eliminar y buscar objetos Lego.</li>
+ *   <li>Almacena los datos en memoria y los sincroniza con archivos de texto y binarios.</li>
+ *   <li>Utiliza un archivo CSV para almacenamiento legible y un archivo serializado para respaldo.</li>
+ * </ul>
+ *
+ * @author Nataly Rengifo
+ * @version 1.0
+ */
 public class LegoDAO implements OperacionDAO<LegoDTO, Lego> {
+	  /** Lista en memoria que contiene los objetos Lego gestionados. */
+    private ArrayList<Lego> listaLego;
 
-	private ArrayList<Lego> listaLego;
-	private final String SERIAL_FILE_NAME = "lego.dat";
-	private final String TEXT_FILE_NAME = "lego.csv";
+    /** Nombre del archivo serializado utilizado para persistencia. */
+    private final String SERIAL_FILE_NAME = "lego.dat";
 
+    /** Nombre del archivo de texto (CSV) utilizado para persistencia. */
+    private final String TEXT_FILE_NAME = "lego.csv";
+
+    /**
+     * Constructor que inicializa la lista y carga los datos desde el archivo de texto.
+     */
 	public LegoDAO() {
 		listaLego = new ArrayList<>();
 		cargarDesdeArchivo();
 	}
-	
-	
+	 /**
+     * Obtiene la lista de objetos Lego en memoria.
+     *
+     * @return lista de legos almacenados en memoria.
+     */
+    public ArrayList<Lego> getListaLego() {
+        return listaLego;
+    }
+
+    /**
+     * Asigna una nueva lista de objetos Lego en memoria.
+     *
+     * @param listaLego lista de legos a establecer.
+     */
+    public void setListaLego(ArrayList<Lego> listaLego) {
+        this.listaLego = listaLego;
+    }
+
+    /**
+     * Obtiene el nombre del archivo serializado.
+     *
+     * @return nombre del archivo {@code .dat}.
+     */
+    public String getSERIAL_FILE_NAME() {
+        return SERIAL_FILE_NAME;
+    }
+
+    /**
+     * Obtiene el nombre del archivo de texto.
+     *
+     * @return nombre del archivo {@code .csv}.
+     */
+    public String getTEXT_FILE_NAME() {
+        return TEXT_FILE_NAME;
+    }
+
+    /**
+     * Crea un nuevo objeto Lego en memoria y lo guarda en los archivos de persistencia.
+     *
+     * @param nuevo DTO con la información del nuevo Lego.
+     * @return {@code true} si la creación fue exitosa, {@code false} si ya existía.
+     */
 	@Override
 	public boolean crear(LegoDTO nuevo) {
 		Lego entidad = DataMapper.dtoToLego(nuevo);
@@ -32,7 +96,12 @@ public class LegoDAO implements OperacionDAO<LegoDTO, Lego> {
 		System.out.println("LEGO YA EXISTE");
 		return false;
 	}
-
+	 /**
+     * Elimina un objeto Lego de la lista y actualiza los archivos de persistencia.
+     *
+     * @param eliminado DTO del Lego a eliminar.
+     * @return {@code true} si fue eliminado, {@code false} si no se encontró.
+     */
 	@Override
 	public boolean eliminar(LegoDTO eliminado) {
 		Lego entidad = DataMapper.dtoToLego(eliminado);
@@ -46,7 +115,14 @@ public class LegoDAO implements OperacionDAO<LegoDTO, Lego> {
 		return false;
 	}
 
-	@Override
+
+    /**
+     * Busca un Lego en la lista por su ID.
+     *
+     * @param toFind Lego con el ID a buscar.
+     * @return el Lego encontrado o {@code null} si no existe.
+     */
+    @Override
 	public Lego find(Lego toFind) {
 		if (!listaLego.isEmpty()) {
 			for (Lego cal : listaLego) {
@@ -58,8 +134,14 @@ public class LegoDAO implements OperacionDAO<LegoDTO, Lego> {
 		}
 		return null;
 	}
-
-	@Override
+    /**
+     * Actualiza un Lego existente en la lista y en los archivos de persistencia.
+     *
+     * @param previo DTO con los datos actuales.
+     * @param nuevo DTO con los nuevos datos.
+     * @return {@code true} si se actualizó correctamente, {@code false} si no se encontró.
+     */
+    @Override
 	public boolean update(LegoDTO previo, LegoDTO nuevo) {
 		Lego entidadPrevio = DataMapper.dtoToLego(previo);
 		Lego entidadNuevo = DataMapper.dtoToLego(nuevo);
@@ -74,7 +156,13 @@ public class LegoDAO implements OperacionDAO<LegoDTO, Lego> {
 		return false;
 	}
 
-	@Override
+
+    /**
+     * Muestra la lista completa de legos en formato de texto.
+     *
+     * @return cadena con todos los legos o un mensaje si la lista está vacía.
+     */
+    @Override
 	public String mostrar() {
 		if (listaLego.isEmpty()) {
 			return "No hay legos en la lista";
@@ -86,10 +174,21 @@ public class LegoDAO implements OperacionDAO<LegoDTO, Lego> {
 		return rta.toString();
 	}
 
+	/**
+     * Escribe la lista de pistolas de agua en un archivo serializado.
+     * <p>
+     * Utiliza la clase {@link FileManager} para la operación de escritura.
+     * </p>
+     */
 	private void escribirArchivoSerializado() {
 		FileManager.escribirArchivoSerializado(SERIAL_FILE_NAME, listaLego);
 	}
-
+	/**
+     * Lee el archivo serializado y carga las pistolas de agua en memoria.
+     * <p>
+     * Si el archivo no existe o está vacío, la lista se inicializa como vacía.
+     * </p>
+     */
 	private void leerArchivoSerializado() {
 		listaLego = (ArrayList<Lego>) FileManager.leerArchivoSerializado(SERIAL_FILE_NAME);
 		if (listaLego == null) {
@@ -97,7 +196,12 @@ public class LegoDAO implements OperacionDAO<LegoDTO, Lego> {
 		}
 
 	}
-
+	/**
+     * Escribe el contenido de la lista en un archivo de texto (CSV).
+     * <p>
+     * El formato es separado por punto y coma {@code ;}, un registro por cada línea.
+     * </p>
+     */
 	public void escribirEnArchivo() {
 		String contenido = "";
 		for (int i = 0; i < listaLego.size(); i++) {
@@ -118,7 +222,15 @@ public class LegoDAO implements OperacionDAO<LegoDTO, Lego> {
 
 		FileManager.escribirEnArchivoTexto(TEXT_FILE_NAME, contenido);
 	}
-
+	/**
+     * Carga los objetos desde un archivo de texto (CSV) y los añade a la lista en memoria.
+     * <p>
+     * Se espera que el archivo tenga el mismo formato que produce {@link #escribirEnArchivo()}.
+     * </p>
+     * <p>
+     * En caso de que el archivo esté vacío, no se carga ningún dato.
+     * </p>
+     */
 	public void cargarDesdeArchivo() {
 		String contenido = FileManager.leerArchivoTexto(TEXT_FILE_NAME);
 
