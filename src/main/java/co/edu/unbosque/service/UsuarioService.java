@@ -14,7 +14,6 @@ public class UsuarioService {
 	private static final UsuarioDAO usuarioDAO = new UsuarioDAO();
 
 	public UsuarioService() {
-		//Comentario Lozada, no es nada.
 	}
 
 	public boolean agregarUsuarioVerificando(UsuarioDTO dto) {
