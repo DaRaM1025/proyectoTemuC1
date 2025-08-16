@@ -6,6 +6,7 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
+	
 <h:head>
 	<meta charset="UTF-8"></meta>
 	<h:title>Carrito</h:title>
@@ -28,7 +29,8 @@
 }
 
 .boton-compra {
-	margin-top: 20px;
+	margin-top: 5px;
+	margin-left: 8px;
 	text-align: center;
 }
 </style>
@@ -66,12 +68,12 @@
 
 					</p:dataTable>
 
-					<div class="boton-compra">
+				</p:panel>
+					<div class="boton-compra col-3">
 						<p:commandButton value="Realizar compra"
 							action="compra.xhtml?faces-redirect=true"
 							icon="pi pi-shopping-cart"/>
 					</div>
-				</p:panel>
 			</div>
 		</h:form>
 	</ui:define>
