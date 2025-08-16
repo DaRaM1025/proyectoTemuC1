@@ -66,7 +66,7 @@ public class CalzadoDAO implements OperacionDAO<CalzadoDTO, Calzado> {
 	public Calzado find(Calzado toFind) {
 		 if (!listaCalzado.isEmpty()) {
 		        for (Calzado cal : listaCalzado) {
-		          if (cal.getNombre().equals(toFind.getNombre())) {
+		          if (cal.getId().equals(toFind.getId())) {
 		                System.out.println("CALZADO IGUAL ENCONTRADO");
 		                return cal;
 		            }
