@@ -24,9 +24,9 @@ public class ProductoDAO implements OperacionDAO<ProductoDTO, Producto> {
 		}
 	}
 
-	@Override
+//	@Override
 	public boolean crear(ProductoDTO nuevo) {
-		FileManager.escribirArchivoSerializado(SERIAL_FILE_NAME, listaProductos);
+		//listaProductos.add(nuevo);
 		return true;
 	}
 
