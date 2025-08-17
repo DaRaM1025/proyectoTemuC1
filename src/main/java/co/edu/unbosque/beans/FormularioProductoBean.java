@@ -21,6 +21,7 @@ public class FormularioProductoBean implements Serializable {
     private String tipoProducto; 
 
     // ----- ROPA -----
+    private String categoriaSeleccionada;
     private String talla;
     private String genero;
     private String material;
@@ -811,6 +812,12 @@ public class FormularioProductoBean implements Serializable {
 
 	public void setCantSuperficiesSonoras(int cantSuperficiesSonoras) {
 		this.cantSuperficiesSonoras = cantSuperficiesSonoras;
+	}
+	public String getCategoriaSeleccionada() {
+		return categoriaSeleccionada;
+	}
+	public void setCategoriaSeleccionada(String categoriaSeleccionada) {
+		this.categoriaSeleccionada = categoriaSeleccionada;
 	}
 
    

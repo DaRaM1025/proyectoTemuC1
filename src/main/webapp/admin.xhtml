@@ -10,154 +10,1926 @@
 <h:head>
 	<meta charset="UTF-8"></meta>
 	<title>Administrador</title>
-	
+
 </h:head>
 <h:body>
-<div class="card crud-demo">
-    <h:form id="form">
-        <p:growl id="messages" showDetail="true"/>
+	<div class="card crud-demo">
 
-        <p:toolbar>
-            <p:toolbarGroup>
-               <p:commandButton value="New" icon="pi pi-plus" actionListener="#{crudView.openNew}"
-                    update=":dialogs:manage-product-content" oncomplete="PF('manageProductDialog').show()"
-                    styleClass="ui-button-success" style="margin-right: .5rem">
-                    <p:resetInput target=":dialogs:manage-product-content" />
-                </p:commandButton>
-                <p:commandButton id="delete-products-button" value="#{crudView.deleteButtonMessage}"
-                    icon="pi pi-trash" actionListener="#{crudView.deleteSelectedProducts}"
-                    styleClass="ui-button-danger" disabled="#{!crudView.hasSelectedProducts()}" update="@this">
-                    <p:confirm header="Confirmation" message="Delete the selected products?"
-                        icon="pi pi-exclamation-triangle" />
-                </p:commandButton>
+		<h:form id="form">
+			<p:growl id="messages" showDetail="true" />
 
-            </p:toolbarGroup>
-        </p:toolbar>
+			<p:toolbar>
+				<p:toolbarGroup>
 
-        <p:dataTable id="dt-products" widgetVar="dtProducts" var="product" value="#{adminbean.products}"
-            reflow="true" styleClass="products-table" selectionMode="multiple" selection="#{adminbean.selectedProducts}"
-            rowKey="#{product.code}" paginator="true" rows="10" selectionRowMode="add" paginatorPosition="bottom">
-            <f:facet name="header">
-                <div class="products-table-header">
-                    <span style="font-weight: bold">PRODUCTS</span>
-                    <span class="filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
-                        <p:inputText id="globalFilter" onkeyup="PrimeFaces.debounce(() => PF('dtProducts').filter())" placeholder="Search" />
-                    </span>
-                </div>
-            </f:facet>
+					<p:menuButton value="New" icon="pi pi-plus"
+						styleClass="ui-button-success">
+						<p:submenu label="Juguete" icon="pi pi-gift">
+							<p:menuitem value="Peluches" icon="pi pi-star"
+								onclick="PF('dlgPeluche').show()" update=":peluche:peluche-form" />
+							<p:menuitem value="Pistolas de Agua" icon="pi pi-send"
+								onclick="PF('dlgPistola').show()" update=":pistola:pistola-form" />
+							<p:menuitem value="Lego" icon="pi pi-th-large"
+								onclick="PF('dlgLego').show()" update=":lego:lego-form" />
+						</p:submenu>
+						
 
-            <p:ajax event="rowSelect" update=":form:delete-products-button" />
-            <p:ajax event="rowUnselect" update=":form:delete-products-button" />
-            <p:ajax event="rowSelectCheckbox" update=":form:delete-products-button" />
-            <p:ajax event="rowUnselectCheckbox" update=":form:delete-products-button" />
-            <p:ajax event="toggleSelect" update=":form:delete-products-button" />
+						<p:submenu label="Maquillaje" icon="pi pi-palette">
+							<p:menuitem value="Labial" icon="pi pi-heart"
+								onclick="PF('dlgLabial').show()" update=":labial:labial-form" />
+							<p:menuitem value="Sombras" icon="pi pi-palette"
+								onclick="PF('dlgSombra').show()" update=":sombra:sombra-form" />
+							<p:menuitem value="Corrector" icon="pi pi-pencil"
+								onclick="PF('dlgCorrector').show()"
+								update=":corrector:corrector-form" />
+						</p:submenu>
 
-            <p:column selectionBox="true" exportable="false"></p:column>
+						<!-- PAPELERÍA -->
+						<p:submenu label="Papelería" icon="pi pi-book">
+							<p:menuitem value="Cuaderno" icon="pi pi-book"
+								onclick="PF('dlgCuaderno').show()"
+								update=":cuaderno:cuaderno-form" />
+							<p:menuitem value="Cinta Adhesiva" icon="pi pi-link"
+								onclick="PF('dlgCinta').show()" update=":cinta:cinta-form" />
+							<p:menuitem value="Marcador" icon="pi pi-pen"
+								onclick="PF('dlgMarcador').show()"
+								update=":marcador:marcador-form" />
+						</p:submenu>
 
-            <p:column headerText="Code" sortBy="#{product.code}" filterBy="#{product.code}">
-                <h:outputText value="#{product.code}" />
-            </p:column>
-            <p:column headerText="Name" sortBy="#{product.name}" filterBy="#{product.name}">
-                <h:outputText value="#{product.name}" />
-            </p:column>
-            <p:column headerText="Image" exportable="false">
-                <p:graphicImage name="images/product/#{product.image}" library="demo" styleClass="product-image" />
-            </p:column>
-            <p:column headerText="Price" sortBy="#{product.price}">
-                <h:outputText value="#{product.price}" style="font-weight: 700">
-                    <f:convertNumber currencySymbol="$" type="currency" />
-                </h:outputText>
-            </p:column>
-            <p:column headerText="Category" sortBy="#{product.category}" filterBy="#{product.category}">
-                <h:outputText value="#{product.category}" />
-            </p:column>
-            <p:column headerText="Reviews" sortBy="#{product.rating}">
-                <p:rating value="#{product.rating}" readonly="true" />
-            </p:column>
-            <p:column headerText="Status" sortBy="#{product.inventoryStatus}"
-                filterBy="#{product.inventoryStatus}">
-                <h:outputText styleClass="product-badge status-#{product.inventoryStatus.name().toLowerCase()}"
-                    value="#{product.inventoryStatus.text}" />
-            </p:column>
-            <p:column exportable="false" ariaHeaderText="Actions">
-                <p:commandButton icon="pi pi-pencil" update=":dialogs:manage-product-content"
-                    oncomplete="PF('manageProductDialog').show()"
-                    styleClass="edit-button rounded-button ui-button-success" process="@this">
-                    <f:setPropertyActionListener value="#{product}" target="#{crudView.selectedProduct}" />
-                    <p:resetInput target=":dialogs:manage-product-content" />
-                </p:commandButton>
-                <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash"
-                                 process="@this"
-                                 oncomplete="PF('deleteProductDialog').show()">
-                    <f:setPropertyActionListener value="#{product}" target="#{crudView.selectedProduct}" />
-                </p:commandButton>
-            </p:column>
+						<!-- INSTRUMENTO MUSICAL -->
+						<p:submenu label="Instrumento Musical" icon="pi pi-music">
+							<p:menuitem value="Instrumento de Viento" icon="pi pi-microphone"
+								onclick="PF('dlgViento').show()" update=":viento:viento-form" />
+							<p:menuitem value="Instrumento de Cuerda" icon="pi pi-volume-up"
+								onclick="PF('dlgCuerda').show()" update=":cuerda:cuerda-form" />
+							<p:menuitem value="Instrumento de Percusión" icon="pi pi-bell"
+								onclick="PF('dlgPercusion').show()"
+								update=":percusion:percusion-form" />
+						</p:submenu>
 
-        </p:dataTable>
-    </h:form>
+						<!-- DISPOSITIVOS ELECTRÓNICOS -->
+						<p:submenu label="Dispositivos Electrónicos" icon="pi pi-desktop">
+							<p:menuitem value="Celular" icon="pi pi-mobile"
+								onclick="PF('dlgCelular').show()" update=":celular:celular-form" />
+							<p:menuitem value="Computador" icon="pi pi-laptop"
+								onclick="PF('dlgComputador').show()"
+								update=":computador:pc-form" />
+							<p:menuitem value="Televisor" icon="pi pi-desktop"
+								onclick="PF('dlgTelevisor').show()"
+								update=":televisor:televisor-form" />
+						</p:submenu>
 
-    <h:form id="dialogs">
-        <p:dialog header="Product Details" showEffect="fade" modal="true" widgetVar="manageProductDialog"
-            responsive="true">
-            <p:outputPanel id="manage-product-content" class="ui-fluid">
-                <p:outputPanel rendered="#{not empty crudView.selectedProduct}">
-                    <p:graphicImage name="images/product/#{crudView.selectedProduct.image}" library="demo"
-                        styleClass="product-image" rendered="#{not empty crudView.selectedProduct.image}" />
-                    <div class="field">
-                        <p:outputLabel for="name">Name</p:outputLabel>
-                        <p:inputText id="name" value="#{crudView.selectedProduct.name}" required="true" />
-                    </div>
-                    <div class="field">
-                        <p:outputLabel for="description">Description</p:outputLabel>
-                        <p:inputTextarea id="description" value="#{adminbean.selectedProduct.description}" />
-                    </div>
-                    <div class="field">
-                        <p:outputLabel for="category">Category</p:outputLabel>
-                        <p:selectOneRadio id="category" value="#{adminbeancrudView.selectedProduct.category}"
-                            layout="responsive" columns="2">
-                            <f:selectItem itemLabel="Accessories" itemValue="Accessories" />
-                            <f:selectItem itemLabel="Clothing" itemValue="Clothing" />
-                            <f:selectItem itemLabel="Electronics" itemValue="Electronics" />
-                            <f:selectItem itemLabel="Fitness" itemValue="Fitness" />
-                        </p:selectOneRadio>
-                    </div>
-                    <div class="formgrid grid">
-                        <div class="field col">
-                            <p:outputLabel for="price">Price</p:outputLabel>
-                            <p:inputNumber id="price" value="#{adminbean.selectedProduct.price}" symbol=" USD"
-                                symbolPosition="s" decimalSeparator="." thousandSeparator="," />
-                        </div>
-                        <div class="field col">
-                            <p:outputLabel for="quantity">Quantity</p:outputLabel>
-                            <p:spinner id="quantity" min="0" value="#{adminbean.selectedProduct.quantity}" />
-                        </div>
-                    </div>
-                </p:outputPanel>
-            </p:outputPanel>
+						<!-- ROPA -->
+						<p:submenu label="Ropa" icon="pi pi-shopping-bag">
+							<p:menuitem value="Calzado" icon="pi pi-shopping-bag"
+								onclick="PF('dlgCalzado').show()" update=":calzado:calzado-form" />
+							<p:menuitem value="Camiseta" icon="pi pi-tags"
+								onclick="PF('dlgCamiseta').show()"
+								update=":camiseta:camiseta-form" />
+							<p:menuitem value="Pantalón" icon="pi pi-briefcase"
+								onclick="PF('dlgPantalon').show()"
+								update=":pantalon:pantalon-form" />
+						</p:submenu>
+					</p:menuButton>
 
-            <f:facet name="footer">
-                <p:commandButton value="Save" icon="pi pi-check" actionListener="#{adminbean.saveProduct}"
-                    update="manage-product-content" process="manage-product-content @this" />
-                <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageProductDialog').hide()"
-                    class="ui-button-secondary" type="button" />
-            </f:facet>
-        </p:dialog>
 
-        <p:confirmDialog widgetVar="deleteProductDialog" showEffect="fade" width="300"
-            message="Delete the product?" header="Confirm" severity="warn">
-            <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{adminbean.deleteProduct}"
-                process="@this" update=":form:delete-products-button"
-                oncomplete="PF('deleteProductDialog').hide()" />
-            <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
-                onclick="PF('deleteProductDialog').hide()" />
-        </p:confirmDialog>
+					<p:commandButton id="delete-products-button"
+						value="#{crudView.deleteButtonMessage}" icon="pi pi-trash"
+						actionListener="#{crudView.deleteSelectedProducts}"
+						styleClass="ui-button-danger"
+						disabled="#{!crudView.hasSelectedProducts()}" update="@this">
+						<p:confirm header="Confirmation"
+							message="Delete the selected products?"
+							icon="pi pi-exclamation-triangle" />
+					</p:commandButton>
 
-        <p:confirmDialog global="true" showEffect="fade" width="300">
-            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
-                icon="pi pi-times" />
-        </p:confirmDialog>
-    </h:form>
-</div>
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:fileUpload mode="simple" skinSimple="true" label="Import"
+						chooseIcon="pi pi-download" />
+					<p:commandButton value="Export" icon="pi pi-upload"
+						styleClass="ui-button-help" ajax="false">
+						<p:dataExporter type="pdf" target="dt-products"
+							fileName="products" />
+					</p:commandButton>
+				</p:toolbarGroup>
+			</p:toolbar>
+		</h:form>
+		<p:dataTable id="dt-products" widgetVar="dtProducts" var="product"
+			value="#{crudView.products}" reflow="true"
+			styleClass="products-table" selectionMode="multiple"
+			selection="#{crudView.selectedProducts}" rowKey="#{product.code}"
+			paginator="true" rows="10" selectionRowMode="add"
+			paginatorPosition="bottom">
+			<f:facet name="header">
+				<div class="products-table-header">
+					<span style="font-weight: bold">PRODUCTS</span> <span
+						class="filter-container ui-input-icon-left"> <i
+						class="pi pi-search"></i> <p:inputText id="globalFilter"
+							onkeyup="PrimeFaces.debounce(() => PF('dtProducts').filter())"
+							placeholder="Search" />
+					</span>
+				</div>
+			</f:facet>
+
+			<p:ajax event="rowSelect" update=":form:delete-products-button" />
+			<p:ajax event="rowUnselect" update=":form:delete-products-button" />
+			<p:ajax event="rowSelectCheckbox"
+				update=":form:delete-products-button" />
+			<p:ajax event="rowUnselectCheckbox"
+				update=":form:delete-products-button" />
+			<p:ajax event="toggleSelect" update=":form:delete-products-button" />
+
+			<p:column selectionBox="true" exportable="false"></p:column>
+
+			<p:column headerText="Code" sortBy="#{product.code}"
+				filterBy="#{product.code}">
+				<h:outputText value="#{product.code}" />
+			</p:column>
+			<p:column headerText="Name" sortBy="#{product.name}"
+				filterBy="#{product.name}">
+				<h:outputText value="#{product.name}" />
+			</p:column>
+			<p:column headerText="Image" exportable="false">
+				<p:graphicImage name="images/product/#{product.image}"
+					library="demo" styleClass="product-image" />
+			</p:column>
+			<p:column headerText="Price" sortBy="#{product.price}">
+				<h:outputText value="#{product.price}" style="font-weight: 700">
+					<f:convertNumber currencySymbol="$" type="currency" />
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Category" sortBy="#{product.category}"
+				filterBy="#{product.category}">
+				<h:outputText value="#{product.category}" />
+			</p:column>
+			<p:column headerText="Reviews" sortBy="#{product.rating}">
+				<p:rating value="#{product.rating}" readonly="true" />
+			</p:column>
+			<p:column headerText="Status" sortBy="#{product.inventoryStatus}"
+				filterBy="#{product.inventoryStatus}">
+				<h:outputText
+					styleClass="product-badge status-#{product.inventoryStatus.name().toLowerCase()}"
+					value="#{product.inventoryStatus.text}" />
+			</p:column>
+			<!-- <p:column exportable="false" ariaHeaderText="Actions">
+					<p:commandButton icon="pi pi-pencil"
+						update=":dialogs:manage-product-content"
+						oncomplete="PF('manageProductDialog').show()"
+						styleClass="edit-button rounded-button ui-button-success"
+						process="@this">
+						<f:setPropertyActionListener value="#{product}"
+							target="#{crudView.selectedProduct}" />
+						<p:resetInput target=":dialogs:manage-product-content" />
+					</p:commandButton> -->
+			<p:commandButton class="ui-button-warning rounded-button"
+				icon="pi pi-trash" process="@this"
+				oncomplete="PF('deleteProductDialog').show()">
+				<f:setPropertyActionListener value="#{product}"
+					target="#{crudView.selectedProduct}" />
+			</p:commandButton>
+			<!-- </p:column> -->
+
+		</p:dataTable>
+
+		<!-- FORM CAMISETA -->
+		<h:form id="camiseta">
+
+			<p:dialog header="Nueva Camiseta" showEffect="fade" modal="true"
+				widgetVar="dlgCamiseta" responsive="true"
+				style="max-height:600px; overflow-y:auto; width:600px;">
+				<p:outputPanel id="camiseta-form" class="ui-fluid">
+					<p:panel header="Camiseta">
+
+
+						<div class="field">
+							<p:outputLabel for="nombre" value="Nombre" />
+							<p:inputText id="nombre" />
+
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="marca" value="Marca" />
+							<p:inputText id="marca" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="descripcion" value="Descripción" />
+							<p:inputTextarea id="descripcion" autoResize="true" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="imagen" value="Imagen" />
+							<p:fileUpload id="imagen" mode="basic" chooseLabel="Seleccionar" />
+						</div>
+
+						<div class="formgrid grid">
+							<div class="field col">
+								<p:outputLabel for="precio" value="Precio" />
+								<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+									minValue="1" />
+							</div>
+							<div class="field col">
+								<p:outputLabel for="cantidad" value="Cantidad" />
+								<p:spinner id="cantidad" min="0" />
+							</div>
+						</div>
+						<div class="field">
+							<p:outputLabel for="talla" value="Talla" />
+							<p:inputText id="talla" />
+						</div>
+						<div class="field">
+							<p:outputLabel for="genero" value="Género" />
+							<p:selectOneMenu id="genero">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Mujer" itemValue="Mujer" />
+								<f:selectItem itemLabel="Hombre" itemValue="Hombre" />
+								<f:selectItem itemLabel="Niño" itemValue="Niño" />
+								<f:selectItem itemLabel="Niña" itemValue="Niña" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:outputLabel for="material" value="Material" />
+							<p:inputText id="material" />
+						</div>
+						<p:outputLabel for="manga" value="Tipo Manga" />
+						<p:selectOneMenu id="manga">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="Manga corta" itemValue="corta" />
+							<f:selectItem itemLabel="Manga larga" itemValue="larga" />
+							<f:selectItem itemLabel="Manga 3/4" itemValue="trescuartos" />
+							<f:selectItem itemLabel="Sin mangas" itemValue="sin" />
+						</p:selectOneMenu>
+						<p:outputLabel for="cuello" value="Tipo Cuello" />
+						<p:selectOneMenu id="cuello">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="Cuello redondo" itemValue="redondo" />
+							<f:selectItem itemLabel="Cuello en V" itemValue="v" />
+							<f:selectItem itemLabel="Cuello polo" itemValue="polo" />
+							<f:selectItem itemLabel="Cuello tortuga" itemValue="tortuga" />
+						</p:selectOneMenu>
+						<div>
+							<p:selectBooleanCheckbox itemLabel="¿Tiene estampado?" />
+						</div>
+					</p:panel>
+				</p:outputPanel>
+
+				<!-- ==================== BOTONES FOOTER ==================== -->
+				<f:facet name="footer">
+					<p:commandButton value="Aceptar" icon="pi pi-check"
+						onclick="PF('dlgCamiseta').hide()" />
+					<p:commandButton value="Cancelar" icon="pi pi-times"
+						onclick="PF('dlgCamiseta').hide()" class="ui-button-secondary"
+						type="button" />
+				</f:facet>
+			</p:dialog>
+		</h:form>
+
+		<!-- FORM CALZADO -->
+
+		<h:form id="calzado">
+
+			<p:dialog header="Nuevo Calzado" showEffect="fade" modal="true"
+				widgetVar="dlgCalzado" responsive="true"
+				style="max-height:600px; overflow-y:auto; width:600px;">
+				<p:outputPanel id="calzado-form" class="ui-fluid">
+					<p:panel header="Calzado">
+
+
+
+						<div class="field">
+							<p:outputLabel for="nombre" value="Nombre" />
+							<p:inputText id="nombre" />
+
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="marca" value="Marca" />
+							<p:inputText id="marca" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="descripcion" value="Descripción" />
+							<p:inputTextarea id="descripcion" autoResize="true" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="imagen" value="Imagen" />
+							<p:fileUpload id="imagen" mode="basic" chooseLabel="Seleccionar" />
+						</div>
+
+						<div class="formgrid grid">
+							<div class="field col">
+								<p:outputLabel for="precio" value="Precio" />
+								<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+									minValue="1" />
+							</div>
+							<div class="field col">
+								<p:outputLabel for="cantidad" value="Cantidad" />
+								<p:spinner id="cantidad" min="0" />
+							</div>
+						</div>
+						<div class="field">
+							<p:outputLabel for="talla" value="Talla" />
+							<p:inputText id="talla" />
+						</div>
+						<div class="field">
+							<p:outputLabel for="genero" value="Género" />
+							<p:selectOneMenu id="genero">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Mujer" itemValue="Mujer" />
+								<f:selectItem itemLabel="Hombre" itemValue="Hombre" />
+								<f:selectItem itemLabel="Niño" itemValue="Niño" />
+								<f:selectItem itemLabel="Niña" itemValue="Niña" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:outputLabel for="material" value="Material" />
+							<p:inputText id="material" />
+							<p:outputLabel for="tipoZapato" value="Tipo Zapato" />
+							<p:selectOneMenu id="tipoZapato">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Tennis" itemValue="tennis" />
+								<f:selectItem itemLabel="Sandalia" itemValue="sandalia" />
+								<f:selectItem itemLabel="Bota" itemValue="bota" />
+								<f:selectItem itemLabel="Tacón" itemValue="tacon" />
+								<f:selectItem itemLabel="Mocasín" itemValue="mocasin" />
+							</p:selectOneMenu>
+							<p:outputLabel for="ocasion" value="Ocasión" />
+							<p:selectOneMenu id="ocasion">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Casual" itemValue="casual" />
+								<f:selectItem itemLabel="Fiesta" itemValue="fiesta" />
+								<f:selectItem itemLabel="Formal" itemValue="formal" />
+								<f:selectItem itemLabel="Deportiva" itemValue="deportiva" />
+							</p:selectOneMenu>
+							<p:outputLabel for="materialSuela" value="Material Suela" />
+							<p:selectOneMenu id="materialSuela">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Poliuterano" itemValue="poliuterano" />
+								<f:selectItem itemLabel="Policloruro de vinilo"
+									itemValue="policlorurodevinilo" />
+								<f:selectItem itemLabel="Neopreno" itemValue="neopreno" />
+								<f:selectItem itemLabel="Yute" itemValue="yute" />
+								<f:selectItem itemLabel="Cuero" itemValue="cuero" />
+								<f:selectItem itemLabel="Corcho" itemValue="corcho" />
+								<f:selectItem itemLabel="Thermo Rubber" itemValue="thermorubber" />
+								<f:selectItem itemLabel="Espuma" itemValue="espuma" />
+							</p:selectOneMenu>
+							<div class="field col">
+								<p:outputLabel for="alturaSuela" value="Altura Suela" />
+								<p:inputNumber id="alturaSuela" decimalPlaces="2" minValue="0.1"
+									symbol=" cm" symbolPosition="s" />
+							</div>
+						</div>
+					</p:panel>
+				</p:outputPanel>
+
+				<!-- ==================== BOTONES FOOTER ==================== -->
+				<f:facet name="footer">
+					<p:commandButton value="Aceptar" icon="pi pi-check"
+						onclick="PF('dlgCalzado').hide()" />
+					<p:commandButton value="Cancelar" icon="pi pi-times"
+						onclick="PF('dlgCalzado').hide()" class="ui-button-secondary"
+						type="button" />
+				</f:facet>
+			</p:dialog>
+		</h:form>
+
+		<!-- FORM PANTALON -->
+
+		<h:form id="pantalon">
+
+			<p:dialog header="Nuevo Pantalón" showEffect="fade" modal="true"
+				widgetVar="dlgPantalon" responsive="true"
+				style="max-height:600px; overflow-y:auto; width:600px;">
+				<p:outputPanel id="pantalon-form" class="ui-fluid">
+					<p:panel header="Pantalón">
+
+
+
+						<div class="field">
+							<p:outputLabel for="nombre" value="Nombre" />
+							<p:inputText id="nombre" />
+
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="marca" value="Marca" />
+							<p:inputText id="marca" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="descripcion" value="Descripción" />
+							<p:inputTextarea id="descripcion" autoResize="true" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="imagen" value="Imagen" />
+							<p:fileUpload id="imagen" mode="basic" chooseLabel="Seleccionar" />
+						</div>
+
+						<div class="formgrid grid">
+							<div class="field col">
+								<p:outputLabel for="precio" value="Precio" />
+								<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+									minValue="1" />
+							</div>
+							<div class="field col">
+								<p:outputLabel for="cantidad" value="Cantidad" />
+								<p:spinner id="cantidad" min="0" />
+							</div>
+						</div>
+						<div class="field">
+							<p:outputLabel for="talla" value="Talla" />
+							<p:inputText id="talla" />
+						</div>
+						<div class="field">
+							<p:outputLabel for="genero" value="Género" />
+							<p:selectOneMenu id="genero">
+								<f:selectItem itemLabel="Selecciona" itemValue="" />
+								<f:selectItem itemLabel="Mujer" itemValue="Mujer" />
+								<f:selectItem itemLabel="Hombre" itemValue="Hombre" />
+								<f:selectItem itemLabel="Niño" itemValue="Niño" />
+								<f:selectItem itemLabel="Niña" itemValue="Niña" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:outputLabel for="material" value="Material" />
+							<p:inputText id="material" />
+							<p:outputLabel for="tipoPantalon" value="Tipo Pantalón" />
+							<p:selectOneMenu id="tipoPantalon">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Jeans" itemValue="jeans" />
+								<f:selectItem itemLabel="Cargo" itemValue="cargo" />
+								<f:selectItem itemLabel="Chino" itemValue="chino" />
+								<f:selectItem itemLabel="Jogger" itemValue="jogger" />
+								<f:selectItem itemLabel="De vestir" itemValue="vestir" />
+							</p:selectOneMenu>
+							<p:outputLabel for="corte" value="Corte" />
+							<p:selectOneMenu id="corte">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Boyfriend" itemValue="boyfriend" />
+								<f:selectItem itemLabel="Skinny" itemValue="skinny" />
+								<f:selectItem itemLabel="Slim fit" itemValue="slimfit" />
+								<f:selectItem itemLabel="Recto" itemValue="recto" />
+								<f:selectItem itemLabel="Bootcut" itemValue="bootcut" />
+								<f:selectItem itemLabel="Wide leg" itemValue="wideleg" />
+							</p:selectOneMenu>
+							<p:outputLabel for="largo" value="Largo" />
+							<p:selectOneMenu id="largo">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Corto" itemValue="corto" />
+								<f:selectItem itemLabel="Capri" itemValue="capri" />
+								<f:selectItem itemLabel="Tobillero" itemValue="tobillero" />
+								<f:selectItem itemLabel="Normal" itemValue="normal" />
+								<f:selectItem itemLabel="Extra Largo" itemValue="extralargo" />
+
+							</p:selectOneMenu>
+						</div>
+					</p:panel>
+				</p:outputPanel>
+
+				<!-- ==================== BOTONES FOOTER ==================== -->
+				<f:facet name="footer">
+					<p:commandButton value="Aceptar" icon="pi pi-check"
+						onclick="PF('dlgPantalon').hide()" />
+					<p:commandButton value="Cancelar" icon="pi pi-times"
+						onclick="PF('dlgPantalon').hide()" class="ui-button-secondary"
+						type="button" />
+				</f:facet>
+			</p:dialog>
+		</h:form>
+
+		<!-- FORM CELULAR -->
+
+		<h:form id="celular">
+
+			<p:dialog header="Nuevo Celular" showEffect="fade" modal="true"
+				widgetVar="dlgCelular" responsive="true"
+				style="max-height:600px; overflow-y:auto; width:600px;">
+				<p:outputPanel id="celular-form" class="ui-fluid">
+					<p:panel header="Celular">
+
+
+
+						<div class="field">
+							<p:outputLabel for="nombre" value="Nombre" />
+							<p:inputText id="nombre" />
+
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="marca" value="Marca" />
+							<p:inputText id="marca" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="descripcion" value="Descripción" />
+							<p:inputTextarea id="descripcion" autoResize="true" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="imagen" value="Imagen" />
+							<p:fileUpload id="imagen" mode="basic" chooseLabel="Seleccionar" />
+						</div>
+
+						<div class="formgrid grid">
+							<div class="field col">
+								<p:outputLabel for="precio" value="Precio" />
+								<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+									minValue="1" />
+							</div>
+							<div class="field col">
+								<p:outputLabel for="cantidad" value="Cantidad" />
+								<p:spinner id="cantidad" min="0" />
+							</div>
+						</div>
+						<div class="field">
+							<p:outputLabel for="pulgadas" value="Pulgadas:" />
+							<p:inputNumber id="pulgadas" minValue="1" maxValue="100"
+								suffix='"' />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="resolucion" value="Resolución:" />
+							<p:selectOneMenu id="resolucion">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="HD (1280×720)" itemValue="HD" />
+								<f:selectItem itemLabel="Full HD (1920×1080)" itemValue="FullHD" />
+								<f:selectItem itemLabel="2K / QHD (2560×1440)" itemValue="2K" />
+								<f:selectItem itemLabel="4K UHD (3840×2160)" itemValue="4K" />
+								<f:selectItem itemLabel="8K UHD (7680×4320)" itemValue="8K" />
+							</p:selectOneMenu>
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="sistema" value="Sistema Operativo:" />
+							<p:selectOneMenu id="sistema">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItems
+									value="#{['Android','iOS','HarmonyOS','KaiOS','Windows','macOS','Linux','ChromeOS','Android TV','webOS','Tizen','Fire OS']}" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:outputLabel for="almacenamientoCel" value="Almacenamiento:" />
+							<p:selectOneMenu id="almacenamientoCel">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItems
+									value="#{['64 GB','128 GB','256 GB','512 GB','1 TB']}" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:outputLabel for="ramCel" value="RAM:" />
+							<p:selectOneMenu id="ramCel">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItems value="#{['4 GB','6 GB','8 GB','12 GB','16 GB']}" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:outputLabel for="camara" value="Cantidad de cámaras:" />
+							<p:spinner id="camara" min="1" max="10" />
+						</div>
+						<div class="field">
+							<p:selectBooleanCheckbox id="dualSim"
+								itemLabel="¿Tiene Dual SIM?" />
+						</div>
+
+
+					</p:panel>
+				</p:outputPanel>
+
+				<!-- ==================== BOTONES FOOTER ==================== -->
+				<f:facet name="footer">
+					<p:commandButton value="Aceptar" icon="pi pi-check"
+						onclick="PF('dlgCelular').hide()" />
+					<p:commandButton value="Cancelar" icon="pi pi-times"
+						onclick="PF('dlgCelular').hide()" class="ui-button-secondary"
+						type="button" />
+				</f:facet>
+			</p:dialog>
+		</h:form>
+
+		<!-- FORM COMPUTADOR -->
+
+		<h:form id="computador">
+
+			<p:dialog header="Nuevo Computador" showEffect="fade" modal="true"
+				widgetVar="dlgComputador" responsive="true"
+				style="max-height:600px; overflow-y:auto; width:600px;">
+				<p:outputPanel id="pc-form" class="ui-fluid">
+					<p:panel header="Computaador">
+
+
+
+						<div class="field">
+							<p:outputLabel for="nombre" value="Nombre" />
+							<p:inputText id="nombre" />
+
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="marca" value="Marca" />
+							<p:inputText id="marca" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="descripcion" value="Descripción" />
+							<p:inputTextarea id="descripcion" autoResize="true" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="imagen" value="Imagen" />
+							<p:fileUpload id="imagen" mode="basic" chooseLabel="Seleccionar" />
+						</div>
+
+						<div class="formgrid grid">
+							<div class="field col">
+								<p:outputLabel for="precio" value="Precio" />
+								<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+									minValue="1" />
+							</div>
+							<div class="field col">
+								<p:outputLabel for="cantidad" value="Cantidad" />
+								<p:spinner id="cantidad" min="0" />
+							</div>
+						</div>
+						<div class="field">
+							<p:outputLabel for="pulgadas" value="Pulgadas:" />
+							<p:inputNumber id="pulgadas" minValue="1" maxValue="100"
+								suffix='"' />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="resolucion" value="Resolución:" />
+							<p:selectOneMenu id="resolucion">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="HD (1280×720)" itemValue="HD" />
+								<f:selectItem itemLabel="Full HD (1920×1080)" itemValue="FullHD" />
+								<f:selectItem itemLabel="2K / QHD (2560×1440)" itemValue="2K" />
+								<f:selectItem itemLabel="4K UHD (3840×2160)" itemValue="4K" />
+								<f:selectItem itemLabel="8K UHD (7680×4320)" itemValue="8K" />
+							</p:selectOneMenu>
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="sistema" value="Sistema Operativo:" />
+							<p:selectOneMenu id="sistema">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItems
+									value="#{['Android','iOS','HarmonyOS','KaiOS','Windows','macOS','Linux','ChromeOS','Android TV','webOS','Tizen','Fire OS']}" />
+							</p:selectOneMenu>
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="almacenamientoPc" value="Almacenamiento:" />
+							<p:selectOneMenu id="almacenamientoPc">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItems
+									value="#{['SSD_256GB','SSD_512GB','SSD_1TB','SSD_2TB','HDD_1TB']}" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:outputLabel for="ramPc" value="RAM:" />
+							<p:selectOneMenu id="ramPc">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItems value="#{['_4GB','_8GB','16GB','32GB','64GB']}" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:outputLabel for="procesador" value="Procesador:" />
+							<p:selectOneMenu id="procesador">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItems
+									value="#{['INTEL_I3','INTEL_I5','INTEL_I7','AMD_RYZEN5','AMD_RYZEN7']}" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:outputLabel for="grafica" value="Tarjeta Gráfica:" />
+							<p:selectOneMenu id="grafica">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItems
+									value="#{['INTEGRADA_INTEL','NVIDIA_GTX_1650','NVIDIA_RTX_3050','NVIDIA_RTX_4060','AMD_RX_6600M']}" />
+							</p:selectOneMenu>
+						</div>
+
+					</p:panel>
+				</p:outputPanel>
+
+				<!-- ==================== BOTONES FOOTER ==================== -->
+				<f:facet name="footer">
+					<p:commandButton value="Aceptar" icon="pi pi-check"
+						onclick="PF('dlgComputador').hide()" />
+					<p:commandButton value="Cancelar" icon="pi pi-times"
+						onclick="PF('dlgComputador').hide()" class="ui-button-secondary"
+						type="button" />
+				</f:facet>
+			</p:dialog>
+		</h:form>
+
+		<!-- FORM TELEVISOR -->
+
+		<h:form id="televisor">
+
+			<p:dialog header="Nuevo Televisor" showEffect="fade" modal="true"
+				widgetVar="dlgTelevisor" responsive="true"
+				style="max-height:600px; overflow-y:auto; width:600px;">
+				<p:outputPanel id="televisor-form" class="ui-fluid">
+					<p:panel header="Televisor">
+
+
+						<div class="field">
+							<p:outputLabel for="nombre" value="Nombre" />
+							<p:inputText id="nombre" />
+
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="marca" value="Marca" />
+							<p:inputText id="marca" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="descripcion" value="Descripción" />
+							<p:inputTextarea id="descripcion" autoResize="true" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="imagen" value="Imagen" />
+							<p:fileUpload id="imagen" mode="basic" chooseLabel="Seleccionar" />
+						</div>
+
+						<div class="formgrid grid">
+							<div class="field col">
+								<p:outputLabel for="precio" value="Precio" />
+								<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+									minValue="1" />
+							</div>
+							<div class="field col">
+								<p:outputLabel for="cantidad" value="Cantidad" />
+								<p:spinner id="cantidad" min="0" />
+							</div>
+						</div>
+						<div class="field">
+							<p:outputLabel for="pulgadas" value="Pulgadas:" />
+							<p:inputNumber id="pulgadas" minValue="1" maxValue="100"
+								suffix='"' />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="resolucion" value="Resolución:" />
+							<p:selectOneMenu id="resolucion">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="HD (1280×720)" itemValue="HD" />
+								<f:selectItem itemLabel="Full HD (1920×1080)" itemValue="FullHD" />
+								<f:selectItem itemLabel="2K / QHD (2560×1440)" itemValue="2K" />
+								<f:selectItem itemLabel="4K UHD (3840×2160)" itemValue="4K" />
+								<f:selectItem itemLabel="8K UHD (7680×4320)" itemValue="8K" />
+							</p:selectOneMenu>
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="sistema" value="Sistema Operativo:" />
+							<p:selectOneMenu id="sistema">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItems
+									value="#{['Android','iOS','HarmonyOS','KaiOS','Windows','macOS','Linux','ChromeOS','Android TV','webOS','Tizen','Fire OS']}" />
+							</p:selectOneMenu>
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="puertosHdmi" value="Puertos HDMI:" />
+							<p:spinner id="puertosHdmi" min="1" max="10" />
+						</div>
+						<div class="field">
+							<p:outputLabel for="frecuenciaHz" value="Frecuencia (Hz):" />
+							<p:inputNumber id="frecuenciaHz" minValue="30" maxValue="240" />
+						</div>
+						<div class="field">
+							<p:outputLabel for="asistente" value="Asistente Virtual:" />
+							<p:selectOneMenu id="asistente">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItems
+									value="#{['GOOGLE_ASSISTANT','AMAZON_ALEXA','APPLE_SIRI','BIXBY','CORTANA','LG_THINQ','XIAOMI_XIAOAI','NINGUNO']}" />
+							</p:selectOneMenu>
+						</div>
+
+					</p:panel>
+				</p:outputPanel>
+
+				<!-- ==================== BOTONES FOOTER ==================== -->
+				<f:facet name="footer">
+					<p:commandButton value="Aceptar" icon="pi pi-check"
+						onclick="PF('dlgTelevisor').hide()" />
+					<p:commandButton value="Cancelar" icon="pi pi-times"
+						onclick="PF('dlgTelevisor').hide()" class="ui-button-secondary"
+						type="button" />
+				</f:facet>
+			</p:dialog>
+		</h:form>
+
+
+		<!-- FORM  LEGO -->
+		<h:form id="lego">
+
+			<p:dialog header="Nueva Lego" showEffect="fade" modal="true"
+				widgetVar="dlgLego" responsive="true"
+				style="max-height:600px; overflow-y:auto; width:600px;">
+				<p:outputPanel id="lego-form" class="ui-fluid">
+					<p:panel header="Lego">
+
+
+
+						<div class="field">
+							<p:outputLabel for="nombre" value="Nombre" />
+							<p:inputText id="nombre" />
+
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="marca" value="Marca" />
+							<p:inputText id="marca" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="descripcion" value="Descripción" />
+							<p:inputTextarea id="descripcion" autoResize="true" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="imagen" value="Imagen" />
+							<p:fileUpload id="imagen" mode="basic" chooseLabel="Seleccionar" />
+						</div>
+
+						<div class="formgrid grid">
+							<div class="field col">
+								<p:outputLabel for="precio" value="Precio" />
+								<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+									minValue="1" />
+							</div>
+							<div class="field col">
+								<p:outputLabel for="cantidad" value="Cantidad" />
+								<p:spinner id="cantidad" min="0" />
+							</div>
+						</div>
+						<div class="field">
+							<p:outputLabel for="edad" value="Edad recomendada:" />
+							<p:spinner id="edad" min="1" max="18" suffix=" años" />
+						</div>
+						<div class="field">
+							<p:outputLabel for="temaLego" value="Tema:" />
+							<p:selectOneMenu id="temaLego">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItems
+									value="#{['Ciudad','Amigos','Ninjago','STAR_WARS','Harry Potter','Técnicos (mecánica)','Construcciones libres','Super héroes','Arquitectura','Jurassic World']}" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:outputLabel for="piezas" value="Cantidad de piezas:" />
+							<p:spinner id="piezas" min="1" max="10000" />
+						</div>
+						<div class="field">
+							<p:selectBooleanCheckbox id="minifiguras"
+								itemLabel="¿Incluye minifiguras?" />
+						</div>
+					</p:panel>
+				</p:outputPanel>
+
+
+				<!-- ==================== BOTONES FOOTER ==================== -->
+				<f:facet name="footer">
+					<p:commandButton value="Aceptar" icon="pi pi-check"
+						onclick="PF('dlgLego').hide()" />
+					<p:commandButton value="Cancelar" icon="pi pi-times"
+						onclick="PF('dlgLego').hide()" class="ui-button-secondary"
+						type="button" />
+				</f:facet>
+			</p:dialog>
+		</h:form>
+
+
+		<!-- FORM  PELUCHE -->
+		<h:form id="peluche">
+
+			<p:dialog header="Nueva Peluche" showEffect="fade" modal="true"
+				widgetVar="dlgPeluche" responsive="true"
+				style="max-height:600px; overflow-y:auto; width:600px;">
+				<p:outputPanel id="peluche-form" class="ui-fluid">
+					<p:panel header="Peluches">
+
+
+
+						<div class="field">
+							<p:outputLabel for="nombre" value="Nombre" />
+							<p:inputText id="nombre" />
+
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="marca" value="Marca" />
+							<p:inputText id="marca" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="descripcion" value="Descripción" />
+							<p:inputTextarea id="descripcion" autoResize="true" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="imagen" value="Imagen" />
+							<p:fileUpload id="imagen" mode="basic" chooseLabel="Seleccionar" />
+						</div>
+
+						<div class="formgrid grid">
+							<div class="field col">
+								<p:outputLabel for="precio" value="Precio" />
+								<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+									minValue="1" />
+							</div>
+							<div class="field col">
+								<p:outputLabel for="cantidad" value="Cantidad" />
+								<p:spinner id="cantidad" min="0" />
+							</div>
+						</div>
+						<div class="field">
+							<p:outputLabel for="edad" value="Edad recomendada:" />
+							<p:spinner id="edad" min="1" max="18" suffix=" años" />
+						</div>
+						<div class="field">
+							<p:selectBooleanCheckbox id="sonidoPeluche"
+								itemLabel="¿Tiene sonido?" />
+						</div>
+						<div class="field">
+							<p:outputLabel for="relleno" value="Tipo de relleno:" />
+							<p:selectOneMenu id="relleno">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItems
+									value="#{['Algodón sintético','Microperlas de poliestireno','Espuma','Algodón natural','Gel / bolitas térmicas']}" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:selectBooleanCheckbox id="lavadora"
+								itemLabel="¿Se puede lavar en lavadora?" />
+						</div>
+					</p:panel>
+				</p:outputPanel>
+
+
+				<!-- ==================== BOTONES FOOTER ==================== -->
+				<f:facet name="footer">
+					<p:commandButton value="Aceptar" icon="pi pi-check"
+						onclick="PF('dlgPeluche').hide()" />
+					<p:commandButton value="Cancelar" icon="pi pi-times"
+						onclick="PF('dlgPeluche').hide()" class="ui-button-secondary"
+						type="button" />
+				</f:facet>
+			</p:dialog>
+		</h:form>
+
+		<!-- FORM  PISTOLA AGUA -->
+		<h:form id="pistola">
+
+			<p:dialog header="Nueva Pistola Agua" showEffect="fade" modal="true"
+				widgetVar="dlgPistola" responsive="true"
+				style="max-height:600px; overflow-y:auto; width:600px;">
+				<p:outputPanel id="pistola-form" class="ui-fluid">
+					<p:panel header="Pistola de Agua">
+
+
+
+						<div class="field">
+							<p:outputLabel for="nombre" value="Nombre" />
+							<p:inputText id="nombre" />
+
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="marca" value="Marca" />
+							<p:inputText id="marca" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="descripcion" value="Descripción" />
+							<p:inputTextarea id="descripcion" autoResize="true" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="imagen" value="Imagen" />
+							<p:fileUpload id="imagen" mode="basic" chooseLabel="Seleccionar" />
+						</div>
+
+						<div class="formgrid grid">
+							<div class="field col">
+								<p:outputLabel for="precio" value="Precio" />
+								<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+									minValue="1" />
+							</div>
+							<div class="field col">
+								<p:outputLabel for="cantidad" value="Cantidad" />
+								<p:spinner id="cantidad" min="0" />
+							</div>
+						</div>
+						<div class="field">
+							<p:outputLabel for="edad" value="Edad recomendada:" />
+							<p:spinner id="edad" min="1" max="18" suffix=" años" />
+						</div>
+						<div class="field">
+							<p:outputLabel for="capacidad" value="Capacidad de agua (ml):" />
+							<p:inputNumber id="capacidad" minValue="50" maxValue="5000"
+								suffix=" ml" />
+						</div>
+						<div class="field">
+							<p:outputLabel for="chorros" value="Cantidad de chorros:" />
+							<p:spinner id="chorros" min="1" max="10" />
+						</div>
+						<div class="field">
+							<p:outputLabel for="alcance" value="Alcance máximo (metros):" />
+							<p:inputNumber id="alcance" minValue="1" maxValue="100"
+								suffix=" m" />
+						</div>
+					</p:panel>
+				</p:outputPanel>
+
+
+				<!-- ==================== BOTONES FOOTER ==================== -->
+				<f:facet name="footer">
+					<p:commandButton value="Aceptar" icon="pi pi-check"
+						onclick="PF('dlgPistola').hide()" />
+					<p:commandButton value="Cancelar" icon="pi pi-times"
+						onclick="PF('dlgPistola').hide()" class="ui-button-secondary"
+						type="button" />
+				</f:facet>
+			</p:dialog>
+		</h:form>
+
+		<!-- FORM  CUADERNO -->
+		<h:form id="cuaderno">
+
+			<p:dialog header="Nuevo Cuaderno" showEffect="fade" modal="true"
+				widgetVar="dlgCuaderno" responsive="true"
+				style="max-height:600px; overflow-y:auto; width:600px;">
+				<p:outputPanel id="cuaderno-form" class="ui-fluid">
+					<p:panel header="Cuaderno">
+
+
+
+						<div class="field">
+							<p:outputLabel for="nombre" value="Nombre" />
+							<p:inputText id="nombre" />
+
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="marca" value="Marca" />
+							<p:inputText id="marca" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="descripcion" value="Descripción" />
+							<p:inputTextarea id="descripcion" autoResize="true" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="imagen" value="Imagen" />
+							<p:fileUpload id="imagen" mode="basic" chooseLabel="Seleccionar" />
+						</div>
+
+						<div class="formgrid grid">
+							<div class="field col">
+								<p:outputLabel for="precio" value="Precio" />
+								<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+									minValue="1" />
+							</div>
+							<div class="field col">
+								<p:outputLabel for="cantidad" value="Cantidad" />
+								<p:spinner id="cantidad" min="0" />
+							</div>
+						</div>
+						<div class="field">
+							<p:outputLabel for="presentacion" value="Tipo de presentación:" />
+							<p:selectOneMenu id="presentacion">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Unidad" itemValue="unidad" />
+								<f:selectItem itemLabel="Paquete / Blíster" itemValue="paquete" />
+								<f:selectItem itemLabel="Caja" itemValue="caja" />
+								<f:selectItem itemLabel="Rollos" itemValue="rollos" />
+								<f:selectItem itemLabel="Kit" itemValue="kit" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:outputLabel for="tipoHojas" value="Tipo de hojas:" />
+							<p:selectOneMenu id="tipoHojas">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Rayadas" itemValue="rayadas" />
+								<f:selectItem itemLabel="Cuadriculadas"
+									itemValue="cuadriculadas" />
+								<f:selectItem itemLabel="Blancas" itemValue="blancas" />
+								<f:selectItem itemLabel="Punteadas" itemValue="punteadas" />
+								<f:selectItem itemLabel="Doble reglón" itemValue="doblereglon" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:outputLabel for="cantidadHojas" value="Cantidad de hojas:" />
+							<p:spinner id="cantidadHojas" min="10" max="500" />
+						</div>
+						<div class="field">
+							<p:selectBooleanCheckbox id="pastaDura"
+								itemLabel="¿Es pasta dura?" />
+						</div>
+
+					</p:panel>
+				</p:outputPanel>
+
+
+				<!-- ==================== BOTONES FOOTER ==================== -->
+				<f:facet name="footer">
+					<p:commandButton value="Aceptar" icon="pi pi-check"
+						onclick="PF('dlgCuaderno').hide()" />
+					<p:commandButton value="Cancelar" icon="pi pi-times"
+						onclick="PF('dlgCuaderno').hide()" class="ui-button-secondary"
+						type="button" />
+				</f:facet>
+			</p:dialog>
+		</h:form>
+
+		<!-- FORM  MARCADOR -->
+		<h:form id="marcador">
+
+			<p:dialog header="Nuevo Marcador" showEffect="fade" modal="true"
+				widgetVar="dlgMarcador" responsive="true"
+				style="max-height:600px; overflow-y:auto; width:600px;">
+				<p:outputPanel id="marcador-form" class="ui-fluid">
+					<p:panel header="Marcador">
+
+
+
+						<div class="field">
+							<p:outputLabel for="nombre" value="Nombre" />
+							<p:inputText id="nombre" />
+
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="marca" value="Marca" />
+							<p:inputText id="marca" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="descripcion" value="Descripción" />
+							<p:inputTextarea id="descripcion" autoResize="true" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="imagen" value="Imagen" />
+							<p:fileUpload id="imagen" mode="basic" chooseLabel="Seleccionar" />
+						</div>
+
+						<div class="formgrid grid">
+							<div class="field col">
+								<p:outputLabel for="precio" value="Precio" />
+								<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+									minValue="1" />
+							</div>
+							<div class="field col">
+								<p:outputLabel for="cantidad" value="Cantidad" />
+								<p:spinner id="cantidad" min="0" />
+							</div>
+						</div>
+						<div class="field">
+							<p:outputLabel for="presentacion" value="Tipo de presentación:" />
+							<p:selectOneMenu id="presentacion">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Unidad" itemValue="unidad" />
+								<f:selectItem itemLabel="Paquete / Blíster" itemValue="paquete" />
+								<f:selectItem itemLabel="Caja" itemValue="caja" />
+								<f:selectItem itemLabel="Rollos" itemValue="rollos" />
+								<f:selectItem itemLabel="Kit" itemValue="kit" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:outputLabel for="tipoPunta" value="Tipo de punta:" />
+							<p:selectOneMenu id="tipoPunta">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Redonda" itemValue="redonda" />
+								<f:selectItem itemLabel="Cónica" itemValue="conica" />
+								<f:selectItem itemLabel="Plana" itemValue="plana" />
+								<f:selectItem itemLabel="Fina" itemValue="fina" />
+								<f:selectItem itemLabel="Pincel" itemValue="pincel" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:selectBooleanCheckbox id="permanente"
+								itemLabel="¿Es permanente?" />
+						</div>
+						<div class="field">
+							<p:outputLabel for="tipoMarcador" value="Tipo de marcador:" />
+							<p:selectOneMenu id="tipoMarcador">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Permanente" itemValue="permanente" />
+								<f:selectItem itemLabel="Borrable" itemValue="borrable" />
+								<f:selectItem itemLabel="Textil" itemValue="textil" />
+								<f:selectItem itemLabel="Resaltador" itemValue="resaltador" />
+								<f:selectItem itemLabel="Acuarelable" itemValue="acuarelable" />
+							</p:selectOneMenu>
+						</div>
+					</p:panel>
+				</p:outputPanel>
+
+
+				<!-- ==================== BOTONES FOOTER ==================== -->
+				<f:facet name="footer">
+					<p:commandButton value="Aceptar" icon="pi pi-check"
+						onclick="PF('dlgMarcador').hide()" />
+					<p:commandButton value="Cancelar" icon="pi pi-times"
+						onclick="PF('dlgMarcador').hide()" class="ui-button-secondary"
+						type="button" />
+				</f:facet>
+			</p:dialog>
+		</h:form>
+
+		<!-- FORM CINTA ADHESIVOA -->
+
+		<h:form id="cinta">
+
+			<p:dialog header="Nueva Cinta Adhesiva" showEffect="fade"
+				modal="true" widgetVar="dlgCinta" responsive="true"
+				style="max-height:600px; overflow-y:auto; width:600px;">
+				<p:outputPanel id="cinta-form" class="ui-fluid">
+					<p:panel header="Cinta Adhesiva">
+
+
+
+						<div class="field">
+							<p:outputLabel for="nombre" value="Nombre" />
+							<p:inputText id="nombre" />
+
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="marca" value="Marca" />
+							<p:inputText id="marca" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="descripcion" value="Descripción" />
+							<p:inputTextarea id="descripcion" autoResize="true" />
+						</div>
+
+
+						<div class="field">
+							<p:outputLabel for="imagen" value="Imagen" />
+							<p:fileUpload id="imagen" mode="basic" chooseLabel="Seleccionar" />
+						</div>
+
+						<div class="formgrid grid">
+							<div class="field col">
+								<p:outputLabel for="precio" value="Precio" />
+								<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+									minValue="1" />
+							</div>
+							<div class="field col">
+								<p:outputLabel for="cantidad" value="Cantidad" />
+								<p:spinner id="cantidad" min="0" />
+							</div>
+						</div>
+						<div class="field">
+							<p:outputLabel for="presentacion" value="Tipo de presentación:" />
+							<p:selectOneMenu id="presentacion">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Unidad" itemValue="unidad" />
+								<f:selectItem itemLabel="Paquete / Blíster" itemValue="paquete" />
+								<f:selectItem itemLabel="Caja" itemValue="caja" />
+								<f:selectItem itemLabel="Rollos" itemValue="rollos" />
+								<f:selectItem itemLabel="Kit" itemValue="kit" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:selectBooleanCheckbox id="reposicionable"
+								itemLabel="¿Adhesivo reposicionable?" />
+						</div>
+						<div class="field">
+							<p:outputLabel for="anchoCinta" value="Ancho de la cinta (mm):" />
+							<p:inputNumber id="anchoCinta" minValue="5" maxValue="200"
+								suffix=" mm" />
+						</div>
+						<div class="field">
+							<p:outputLabel for="tipoCinta" value="Tipo de cinta:" />
+							<p:selectOneMenu id="tipoCinta">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Cinta transparente"
+									itemValue="transparente" />
+								<f:selectItem itemLabel="Cinta de enmascarar"
+									itemValue="enmascarar" />
+								<f:selectItem itemLabel="Cinta doble faz" itemValue="doblefaz" />
+								<f:selectItem itemLabel="Cinta de embalaje" itemValue="embalaje" />
+								<f:selectItem itemLabel="Cinta térmica" itemValue="termica" />
+							</p:selectOneMenu>
+						</div>
+					</p:panel>
+				</p:outputPanel>
+
+
+				<!-- ==================== BOTONES FOOTER ==================== -->
+				<f:facet name="footer">
+					<p:commandButton value="Aceptar" icon="pi pi-check"
+						onclick="PF('dlgCinta').hide()" />
+					<p:commandButton value="Cancelar" icon="pi pi-times"
+						onclick="PF('dlgCinta').hide()" class="ui-button-secondary"
+						type="button" />
+				</f:facet>
+			</p:dialog>
+		</h:form>
+
+		<!-- FORM SOMBRAS -->
+
+		<h:form id="sombra">
+
+			<p:dialog header="Nueva Sombra" showEffect="fade" modal="true"
+				widgetVar="dlgSombra" responsive="true"
+				style="max-height:600px; overflow-y:auto; width:600px;">
+				<p:outputPanel id="sombra-form" class="ui-fluid">
+					<p:panel header="Sombras">
+
+
+
+						<div class="field">
+							<p:outputLabel for="nombre" value="Nombre" />
+							<p:inputText id="nombre" />
+
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="marca" value="Marca" />
+							<p:inputText id="marca" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="descripcion" value="Descripción" />
+							<p:inputTextarea id="descripcion" autoResize="true" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="imagen" value="Imagen" />
+							<p:fileUpload id="imagen" mode="basic" chooseLabel="Seleccionar" />
+						</div>
+
+						<div class="formgrid grid">
+							<div class="field col">
+								<p:outputLabel for="precio" value="Precio" />
+								<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+									minValue="1" />
+							</div>
+							<div class="field col">
+								<p:outputLabel for="cantidad" value="Cantidad" />
+								<p:spinner id="cantidad" min="0" />
+							</div>
+						</div>
+						<div class="field">
+							<p:outputLabel for="tipoPiel" value="Tipo de piel:" />
+							<p:selectOneMenu id="tipoPiel">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Grasa" itemValue="grasa" />
+								<f:selectItem itemLabel="Seca" itemValue="seca" />
+								<f:selectItem itemLabel="Mixta" itemValue="mixta" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:selectBooleanCheckbox id="apruebaAgua"
+								itemLabel="¿Es a prueba de agua?" />
+						</div>
+						<div class="field">
+
+							<p:outputLabel for="fechaVencimiento"
+								value="Fecha de vencimiento:" />
+							<p:inputMask id="fechaVencimiento" mask="99/99/9999" />
+
+						</div>
+						<div class="field">
+							<p:outputLabel for="cantidadColores" value="Cantidad de colores:" />
+							<p:spinner id="cantidadColores" min="1" max="100" />
+						</div>
+						<div class="field">
+							<p:outputLabel for="acabado" value="Acabado:" />
+							<p:selectOneMenu id="acabado">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Mate" itemValue="mate" />
+								<f:selectItem itemLabel="Satinado" itemValue="satinado" />
+								<f:selectItem itemLabel="Shimmer" itemValue="shimmer" />
+								<f:selectItem itemLabel="Holográfico" itemValue="holografico" />
+								<f:selectItem itemLabel="Perlado" itemValue="perlado" />
+								<f:selectItem itemLabel="Metálico" itemValue="metalico" />
+							</p:selectOneMenu>
+						</div>
+					</p:panel>
+				</p:outputPanel>
+
+
+
+
+				<!-- ==================== BOTONES FOOTER ==================== -->
+				<f:facet name="footer">
+					<p:commandButton value="Aceptar" icon="pi pi-check"
+						onclick="PF('dlgSombra').hide()" />
+					<p:commandButton value="Cancelar" icon="pi pi-times"
+						onclick="PF('dlgSombra').hide()" class="ui-button-secondary"
+						type="button" />
+				</f:facet>
+			</p:dialog>
+		</h:form>
+
+		<!-- FORM LABIAL -->
+
+		<h:form id="labial">
+
+			<p:dialog header="Nuevo Labial" showEffect="fade" modal="true"
+				widgetVar="dlgLabial" responsive="true"
+				style="max-height:600px; overflow-y:auto; width:600px;">
+				<p:outputPanel id="labial-form" class="ui-fluid">
+					<p:panel header="Labiales">
+
+
+
+						<div class="field">
+							<p:outputLabel for="nombre" value="Nombre" />
+							<p:inputText id="nombre" />
+
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="marca" value="Marca" />
+							<p:inputText id="marca" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="descripcion" value="Descripción" />
+							<p:inputTextarea id="descripcion" autoResize="true" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="imagen" value="Imagen" />
+							<p:fileUpload id="imagen" mode="basic" chooseLabel="Seleccionar" />
+						</div>
+
+						<div class="formgrid grid">
+							<div class="field col">
+								<p:outputLabel for="precio" value="Precio" />
+								<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+									minValue="1" />
+							</div>
+							<div class="field col">
+								<p:outputLabel for="cantidad" value="Cantidad" />
+								<p:spinner id="cantidad" min="0" />
+							</div>
+						</div>
+						<div class="field">
+							<p:outputLabel for="tipoPiel" value="Tipo de piel:" />
+							<p:selectOneMenu id="tipoPiel">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Grasa" itemValue="grasa" />
+								<f:selectItem itemLabel="Seca" itemValue="seca" />
+								<f:selectItem itemLabel="Mixta" itemValue="mixta" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:selectBooleanCheckbox id="apruebaAgua"
+								itemLabel="¿Es a prueba de agua?" />
+						</div>
+						<div class="field">
+
+							<p:outputLabel for="fechaVencimiento"
+								value="Fecha de vencimiento:" />
+							<p:inputMask id="fechaVencimiento" mask="99/99/9999" />
+
+						</div>
+						<div class="field">
+							<p:outputLabel for="duracion" value="Duración:" />
+							<p:selectOneMenu id="duracion">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Corta (1 a 2 horas)" itemValue="corta" />
+								<f:selectItem itemLabel="Media (3 a 5 horas)" itemValue="media" />
+								<f:selectItem itemLabel="Larga (6 a 8 horas)" itemValue="larga" />
+								<f:selectItem itemLabel="Ultra (24 horas)" itemValue="ultra" />
+								<f:selectItem itemLabel="No Transfer" itemValue="notransfer" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:selectBooleanCheckbox id="hidratante"
+								itemLabel="¿Es hidratante?" />
+						</div>
+					</p:panel>
+				</p:outputPanel>
+
+
+				<!-- ==================== BOTONES FOOTER ==================== -->
+				<f:facet name="footer">
+					<p:commandButton value="Aceptar" icon="pi pi-check"
+						onclick="PF('dlgLabial').hide()" />
+					<p:commandButton value="Cancelar" icon="pi pi-times"
+						onclick="PF('dlgLabial').hide()" class="ui-button-secondary"
+						type="button" />
+				</f:facet>
+			</p:dialog>
+		</h:form>
+
+		<!-- FORM CORRECTOR -->
+
+		<h:form id="corrector">
+
+			<p:dialog header="Nuevo Corrector" showEffect="fade" modal="true"
+				widgetVar="dlgCorrector" responsive="true"
+				style="max-height:600px; overflow-y:auto; width:600px;">
+				<p:outputPanel id="corrector-form" class="ui-fluid">
+					<p:panel header="Corrector">
+
+
+
+						<div class="field">
+							<p:outputLabel for="nombre" value="Nombre" />
+							<p:inputText id="nombre" />
+
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="marca" value="Marca" />
+							<p:inputText id="marca" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="descripcion" value="Descripción" />
+							<p:inputTextarea id="descripcion" autoResize="true" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="imagen" value="Imagen" />
+							<p:fileUpload id="imagen" mode="basic" chooseLabel="Seleccionar" />
+						</div>
+
+						<div class="formgrid grid">
+							<div class="field col">
+								<p:outputLabel for="precio" value="Precio" />
+								<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+									minValue="1" />
+							</div>
+							<div class="field col">
+								<p:outputLabel for="cantidad" value="Cantidad" />
+								<p:spinner id="cantidad" min="0" />
+							</div>
+						</div>
+						<div class="field">
+							<p:outputLabel for="tipoPiel" value="Tipo de piel:" />
+							<p:selectOneMenu id="tipoPiel">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Grasa" itemValue="grasa" />
+								<f:selectItem itemLabel="Seca" itemValue="seca" />
+								<f:selectItem itemLabel="Mixta" itemValue="mixta" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:selectBooleanCheckbox id="apruebaAgua"
+								itemLabel="¿Es a prueba de agua?" />
+						</div>
+						<div class="field">
+
+							<p:outputLabel for="fechaVencimiento"
+								value="Fecha de vencimiento:" />
+							<p:inputMask id="fechaVencimiento" mask="99/99/9999" />
+
+						</div>
+						<div class="field">
+							<p:outputLabel for="cobertura" value="Cobertura:" />
+							<p:selectOneMenu id="cobertura">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Ligera" itemValue="ligera" />
+								<f:selectItem itemLabel="Media" itemValue="media" />
+								<f:selectItem itemLabel="Alta" itemValue="alta" />
+								<f:selectItem itemLabel="Total" itemValue="total" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:outputLabel for="formato" value="Formato:" />
+							<p:selectOneMenu id="formato">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Líquido" itemValue="liquido" />
+								<f:selectItem itemLabel="Crema" itemValue="crema" />
+								<f:selectItem itemLabel="Barra" itemValue="barra" />
+								<f:selectItem itemLabel="Mousse" itemValue="mousse" />
+								<f:selectItem itemLabel="Cushion" itemValue="cushion" />
+							</p:selectOneMenu>
+						</div>
+					</p:panel>
+				</p:outputPanel>
+
+
+				<!-- ==================== BOTONES FOOTER ==================== -->
+				<f:facet name="footer">
+					<p:commandButton value="Aceptar" icon="pi pi-check"
+						onclick="PF('dlgCorrector').hide()" />
+					<p:commandButton value="Cancelar" icon="pi pi-times"
+						onclick="PF('dlgCorrector').hide()" class="ui-button-secondary"
+						type="button" />
+				</f:facet>
+			</p:dialog>
+		</h:form>
+
+
+		<!-- FORM INSTRUMENTO VIENTO -->
+
+		<h:form id="viento">
+
+			<p:dialog header="Nuevo Instrumento de Viento" showEffect="fade"
+				modal="true" widgetVar="dlgViento" responsive="true"
+				style="max-height:600px; overflow-y:auto; width:600px;">>
+					<p:outputPanel id="viento-form" class="ui-fluid">
+					<p:panel header="Instrumento de Viento">
+
+
+
+						<div class="field">
+							<p:outputLabel for="nombre" value="Nombre" />
+							<p:inputText id="nombre" />
+
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="marca" value="Marca" />
+							<p:inputText id="marca" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="descripcion" value="Descripción" />
+							<p:inputTextarea id="descripcion" autoResize="true" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="imagen" value="Imagen" />
+							<p:fileUpload id="imagen" mode="basic" chooseLabel="Seleccionar" />
+						</div>
+
+						<div class="formgrid grid">
+							<div class="field col">
+								<p:outputLabel for="precio" value="Precio" />
+								<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+									minValue="1" />
+							</div>
+							<div class="field col">
+								<p:outputLabel for="cantidad" value="Cantidad" />
+								<p:spinner id="cantidad" min="0" />
+							</div>
+						</div>
+						<div class="field">
+							<p:selectBooleanCheckbox id="incluyeEstuche"
+								itemLabel="¿Incluye estuche?" />
+						</div>
+						<div class="field">
+							<p:outputLabel for="tipoViento"
+								value="Tipo de instrumento de viento:" />
+							<p:selectOneMenu id="tipoViento">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Trompeta" itemValue="trompeta" />
+								<f:selectItem itemLabel="Trombón" itemValue="trombon" />
+								<f:selectItem itemLabel="Tuba" itemValue="tuba" />
+								<f:selectItem itemLabel="Saxofón" itemValue="saxofon" />
+								<f:selectItem itemLabel="Clarinete" itemValue="clarinete" />
+								<f:selectItem itemLabel="Flauta" itemValue="flauta" />
+								<f:selectItem itemLabel="Oboe" itemValue="oboe" />
+								<f:selectItem itemLabel="Fagot" itemValue="fagot" />
+								<f:selectItem itemLabel="Corneta" itemValue="corneta" />
+								<f:selectItem itemLabel="Corno Francés" itemValue="corno" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:outputLabel for="afinacion" value="Afinación:" />
+							<p:selectOneMenu id="afinacion">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Do (C)" itemValue="do" />
+								<f:selectItem itemLabel="Re (D)" itemValue="re" />
+								<f:selectItem itemLabel="Mi♭ (Eb)" itemValue="mib" />
+								<f:selectItem itemLabel="Fa (F)" itemValue="fa" />
+								<f:selectItem itemLabel="Sol (G)" itemValue="sol" />
+								<f:selectItem itemLabel="Si♭ (Bb)" itemValue="sib" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:outputLabel for="numValvulas" value="Número de válvulas:" />
+							<p:spinner id="numValvulas" min="0" max="10" />
+						</div>
+						<div class="field">
+							<p:selectBooleanCheckbox id="boquillas"
+								itemLabel="¿Incluye boquillas?" />
+						</div>
+					</p:panel>
+				</p:outputPanel>
+
+
+				<!-- ==================== BOTONES FOOTER ==================== -->
+				<f:facet name="footer">
+					<p:commandButton value="Aceptar" icon="pi pi-check"
+						onclick="PF('dlgViento').hide()" />
+					<p:commandButton value="Cancelar" icon="pi pi-times"
+						onclick="PF('dlgViento').hide()" class="ui-button-secondary"
+						type="button" />
+				</f:facet>
+			</p:dialog>
+		</h:form>
+
+
+		<!-- FORM INSTRUMENTO CUERDA -->
+
+		<h:form id="cuerda">
+
+			<p:dialog header="Nuevo Instrumento de Cuerda" showEffect="fade"
+				modal="true" widgetVar="dlgCuerda" responsive="true"
+				style="max-height:600px; overflow-y:auto; width:600px;">
+				<p:outputPanel id="cuerda-form" class="ui-fluid">
+					<p:panel header="Instrumento de Cuerda">
+
+
+
+						<div class="field">
+							<p:outputLabel for="nombre" value="Nombre" />
+							<p:inputText id="nombre" />
+
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="marca" value="Marca" />
+							<p:inputText id="marca" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="descripcion" value="Descripción" />
+							<p:inputTextarea id="descripcion" autoResize="true" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="imagen" value="Imagen" />
+							<p:fileUpload id="imagen" mode="basic" chooseLabel="Seleccionar" />
+						</div>
+
+						<div class="formgrid grid">
+							<div class="field col">
+								<p:outputLabel for="precio" value="Precio" />
+								<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+									minValue="1" />
+							</div>
+							<div class="field col">
+								<p:outputLabel for="cantidad" value="Cantidad" />
+								<p:spinner id="cantidad" min="0" />
+							</div>
+						</div>
+						<div class="field">
+							<p:selectBooleanCheckbox id="incluyeEstuche"
+								itemLabel="¿Incluye estuche?" />
+						</div>
+						<div class="field">
+							<p:outputLabel for="tipoCuerda"
+								value="Tipo de instrumento de cuerda:" />
+							<p:selectOneMenu id="tipoCuerda">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Guitarra" itemValue="guitarra" />
+								<f:selectItem itemLabel="Bajo" itemValue="bajo" />
+								<f:selectItem itemLabel="Violín" itemValue="violin" />
+								<f:selectItem itemLabel="Viola" itemValue="viola" />
+								<f:selectItem itemLabel="Violonchelo" itemValue="violonchelo" />
+								<f:selectItem itemLabel="Contrabajo" itemValue="contrabajo" />
+								<f:selectItem itemLabel="Arpa" itemValue="arpa" />
+								<f:selectItem itemLabel="Ukelele" itemValue="ukelele" />
+								<f:selectItem itemLabel="Banjo" itemValue="banjo" />
+								<f:selectItem itemLabel="Mandolina" itemValue="mandolina" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:outputLabel for="numCuerdas" value="Número de cuerdas:" />
+							<p:spinner id="numCuerdas" min="1" max="20" />
+						</div>
+						<div class="field">
+							<p:outputLabel for="tipoCuerdas" value="Tipo de cuerdas:" />
+							<p:selectOneMenu id="tipoCuerdas">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Nylon" itemValue="nylon" />
+								<f:selectItem itemLabel="Acero" itemValue="acero" />
+								<f:selectItem itemLabel="Tripas" itemValue="tripas" />
+								<f:selectItem itemLabel="Entorchadas" itemValue="entorchadas" />
+								<f:selectItem itemLabel="Carbono" itemValue="carbono" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:selectBooleanCheckbox id="cajaResonancia"
+								itemLabel="¿Tiene caja de resonancia?" />
+						</div>
+					</p:panel>
+				</p:outputPanel>
+
+
+				<!-- ==================== BOTONES FOOTER ==================== -->
+				<f:facet name="footer">
+					<p:commandButton value="Aceptar" icon="pi pi-check"
+						onclick="PF('dlgCuerda').hide()" />
+					<p:commandButton value="Cancelar" icon="pi pi-times"
+						onclick="PF('dlgCuerda').hide()" class="ui-button-secondary"
+						type="button" />
+				</f:facet>
+			</p:dialog>
+		</h:form>
+
+		<!-- FORM INSTRUMENTO PERCUSION -->
+
+		<h:form id="percusion">
+
+			<p:dialog header="Nuevo Instrumento de Percusion" showEffect="fade"
+				modal="true" widgetVar="dlgPercusion" responsive="true"
+				style="max-height:600px; overflow-y:auto; width:600px;">
+				<p:outputPanel id="percusion-form" class="ui-fluid">
+					<p:panel header="Instrumento de Percusion">
+
+
+
+						<div class="field">
+							<p:outputLabel for="nombre" value="Nombre" />
+							<p:inputText id="nombre" />
+
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="marca" value="Marca" />
+							<p:inputText id="marca" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="descripcion" value="Descripción" />
+							<p:inputTextarea id="descripcion" autoResize="true" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="imagen" value="Imagen" />
+							<p:fileUpload id="imagen" mode="basic" chooseLabel="Seleccionar" />
+						</div>
+
+						<div class="formgrid grid">
+							<div class="field col">
+								<p:outputLabel for="precio" value="Precio" />
+								<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+									minValue="1" />
+							</div>
+							<div class="field col">
+								<p:outputLabel for="cantidad" value="Cantidad" />
+								<p:spinner id="cantidad" min="0" />
+							</div>
+						</div>
+						<div class="field">
+							<p:selectBooleanCheckbox id="incluyeEstuche"
+								itemLabel="¿Incluye estuche?" />
+						</div>
+						<div class="field">
+							<p:outputLabel for="tipoPercusion"
+								value="Tipo de instrumento de percusión:" />
+							<p:selectOneMenu id="tipoPercusion">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Batería" itemValue="bateria" />
+								<f:selectItem itemLabel="Tambor" itemValue="tambor" />
+								<f:selectItem itemLabel="Bongó" itemValue="bongo" />
+								<f:selectItem itemLabel="Conga" itemValue="conga" />
+								<f:selectItem itemLabel="Cajón" itemValue="cajon" />
+								<f:selectItem itemLabel="Timbal" itemValue="timbal" />
+								<f:selectItem itemLabel="Xilófono" itemValue="xilofono" />
+								<f:selectItem itemLabel="Marimba" itemValue="marimba" />
+								<f:selectItem itemLabel="Platillos" itemValue="platillos" />
+								<f:selectItem itemLabel="Triángulo" itemValue="triangulo" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:selectBooleanCheckbox id="usaBaquetas"
+								itemLabel="¿Usa baquetas?" />
+						</div>
+						<div class="field">
+							<p:outputLabel for="tipoPercusionDet" value="Tipo de percusión:" />
+							<p:selectOneMenu id="tipoPercusionDet">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItem itemLabel="Membranófonos"
+									itemValue="membranofonos" />
+								<f:selectItem itemLabel="Idiófonos" itemValue="idiofonos" />
+								<f:selectItem itemLabel="Electrónicos" itemValue="electronicos" />
+							</p:selectOneMenu>
+						</div>
+						<div class="field">
+							<p:outputLabel for="superficies"
+								value="Cantidad de superficies sonoras:" />
+							<p:spinner id="superficies" min="1" max="50" />
+						</div>
+					</p:panel>
+				</p:outputPanel>
+
+
+				<!-- ==================== BOTONES FOOTER ==================== -->
+				<f:facet name="footer">
+					<p:commandButton value="Aceptar" icon="pi pi-check"
+						onclick="PF('dlgPercusion').hide()" />
+					<p:commandButton value="Cancelar" icon="pi pi-times"
+						onclick="PF('dlgPercusion').hide()" class="ui-button-secondary"
+						type="button" />
+				</f:facet>
+			</p:dialog>
+		</h:form>
+
+	</div>
 </h:body>
 </html>
