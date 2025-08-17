@@ -6,7 +6,9 @@ import java.util.List;
 
 import org.primefaces.model.ResponsiveOption;
 
+import co.edu.unbosque.model.LabialDTO;
 import co.edu.unbosque.model.Product;
+import co.edu.unbosque.service.LabialService;
 import co.edu.unbosque.service.ProductService;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
@@ -15,14 +17,14 @@ import jakarta.inject.Named;
 
 @Named
 @ViewScoped
-public class CarouselView implements Serializable {
+public class CarouselViewLabiales implements Serializable {
 
-    private List<Product> products;
+    private List<LabialDTO> products;
 
     private List<ResponsiveOption> responsiveOptions;
 
     @Inject
-    private ProductService service;
+    private LabialService service;
 
     @PostConstruct
     public void init() {
@@ -33,11 +35,11 @@ public class CarouselView implements Serializable {
         responsiveOptions.add(new ResponsiveOption("560px", 1, 1));
     }
 
-    public List<Product> getProducts() {
+    public List<LabialDTO> getProducts() {
         return products;
     }
 
-    public void setService(ProductService service) {
+    public void setService(LabialService service) {
         this.service = service;
     }
 
