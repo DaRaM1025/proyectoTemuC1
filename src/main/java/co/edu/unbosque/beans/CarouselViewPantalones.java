@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.primefaces.model.ResponsiveOption;
 
-import co.edu.unbosque.model.CorrectorDTO;
-import co.edu.unbosque.service.CorrectorService;
+import co.edu.unbosque.model.PantalonDTO;
+import co.edu.unbosque.service.PantalonService;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
@@ -15,14 +15,13 @@ import jakarta.inject.Named;
 
 @Named
 @ViewScoped
-public class CarouselViewCorrectores implements Serializable {
-
-	private List<CorrectorDTO> products;
+public class CarouselViewPantalones implements Serializable {
+	private List<PantalonDTO> products;
 
 	private List<ResponsiveOption> responsiveOptions;
 
 	@Inject
-	private CorrectorService service;
+	private PantalonService service;
 
 	@PostConstruct
 	public void init() {
@@ -33,11 +32,11 @@ public class CarouselViewCorrectores implements Serializable {
 		responsiveOptions.add(new ResponsiveOption("560px", 1, 1));
 	}
 
-	public List<CorrectorDTO> getProducts() {
+	public List<PantalonDTO> getProducts() {
 		return products;
 	}
 
-	public void setService(CorrectorService service) {
+	public void setService(PantalonService service) {
 		this.service = service;
 	}
 
@@ -48,4 +47,5 @@ public class CarouselViewCorrectores implements Serializable {
 	public void setResponsiveOptions(List<ResponsiveOption> responsiveOptions) {
 		this.responsiveOptions = responsiveOptions;
 	}
+
 }

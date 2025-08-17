@@ -39,7 +39,8 @@ public class CamisetaDTO extends RopaDTO {
 	}
 
 	public CamisetaDTO(String nombre, String marca, String tipoProducto, String descripcion, String urlImagen,
-			double precio, int cantidad, String id) {}
+			double precio, int cantidad, String id) {
+	}
 
 	public CamisetaDTO(String talla, String genero, String material) {
 		super(talla, genero, material);
@@ -77,6 +78,13 @@ public class CamisetaDTO extends RopaDTO {
 
 	public void setEstampado(boolean isEstampado) {
 		this.isEstampado = isEstampado;
+	}
+
+	@Override
+	public CamisetaDTO clone() {
+		return new CamisetaDTO(getNombre(), getMarca(), getTipoProducto(), getDescripcion(), getUrlImagen(),
+				getPrecio(), getCantidad(), getId(), getTalla(), getGenero(), getMaterial(), getTipoManga(),
+				getCuello(), isEstampado());
 	}
 
 }
