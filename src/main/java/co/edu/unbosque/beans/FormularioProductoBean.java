@@ -7,7 +7,7 @@ import jakarta.inject.Named;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-@Named("productoBean")
+@Named("productoFormularioBean")
 @ViewScoped
 public class FormularioProductoBean implements Serializable {
 
