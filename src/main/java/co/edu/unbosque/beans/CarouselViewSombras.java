@@ -5,9 +5,7 @@ import java.util.List;
 
 import org.primefaces.model.ResponsiveOption;
 
-import co.edu.unbosque.model.LabialDTO;
 import co.edu.unbosque.model.SombraDTO;
-import co.edu.unbosque.service.LabialService;
 import co.edu.unbosque.service.SombraService;
 import jakarta.annotation.PostConstruct;
 import jakarta.inject.Inject;
