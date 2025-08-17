@@ -1,10 +1,12 @@
 package co.edu.unbosque.model;
 
-public class LabialDTO extends MaquillajeDTO {
-    private String duracion;
-    private boolean esHidratante;
+import java.io.Serializable;
 
-    public LabialDTO() {
+public class LabialDTO extends MaquillajeDTO implements Serializable {
+	private String duracion;
+	private boolean esHidratante;
+
+	public LabialDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -15,8 +17,8 @@ public class LabialDTO extends MaquillajeDTO {
 		this.esHidratante = esHidratante;
 	}
 
-	public LabialDTO(String nombre, String marca, String tipoProducto, String descripcion, String urlImagen, double precio,
-			int cantidad, String id, String duracion, boolean esHidratante) {
+	public LabialDTO(String nombre, String marca, String tipoProducto, String descripcion, String urlImagen,
+			double precio, int cantidad, String id, String duracion, boolean esHidratante) {
 		super(nombre, marca, tipoProducto, descripcion, urlImagen, precio, cantidad, id);
 		this.duracion = duracion;
 		this.esHidratante = esHidratante;
@@ -33,22 +35,22 @@ public class LabialDTO extends MaquillajeDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public LabialDTO(String nombre, String marca, String tipoProducto, String descripcion, String urlImagen, double precio,
-			int cantidad, String id, String tipoPiel, boolean esApruebaDeAgua, String fechaVencimiento) {
+	public LabialDTO(String nombre, String marca, String tipoProducto, String descripcion, String urlImagen,
+			double precio, int cantidad, String id, String tipoPiel, boolean esApruebaDeAgua, String fechaVencimiento) {
 		super(nombre, marca, tipoProducto, descripcion, urlImagen, precio, cantidad, id, tipoPiel, esApruebaDeAgua,
 				fechaVencimiento);
 		// TODO Auto-generated constructor stub
 	}
 
-	public LabialDTO(String nombre, String marca, String tipoProducto, String descripcion, String urlImagen, double precio,
-			int cantidad, String id) {
+	public LabialDTO(String nombre, String marca, String tipoProducto, String descripcion, String urlImagen,
+			double precio, int cantidad, String id) {
 		super(nombre, marca, tipoProducto, descripcion, urlImagen, precio, cantidad, id);
 		// TODO Auto-generated constructor stub
 	}
 
-	public LabialDTO(String nombre, String marca, String tipoProducto, String descripcion, String urlImagen, double precio,
-			int cantidad, String id, String tipoPiel, boolean esApruebaDeAgua, String fechaVencimiento, String duracion,
-			boolean esHidratante) {
+	public LabialDTO(String nombre, String marca, String tipoProducto, String descripcion, String urlImagen,
+			double precio, int cantidad, String id, String tipoPiel, boolean esApruebaDeAgua, String fechaVencimiento,
+			String duracion, boolean esHidratante) {
 		super(nombre, marca, tipoProducto, descripcion, urlImagen, precio, cantidad, id, tipoPiel, esApruebaDeAgua,
 				fechaVencimiento);
 		this.duracion = duracion;
@@ -69,6 +71,12 @@ public class LabialDTO extends MaquillajeDTO {
 
 	public void setEsHidratante(boolean esHidratante) {
 		this.esHidratante = esHidratante;
+	}
+
+	@Override
+	public LabialDTO clone() {
+		return new LabialDTO(getNombre(), getMarca(), getTipoProducto(), getDescripcion(), getUrlImagen(), getPrecio(),
+				getCantidad(), getId(), getTipoPiel(), isEsApruebaDeAgua(), getFechaVencimiento(), getDuracion(), isEsHidratante());
 	}
 
 }

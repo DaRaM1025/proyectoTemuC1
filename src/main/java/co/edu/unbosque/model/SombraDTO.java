@@ -70,5 +70,10 @@ public class SombraDTO extends MaquillajeDTO {
 	public void setAcabado(String acabado) {
 		this.acabado = acabado;
 	}
+	@Override
+	public SombraDTO clone() {
+		return new SombraDTO(getNombre(), getMarca(), getTipoProducto(), getDescripcion(), getUrlImagen(), getPrecio(),
+				getCantidad(), getId(), getTipoPiel(), isEsApruebaDeAgua(), getFechaVencimiento(), getCantidadColores(),getAcabado());
+	}
 
 }
