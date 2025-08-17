@@ -1,8 +1,7 @@
 package co.edu.unbosque.model;
 
-import java.io.Serializable;
 
-public class LabialDTO extends MaquillajeDTO implements Serializable {
+public class LabialDTO extends MaquillajeDTO  {
 	private String duracion;
 	private boolean esHidratante;
 

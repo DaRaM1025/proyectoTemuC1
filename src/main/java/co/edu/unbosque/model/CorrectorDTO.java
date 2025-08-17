@@ -70,5 +70,11 @@ public class CorrectorDTO extends MaquillajeDTO {
 	public void setFormato(String formato) {
 		this.formato = formato;
 	}
+	
+	@Override
+	public CorrectorDTO clone() {
+		return new CorrectorDTO(getNombre(), getMarca(), getTipoProducto(), getDescripcion(), getUrlImagen(), getPrecio(),
+				getCantidad(), getId(), getTipoPiel(), isEsApruebaDeAgua(), getFechaVencimiento(), getCobertura(), getFormato());
+	}
 
 }

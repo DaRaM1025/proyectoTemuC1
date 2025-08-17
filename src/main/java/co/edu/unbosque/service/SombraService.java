@@ -7,62 +7,80 @@ import java.util.UUID;
 
 import co.edu.unbosque.model.SombraDTO;
 import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Named;
 
+@Named
+@ApplicationScoped
 public class SombraService {
-private List<SombraDTO> listaSombras;
-	
+	private List<SombraDTO> listaSombras;
+
 	@PostConstruct
 	public void init() {
 		listaSombras = new ArrayList<SombraDTO>();
-		listaSombras.add(new SombraDTO("Labial Rojo", "L'Oréal", "Labial", "Labial color rojo intenso para que luzcas increible en todo momento ", "assets/prueba.jpeg", 25000, 50, "L001", "Mixta", true, "2026-05-01"));
-        listaSombras.add(new SombraDTO("Labial Nude", "Maybelline", "Labial", "Tono nude", "img/nude.jpg", 23000, 30, "L002", "Seca", false, "2025-12-31"));
-        listaSombras.add(new SombraDTO("Labial Rosa", "Revlon", "Labial", "Rosa suave", "img/rosa.jpg", 27000, 20, "L003", "Grasa", true, "2026-02-15"));
-        listaSombras.add(new SombraDTO("Labial Vino", "MAC", "Labial", "Color vino", "img/vino.jpg", 45000, 15, "L004", "Mixta", true, "2027-01-20"));
-        listaSombras.add(new SombraDTO("Labial Coral", "NYX", "Labial", "Coral brillante", "img/coral.jpg", 21000, 40, "L005", "Normal", false, "2025-11-10"));
-        listaSombras.add(new SombraDTO("Labial Marrón", "Avon", "Labial", "Marrón oscuro", "img/marron.jpg", 18000, 25, "L006", "Mixta", false, "2026-03-30"));
-        listaSombras.add(new SombraDTO("Labial Fucsia", "Clinique", "Labial", "Fucsia vibrante", "img/fucsia.jpg", 39000, 18, "L007", "Seca", true, "2026-07-07"));
-        listaSombras.add(new SombraDTO("Labial Durazno", "Sephora", "Labial", "Durazno pastel", "img/durazno.jpg", 35000, 12, "L008", "Grasa", false, "2025-09-25"));
-        listaSombras.add(new SombraDTO("Labial Morado", "Estée Lauder", "Labial", "Morado elegante", "img/morado.jpg", 52000, 10, "L009", "Normal", true, "2027-04-12"));
-        listaSombras.add(new SombraDTO("Labial Transparente", "E.L.F.", "Labial", "Gloss transparente", "img/gloss.jpg", 15000, 35, "L010", "Mixta", false, "2026-08-18"));
+		listaSombras.add(
+				new SombraDTO("Sombra Nude", "Maybelline", "Polvo compacto", "Paleta de tonos nude para uso diario",
+						"https://example.com/nude.jpg", 45000, 20, "S001", "Mixta", true, "2026-05-12", 12, "Mate"));
+		listaSombras.add(new SombraDTO("Sombra Brillante", "L'Oréal", "Polvo suelto", "Sombras con acabado brillante",
+				"https://example.com/brillante.jpg", 52000, 15, "S002", "Grasa", false, "2027-01-20", 8, "Satinado"));
+		listaSombras.add(new SombraDTO("Sombra Natural", "Revlon", "Paleta", "Colores neutros para looks naturales",
+				"https://example.com/natural.jpg", 60000, 25, "S003", "Seca", true, "2026-10-05", 10, "Mate"));
+		listaSombras.add(new SombraDTO("Sombra Intensa", "MAC", "Polvo compacto", "Sombras de alta pigmentación",
+				"https://example.com/intensa.jpg", 90000, 12, "S004", "Mixta", true, "2027-03-14", 16, "Metálico"));
+		listaSombras.add(new SombraDTO("Sombra Fiesta", "NYX", "Paleta", "Paleta colorida para fiestas",
+				"https://example.com/fiesta.jpg", 75000, 18, "S005", "Normal", false, "2026-12-01", 20, "Brillante"));
+		listaSombras.add(new SombraDTO("Sombra Elegante", "Clinique", "Polvo suelto", "Sombras discretas y elegantes",
+				"https://example.com/elegante.jpg", 82000, 10, "S006", "Seca", true, "2027-07-21", 6, "Mate"));
+		listaSombras.add(new SombraDTO("Sombra Tropical", "Sephora", "Paleta", "Colores vivos inspirados en el trópico",
+				"https://example.com/tropical.jpg", 98000, 14, "S007", "Grasa", false, "2026-09-17", 18, "Metálico"));
+		listaSombras.add(new SombraDTO("Sombra Profesional", "Urban Decay", "Paleta",
+				"Sombras profesionales de alta duración", "https://example.com/profesional.jpg", 120000, 8, "S008",
+				"Mixta", true, "2027-05-05", 24, "Brillante"));
+		listaSombras.add(new SombraDTO("Sombra Minimalista", "Essence", "Polvo compacto",
+				"Sombras básicas y económicas", "https://example.com/minimalista.jpg", 30000, 30, "S009", "Normal",
+				false, "2026-11-30", 4, "Mate"));
+		listaSombras
+				.add(new SombraDTO("Sombra Glam", "Huda Beauty", "Paleta", "Sombras glamorosas con acabado satinado",
+						"https://example.com/glam.jpg", 135000, 6, "S010", "Seca", true, "2027-08-10", 28, "Satinado"));
 	}
-	
-	 public List<SombraDTO> getProducts() {
-	        return new ArrayList<>(listaSombras);
-	    }
 
-	    public List<SombraDTO> getProducts(int size) {
+	public List<SombraDTO> getProducts() {
+		return new ArrayList<>(listaSombras);
+	}
 
-	        if (size > listaSombras.size()) {
-	            Random rand = new Random();
+	public List<SombraDTO> getProducts(int size) {
 
-	            List<SombraDTO> randomList = new ArrayList<>();
-	            for (int i = 0; i < size; i++) {
-	                int randomIndex = rand.nextInt(listaSombras.size());
-	                randomList.add(listaSombras.get(randomIndex));
-	            }
+		if (size > listaSombras.size()) {
+			Random rand = new Random();
 
-	            return randomList;
-	        }
+			List<SombraDTO> randomList = new ArrayList<>();
+			for (int i = 0; i < size; i++) {
+				int randomIndex = rand.nextInt(listaSombras.size());
+				randomList.add(listaSombras.get(randomIndex));
+			}
 
-	        else {
-	            return new ArrayList<>(listaSombras.subList(0, size));
-	        }
+			return randomList;
+		}
 
-	    }
+		else {
+			return new ArrayList<>(listaSombras.subList(0, size));
+		}
 
-	    public List<SombraDTO> getClonedProducts(int size) {
-	        List<SombraDTO> results = new ArrayList<>();
-	        List<SombraDTO> originals = getProducts(size);
-	        for (SombraDTO original : originals) {
-	            results.add(original.clone());
-	        }
+	}
 
-	        // make sure to have unique codes
-	        for (SombraDTO product : results) {
-	            product.setId(UUID.randomUUID().toString().replace("-", "").substring(0, 8));
-	        }
+	public List<SombraDTO> getClonedProducts(int size) {
+		List<SombraDTO> results = new ArrayList<>();
+		List<SombraDTO> originals = getProducts(size);
+		for (SombraDTO original : originals) {
+			results.add(original.clone());
+		}
 
-	        return results;
-	    }
+		// make sure to have unique codes
+		for (SombraDTO product : results) {
+			product.setId(UUID.randomUUID().toString().replace("-", "").substring(0, 8));
+		}
+
+		return results;
+	}
 
 }

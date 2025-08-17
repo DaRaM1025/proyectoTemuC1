@@ -1,5 +1,6 @@
 package co.edu.unbosque.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,9 +9,13 @@ import org.primefaces.model.ResponsiveOption;
 import co.edu.unbosque.model.SombraDTO;
 import co.edu.unbosque.service.SombraService;
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
-public class CarouselViewSombras {
+@Named
+@ViewScoped
+public class CarouselViewSombras implements Serializable {
 	private List<SombraDTO> products;
 
     private List<ResponsiveOption> responsiveOptions;

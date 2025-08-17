@@ -7,9 +7,7 @@ import java.util.List;
 import org.primefaces.model.ResponsiveOption;
 
 import co.edu.unbosque.model.LabialDTO;
-import co.edu.unbosque.model.Product;
 import co.edu.unbosque.service.LabialService;
-import co.edu.unbosque.service.ProductService;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
