@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Nuevo Producto</title>
+   
+</h:head>
+
+<h:body>
+    <h:form id="productoForm">
+        <h2>Nuevo Producto</h2>
+
+        <!-- Datos básicos -->
+        <fieldset>
+            <legend>Datos Básicos</legend>
+
+            <h:outputLabel value="Nombre:" for="nombre"/>
+            <h:inputText id="nombre" value="#{productoBean.nombre}" required="true"/><br/><br/>
+
+            <h:outputLabel value="Marca:" for="marca"/>
+            <h:inputText id="marca" value="#{productoBean.marca}" required="true"/><br/><br/>
+
+            <h:outputLabel value="Descripción:" for="descripcion"/>
+            <h:inputTextarea id="descripcion" value="#{productoBean.descripcion}" required="true"/><br/><br/>
+
+            <h:outputLabel value="Imagen:" for="imagen"/>
+            <h:inputFile id="imagen" value="#{productoBean.imagen}"/><br/><br/>
+
+            <h:outputLabel value="Precio:" for="precio"/>
+            <h:inputText id="precio" value="#{productoBean.precio}" required="true"/><br/><br/>
+
+            <h:outputLabel value="Cantidad:" for="cantidad"/>
+            <h:inputText id="cantidad" value="#{productoBean.cantidad}" required="true"/><br/><br/>
+
+            <!-- Categoría principal -->
+            <h:outputLabel value="Categoría:" for="tipoProducto"/>
+            <h:selectOneMenu id="tipoProducto" value="#{productoBean.tipoProducto}">
+                <f:selectItem itemValue="" itemLabel="Seleccione"/>
+                <f:selectItem itemValue="ropa" itemLabel="Ropa"/>
+                <f:selectItem itemValue="electronicos" itemLabel="Dispositivos Electrónicos"/>
+                <f:selectItem itemValue="juguetes" itemLabel="Juguetes"/>
+                <f:selectItem itemValue="papeleria" itemLabel="Papelería"/>
+                <f:selectItem itemValue="maquillaje" itemLabel="Maquillaje"/>
+                <f:selectItem itemValue="instrumentos" itemLabel="Instrumentos Musicales"/>
+            </h:selectOneMenu>
+        </fieldset>
+
+        <!-- ROPA -->
+        <fieldset id="ropa" class="hidden">
+            <legend>Datos de Ropa</legend>
+
+            <h:outputLabel value="Talla:" for="talla"/>
+            <h:inputText id="talla" value="#{productoBean.talla}"/><br/><br/>
+
+            <h:outputLabel value="Género:" for="genero"/>
+            <h:selectOneMenu id="genero" value="#{productoBean.genero}">
+                <f:selectItem itemValue="" itemLabel="Seleccione"/>
+                <f:selectItem itemValue="Mujer" itemLabel="Mujer"/>
+                <f:selectItem itemValue="Hombre" itemLabel="Hombre"/>
+                <f:selectItem itemValue="Niño" itemLabel="Niño"/>
+                <f:selectItem itemValue="Niña" itemLabel="Niña"/>
+            </h:selectOneMenu><br/><br/>
+
+            <h:outputLabel value="Material:" for="material"/>
+            <h:inputText id="material" value="#{productoBean.material}"/><br/><br/>
+
+            <!-- Subcategorías de ropa -->
+            <h:outputLabel value="Subcategoría:" for="subRopa"/>
+            <h:selectOneMenu id="subRopa" value="#{productoBean.subRopa}">
+                <f:selectItem itemValue="" itemLabel="Seleccione"/>
+                <f:selectItem itemValue="pantalon" itemLabel="Pantalón"/>
+                <f:selectItem itemValue="camiseta" itemLabel="Camiseta"/>
+                <f:selectItem itemValue="calzado" itemLabel="Calzado"/>
+            </h:selectOneMenu>
+
+            <!-- Pantalón -->
+            <div id="pantalon" class="hidden">
+                <h4>Pantalón</h4>
+                <h:outputLabel value="Tipo:"/>
+                <h:selectOneMenu value="#{productoBean.tipoPantalon}">
+                    <f:selectItem itemValue="Jeans" itemLabel="Jeans"/>
+                    <f:selectItem itemValue="Cargo" itemLabel="Cargo"/>
+                    <f:selectItem itemValue="Chino" itemLabel="Chino"/>
+                    <f:selectItem itemValue="Jogger" itemLabel="Jogger"/>
+                    <f:selectItem itemValue="De vestir" itemLabel="De vestir"/>
+                </h:selectOneMenu><br/><br/>
+
+                <h:outputLabel value="Corte:"/>
+                <h:selectOneMenu value="#{productoBean.cortePantalon}">
+                    <f:selectItem itemValue="Boyfriend" itemLabel="Boyfriend"/>
+                    <f:selectItem itemValue="Skinny" itemLabel="Skinny"/>
+                    <f:selectItem itemValue="Slim fit" itemLabel="Slim fit"/>
+                    <f:selectItem itemValue="Recto" itemLabel="Recto (Straight)"/>
+                    <f:selectItem itemValue="Bootcut" itemLabel="Bootcut"/>
+                    <f:selectItem itemValue="Wide leg" itemLabel="Wide leg"/>
+                </h:selectOneMenu><br/><br/>
+
+                <h:outputLabel value="Largo:"/>
+                <h:selectOneMenu value="#{productoBean.largoPantalon}">
+                    <f:selectItem itemValue="Corto" itemLabel="Corto (shorts)"/>
+                    <f:selectItem itemValue="Capri" itemLabel="Capri (3/4)"/>
+                    <f:selectItem itemValue="Tobillero" itemLabel="Tobillero"/>
+                    <f:selectItem itemValue="Normal" itemLabel="Normal (hasta el zapato)"/>
+                    <f:selectItem itemValue="Extra largo" itemLabel="Extra largo"/>
+                </h:selectOneMenu>
+            </div>
+
+            <!-- Camiseta -->
+            <div id="camiseta" class="hidden">
+                <h4>Camiseta</h4>
+                <h:outputLabel value="Manga:"/>
+                <h:selectOneMenu value="#{productoBean.mangaCamiseta}">
+                    <f:selectItem itemValue="Manga corta" itemLabel="Manga corta"/>
+                    <f:selectItem itemValue="Manga larga" itemLabel="Manga larga"/>
+                    <f:selectItem itemValue="Manga 3/4" itemLabel="Manga 3/4"/>
+                    <f:selectItem itemValue="Sin mangas" itemLabel="Sin mangas"/>
+                </h:selectOneMenu><br/><br/>
+
+                <h:outputLabel value="Cuello:"/>
+                <h:selectOneMenu value="#{productoBean.cuelloCamiseta}">
+                    <f:selectItem itemValue="Redondo" itemLabel="Cuello redondo"/>
+                    <f:selectItem itemValue="V" itemLabel="Cuello en V"/>
+                    <f:selectItem itemValue="Polo" itemLabel="Cuello polo"/>
+                    <f:selectItem itemValue="Tortuga" itemLabel="Cuello tortuga"/>
+                </h:selectOneMenu><br/><br/>
+
+                <h:outputLabel value="¿Estampada?"/>
+                <h:selectOneMenu value="#{productoBean.estampada}">
+                    <f:selectItem itemValue="true" itemLabel="Sí"/>
+                    <f:selectItem itemValue="false" itemLabel="No"/>
+                </h:selectOneMenu>
+            </div>
+
+            <!-- Calzado -->
+            <div id="calzado" class="hidden">
+                <h4>Calzado</h4>
+                <h:outputLabel value="Tipo de zapato:"/>
+                <h:selectOneMenu value="#{productoBean.tipoCalzado}">
+                    <f:selectItem itemValue="Tennis" itemLabel="Tennis"/>
+                    <f:selectItem itemValue="Sandalia" itemLabel="Sandalia"/>
+                    <f:selectItem itemValue="Bota" itemLabel="Bota"/>
+                    <f:selectItem itemValue="Tacón" itemLabel="Tacón"/>
+                    <f:selectItem itemValue="Mocasín" itemLabel="Mocasín"/>
+                </h:selectOneMenu><br/><br/>
+
+                <h:outputLabel value="Ocasión:"/>
+                <h:selectOneMenu value="#{productoBean.ocasionCalzado}">
+                    <f:selectItem itemValue="Casual" itemLabel="Casual"/>
+                    <f:selectItem itemValue="Formal" itemLabel="Formal"/>
+                    <f:selectItem itemValue="Deportiva" itemLabel="Deportiva"/>
+                    <f:selectItem itemValue="Fiesta" itemLabel="Fiesta"/>
+                </h:selectOneMenu><br/><br/>
+
+                <h:outputLabel value="Material suela:"/>
+                <h:selectOneMenu value="#{productoBean.suelaCalzado}">
+                    <f:selectItem itemValue="Poliuretano" itemLabel="Poliuretano"/>
+                    <f:selectItem itemValue="PVC" itemLabel="PVC"/>
+                    <f:selectItem itemValue="Neopreno" itemLabel="Neopreno"/>
+                    <f:selectItem itemValue="Yute" itemLabel="Yute"/>
+                    <f:selectItem itemValue="Corcho" itemLabel="Corcho"/>
+                    <f:selectItem itemValue="Cuero" itemLabel="Cuero"/>
+                    <f:selectItem itemValue="Espuma" itemLabel="Espuma"/>
+                    <f:selectItem itemValue="Thermo Rubber" itemLabel="Thermo Rubber"/>
+                </h:selectOneMenu><br/><br/>
+
+                <h:outputLabel value="Altura suela:"/>
+                <h:inputText value="#{productoBean.alturaSuela}"/>
+            </div>
+        </fieldset>
+
+        <br/>
+        <h:commandButton value="Aceptar" action="#{productoBean.guardar}"/>
+        <h:commandButton value="Cancelar" immediate="true" action="#{productoBean.cancelar}"/>
+    </h:form>
+
+    <!-- Script para mostrar/ocultar dinámicamente -->
+    
+</h:body>
+</html>
