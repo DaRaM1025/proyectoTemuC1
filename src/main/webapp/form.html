@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Formulario Producto</title>
+</h:head>
+<h:body>
+
+    <h:form id="formProducto">
+
+        <!-- BOTÓN NUEVO -->
+        <p:commandButton value="New" icon="pi pi-plus"
+                         update="panelProducto" />
+
+        <!-- PANEL PRINCIPAL -->
+        <p:panel id="panelProducto" header="Registro de Producto">
+
+            <!-- DATOS BÁSICOS -->
+            <p:outputLabel value="Nombre:" for="nombre"/>
+            <p:inputText id="nombre"/>
+
+            <p:outputLabel value="Marca:" for="marca"/>
+            <p:inputText id="marca"/>
+
+            <p:outputLabel value="Descripción:" for="descripcion"/>
+            <p:inputTextarea id="descripcion"/>
+
+            <p:outputLabel value="Imagen:" for="imagen"/>
+            <p:fileUpload id="imagen" mode="simple"/>
+
+            <p:outputLabel value="Precio:" for="precio"/>
+            <p:inputNumber id="precio"/>
+
+            <p:outputLabel value="Cantidad:" for="cantidad"/>
+            <p:inputNumber id="cantidad"/>
+
+            <!-- SELECCIÓN DEL TIPO DE PRODUCTO -->
+            <p:outputLabel value="Tipo de producto:" for="tipoProducto"/>
+            <p:selectOneMenu id="tipoProducto">
+                <f:selectItem itemLabel="Seleccione..." itemValue="" noSelectionOption="true"/>
+                <f:selectItem itemLabel="Ropa" itemValue="Ropa"/>
+                <f:selectItem itemLabel="Dispositivos Electronicos" itemValue="Electronicos"/>
+                <f:selectItem itemLabel="Juguetes" itemValue="Juguetes"/>
+                <f:selectItem itemLabel="Papeleria" itemValue="Papeleria"/>
+                <f:selectItem itemLabel="Instrumentos Musicales" itemValue="Instrumento"/>
+                <f:selectItem itemLabel="Maquillaje" itemValue="Maquillaje"/>
+                <p:ajax update="seccionTipo" process="@this"/>
+            </p:selectOneMenu>
+
+            <!-- SECCIÓN DINÁMICA SEGÚN EL TIPO -->
+            <h:panelGroup id="seccionTipo">
+
+                <!-- =================== ROPA =================== -->
+                <h:panelGroup>
+                    <p:outputLabel value="Talla:"/>
+                    <p:inputText/>
+
+                    <p:outputLabel value="Género:"/>
+                    <p:selectOneMenu>
+                        <f:selectItem itemLabel="Mujer" itemValue="Mujer"/>
+                        <f:selectItem itemLabel="Hombre" itemValue="Hombre"/>
+                        <f:selectItem itemLabel="Niño" itemValue="Niño"/>
+                        <f:selectItem itemLabel="Niña" itemValue="Niña"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Material:"/>
+                    <p:inputText/>
+
+                    <p:outputLabel value="Categoría:"/>
+                    <p:selectOneMenu>
+                        <f:selectItem itemLabel="Calzado" itemValue="Calzado"/>
+                        <f:selectItem itemLabel="Camiseta" itemValue="Camiseta"/>
+                        <f:selectItem itemLabel="Pantalon" itemValue="Pantalon"/>
+                        <p:ajax update="subRopa" process="@this"/>
+                    </p:selectOneMenu>
+
+                    <!-- SUB-CATEGORÍAS ROPA -->
+                    <h:panelGroup id="subRopa">
+
+                        <!-- Pantalón -->
+                        <h:panelGroup>
+                            <p:outputLabel value="Tipo de pantalón:"/>
+                            <p:selectOneMenu>
+                                <f:selectItem itemLabel="Jeans" itemValue="Jeans"/>
+                                <f:selectItem itemLabel="Cargo" itemValue="Cargo"/>
+                                <f:selectItem itemLabel="Chino" itemValue="Chino"/>
+                                <f:selectItem itemLabel="Jogger" itemValue="Jogger"/>
+                                <f:selectItem itemLabel="De vestir" itemValue="Vestir"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Corte:"/>
+                            <p:selectOneMenu>
+                                <f:selectItem itemLabel="Boyfriend" itemValue="Boyfriend"/>
+                                <f:selectItem itemLabel="Skinny" itemValue="Skinny"/>
+                                <f:selectItem itemLabel="Slim fit" itemValue="Slim fit"/>
+                                <f:selectItem itemLabel="Recto" itemValue="Recto"/>
+                                <f:selectItem itemLabel="Bootcut" itemValue="Bootcut"/>
+                                <f:selectItem itemLabel="Wide leg" itemValue="Wide leg"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Largo:"/>
+                            <p:selectOneMenu>
+                                <f:selectItem itemLabel="Shorts" itemValue="Shorts"/>
+                                <f:selectItem itemLabel="Capri" itemValue="Capri"/>
+                                <f:selectItem itemLabel="Tobillero" itemValue="Tobillero"/>
+                                <f:selectItem itemLabel="Normal" itemValue="Normal"/>
+                                <f:selectItem itemLabel="Extra largo" itemValue="ExtraLargo"/>
+                            </p:selectOneMenu>
+                        </h:panelGroup>
+
+                        <!-- Camiseta -->
+                        <h:panelGroup>
+                            <p:outputLabel value="Tipo de manga:"/>
+                            <p:selectOneMenu>
+                                <f:selectItem itemLabel="Manga corta" itemValue="Corta"/>
+                                <f:selectItem itemLabel="Manga larga" itemValue="Larga"/>
+                                <f:selectItem itemLabel="Manga 3/4" itemValue="3/4"/>
+                                <f:selectItem itemLabel="Sin mangas" itemValue="SinMangas"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Cuello:"/>
+                            <p:selectOneMenu>
+                                <f:selectItem itemLabel="Redondo" itemValue="Redondo"/>
+                                <f:selectItem itemLabel="V" itemValue="V"/>
+                                <f:selectItem itemLabel="Polo" itemValue="Polo"/>
+                                <f:selectItem itemLabel="Tortuga" itemValue="Tortuga"/>
+                            </p:selectOneMenu>
+
+                            <p:selectBooleanCheckbox itemLabel="Estampada"/>
+                        </h:panelGroup>
+
+                        <!-- Calzado -->
+                        <h:panelGroup>
+                            <p:outputLabel value="Tipo de zapato:"/>
+                            <p:selectOneMenu>
+                                <f:selectItem itemLabel="Tennis" itemValue="Tennis"/>
+                                <f:selectItem itemLabel="Sandalia" itemValue="Sandalia"/>
+                                <f:selectItem itemLabel="Bota" itemValue="Bota"/>
+                                <f:selectItem itemLabel="Tacón" itemValue="Tacon"/>
+                                <f:selectItem itemLabel="Mocasín" itemValue="Mocasin"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Ocasión:"/>
+                            <p:selectOneMenu>
+                                <f:selectItem itemLabel="Casual" itemValue="Casual"/>
+                                <f:selectItem itemLabel="Formal" itemValue="Formal"/>
+                                <f:selectItem itemLabel="Deportiva" itemValue="Deportiva"/>
+                                <f:selectItem itemLabel="Fiesta" itemValue="Fiesta"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Material de la suela:"/>
+                            <p:selectOneMenu>
+                                <f:selectItem itemLabel="Poliuretano" itemValue="PU"/>
+                                <f:selectItem itemLabel="PVC" itemValue="PVC"/>
+                                <f:selectItem itemLabel="Neopreno" itemValue="Neopreno"/>
+                                <f:selectItem itemLabel="Yute" itemValue="Yute"/>
+                                <f:selectItem itemLabel="Corcho" itemValue="Corcho"/>
+                                <f:selectItem itemLabel="Cuero" itemValue="Cuero"/>
+                                <f:selectItem itemLabel="Espuma" itemValue="Espuma"/>
+                                <f:selectItem itemLabel="Thermo Rubber" itemValue="TR"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Altura de la suela:"/>
+                            <p:inputNumber/>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <!-- BOTONES FINALES -->
+            <p:commandButton value="Aceptar" icon="pi pi-check" update="@form"/>
+            <p:commandButton value="Cancelar" icon="pi pi-times" update="@form"/>
+
+        </p:panel>
+
+    </h:form>
+
+</h:body>
+</html>
