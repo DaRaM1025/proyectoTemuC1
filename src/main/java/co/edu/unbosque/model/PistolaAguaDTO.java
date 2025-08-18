@@ -80,5 +80,10 @@ public class PistolaAguaDTO extends JugueteDTO {
 	public void setAlcanceMaximo(double alcanceMaximo) {
 		this.alcanceMaximo = alcanceMaximo;
 	}
-
+	
+	@Override
+	public PistolaAguaDTO clone() {
+		return new PistolaAguaDTO(getNombre(), getMarca(), getTipoProducto(), getDescripcion(), getUrlImagen(), getPrecio(),
+				getCantidad(), getId(), getEdadRecomendada(), getCapacidadAgua(), getCantidadChorros(), getAlcanceMaximo());
+	}
 }

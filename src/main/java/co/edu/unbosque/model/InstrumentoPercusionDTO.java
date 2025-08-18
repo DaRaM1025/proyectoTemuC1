@@ -87,5 +87,11 @@ public class InstrumentoPercusionDTO extends InstrumentoMusicalDTO {
 	public void setCantSuperficiesSonoras(int cantSuperficiesSonoras) {
 		this.cantSuperficiesSonoras = cantSuperficiesSonoras;
 	}
+	
+	@Override
+	public InstrumentoPercusionDTO clone() {
+		return new InstrumentoPercusionDTO(getNombre(), getMarca(), getTipoProducto(), getDescripcion(), getUrlImagen(), getPrecio(),
+				getCantidad(), getId(), isIncluyeEstuche(), getTipoInstrumentoPercusion(), isUsoBaquetas(), getTipoPercusion(), getCantSuperficiesSonoras());
+	}
 
 }

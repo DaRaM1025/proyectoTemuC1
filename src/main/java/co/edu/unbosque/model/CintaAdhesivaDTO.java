@@ -87,6 +87,11 @@ public class CintaAdhesivaDTO extends PapeleriaDTO {
 	public void setTipoCinta(String tipoCinta) {
 		this.tipoCinta = tipoCinta;
 	}
-
+	
+	public CintaAdhesivaDTO clone() {
+		return new CintaAdhesivaDTO(getNombre(), getMarca(), getTipoProducto(), getDescripcion(), getUrlImagen(), getPrecio(),
+				getCantidad(), getId(), getTipoPresentacion(), isEsAdhesivoReposicionable(), getAncho(), getTipoCinta());
+	}
+	
 }
 

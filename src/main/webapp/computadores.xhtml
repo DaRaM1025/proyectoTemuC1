@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8"></meta>
+	<title>Computadores</title>
+
+</h:head>
+
+<ui:composition template="templates/template.xhtml">
+
+	<ui:define name="content">
+		<style>
+.product-item .product-item-content {
+	border: 1px solid var(--surface-d);
+	border-radius: 3px;
+	margin: .3rem;
+	text-align: center;
+	padding: 2rem 0;
+}
+
+.product-item .product-image {
+	width: 50%;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+}
+</style>
+
+		<h:form id="form">
+
+			<div class="card">
+				<p:carousel value="#{carouselViewComputadores.products}"
+					var="product" numVisible="3" numScroll="3"
+					responsiveOptions="#{carouselViewComputadores.responsiveOptions}">
+					<f:facet name="header">
+						<h5 class="col-4">Computadores de Temporada:</h5>
+					</f:facet>
+					<div class="product-item">
+						<div class="product-item-content">
+							<div class="mb-3">
+								<p:graphicImage name="/#{product.urlImagen}"
+									styleClass="product-image" />
+							</div>
+							<div>
+								<h4 class="mb-3">#{product.nombre}</h4>
+
+								<h6 class="mt-1">Precio</h6>
+								<h:outputText value="#{product.precio}">
+									<f:convertNumber type="currency" pattern="¤#0"
+										currencySymbol="$" />
+								</h:outputText>
+								<h6 class="mt-1">
+									<h:outputText value="#{product.id}"></h:outputText>
+								</h6>
+								<h6 class="mt-1">
+									<h:outputText value="Pulgadas"></h:outputText>
+								</h6>
+								<h:outputText value="#{product.pulgadas}"></h:outputText>
+								<h6 class="mt-1">
+									<h:outputText value="Resolucion"></h:outputText>
+								</h6>
+								<h:outputText value="#{product.resolucion}"></h:outputText>
+								<h6 class="mt-1">
+									<h:outputText value="Sistema Operativo"></h:outputText>
+								</h6>
+								<h:outputText value="#{product.sistemaOperativo}"></h:outputText>
+								<h6 class="mt-1">
+									<h:outputText value="Almacenamiento"></h:outputText>
+								</h6>
+								<h:outputText value="#{product.almacenamiento}"></h:outputText>
+								<h6 class="mt-1">
+									<h:outputText value="RAM"></h:outputText>
+								</h6>
+								<h:outputText value="#{product.ram}"></h:outputText>
+								<h6 class="mt-1">
+									<h:outputText value="Procesador"></h:outputText>
+								</h6>
+								<h:outputText value="#{product.procesador}"></h:outputText>
+								<h6 class="mt-1">
+									<h:outputText value="Tarjeta Gráfica"></h:outputText>
+								</h6>
+								<h:outputText value="#{product.tarjetaGrafica}"></h:outputText>
+								<span> Agregar al Carrito <p:commandButton type="button"
+										icon="pi pi-cart-plus" styleClass="rounded-button mr-2" />
+								</span>
+
+							</div>
+						</div>
+					</div>
+				</p:carousel>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

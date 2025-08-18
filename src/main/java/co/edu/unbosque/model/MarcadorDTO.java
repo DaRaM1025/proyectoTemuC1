@@ -80,5 +80,10 @@ public class MarcadorDTO extends PapeleriaDTO {
 	public void setTipoMarcador(String tipoMarcador) {
 		this.tipoMarcador = tipoMarcador;
 	}
+	
+	public MarcadorDTO clone() {
+		return new MarcadorDTO(getNombre(), getMarca(), getTipoProducto(), getDescripcion(), getUrlImagen(), getPrecio(),
+				getCantidad(), getId(), getTipoPresentacion(), getTipoPunta(), isPermanente(), getTipoMarcador());
+	}
 
 }

@@ -79,5 +79,11 @@ public class LegoDTO extends JugueteDTO {
 	public void setTieneMinifiguras(boolean tieneMinifiguras) {
 		this.tieneMinifiguras = tieneMinifiguras;
 	}
+	
+	@Override
+	public LegoDTO clone() {
+		return new LegoDTO(getNombre(), getMarca(), getTipoProducto(), getDescripcion(), getUrlImagen(), getPrecio(),
+				getCantidad(), getId(), getEdadRecomendada(), getTema(), getNumeroPiezas(), isTieneMinifiguras());
+	}
 
 }

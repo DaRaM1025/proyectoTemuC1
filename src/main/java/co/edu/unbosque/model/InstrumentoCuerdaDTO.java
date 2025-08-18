@@ -80,5 +80,11 @@ public InstrumentoCuerdaDTO(String nombre, String marca, String tipoProducto, St
 	public void setTieneCajaResonancia(boolean tieneCajaResonancia) {
 		this.tieneCajaResonancia = tieneCajaResonancia;
 	}
+	
+	@Override
+	public InstrumentoCuerdaDTO clone() {
+		return new InstrumentoCuerdaDTO(getNombre(), getMarca(), getTipoProducto(), getDescripcion(), getUrlImagen(), getPrecio(),
+				getCantidad(), getId(), isIncluyeEstuche(), getTipoInstrumentoCuerda(), getNumeroCuerdas(), getTipoCuerda(), isTieneCajaResonancia());
+	}
 
 }
