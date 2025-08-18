@@ -26,7 +26,7 @@ public class CarouselViewLabiales implements Serializable {
 
     @PostConstruct
     public void init() {
-        products = service.getProducts(9);
+        products = service.getProducts(10);
         responsiveOptions = new ArrayList<>();
         responsiveOptions.add(new ResponsiveOption("1024px", 3, 3));
         responsiveOptions.add(new ResponsiveOption("768px", 2, 2));

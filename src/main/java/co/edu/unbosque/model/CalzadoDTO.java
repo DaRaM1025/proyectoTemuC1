@@ -89,6 +89,9 @@ public class CalzadoDTO extends RopaDTO {
 		this.alturaSuela = alturaSuela;
 	}
 
-
-
+	@Override
+	public CalzadoDTO clone() {
+		return new CalzadoDTO(getNombre(), getMarca(), getTipoProducto(), getDescripcion(), getUrlImagen(),
+				getPrecio(), getCantidad(), getId(), getTalla(), getGenero(), getMaterial(), getTipoCalzado(), getOcasion(), getMaterialSuela(), getAlturaSuela());
+	}
 }
