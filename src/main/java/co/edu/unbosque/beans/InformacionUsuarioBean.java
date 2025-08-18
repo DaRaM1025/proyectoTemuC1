@@ -5,6 +5,8 @@ import java.util.Date;
 import co.edu.unbosque.model.UsuarioDTO;
 import co.edu.unbosque.service.UsuarioService;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.validation.constraints.Email;
@@ -48,11 +50,11 @@ public class InformacionUsuarioBean {
 
 	    if (exito) {
 	        System.out.println("Usuario guardado con éxito😁");
-	        return "exito"; 
+	        return null; 
 	    } else {
-	        System.out.println("❌Usuario ya existente👺");
-	       
-	        return null;
+	    	 FacesContext.getCurrentInstance().addMessage(null,
+	    	            new FacesMessage(FacesMessage.SEVERITY_ERROR, "❌ El usuario ya existe (username repetido)", null));
+	    	        return null;
 	    }
 	}
 
