@@ -13,6 +13,7 @@ import jakarta.inject.Named;
 @Named
 @ApplicationScoped
 public class CamisetaService {
+	
 	private List<CamisetaDTO> listaCamisetas;
 
 	@PostConstruct

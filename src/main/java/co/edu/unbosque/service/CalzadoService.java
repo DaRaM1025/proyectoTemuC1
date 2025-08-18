@@ -6,6 +6,8 @@ import java.util.Random;
 import java.util.UUID;
 
 import co.edu.unbosque.model.CalzadoDTO;
+import co.edu.unbosque.model.ModelFacade;
+import co.edu.unbosque.model.persistence.DataMapper;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
@@ -14,10 +16,12 @@ import jakarta.inject.Named;
 @ApplicationScoped
 public class CalzadoService {
 	private List<CalzadoDTO> listaCalzados;
+	private ModelFacade mf;
 
 	@PostConstruct
 	public void init() {
 		listaCalzados = new ArrayList<>();
+		mf = new ModelFacade();
 
 		listaCalzados.add(new CalzadoDTO("Zapatillas Running Air", "Nike", "Deportivo",
 				"Zapatillas para correr con tecnología Air", "https://example.com/nike_air.jpg", 320000, 20, "CAL001",
@@ -59,10 +63,13 @@ public class CalzadoService {
 				"https://example.com/vans_skate.jpg", 260000, 22, "CAL010", "41", "Unisex", "Lona", "Zapatillas",
 				"Casual", "Goma", 2.5));
 
+		igualarListas();
+		leerLista();
 	}
 
 	public List<CalzadoDTO> getProducts() {
 		return new ArrayList<>(listaCalzados);
+
 	}
 
 	public List<CalzadoDTO> getProducts(int size) {
@@ -83,6 +90,17 @@ public class CalzadoService {
 			return new ArrayList<>(listaCalzados.subList(0, size));
 		}
 
+	}
+
+	public void igualarListas() {
+		mf.getCalzadoDAO().getListaCalzado()
+				.addAll(DataMapper.listaCalzadoDTOToListaCalzado((ArrayList<CalzadoDTO>) listaCalzados));
+		mf.getCalzadoDAO().escribirEnArchivo();
+	}
+
+	public void leerLista() {
+		mf.getCalzadoDAO().cargarDesdeArchivo();
+		listaCalzados = DataMapper.listaCalzadoToListaCalzadoDTO(mf.getCalzadoDAO().getListaCalzado());
 	}
 
 	public List<CalzadoDTO> getClonedProducts(int size) {
