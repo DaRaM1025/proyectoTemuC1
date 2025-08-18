@@ -7,7 +7,11 @@ import java.util.UUID;
 
 import co.edu.unbosque.model.PelucheDTO;
 import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Named;
 
+@Named
+@ApplicationScoped
 public class PelucheService {
 	private List<PelucheDTO> listaPeluches;
 
