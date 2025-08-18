@@ -1,10 +1,11 @@
 package co.edu.unbosque.model;
 
 public class PelucheDTO extends JugueteDTO {
-    private boolean tieneSonido;
-    private String tipoRelleno; //Posible enum
-    private boolean lavadoMaquina;
-    public PelucheDTO() {
+	private boolean tieneSonido;
+	private String tipoRelleno; // Posible enum
+	private boolean lavadoMaquina;
+
+	public PelucheDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -78,6 +79,12 @@ public class PelucheDTO extends JugueteDTO {
 
 	public void setLavadoMaquina(boolean lavadoMaquina) {
 		this.lavadoMaquina = lavadoMaquina;
+	}
+
+	@Override
+	public PelucheDTO clone() {
+		return new PelucheDTO(getNombre(), getMarca(), getTipoProducto(), getDescripcion(), getUrlImagen(), getPrecio(),
+				getCantidad(), getId(), getEdadRecomendada(), isTieneSonido(), getTipoRelleno(), isLavadoMaquina());
 	}
 
 }
