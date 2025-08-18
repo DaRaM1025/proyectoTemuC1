@@ -20,28 +20,25 @@ public class SombraService {
 		listaSombras = new ArrayList<SombraDTO>();
 		listaSombras.add(
 				new SombraDTO("Sombra Nude", "Maybelline", "Polvo compacto", "Paleta de tonos nude para uso diario",
-						"https://example.com/nude.jpg", 45000, 20, "S001", "Mixta", true, "2026-05-12", 12, "Mate"));
+						"assets/sombra1.jpeg", 45000, 20, "S001", "Mixta", true, "2026-05-12", 12, "Mate"));
 		listaSombras.add(new SombraDTO("Sombra Brillante", "L'Oréal", "Polvo suelto", "Sombras con acabado brillante",
-				"https://example.com/brillante.jpg", 52000, 15, "S002", "Grasa", false, "2027-01-20", 8, "Satinado"));
+				"assets/sombra2.jpeg", 52000, 15, "S002", "Grasa", false, "2027-01-20", 8, "Satinado"));
 		listaSombras.add(new SombraDTO("Sombra Natural", "Revlon", "Paleta", "Colores neutros para looks naturales",
-				"https://example.com/natural.jpg", 60000, 25, "S003", "Seca", true, "2026-10-05", 10, "Mate"));
+				"assets/sombra3.jpeg", 60000, 25, "S003", "Seca", true, "2026-10-05", 10, "Mate"));
 		listaSombras.add(new SombraDTO("Sombra Intensa", "MAC", "Polvo compacto", "Sombras de alta pigmentación",
-				"https://example.com/intensa.jpg", 90000, 12, "S004", "Mixta", true, "2027-03-14", 16, "Metálico"));
+				"assets/sombra4.jpeg", 90000, 12, "S004", "Mixta", true, "2027-03-14", 16, "Metálico"));
 		listaSombras.add(new SombraDTO("Sombra Fiesta", "NYX", "Paleta", "Paleta colorida para fiestas",
-				"https://example.com/fiesta.jpg", 75000, 18, "S005", "Normal", false, "2026-12-01", 20, "Brillante"));
+				"assets/sombra5.jpeg", 75000, 18, "S005", "Normal", false, "2026-12-01", 20, "Brillante"));
 		listaSombras.add(new SombraDTO("Sombra Elegante", "Clinique", "Polvo suelto", "Sombras discretas y elegantes",
-				"https://example.com/elegante.jpg", 82000, 10, "S006", "Seca", true, "2027-07-21", 6, "Mate"));
+				"assets/sombra6.jpeg", 82000, 10, "S006", "Seca", true, "2027-07-21", 6, "Mate"));
 		listaSombras.add(new SombraDTO("Sombra Tropical", "Sephora", "Paleta", "Colores vivos inspirados en el trópico",
-				"https://example.com/tropical.jpg", 98000, 14, "S007", "Grasa", false, "2026-09-17", 18, "Metálico"));
-		listaSombras.add(new SombraDTO("Sombra Profesional", "Urban Decay", "Paleta",
-				"Sombras profesionales de alta duración", "https://example.com/profesional.jpg", 120000, 8, "S008",
-				"Mixta", true, "2027-05-05", 24, "Brillante"));
-		listaSombras.add(new SombraDTO("Sombra Minimalista", "Essence", "Polvo compacto",
-				"Sombras básicas y económicas", "https://example.com/minimalista.jpg", 30000, 30, "S009", "Normal",
-				false, "2026-11-30", 4, "Mate"));
-		listaSombras
-				.add(new SombraDTO("Sombra Glam", "Huda Beauty", "Paleta", "Sombras glamorosas con acabado satinado",
-						"https://example.com/glam.jpg", 135000, 6, "S010", "Seca", true, "2027-08-10", 28, "Satinado"));
+				"assets/sombra7.jpeg", 98000, 14, "S007", "Grasa", false, "2026-09-17", 18, "Metálico"));
+		listaSombras.add(new SombraDTO("Sombra Profesional", "Urban Decay", "Paleta", "Sombras profesionales de alta duración",
+						"assets/sombra8.jpeg", 120000, 8, "S008", "Mixta", true, "2027-05-05", 24, "Brillante"));
+		listaSombras.add(new SombraDTO("Sombra Minimalista", "Essence", "Polvo compacto", "Sombras básicas y económicas",
+						"assets/sombra9.jpeg", 30000, 30, "S009", "Normal", false, "2026-11-30", 4, "Mate"));
+		listaSombras.add(new SombraDTO("Sombra Glam", "Huda Beauty", "Paleta", "Sombras glamorosas con acabado satinado",
+						"assets/sombra10.jpeg", 135000, 6, "S010", "Seca", true, "2027-08-10", 28, "Satinado"));
 	}
 
 	public List<SombraDTO> getProducts() {
