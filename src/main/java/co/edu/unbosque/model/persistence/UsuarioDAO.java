@@ -4,14 +4,15 @@ import java.util.ArrayList;
 
 import co.edu.unbosque.model.Usuario;
 import co.edu.unbosque.model.UsuarioDTO;
-
+import jakarta.enterprise.context.ApplicationScoped;
+@ApplicationScoped
 public class UsuarioDAO implements OperacionDAO<UsuarioDTO, Usuario> {
 
 	private ArrayList<Usuario> listaUsuarios;
 	private final String SERIAL_FILE_NAME = "usuario.dat";
 
 	public UsuarioDAO() {
-		super();
+	
 		listaUsuarios = new ArrayList<>();
 		leerArchivoSerializado();
 		
@@ -28,6 +29,7 @@ public class UsuarioDAO implements OperacionDAO<UsuarioDTO, Usuario> {
 	private void escribirArchivoSerializado() {
 		FileManager.escribirArchivoSerializado(SERIAL_FILE_NAME, listaUsuarios);
 	}
+	@SuppressWarnings("unchecked")
 
 	private void leerArchivoSerializado() {
 		listaUsuarios = (ArrayList<Usuario>) FileManager.leerArchivoSerializado(SERIAL_FILE_NAME);
