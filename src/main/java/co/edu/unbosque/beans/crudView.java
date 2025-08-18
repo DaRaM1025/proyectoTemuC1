@@ -23,7 +23,7 @@ public class crudView implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
-    private ArrayList<Product> products;;
+    private ArrayList<Product> products;
 
     private Product selectedProduct;
 
