@@ -20,11 +20,11 @@
 
 	<link rel="stylesheet"
 		href="https://unpkg.com/primeflex@latest/primeflex.css"></link>
-    
+	<link rel="stylesheet" href="estilos.css"></link>
 </h:head>
 
 <h:body>
-	
+
 	<div id='navbar'>
 		<ui:insert name="navbar">
 			<ui:include src="/templates/navbar.xhtml"></ui:include>
@@ -35,10 +35,20 @@
 		<ui:insert name="content" />
 		<br />
 	</div>
-	<div id='footer'>
-		<ui:insert name="footer">
-			<ui:include src="/templates/footer.xhtml"></ui:include>
-		</ui:insert>
+	<ui:insert name="footer">
+		<ui:include src="/templates/footer.xhtml"></ui:include>
+	</ui:insert>
+
+	<div class="fixed-bottom-bar d-flex align-items-center">
+		<h:form>
+			<p:toggleSwitch value="#{selectBooleanView.value1}"
+				styleClass="order-1" />
+		</h:form>
+		<p:button icon="pi pi-cart-plus"
+			styleClass="order-2 mx-auto rounded-button ui-button-outlined"
+			href="carrito.xhtml" />
+		<p:button icon="pi pi-times"
+			styleClass="order-3 rounded-button ui-button-danger ui-button-outlined" />
 	</div>
 </h:body>
 </html>

@@ -34,6 +34,7 @@ public class FileManager {
 	/*
 	 * Ubicación de donde se van a crear los archivos
 	 */
+
 	private static final String RUTA_CARPETA =
 	        System.getProperty("user.home") + File.separator + "Documents";
 
@@ -81,7 +82,7 @@ public class FileManager {
 	 */
 	public static void escribirEnArchivoTexto(String nombreArchivo, String contenido) {
 		try {
-			archivo = new File(RUTA_CARPETA + "/" + nombreArchivo);
+			archivo = new File(RUTA_CARPETA + File.separator + nombreArchivo);
 			if (!archivo.exists()) {
 				archivo.createNewFile();
 			}
@@ -141,7 +142,7 @@ public class FileManager {
 	 */
 	public static String leerArchivoTexto(String nombreArchivo) {
 		try {
-			archivo = new File(RUTA_CARPETA + "/" + nombreArchivo);
+			archivo = new File(RUTA_CARPETA + File.separator + nombreArchivo);
 			if (!archivo.exists()) {
 				archivo.createNewFile();
 			}
@@ -202,5 +203,6 @@ public class FileManager {
 	        e.printStackTrace();
 	    }
 	    return contenido;
+
 	}
 }
