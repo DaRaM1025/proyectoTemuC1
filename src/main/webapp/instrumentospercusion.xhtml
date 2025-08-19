@@ -32,7 +32,6 @@
 </style>
 
 		<h:form id="form">
-
 			<div class="card">
 				<p:carousel value="#{carouselViewInstrumentosPercusion.products}"
 					var="product" numVisible="3" numScroll="3"
@@ -43,7 +42,8 @@
 					<div class="product-item">
 						<div class="product-item-content">
 							<div class="mb-3">
-								<p:graphicImage value="https://img.freepik.com/fotos-premium/banda-tocando-tambores-tradicionales-japoneses-taiko_1048944-11882563.jpg"
+									<p:graphicImage
+										value="https://img.freepik.com/fotos-premium/banda-tocando-tambores-tradicionales-japoneses-taiko_1048944-11882563.jpg"
 									styleClass="product-image" />
 							</div>
 							<div>
@@ -78,9 +78,11 @@
 								</h6>
 								<h:outputText value="#{product.cantSuperficiesSonoras}"></h:outputText>
 								<div class="mt-5">
-								<span> Agregar al Carrito <p:commandButton type="button"
-										icon="pi pi-cart-plus" styleClass="rounded-button mr-2" />
-								</span>
+									<span> Agregar al Carrito <p:commandButton
+											update=":form"
+											actionListener="#{carritoBean.agregarProducto(product)}"
+											icon="pi pi-cart-plus" styleClass="rounded-button mr-2" />
+									</span>
 								</div>
 
 							</div>

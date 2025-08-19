@@ -32,7 +32,6 @@
 </style>
 
 		<h:form id="form">
-
 			<div class="card">
 				<p:carousel value="#{carouselViewMarcadores.products}" var="product"
 					numVisible="3" numScroll="3"
@@ -69,8 +68,7 @@
 									<h:outputText value="Tipo de Marcador"></h:outputText>
 								</h6>
 								<h:outputText value="#{product.tipoMarcador}"></h:outputText>
-								<div>
-
+								<div class="mt-5">
 									<span> Agregar al Carrito <p:commandButton
 											update=":form"
 											actionListener="#{carritoBean.agregarProducto(product)}"

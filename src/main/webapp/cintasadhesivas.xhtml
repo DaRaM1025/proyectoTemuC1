@@ -34,8 +34,8 @@
 		<h:form id="form">
 
 			<div class="card">
-				<p:carousel value="#{carouselViewCintasAdhesivas.products}" var="product"
-					numVisible="3" numScroll="3"
+				<p:carousel value="#{carouselViewCintasAdhesivas.products}"
+					var="product" numVisible="3" numScroll="3"
 					responsiveOptions="#{carouselViewCintasAdhesivas.responsiveOptions}">
 					<f:facet name="header">
 						<h5 class="col-4">Cintas Adhesivas de Temporada:</h5>
@@ -43,7 +43,8 @@
 					<div class="product-item">
 						<div class="product-item-content">
 							<div class="mb-3">
-								<p:graphicImage value="https://http2.mlstatic.com/D_NQ_NP_941195-MCO76588397667_052024-O.webp"
+								<p:graphicImage
+									value="https://http2.mlstatic.com/D_NQ_NP_941195-MCO76588397667_052024-O.webp"
 									styleClass="product-image" />
 							</div>
 							<div>
@@ -74,9 +75,11 @@
 								</h6>
 								<h:outputText value="#{product.tipoCinta}"></h:outputText>
 								<div class="mt-5">
-								<span> Agregar al Carrito <p:commandButton type="button"
-										icon="pi pi-cart-plus" styleClass="rounded-button mr-2" />
-								</span>
+									<span> Agregar al Carrito <p:commandButton
+											update=":form"
+											actionListener="#{carritoBean.agregarProducto(product)}"
+											icon="pi pi-cart-plus" styleClass="rounded-button mr-2" />
+									</span>
 								</div>
 
 							</div>

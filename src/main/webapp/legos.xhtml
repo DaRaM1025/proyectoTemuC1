@@ -75,11 +75,12 @@
 								</h6>
 								<h:outputText value="#{product.tieneMinifiguras}"></h:outputText>
 								<div class="mt-5">
-								<span> Agregar al Carrito <p:commandButton type="button"
-										icon="pi pi-cart-plus" styleClass="rounded-button mr-2" />
-								</span>
+									<span> Agregar al Carrito <p:commandButton
+											update=":form"
+											actionListener="#{carritoBean.agregarProducto(product)}"
+											icon="pi pi-cart-plus" styleClass="rounded-button mr-2" />
+									</span>
 								</div>
-
 							</div>
 						</div>
 					</div>
