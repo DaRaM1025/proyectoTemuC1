@@ -42,7 +42,8 @@
 					<div class="product-item">
 						<div class="product-item-content">
 							<div class="mb-3">
-								<p:graphicImage value="https://img.freepik.com/fotos-premium/primer-plano-resaltadores-contra-fondo-blanco_1048944-27150650.jpg"
+								<p:graphicImage
+									value="https://img.freepik.com/fotos-premium/primer-plano-resaltadores-contra-fondo-blanco_1048944-27150650.jpg"
 									styleClass="product-image" />
 							</div>
 							<div>
@@ -69,12 +70,13 @@
 								</h6>
 								<h:outputText value="#{product.tipoMarcador}"></h:outputText>
 								<div class="mt-5">
-								<div>
-									<span> Agregar al Carrito <p:commandButton
-											update=":form"
-											actionListener="#{carritoBean.agregarProducto(product)}"
-											icon="pi pi-cart-plus" styleClass="rounded-button mr-2" />
-									</span>
+									<div>
+										<span> Agregar al Carrito <p:commandButton
+												update=":form"
+												actionListener="#{carritoBean.agregarProducto(product)}"
+												icon="pi pi-cart-plus" styleClass="rounded-button mr-2" />
+										</span>
+									</div>
 								</div>
 							</div>
 						</div>

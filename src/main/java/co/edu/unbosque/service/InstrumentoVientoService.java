@@ -20,36 +20,36 @@ public class InstrumentoVientoService {
 	@PostConstruct
 	public void init() {
 		listaInstrumentosViento = new ArrayList<>();
-//
-//		listaInstrumentosViento
-//				.add(new InstrumentoVientoDTO("Flauta Dulce", "Yamaha", "Instrumento de Viento", "Flauta de iniciación",
-//						"https://example.com/flauta.jpg", 45000, 50, "IV001", false, "Flauta", "Do", 0, false));
-//		listaInstrumentosViento.add(new InstrumentoVientoDTO("Trompeta", "Bach", "Instrumento de Viento",
-//				"Trompeta de latón profesional", "https://example.com/trompeta.jpg", 2500000, 5, "IV002", true,
-//				"Trompeta", "Si bemol", 3, true));
-//		listaInstrumentosViento.add(new InstrumentoVientoDTO("Clarinete", "Buffet Crampon", "Instrumento de Viento",
-//				"Clarinete en si bemol", "https://example.com/clarinete.jpg", 3200000, 3, "IV003", true, "Clarinete",
-//				"Si bemol", 0, true));
-//		listaInstrumentosViento
-//				.add(new InstrumentoVientoDTO("Saxofón Alto", "Yamaha", "Instrumento de Viento", "Saxofón de estudio",
-//						"https://example.com/saxo.jpg", 4500000, 4, "IV004", true, "Saxofón", "Mi bemol", 0, true));
-//		listaInstrumentosViento.add(new InstrumentoVientoDTO("Oboe", "Howarth", "Instrumento de Viento",
-//				"Oboe intermedio", "https://example.com/oboe.jpg", 5800000, 2, "IV005", true, "Oboe", "Do", 0, true));
-//		listaInstrumentosViento
-//				.add(new InstrumentoVientoDTO("Trombón", "Conn", "Instrumento de Viento", "Trombón tenor de vara",
-//						"https://example.com/trombon.jpg", 3000000, 3, "IV006", true, "Trombón", "Si bemol", 0, false));
-//		listaInstrumentosViento
-//				.add(new InstrumentoVientoDTO("Armónica", "Hohner", "Instrumento de Viento", "Armónica de 10 agujeros",
-//						"https://example.com/armonica.jpg", 120000, 20, "IV007", false, "Armónica", "Do", 0, false));
-//		listaInstrumentosViento.add(new InstrumentoVientoDTO("Tuba", "Miraphone", "Instrumento de Viento",
-//				"Tuba de concierto", "https://example.com/tuba.jpg", 9000000, 1, "IV008", true, "Tuba", "Fa", 4, true));
-//		listaInstrumentosViento
-//				.add(new InstrumentoVientoDTO("Fagot", "Fox", "Instrumento de Viento", "Fagot profesional",
-//						"https://example.com/fagot.jpg", 12000000, 1, "IV009", true, "Fagot", "Do", 0, true));
-//		listaInstrumentosViento
-//				.add(new InstrumentoVientoDTO("Corneta", "Getzen", "Instrumento de Viento", "Corneta de latón",
-//						"https://example.com/corneta.jpg", 1800000, 2, "IV010", true, "Corneta", "Si bemol", 3, true));
-//		igualarListas();
+
+		listaInstrumentosViento
+				.add(new InstrumentoVientoDTO("Flauta Dulce", "Yamaha", "Instrumento de Viento", "Flauta de iniciación",
+						"https://example.com/flauta.jpg", 45000, 50, "IV001", false, "Flauta", "Do", 0, false));
+		listaInstrumentosViento.add(new InstrumentoVientoDTO("Trompeta", "Bach", "Instrumento de Viento",
+				"Trompeta de latón profesional", "https://example.com/trompeta.jpg", 2500000, 5, "IV002", true,
+				"Trompeta", "Si bemol", 3, true));
+		listaInstrumentosViento.add(new InstrumentoVientoDTO("Clarinete", "Buffet Crampon", "Instrumento de Viento",
+				"Clarinete en si bemol", "https://example.com/clarinete.jpg", 3200000, 3, "IV003", true, "Clarinete",
+				"Si bemol", 0, true));
+		listaInstrumentosViento
+				.add(new InstrumentoVientoDTO("Saxofón Alto", "Yamaha", "Instrumento de Viento", "Saxofón de estudio",
+						"https://example.com/saxo.jpg", 4500000, 4, "IV004", true, "Saxofón", "Mi bemol", 0, true));
+		listaInstrumentosViento.add(new InstrumentoVientoDTO("Oboe", "Howarth", "Instrumento de Viento",
+				"Oboe intermedio", "https://example.com/oboe.jpg", 5800000, 2, "IV005", true, "Oboe", "Do", 0, true));
+		listaInstrumentosViento
+				.add(new InstrumentoVientoDTO("Trombón", "Conn", "Instrumento de Viento", "Trombón tenor de vara",
+						"https://example.com/trombon.jpg", 3000000, 3, "IV006", true, "Trombón", "Si bemol", 0, false));
+		listaInstrumentosViento
+				.add(new InstrumentoVientoDTO("Armónica", "Hohner", "Instrumento de Viento", "Armónica de 10 agujeros",
+						"https://example.com/armonica.jpg", 120000, 20, "IV007", false, "Armónica", "Do", 0, false));
+		listaInstrumentosViento.add(new InstrumentoVientoDTO("Tuba", "Miraphone", "Instrumento de Viento",
+				"Tuba de concierto", "https://example.com/tuba.jpg", 9000000, 1, "IV008", true, "Tuba", "Fa", 4, true));
+		listaInstrumentosViento
+				.add(new InstrumentoVientoDTO("Fagot", "Fox", "Instrumento de Viento", "Fagot profesional",
+						"https://example.com/fagot.jpg", 12000000, 1, "IV009", true, "Fagot", "Do", 0, true));
+		listaInstrumentosViento
+				.add(new InstrumentoVientoDTO("Corneta", "Getzen", "Instrumento de Viento", "Corneta de latón",
+						"https://example.com/corneta.jpg", 1800000, 2, "IV010", true, "Corneta", "Si bemol", 3, true));
+		igualarListas();
 		leerLista();
 
 	}

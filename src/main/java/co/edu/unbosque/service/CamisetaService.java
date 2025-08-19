@@ -22,47 +22,47 @@ public class CamisetaService {
 	public void init() {
 		listaCamisetas = new ArrayList<>();
 
-//		listaCamisetas.add(new CamisetaDTO("Camiseta Básica Blanca", "H&M", "Casual",
-//				"Camiseta de algodón blanca clásica", "https://example.com/camiseta_blanca.jpg", 25000, 30, "CAM001",
-//				"M", "Unisex", "Algodón", "Manga corta", "Redondo", false));
-//
-//		listaCamisetas.add(new CamisetaDTO("Camiseta Negra Slim", "Zara", "Casual",
-//				"Camiseta negra entallada de alta calidad", "https://example.com/camiseta_negra.jpg", 45000, 20,
-//				"CAM002", "L", "Hombre", "Algodón", "Manga corta", "V", false));
-//
-//		listaCamisetas.add(new CamisetaDTO("Camiseta Deportiva Dry-Fit", "Nike", "Deportiva",
-//				"Camiseta deportiva con tecnología de secado rápido", "https://example.com/camiseta_nike.jpg", 80000,
-//				15, "CAM003", "M", "Hombre", "Poliéster", "Manga corta", "Redondo", true));
-//
-//		listaCamisetas.add(new CamisetaDTO("Camiseta Oversize", "Adidas", "Urbana", "Camiseta ancha estilo urbano",
-//				"https://example.com/camiseta_adidas.jpg", 70000, 12, "CAM004", "XL", "Unisex", "Algodón",
-//				"Manga corta", "Redondo", false));
-//
-//		listaCamisetas.add(new CamisetaDTO("Camiseta Crop Top", "Bershka", "Moda",
-//				"Camiseta corta para looks juveniles", "https://example.com/camiseta_crop.jpg", 60000, 18, "CAM005",
-//				"S", "Mujer", "Algodón", "Manga corta", "Redondo", true));
-//
-//		listaCamisetas.add(new CamisetaDTO("Camiseta Polo Clásica", "Lacoste", "Casual",
-//				"Camiseta polo con cuello y botones", "https://example.com/camiseta_polo.jpg", 120000, 10, "CAM006",
-//				"L", "Hombre", "Algodón Piqué", "Manga corta", "Tipo polo", false));
-//
-//		listaCamisetas.add(new CamisetaDTO("Camiseta Manga Larga", "Pull&Bear", "Casual",
-//				"Camiseta manga larga de algodón", "https://example.com/camiseta_larga.jpg", 55000, 14, "CAM007", "M",
-//				"Unisex", "Algodón", "Manga larga", "Redondo", false));
-//
-//		listaCamisetas.add(new CamisetaDTO("Camiseta Estampada Rock", "Forever21", "Urbana",
-//				"Camiseta con estampado de banda de rock", "https://example.com/camiseta_rock.jpg", 48000, 25, "CAM008",
-//				"L", "Unisex", "Algodón", "Manga corta", "Redondo", true));
-//
-//		listaCamisetas.add(new CamisetaDTO("Camiseta Running Mujer", "Under Armour", "Deportiva",
-//				"Camiseta ligera para correr", "https://example.com/camiseta_running.jpg", 85000, 9, "CAM009", "S",
-//				"Mujer", "Poliéster", "Manga corta", "Redondo", false));
-//
-//		listaCamisetas.add(new CamisetaDTO("Camiseta Termica", "The North Face", "Outdoor",
-//				"Camiseta térmica para climas fríos", "https://example.com/camiseta_termica.jpg", 130000, 6, "CAM010",
-//				"M", "Unisex", "Poliéster térmico", "Manga larga", "Redondo", false));
-//
-//		igualarListas();
+		listaCamisetas.add(new CamisetaDTO("Camiseta Básica Blanca", "H&M", "Casual",
+				"Camiseta de algodón blanca clásica", "https://example.com/camiseta_blanca.jpg", 25000, 30, "CAM001",
+				"M", "Unisex", "Algodón", "Manga corta", "Redondo", false));
+
+		listaCamisetas.add(new CamisetaDTO("Camiseta Negra Slim", "Zara", "Casual",
+				"Camiseta negra entallada de alta calidad", "https://example.com/camiseta_negra.jpg", 45000, 20,
+				"CAM002", "L", "Hombre", "Algodón", "Manga corta", "V", false));
+
+		listaCamisetas.add(new CamisetaDTO("Camiseta Deportiva Dry-Fit", "Nike", "Deportiva",
+				"Camiseta deportiva con tecnología de secado rápido", "https://example.com/camiseta_nike.jpg", 80000,
+				15, "CAM003", "M", "Hombre", "Poliéster", "Manga corta", "Redondo", true));
+
+		listaCamisetas.add(new CamisetaDTO("Camiseta Oversize", "Adidas", "Urbana", "Camiseta ancha estilo urbano",
+				"https://example.com/camiseta_adidas.jpg", 70000, 12, "CAM004", "XL", "Unisex", "Algodón",
+				"Manga corta", "Redondo", false));
+
+		listaCamisetas.add(new CamisetaDTO("Camiseta Crop Top", "Bershka", "Moda",
+				"Camiseta corta para looks juveniles", "https://example.com/camiseta_crop.jpg", 60000, 18, "CAM005",
+				"S", "Mujer", "Algodón", "Manga corta", "Redondo", true));
+
+		listaCamisetas.add(new CamisetaDTO("Camiseta Polo Clásica", "Lacoste", "Casual",
+				"Camiseta polo con cuello y botones", "https://example.com/camiseta_polo.jpg", 120000, 10, "CAM006",
+				"L", "Hombre", "Algodón Piqué", "Manga corta", "Tipo polo", false));
+
+		listaCamisetas.add(new CamisetaDTO("Camiseta Manga Larga", "Pull&Bear", "Casual",
+				"Camiseta manga larga de algodón", "https://example.com/camiseta_larga.jpg", 55000, 14, "CAM007", "M",
+				"Unisex", "Algodón", "Manga larga", "Redondo", false));
+
+		listaCamisetas.add(new CamisetaDTO("Camiseta Estampada Rock", "Forever21", "Urbana",
+				"Camiseta con estampado de banda de rock", "https://example.com/camiseta_rock.jpg", 48000, 25, "CAM008",
+				"L", "Unisex", "Algodón", "Manga corta", "Redondo", true));
+
+		listaCamisetas.add(new CamisetaDTO("Camiseta Running Mujer", "Under Armour", "Deportiva",
+				"Camiseta ligera para correr", "https://example.com/camiseta_running.jpg", 85000, 9, "CAM009", "S",
+				"Mujer", "Poliéster", "Manga corta", "Redondo", false));
+
+		listaCamisetas.add(new CamisetaDTO("Camiseta Termica", "The North Face", "Outdoor",
+				"Camiseta térmica para climas fríos", "https://example.com/camiseta_termica.jpg", 130000, 6, "CAM010",
+				"M", "Unisex", "Poliéster térmico", "Manga larga", "Redondo", false));
+
+		igualarListas();
 		leerLista();
 
 	}

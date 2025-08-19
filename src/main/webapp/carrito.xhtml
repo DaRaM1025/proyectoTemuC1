@@ -21,8 +21,8 @@
 }
 
 .imagen-producto {
-	width: 80px;
-	height: 80px;
+	width: 15px;
+	height: 20px;
 	object-fit: cover;
 	border-radius: 5px;
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
@@ -43,7 +43,7 @@
 			<div class="contenedor-panel">
 				<p:panel header="Carrito de Compras" styleClass="tabla-productos">
 					<p:dataTable id="tablaCarrito" var="item"
-						value="#{carritoBean.productosCarrito}" rows="4" paginator="false"
+						value="#{carritoBean.productosCarrito}" rows="8" paginator="false"
 						style="width:100%">
 						<p:column headerText="Nombre">
 							<h:outputText value="#{item.nombre}" />
@@ -54,7 +54,7 @@
 						</p:column>
 
 						<p:column headerText="Imagen">
-							<p:graphicImage value="#{item.urlImagen}"
+							<p:graphicImage name="/#{item.urlImagen}"
 								styleClass="imagen-producto" />
 						</p:column>
 
