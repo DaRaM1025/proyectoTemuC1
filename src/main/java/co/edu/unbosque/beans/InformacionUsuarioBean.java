@@ -40,7 +40,7 @@ public class InformacionUsuarioBean {
 	private String password;
 
 	private Date fechaNacimiento;
-	
+
 	@Inject
 	private UsuarioService usuarioService;
 
@@ -50,7 +50,7 @@ public class InformacionUsuarioBean {
 
 	    if (exito) {
 	        System.out.println("Usuario guardado con éxito😁");
-	        return null; 
+	        return null;
 	    } else {
 	    	 FacesContext.getCurrentInstance().addMessage(null,
 	    	            new FacesMessage(FacesMessage.SEVERITY_ERROR, "❌ El usuario ya existe (username repetido)", null));

@@ -93,7 +93,7 @@ public class InstrumentoVientoDTO extends InstrumentoMusicalDTO {
 	public void setRequiereBoquilla(boolean requiereBoquilla) {
 		this.requiereBoquilla = requiereBoquilla;
 	}
-	
+
 	@Override
 	public InstrumentoVientoDTO clone() {
 		return new InstrumentoVientoDTO(getNombre(), getMarca(), getTipoProducto(), getDescripcion(), getUrlImagen(), getPrecio(),

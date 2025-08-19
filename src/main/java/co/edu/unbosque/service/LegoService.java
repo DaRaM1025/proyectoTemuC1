@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import co.edu.unbosque.model.CintaAdhesivaDTO;
 import co.edu.unbosque.model.LegoDTO;
 import co.edu.unbosque.model.ModelFacade;
 import co.edu.unbosque.model.persistence.DataMapper;
@@ -63,9 +62,9 @@ public class LegoService {
 //		        500000, 7, "LEGO010", 6, "Disney", 701, true));
 //		igualarListas();
 		leerLista();
-		
+
 	}
-	
+
 	public void igualarListas() {
 		ModelFacade.getLegoDAO().getListaLego()
 				.addAll(DataMapper.listaLegoDTOToListaLego((ArrayList<LegoDTO>) listaLegos));

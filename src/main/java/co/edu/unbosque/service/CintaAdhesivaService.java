@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import co.edu.unbosque.model.CelularDTO;
 import co.edu.unbosque.model.CintaAdhesivaDTO;
 import co.edu.unbosque.model.ModelFacade;
 import co.edu.unbosque.model.persistence.DataMapper;
@@ -63,9 +62,9 @@ public class CintaAdhesivaService {
 //				true, 1.2, "Transparente"));
 //		igualarListas();
 		leerLista();
-		
+
 	}
-	
+
 	public void igualarListas() {
 		ModelFacade.getCintaDAO().getlistaCintaAdhesivas()
 				.addAll(DataMapper.listaCintaAdhesivaDTOToListaCintaAdhesiva((ArrayList<CintaAdhesivaDTO>) listaCintasAdhesivas));

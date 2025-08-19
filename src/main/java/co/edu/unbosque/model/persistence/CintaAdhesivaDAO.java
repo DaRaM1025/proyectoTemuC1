@@ -11,7 +11,7 @@ public class CintaAdhesivaDAO implements OperacionDAO<CintaAdhesivaDTO, CintaAdh
 	private final String CINTA_FILE_NAME = "CintaAdhesiva.csv";
 
 	public CintaAdhesivaDAO() {
-		listaCintaAdhesivas = new ArrayList<CintaAdhesiva>();
+		listaCintaAdhesivas = new ArrayList<>();
 		cargarDesdeArchivo();
 	}
 
@@ -97,19 +97,19 @@ public class CintaAdhesivaDAO implements OperacionDAO<CintaAdhesivaDTO, CintaAdh
 
 	public void escribirEnArchivo() {
 		String contenido = "";
-		for (int i = 0; i < listaCintaAdhesivas.size(); i++) {
-			contenido += listaCintaAdhesivas.get(i).getNombre() + ";";
-			contenido += listaCintaAdhesivas.get(i).getMarca() + ";";
-			contenido += listaCintaAdhesivas.get(i).getTipoProducto() + ";";
-			contenido += listaCintaAdhesivas.get(i).getDescripcion() + ";";
-			contenido += listaCintaAdhesivas.get(i).getUrlImagen() + ";";
-			contenido += listaCintaAdhesivas.get(i).getPrecio() + ";";
-			contenido += listaCintaAdhesivas.get(i).getCantidad() + ";";
-			contenido += listaCintaAdhesivas.get(i).getId() + ";";
-			contenido += listaCintaAdhesivas.get(i).getTipoPresentacion() + ";";
-			contenido += listaCintaAdhesivas.get(i).isEsAdhesivoReposicionable() + ";";
-			contenido += listaCintaAdhesivas.get(i).getAncho() + ";";
-			contenido += listaCintaAdhesivas.get(i).getTipoCinta() + "\n";
+		for (CintaAdhesiva element : listaCintaAdhesivas) {
+			contenido += element.getNombre() + ";";
+			contenido += element.getMarca() + ";";
+			contenido += element.getTipoProducto() + ";";
+			contenido += element.getDescripcion() + ";";
+			contenido += element.getUrlImagen() + ";";
+			contenido += element.getPrecio() + ";";
+			contenido += element.getCantidad() + ";";
+			contenido += element.getId() + ";";
+			contenido += element.getTipoPresentacion() + ";";
+			contenido += element.isEsAdhesivoReposicionable() + ";";
+			contenido += element.getAncho() + ";";
+			contenido += element.getTipoCinta() + "\n";
 		}
 		FileManager.escribirEnArchivoTexto(CINTA_FILE_NAME, contenido);
 	}
@@ -122,8 +122,8 @@ public class CintaAdhesivaDAO implements OperacionDAO<CintaAdhesivaDTO, CintaAdh
 		}
 
 		String[] filas = contenido.split("\n");
-		for (int i = 0; i < filas.length; i++) {
-			String[] columnas = filas[i].split(";");
+		for (String element : filas) {
+			String[] columnas = element.split(";");
 			String nombre = columnas[0];
 			String marca = columnas[1];
 			String tipoProducto = columnas[2];

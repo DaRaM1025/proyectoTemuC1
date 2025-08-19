@@ -62,9 +62,9 @@ public class PelucheService {
 //		        50000, 20, "PEL010", 4, false, "Poliéster", true));
 //		igualarListas();
 		leerLista();
-		
+
 	}
-	
+
 	public void igualarListas() {
 		ModelFacade.getPelucheDAO().getListaPeluches()
 				.addAll(DataMapper.listaPelucheDTOToListaPeluche((ArrayList<PelucheDTO>) listaPeluches));

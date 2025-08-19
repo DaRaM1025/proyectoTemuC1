@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import co.edu.unbosque.model.CamisetaDTO;
 import co.edu.unbosque.model.InstrumentoPercusionDTO;
 import co.edu.unbosque.model.ModelFacade;
 import co.edu.unbosque.model.persistence.DataMapper;

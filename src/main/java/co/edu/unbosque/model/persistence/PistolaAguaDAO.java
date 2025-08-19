@@ -11,14 +11,14 @@ import co.edu.unbosque.model.PistolaAguaDTO;
  * sobre objetos de tipo {@link PistolaAgua}, gestionando la persistencia de los datos
  * tanto en un archivo de texto (CSV) como en un archivo serializado (DAT).
  * </p>
- * 
+ *
  * <p>Características principales:</p>
  * <ul>
  *   <li>Almacena en memoria los objetos en una lista interna.</li>
  *   <li>Sincroniza automáticamente los cambios con los archivos de persistencia.</li>
  *   <li>El criterio de unicidad de una pistola de agua está dado por su campo {@code id}.</li>
  * </ul>
- * 
+ *
  * @author Nataly Rengifo
  * @version 1.0
  */
@@ -40,11 +40,11 @@ public class PistolaAguaDAO implements OperacionDAO<PistolaAguaDTO, PistolaAgua>
 		listaPistola = new ArrayList<>();
 		cargarDesdeArchivo();
 	}
-	
+
 
     /**
      * Obtiene la lista completa de pistolas de agua en memoria.
-     * 
+     *
      * @return lista de pistolas de agua.
      */
 	public ArrayList<PistolaAgua> getListaPistola() {
@@ -53,7 +53,7 @@ public class PistolaAguaDAO implements OperacionDAO<PistolaAguaDTO, PistolaAgua>
 
 	/**
      * Establece una nueva lista de pistolas.
-     * 
+     *
      * @param listaPistola lista de pistolas a asignar.
      */
 	public void setListaPistola(ArrayList<PistolaAgua> listaPistola) {
@@ -62,7 +62,7 @@ public class PistolaAguaDAO implements OperacionDAO<PistolaAguaDTO, PistolaAgua>
 
 	 /**
      * Obtiene el nombre del archivo serializado.
-     * 
+     *
      * @return nombre del archivo serializado.
      */
 	public String getSERIAL_FILE_NAME() {
@@ -71,7 +71,7 @@ public class PistolaAguaDAO implements OperacionDAO<PistolaAguaDTO, PistolaAgua>
 
 	 /**
      * Obtiene el nombre del archivo CSV.
-     * 
+     *
      * @return nombre del archivo CSV.
      */
 	public String getTEXT_FILE_NAME() {
@@ -215,19 +215,19 @@ public class PistolaAguaDAO implements OperacionDAO<PistolaAguaDTO, PistolaAgua>
      */
 	public void escribirEnArchivo() {
 		String contenido = "";
-		for (int i = 0; i < listaPistola.size(); i++) {
-			contenido += listaPistola.get(i).getNombre() + ";";
-			contenido += listaPistola.get(i).getMarca() + ";";
-			contenido += listaPistola.get(i).getTipoProducto() + ";";
-			contenido += listaPistola.get(i).getDescripcion() + ";";
-			contenido += listaPistola.get(i).getUrlImagen() + ";";
-			contenido += listaPistola.get(i).getPrecio() + ";";
-			contenido += listaPistola.get(i).getCantidad() + ";";
-			contenido += listaPistola.get(i).getId() + ";";
-			contenido += listaPistola.get(i).getEdadRecomendada() + ";";
-			contenido += listaPistola.get(i).getCapacidadAgua() + ";";
-			contenido += listaPistola.get(i).getCantidadChorros() + ";";
-			contenido += listaPistola.get(i).getAlcanceMaximo()+"\n";
+		for (PistolaAgua element : listaPistola) {
+			contenido += element.getNombre() + ";";
+			contenido += element.getMarca() + ";";
+			contenido += element.getTipoProducto() + ";";
+			contenido += element.getDescripcion() + ";";
+			contenido += element.getUrlImagen() + ";";
+			contenido += element.getPrecio() + ";";
+			contenido += element.getCantidad() + ";";
+			contenido += element.getId() + ";";
+			contenido += element.getEdadRecomendada() + ";";
+			contenido += element.getCapacidadAgua() + ";";
+			contenido += element.getCantidadChorros() + ";";
+			contenido += element.getAlcanceMaximo()+"\n";
 
 		}
 
@@ -250,8 +250,8 @@ public class PistolaAguaDAO implements OperacionDAO<PistolaAguaDTO, PistolaAgua>
 		}
 
 		String[] filas = contenido.split("\n");
-		for (int i = 0; i < filas.length; i++) {
-			String[] columnas = filas[i].split(";");
+		for (String element : filas) {
+			String[] columnas = element.split(";");
 			String nombre = columnas[0];
 			String marca = columnas[1];
 			String tipoProducto = columnas[2];
@@ -266,9 +266,9 @@ public class PistolaAguaDAO implements OperacionDAO<PistolaAguaDTO, PistolaAgua>
 			double alcanceMaximo= Double.parseDouble(columnas[11])
 			;
 			listaPistola.add(new PistolaAgua(nombre, marca, tipoProducto, descripcion, urlImagen, precio, cantidad, id, edadRecomendada, capacidadAgua, cantidadChorros, alcanceMaximo) );
-					
+
 		}
 	}
-	
-	
+
+
 }

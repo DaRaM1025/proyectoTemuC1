@@ -64,9 +64,9 @@ public class CelularService {
 //				4800000, 9, "CEL010", 6.82, "3168x1440", "Android 13", "512GB", "16GB", 3, true));
 //		igualarListas();
 		leerLista();
-		
+
 	}
-	
+
 	public void igualarListas() {
 		ModelFacade.getCelularDAO().getListaCelular()
 				.addAll(DataMapper.listaCelularDTOToListaCelular((ArrayList<CelularDTO>) listaCelulares));

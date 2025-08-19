@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import co.edu.unbosque.model.CamisetaDTO;
 import co.edu.unbosque.model.InstrumentoCuerdaDTO;
 import co.edu.unbosque.model.ModelFacade;
 import co.edu.unbosque.model.persistence.DataMapper;
@@ -54,9 +53,9 @@ public class InstrumentoCuerdaService {
 				"Nylon", true));
 		igualarListas();
 		leerLista();
-		
+
 	}
-	
+
 	public void igualarListas() {
 		ModelFacade.getCuerdaDAO().getListaInstrumentoCuerda()
 				.addAll(DataMapper.listaInstrumentoCuerdaDTOToListaInstrumentoCuerda((ArrayList<InstrumentoCuerdaDTO>) listaInstrumentosCuerda));

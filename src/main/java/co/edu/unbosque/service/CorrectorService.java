@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import co.edu.unbosque.model.CintaAdhesivaDTO;
 import co.edu.unbosque.model.CorrectorDTO;
 import co.edu.unbosque.model.ModelFacade;
 import co.edu.unbosque.model.persistence.DataMapper;
@@ -20,7 +19,7 @@ public class CorrectorService {
 
 	@PostConstruct
 	public void init() {
-		listaCorrectores = new ArrayList<CorrectorDTO>();
+		listaCorrectores = new ArrayList<>();
 //		listaCorrectores.add(new CorrectorDTO("Corrector Fit Me", "Maybelline", "Líquido",
 //				"Corrector líquido de cobertura media", "assets/corrector1.jpeg", 35000, 20, "C001", "Mixta",
 //				true, "2026-05-12", "Media", "Tubito"));
@@ -61,9 +60,9 @@ public class CorrectorService {
 //				"C010", "Seca", true, "2027-08-10", "Total", "Tubito"));
 //		igualarListas();
 		leerLista();
-		
+
 	}
-	
+
 	public void igualarListas() {
 		ModelFacade.getCorrectorDAO().getListaCorrectores()
 				.addAll(DataMapper.listaCorrectorDTOToListaCorrector((ArrayList<CorrectorDTO>) listaCorrectores));

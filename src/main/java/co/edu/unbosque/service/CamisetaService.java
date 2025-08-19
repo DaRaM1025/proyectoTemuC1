@@ -15,13 +15,13 @@ import jakarta.inject.Named;
 @Named
 @ApplicationScoped
 public class CamisetaService {
-	
+
 	private List<CamisetaDTO> listaCamisetas;
 
 	@PostConstruct
 	public void init() {
 		listaCamisetas = new ArrayList<>();
-		
+
 //		listaCamisetas.add(new CamisetaDTO("Camiseta Básica Blanca", "H&M", "Casual",
 //				"Camiseta de algodón blanca clásica", "https://example.com/camiseta_blanca.jpg", 25000, 30, "CAM001",
 //				"M", "Unisex", "Algodón", "Manga corta", "Redondo", false));
@@ -61,12 +61,12 @@ public class CamisetaService {
 //		listaCamisetas.add(new CamisetaDTO("Camiseta Termica", "The North Face", "Outdoor",
 //				"Camiseta térmica para climas fríos", "https://example.com/camiseta_termica.jpg", 130000, 6, "CAM010",
 //				"M", "Unisex", "Poliéster térmico", "Manga larga", "Redondo", false));
-//		
+//
 //		igualarListas();
 		leerLista();
-		
+
 	}
-	
+
 	public void igualarListas() {
 		ModelFacade.getCamisetaDAO().getListaCamiseta()
 				.addAll(DataMapper.listaCamisetaDTOToListaCamiseta((ArrayList<CamisetaDTO>) listaCamisetas));

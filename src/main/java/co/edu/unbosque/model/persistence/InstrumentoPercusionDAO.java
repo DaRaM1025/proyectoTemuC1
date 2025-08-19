@@ -116,20 +116,20 @@ public class InstrumentoPercusionDAO implements OperacionDAO<InstrumentoPercusio
 
 	public void escribirEnArchivo() {
 		String contenido = "";
-		for (int i = 0; i < listaInstrumentoPercusion.size(); i++) {
-			contenido += listaInstrumentoPercusion.get(i).getNombre() + ";";
-			contenido += listaInstrumentoPercusion.get(i).getMarca() + ";";
-			contenido += listaInstrumentoPercusion.get(i).getTipoProducto() + ";";
-			contenido += listaInstrumentoPercusion.get(i).getDescripcion() + ";";
-			contenido += listaInstrumentoPercusion.get(i).getUrlImagen() + ";";
-			contenido += listaInstrumentoPercusion.get(i).getPrecio() + ";";
-			contenido += listaInstrumentoPercusion.get(i).getCantidad() + ";";
-			contenido += listaInstrumentoPercusion.get(i).getId() + ";";
-			contenido += listaInstrumentoPercusion.get(i).isIncluyeEstuche() + ";";
-			contenido += listaInstrumentoPercusion.get(i).getTipoInstrumentoPercusion() + ";";
-			contenido += listaInstrumentoPercusion.get(i).isUsoBaquetas() + ";";
-			contenido += listaInstrumentoPercusion.get(i).getTipoPercusion() + ";";
-			contenido += listaInstrumentoPercusion.get(i).getCantSuperficiesSonoras() + "\n";
+		for (InstrumentoPercusion element : listaInstrumentoPercusion) {
+			contenido += element.getNombre() + ";";
+			contenido += element.getMarca() + ";";
+			contenido += element.getTipoProducto() + ";";
+			contenido += element.getDescripcion() + ";";
+			contenido += element.getUrlImagen() + ";";
+			contenido += element.getPrecio() + ";";
+			contenido += element.getCantidad() + ";";
+			contenido += element.getId() + ";";
+			contenido += element.isIncluyeEstuche() + ";";
+			contenido += element.getTipoInstrumentoPercusion() + ";";
+			contenido += element.isUsoBaquetas() + ";";
+			contenido += element.getTipoPercusion() + ";";
+			contenido += element.getCantSuperficiesSonoras() + "\n";
 		}
 
 		FileManager.escribirEnArchivoTexto(CALZADO_FILE_NAME, contenido);
@@ -143,8 +143,8 @@ public class InstrumentoPercusionDAO implements OperacionDAO<InstrumentoPercusio
 		}
 
 		String[] filas = contenido.split("\n");
-		for (int i = 0; i < filas.length; i++) {
-			String[] columnas = filas[i].split(";");
+		for (String element : filas) {
+			String[] columnas = element.split(";");
 			String nombre = columnas[0];
 			String marca = columnas[1];
 			String tipoProducto = columnas[2];

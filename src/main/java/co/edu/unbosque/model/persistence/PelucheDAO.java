@@ -2,7 +2,6 @@ package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
 
-import co.edu.unbosque.model.Camiseta;
 import co.edu.unbosque.model.Peluche;
 import co.edu.unbosque.model.PelucheDTO;
 /**
@@ -19,21 +18,21 @@ import co.edu.unbosque.model.PelucheDTO;
  *   <li>Sincroniza automáticamente los cambios con los archivos de persistencia.</li>
  *   <li>El criterio de unicidad de un peluche está dado por su campo {@code id}.</li>
  * </ul>
- * 
+ *
  * @author Nataly Rengifo
  * @version 1.0
  */
 public class PelucheDAO implements OperacionDAO<PelucheDTO, Peluche>{
 
 	 /** Lista en memoria que almacena las camisetas disponibles. */
-    private ArrayList<Peluche> listaPeluches; 
-	
+    private ArrayList<Peluche> listaPeluches;
+
 	/** Nombre del archivo serializado donde se almacenan los objetos. */
     	private final String SERIAL_FILE_NAME = "peluche.dat";
-    	 
+
     	/** Nombre del archivo de texto (CSV) donde se almacenan los objetos. */
         private final String TEXT_FILE_NAME = "peluche.csv";
-	
+
         /**
      * Constructor que inicializa la lista y carga los datos desde el archivo CSV,
       */
@@ -41,13 +40,13 @@ public class PelucheDAO implements OperacionDAO<PelucheDTO, Peluche>{
 		listaPeluches = new ArrayList<>();
 		cargarDesdeArchivo();
 	}
-	
+
 	/**
      * Obtiene la lista completa de peluches en memoria.
-     * 
+     *
      * @return lista de peluches.
      */
-	
+
 	public ArrayList<Peluche> getListaPeluches() {
 		return listaPeluches;
 	}
@@ -55,7 +54,7 @@ public class PelucheDAO implements OperacionDAO<PelucheDTO, Peluche>{
 
 	/**
      * Establece una nueva lista de peluches.
-     * 
+     *
      * @param listaPeluches lista de peluches a asignar.
      */
 	public void setListaPeluches(ArrayList<Peluche> listaPeluches) {
@@ -65,7 +64,7 @@ public class PelucheDAO implements OperacionDAO<PelucheDTO, Peluche>{
 
 	/**
      * Obtiene el nombre del archivo serializado.
-     * 
+     *
      * @return nombre del archivo serializado.
      */
 	public String getSERIAL_FILE_NAME() {
@@ -75,7 +74,7 @@ public class PelucheDAO implements OperacionDAO<PelucheDTO, Peluche>{
 
 	/**
      * Obtiene el nombre del archivo CSV.
-     * 
+     *
      * @return nombre del archivo CSV.
      */
 
@@ -210,19 +209,19 @@ public class PelucheDAO implements OperacionDAO<PelucheDTO, Peluche>{
      */
 	public void escribirEnArchivo() {
 		String contenido = "";
-		for (int i = 0; i < listaPeluches.size(); i++) {
-			contenido += listaPeluches.get(i).getNombre() + ";";
-			contenido += listaPeluches.get(i).getMarca() + ";";
-			contenido += listaPeluches.get(i).getTipoProducto() + ";";
-			contenido += listaPeluches.get(i).getDescripcion() + ";";
-			contenido += listaPeluches.get(i).getUrlImagen() + ";";
-			contenido += listaPeluches.get(i).getPrecio() + ";";
-			contenido += listaPeluches.get(i).getCantidad() + ";";
-			contenido += listaPeluches.get(i).getId() + ";";
-			contenido += listaPeluches.get(i).getEdadRecomendada() + ";";
-			contenido += listaPeluches.get(i).isTieneSonido() + ";";
-			contenido += listaPeluches.get(i).getTipoRelleno() + ";";
-			contenido += listaPeluches.get(i).isLavadoMaquina() +"\n";
+		for (Peluche element : listaPeluches) {
+			contenido += element.getNombre() + ";";
+			contenido += element.getMarca() + ";";
+			contenido += element.getTipoProducto() + ";";
+			contenido += element.getDescripcion() + ";";
+			contenido += element.getUrlImagen() + ";";
+			contenido += element.getPrecio() + ";";
+			contenido += element.getCantidad() + ";";
+			contenido += element.getId() + ";";
+			contenido += element.getEdadRecomendada() + ";";
+			contenido += element.isTieneSonido() + ";";
+			contenido += element.getTipoRelleno() + ";";
+			contenido += element.isLavadoMaquina() +"\n";
 
 		}
 
@@ -245,8 +244,8 @@ public class PelucheDAO implements OperacionDAO<PelucheDTO, Peluche>{
 		}
 
 		String[] filas = contenido.split("\n");
-		for (int i = 0; i < filas.length; i++) {
-			String[] columnas = filas[i].split(";");
+		for (String element : filas) {
+			String[] columnas = element.split(";");
 			String nombre = columnas[0];
 			String marca = columnas[1];
 			String tipoProducto = columnas[2];
@@ -261,9 +260,9 @@ public class PelucheDAO implements OperacionDAO<PelucheDTO, Peluche>{
 			boolean lavadoMaquina= Boolean.parseBoolean(columnas[11])
 			;
 			listaPeluches.add(new Peluche(nombre, marca, tipoProducto, descripcion, urlImagen, precio, cantidad, id, edadRecomendada, tieneSonido, tipoRelleno, lavadoMaquina));
-					
+
 		}
 	}
-	
-	
+
+
 }

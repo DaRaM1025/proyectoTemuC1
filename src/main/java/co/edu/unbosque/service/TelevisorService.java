@@ -61,9 +61,9 @@ public class TelevisorService {
 //				18, "TV010", 50, "3840x2160", "webOS", 3, 60, "Alexa"));
 //		igualarListas();
 		leerLista();
-		
+
 	}
-	
+
 	public void igualarListas() {
 		ModelFacade.getTelevisorDAO().getListaCalzado()
 				.addAll(DataMapper.listaTelevisorDTOToListaTelevisor((ArrayList<TelevisorDTO>) listaTelevisores));

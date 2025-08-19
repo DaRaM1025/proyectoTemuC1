@@ -108,10 +108,10 @@ public class FileManager {
 	 */
 	public static void escribirArchivoSerializado(String nombreArchivo, Object contenido) {
 	    try {
-	        crearCarpeta(); 
+	        crearCarpeta();
 	        File archivo = new File(RUTA_CARPETA, nombreArchivo);
 
-	       
+
 	        System.out.println("Guardando en: " + archivo.getAbsolutePath());
 
 	        if (!archivo.exists()) {
@@ -177,10 +177,10 @@ public class FileManager {
 	public static Object leerArchivoSerializado(String nombreArchivo) {
 	    Object contenido = null;
 	    try {
-	        crearCarpeta(); 
+	        crearCarpeta();
 	        File archivo = new File(RUTA_CARPETA, nombreArchivo);
 
-	       
+
 	        System.out.println("Leyendo desde: " + archivo.getAbsolutePath());
 
 	        if (!archivo.exists() || archivo.length() == 0) {

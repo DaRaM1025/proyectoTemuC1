@@ -1,15 +1,26 @@
 package co.edu.unbosque.beans;
 
-import com.lowagie.text.*;
-import com.lowagie.text.pdf.PdfWriter;
-import jakarta.annotation.ManagedBean;
-import jakarta.faces.view.ViewScoped;
-import jakarta.inject.Named;
-import jakarta.mail.*;
-import jakarta.mail.internet.*;
 import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 import java.util.Properties;
+
+import com.lowagie.text.Document;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfWriter;
+
+import jakarta.annotation.ManagedBean;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
+import jakarta.mail.Authenticator;
+import jakarta.mail.Message;
+import jakarta.mail.Multipart;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeBodyPart;
+import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMultipart;
 
 @Named("compraBean")
 @ManagedBean
@@ -52,6 +63,7 @@ public class CompraBean implements Serializable {
 			props.put("mail.smtp.port", "587");
 
 			Session session = Session.getInstance(props, new Authenticator() {
+				@Override
 				protected PasswordAuthentication getPasswordAuthentication() {
 					return new PasswordAuthentication(remitente, clave);
 				}

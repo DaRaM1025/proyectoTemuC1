@@ -19,7 +19,7 @@ public class SombraService {
 
 	@PostConstruct
 	public void init() {
-		listaSombras = new ArrayList<SombraDTO>();
+		listaSombras = new ArrayList<>();
 //		listaSombras.add(
 //				new SombraDTO("Sombra Nude", "Maybelline", "Polvo compacto", "Paleta de tonos nude para uso diario",
 //						"assets/sombra1.jpeg", 45000, 20, "S001", "Mixta", true, "2026-05-12", 12, "Mate"));
@@ -43,9 +43,9 @@ public class SombraService {
 //						"assets/sombra10.jpeg", 135000, 6, "S010", "Seca", true, "2027-08-10", 28, "Satinado"));
 //		igualarListas();
 		leerLista();
-		
+
 	}
-	
+
 	public void igualarListas() {
 		ModelFacade.getSombraDAO().getlistaSombras()
 				.addAll(DataMapper.listaSombraDTOToListaTelevisor((ArrayList<SombraDTO>) listaSombras));

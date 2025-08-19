@@ -7,15 +7,15 @@ public class CompraDTO {
 	private UsuarioDTO usuario;
 	private ArrayList<ProductoDTO> productos;
 	private LocalDate fecha;
-	
-	
+
+
 	public CompraDTO(UsuarioDTO usuario, ArrayList<ProductoDTO> productos, LocalDate fecha) {
 		super();
 		this.usuario = usuario;
 		this.productos = productos;
 		this.fecha = fecha;
 	}
-	
+
 	public CompraDTO() {
 		super();
 	}

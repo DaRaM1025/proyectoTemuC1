@@ -4,19 +4,18 @@ import java.util.ArrayList;
 
 import co.edu.unbosque.model.Producto;
 import co.edu.unbosque.model.ProductoDTO;
-import co.edu.unbosque.model.Usuario;
 
 public class ProductoDAO implements OperacionDAO<ProductoDTO, Producto> {
 
 	private ArrayList<Producto> listaProductos;
 	private final String SERIAL_FILE_NAME = "productos.dat";
-	
+
 	public ProductoDAO() {
 		super();
-		listaProductos = new ArrayList<Producto>();
+		listaProductos = new ArrayList<>();
 		leerArchivoSerializado();
 	}
-	
+
 	private void leerArchivoSerializado() {
 		listaProductos = (ArrayList<Producto>) FileManager.leerArchivoSerializado(SERIAL_FILE_NAME);
 		if (listaProductos == null) {
@@ -25,6 +24,7 @@ public class ProductoDAO implements OperacionDAO<ProductoDTO, Producto> {
 	}
 
 //	@Override
+	@Override
 	public boolean crear(ProductoDTO nuevo) {
 		//listaProductos.add(nuevo);
 		return true;
@@ -65,6 +65,6 @@ public class ProductoDAO implements OperacionDAO<ProductoDTO, Producto> {
 	public String getSERIAL_FILE_NAME() {
 		return SERIAL_FILE_NAME;
 	}
-	
-	
+
+
 }

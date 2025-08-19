@@ -1,7 +1,5 @@
 package co.edu.unbosque.beans;
 
-import java.awt.List;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -35,10 +33,10 @@ public class crudView implements Serializable{
     @PostConstruct
     public void init() {
         this.products = (ArrayList<Product>) this.productService.getClonedProducts(100);
-        this.selectedProducts = new ArrayList<Product>();
+        this.selectedProducts = new ArrayList<>();
     }
 
- 
+
     public ArrayList<Product> getProducts() {
 		return products;
 	}

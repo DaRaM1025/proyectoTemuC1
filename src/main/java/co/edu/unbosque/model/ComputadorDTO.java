@@ -108,7 +108,7 @@ public class ComputadorDTO extends DispositivoElectronicoDTO {
 	public void setTarjetaGrafica(String tarjetaGrafica) {
 		this.tarjetaGrafica = tarjetaGrafica;
 	}
-	
+
 	@Override
 	public ComputadorDTO clone() {
 		return new ComputadorDTO(getNombre(), getMarca(), getTipoProducto(), getDescripcion(), getUrlImagen(), getPrecio(),

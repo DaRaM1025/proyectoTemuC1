@@ -1,11 +1,11 @@
 package co.edu.unbosque.beans;
 
 
-import jakarta.faces.view.ViewScoped;
-import jakarta.inject.Named;
-
 import java.io.Serializable;
 import java.time.LocalDate;
+
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
 
 @Named("productoFormularioBean")
 @ViewScoped
@@ -15,10 +15,10 @@ public class FormularioProductoBean implements Serializable {
     private String nombre;
     private String marca;
     private String descripcion;
-    private String imagen; 
+    private String imagen;
     private double precio;
     private int cantidad;
-    private String tipoProducto; 
+    private String tipoProducto;
 
     // ----- ROPA -----
     private String categoriaSeleccionada;
@@ -147,9 +147,9 @@ public class FormularioProductoBean implements Serializable {
     // ----- MÉTODOS DE ACCIÓN -----
     //Gurda la informaciòn en la lista correspondiente del producto y su categoria
     public String guardar() {
-       
+
         System.out.println("Producto guardado: " + nombre + " - " + tipoProducto);
-        return null; 
+        return null;
     }
 //Metodo que limpie los campos del form sin guardar nada
     public String cancelar() {
@@ -820,6 +820,6 @@ public class FormularioProductoBean implements Serializable {
 		this.categoriaSeleccionada = categoriaSeleccionada;
 	}
 
-   
+
 }
 

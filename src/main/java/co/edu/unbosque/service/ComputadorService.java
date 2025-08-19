@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import co.edu.unbosque.model.CamisetaDTO;
 import co.edu.unbosque.model.ComputadorDTO;
 import co.edu.unbosque.model.ModelFacade;
 import co.edu.unbosque.model.persistence.DataMapper;
@@ -70,9 +69,9 @@ public class ComputadorService {
 //						"1TB SSD", "32GB", "Portátil", "Intel i9-12900H", "NVIDIA RTX 3080"));
 //		igualarListas();
 		leerLista();
-		
+
 	}
-	
+
 	public void igualarListas() {
 		ModelFacade.getComputadorDAO().getListaComputador()
 				.addAll(DataMapper.listaComputadorDTOToListaComputador((ArrayList<ComputadorDTO>) listaComputadores));

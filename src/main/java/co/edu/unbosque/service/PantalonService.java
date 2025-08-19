@@ -63,9 +63,9 @@ public class PantalonService {
 //				"Regular", "Largo"));
 //		igualarListas();
 		leerLista();
-		
+
 	}
-	
+
 	public void igualarListas() {
 		ModelFacade.getPantalonDAO().getListaPantalon()
 				.addAll(DataMapper.listaPantalonDTOToListaPantalon((ArrayList<PantalonDTO>) listaPantalones));

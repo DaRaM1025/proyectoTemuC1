@@ -62,9 +62,9 @@ public class MarcadorService {
 //				"Unidad", "Mediana", true, "Permanente"));
 //		igualarListas();
 		leerLista();
-		
+
 	}
-	
+
 	public void igualarListas() {
 		ModelFacade.getMarcadorDAO().getlistaMarcadores()
 				.addAll(DataMapper.listaMarcadorDTOToListaMarcador((ArrayList<MarcadorDTO>) listaMarcadores));

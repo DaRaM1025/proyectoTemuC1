@@ -87,7 +87,8 @@ public class CuadernoDTO extends PapeleriaDTO {
 	public void setPastaDura(boolean isPastaDura) {
 		this.isPastaDura = isPastaDura;
 	}
-	
+
+	@Override
 	public CuadernoDTO clone() {
 		return new CuadernoDTO(getNombre(), getMarca(), getTipoProducto(), getDescripcion(), getUrlImagen(), getPrecio(),
 				getCantidad(), getId(), getTipoPresentacion(), getTipoHojas(), getCantidadHojas(), isPastaDura());

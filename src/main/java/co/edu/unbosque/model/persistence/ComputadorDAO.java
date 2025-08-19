@@ -115,22 +115,22 @@ public class ComputadorDAO implements OperacionDAO<ComputadorDTO, Computador> {
 
 	public void escribirEnArchivo() {
 		String contenido = "";
-		for (int i = 0; i < listaComputador.size(); i++) {
-			contenido += listaComputador.get(i).getNombre() + ";";
-			contenido += listaComputador.get(i).getMarca() + ";";
-			contenido += listaComputador.get(i).getTipoProducto() + ";";
-			contenido += listaComputador.get(i).getDescripcion() + ";";
-			contenido += listaComputador.get(i).getUrlImagen() + ";";
-			contenido += listaComputador.get(i).getPrecio() + ";";
-			contenido += listaComputador.get(i).getCantidad() + ";";
-			contenido += listaComputador.get(i).getId() + ";";
-			contenido += listaComputador.get(i).getPulgadas() + ";";
-			contenido += listaComputador.get(i).getResolucion() + ";";
-			contenido += listaComputador.get(i).getSistemaOperativo() + ";";
-			contenido += listaComputador.get(i).getAlmacenamiento() + ";";
-			contenido += listaComputador.get(i).getRam() + ";";
-			contenido += listaComputador.get(i).getProcesador() + ";";
-			contenido += listaComputador.get(i).getTarjetaGrafica() + "\n";
+		for (Computador element : listaComputador) {
+			contenido += element.getNombre() + ";";
+			contenido += element.getMarca() + ";";
+			contenido += element.getTipoProducto() + ";";
+			contenido += element.getDescripcion() + ";";
+			contenido += element.getUrlImagen() + ";";
+			contenido += element.getPrecio() + ";";
+			contenido += element.getCantidad() + ";";
+			contenido += element.getId() + ";";
+			contenido += element.getPulgadas() + ";";
+			contenido += element.getResolucion() + ";";
+			contenido += element.getSistemaOperativo() + ";";
+			contenido += element.getAlmacenamiento() + ";";
+			contenido += element.getRam() + ";";
+			contenido += element.getProcesador() + ";";
+			contenido += element.getTarjetaGrafica() + "\n";
 		}
 
 		FileManager.escribirEnArchivoTexto(CALZADO_FILE_NAME, contenido);
@@ -144,8 +144,8 @@ public class ComputadorDAO implements OperacionDAO<ComputadorDTO, Computador> {
 		}
 
 		String[] filas = contenido.split("\n");
-		for (int i = 0; i < filas.length; i++) {
-			String[] columnas = filas[i].split(";");
+		for (String element : filas) {
+			String[] columnas = element.split(";");
 			String nombre = columnas[0];
 			String marca = columnas[1];
 			String tipoProducto = columnas[2];

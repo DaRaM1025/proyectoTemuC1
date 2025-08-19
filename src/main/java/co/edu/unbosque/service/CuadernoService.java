@@ -58,9 +58,9 @@ public class CuadernoService {
 //				"https://example.com/cuaderno_escolar.jpg", 8200, 80, "CUA010", "Cosido", "Rayadas", 100, false));
 //		igualarListas();
 		leerLista();
-		
+
 	}
-	
+
 	public void igualarListas() {
 		ModelFacade.getCuadernoDAO().getlistaCuadernos()
 				.addAll(DataMapper.listaCuadernoDTOToListaCuaderno((ArrayList<CuadernoDTO>) listaCuadernos));

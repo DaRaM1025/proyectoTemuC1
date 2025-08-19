@@ -12,10 +12,10 @@ public class UsuarioDAO implements OperacionDAO<UsuarioDTO, Usuario> {
 	private final String SERIAL_FILE_NAME = "usuario.dat";
 
 	public UsuarioDAO() {
-	
+
 		listaUsuarios = new ArrayList<>();
 		leerArchivoSerializado();
-		
+
 	}
 
 	public ArrayList<Usuario> getListaUsuarios() {
@@ -40,11 +40,11 @@ public class UsuarioDAO implements OperacionDAO<UsuarioDTO, Usuario> {
 
 	@Override
 
-	
+
 	public boolean crear(UsuarioDTO nuevo) {
 	    Usuario entidad = DataMapper.usuarioDTOToUsuario(nuevo);
 	    Usuario encontrado = find(entidad);
-	    
+
 	    if (encontrado == null) {
 	        listaUsuarios.add(entidad);
 	        System.out.println("EXITO" + listaUsuarios.size());

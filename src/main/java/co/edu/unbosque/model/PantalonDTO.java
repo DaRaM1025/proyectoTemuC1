@@ -59,7 +59,7 @@ public class PantalonDTO extends RopaDTO {
 	public void setLargo(String largo) {
 		this.largo = largo;
 	}
-	
+
 	@Override
 	public PantalonDTO clone() {
 		return new PantalonDTO(getNombre(), getMarca(), getTipoProducto(), getDescripcion(), getUrlImagen(),

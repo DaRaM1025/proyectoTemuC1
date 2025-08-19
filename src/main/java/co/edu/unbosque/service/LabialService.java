@@ -16,10 +16,10 @@ import jakarta.inject.Named;
 @ApplicationScoped
 public class LabialService {
 	private List<LabialDTO> listaLabial;
-	
+
 	@PostConstruct
 	public void init() {
-		listaLabial = new ArrayList<LabialDTO>();
+		listaLabial = new ArrayList<>();
 //		listaLabial.add(new LabialDTO("Labial Rojo", "L'Oréal", "Labial", "Labial color rojo intenso para que luzcas increible en todo momento ", "assets/labial1.jpeg", 25000, 50, "L001", "Mixta", true, "2026-05-01"));
 //        listaLabial.add(new LabialDTO("Labial Nude", "Maybelline", "Labial", "Tono nude", "assets/labial2.jpg", 23000, 30, "L002", "Seca", false, "2025-12-31"));
 //        listaLabial.add(new LabialDTO("Labial Rosa", "Revlon", "Labial", "Rosa suave", "assets/labial3.png", 27000, 20, "L003", "Grasa", true, "2026-02-15"));
@@ -32,9 +32,9 @@ public class LabialService {
 //        listaLabial.add(new LabialDTO("Labial Transparente", "E.L.F.", "Labial", "Gloss transparente", "assets/labial10.jpeg", 15000, 35, "L010", "Mixta", false, "2026-08-18"));
 //        igualarListas();
 		leerLista();
-		
+
 	}
-	
+
 	public void igualarListas() {
 		ModelFacade.getLabialDAO().getListaLabiales()
 				.addAll(DataMapper.listaLabialDTOToListaLabial((ArrayList<LabialDTO>) listaLabial));
@@ -83,6 +83,6 @@ public class LabialService {
 
 	        return results;
 	    }
-	
+
 
 }

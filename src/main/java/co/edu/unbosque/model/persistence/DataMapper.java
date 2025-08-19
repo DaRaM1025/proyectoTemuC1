@@ -16,38 +16,24 @@ import co.edu.unbosque.model.Corrector;
 import co.edu.unbosque.model.CorrectorDTO;
 import co.edu.unbosque.model.Cuaderno;
 import co.edu.unbosque.model.CuadernoDTO;
-import co.edu.unbosque.model.DispositivoElectronico;
-import co.edu.unbosque.model.DispositivoElectronicoDTO;
 import co.edu.unbosque.model.InstrumentoCuerda;
 import co.edu.unbosque.model.InstrumentoCuerdaDTO;
-import co.edu.unbosque.model.InstrumentoMusical;
-import co.edu.unbosque.model.InstrumentoMusicalDTO;
 import co.edu.unbosque.model.InstrumentoPercusion;
 import co.edu.unbosque.model.InstrumentoPercusionDTO;
 import co.edu.unbosque.model.InstrumentoViento;
 import co.edu.unbosque.model.InstrumentoVientoDTO;
-import co.edu.unbosque.model.Juguete;
-import co.edu.unbosque.model.JugueteDTO;
 import co.edu.unbosque.model.Labial;
 import co.edu.unbosque.model.LabialDTO;
 import co.edu.unbosque.model.Lego;
 import co.edu.unbosque.model.LegoDTO;
-import co.edu.unbosque.model.Maquillaje;
-import co.edu.unbosque.model.MaquillajeDTO;
 import co.edu.unbosque.model.Marcador;
 import co.edu.unbosque.model.MarcadorDTO;
 import co.edu.unbosque.model.Pantalon;
 import co.edu.unbosque.model.PantalonDTO;
-import co.edu.unbosque.model.Papeleria;
-import co.edu.unbosque.model.PapeleriaDTO;
 import co.edu.unbosque.model.Peluche;
 import co.edu.unbosque.model.PelucheDTO;
 import co.edu.unbosque.model.PistolaAgua;
 import co.edu.unbosque.model.PistolaAguaDTO;
-import co.edu.unbosque.model.Producto;
-import co.edu.unbosque.model.ProductoDTO;
-import co.edu.unbosque.model.Ropa;
-import co.edu.unbosque.model.RopaDTO;
 import co.edu.unbosque.model.Sombra;
 import co.edu.unbosque.model.SombraDTO;
 import co.edu.unbosque.model.Televisor;
@@ -1056,7 +1042,7 @@ public class DataMapper {
 		}
 		return listaEntidad;
 	}
-	
+
 	/**
 	 * Convierte un PelucheDTO a un Peluche.
 	 *
@@ -1123,7 +1109,7 @@ public class DataMapper {
 		}
 		return listaEntidad;
 	}
-	
+
 	/**
 	 * Convierte un PistolaAguaDTO a un PistolaAgua.
 	 *
@@ -1190,7 +1176,7 @@ public class DataMapper {
 		}
 		return listaEntidad;
 	}
-	
+
 	/**
 	 * Convierte un TelevisorDTO a un Televisor.
 	 *
@@ -1206,7 +1192,7 @@ public class DataMapper {
 				dto.getUrlImagen(), dto.getPrecio(), dto.getCantidad(), dto.getId(), dto.getPulgadas(),
 				dto.getResolucion(),dto.getSistemaOperativo(), dto.getCantPuertosHDMI(), dto.getFrecuenciaHz(), dto.getAsistenteVirtual());
 	}
-	
+
 	/**
 	 * Convierte un Televisor a un TelevisorDTO.
 	 *
@@ -1257,7 +1243,7 @@ public class DataMapper {
 		}
 		return listaEntidad;
 	}
-	
+
 	/**
 	 * Convierte un SombraDTO a un Sombra.
 	 *
@@ -1273,7 +1259,7 @@ public class DataMapper {
 				dto.getUrlImagen(), dto.getPrecio(), dto.getCantidad(), dto.getId(), dto.getTipoPiel(), dto.isEsApruebaDeAgua(),
 				dto.getFechaVencimiento(),dto.getCantidadColores(), dto.getAcabado());
 	}
-	
+
 	/**
 	 * Convierte un Sombra a un SombraDTO.
 	 *
@@ -1324,6 +1310,6 @@ public class DataMapper {
 		}
 		return listaEntidad;
 	}
-	
-	
+
+
 }

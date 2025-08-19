@@ -97,7 +97,7 @@ public class CelularDTO extends DispositivoElectronicoDTO {
 	public void setDualSim(boolean dualSim) {
 		this.dualSim = dualSim;
 	}
-	
+
 	@Override
 	public CelularDTO clone() {
 		return new CelularDTO(getNombre(), getMarca(), getTipoProducto(), getDescripcion(), getUrlImagen(), getPrecio(),

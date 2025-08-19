@@ -11,7 +11,7 @@ public class MarcadorDAO implements OperacionDAO<MarcadorDTO, Marcador>{
 	private final String MARCADOR_FILE_NAME = "Marcador.csv";
 
 	public MarcadorDAO() {
-		listaMarcadores = new ArrayList<Marcador>();
+		listaMarcadores = new ArrayList<>();
 		cargarDesdeArchivo();
 	}
 
@@ -97,19 +97,19 @@ public class MarcadorDAO implements OperacionDAO<MarcadorDTO, Marcador>{
 
 	public void escribirEnArchivo() {
 		String contenido = "";
-		for (int i = 0; i < listaMarcadores.size(); i++) {
-			contenido += listaMarcadores.get(i).getNombre() + ";";
-			contenido += listaMarcadores.get(i).getMarca() + ";";
-			contenido += listaMarcadores.get(i).getTipoProducto() + ";";
-			contenido += listaMarcadores.get(i).getDescripcion() + ";";
-			contenido += listaMarcadores.get(i).getUrlImagen() + ";";
-			contenido += listaMarcadores.get(i).getPrecio() + ";";
-			contenido += listaMarcadores.get(i).getCantidad() + ";";
-			contenido += listaMarcadores.get(i).getId() + ";";
-			contenido += listaMarcadores.get(i).getTipoPresentacion() + ";";
-			contenido += listaMarcadores.get(i).getTipoPunta() + ";";
-			contenido += listaMarcadores.get(i).isPermanente() + ";";
-			contenido += listaMarcadores.get(i).getTipoMarcador() + "\n";
+		for (Marcador listaMarcadore : listaMarcadores) {
+			contenido += listaMarcadore.getNombre() + ";";
+			contenido += listaMarcadore.getMarca() + ";";
+			contenido += listaMarcadore.getTipoProducto() + ";";
+			contenido += listaMarcadore.getDescripcion() + ";";
+			contenido += listaMarcadore.getUrlImagen() + ";";
+			contenido += listaMarcadore.getPrecio() + ";";
+			contenido += listaMarcadore.getCantidad() + ";";
+			contenido += listaMarcadore.getId() + ";";
+			contenido += listaMarcadore.getTipoPresentacion() + ";";
+			contenido += listaMarcadore.getTipoPunta() + ";";
+			contenido += listaMarcadore.isPermanente() + ";";
+			contenido += listaMarcadore.getTipoMarcador() + "\n";
 		}
 		FileManager.escribirEnArchivoTexto(MARCADOR_FILE_NAME, contenido);
 	}
@@ -122,8 +122,8 @@ public class MarcadorDAO implements OperacionDAO<MarcadorDTO, Marcador>{
 		}
 
 		String[] filas = contenido.split("\n");
-		for (int i = 0; i < filas.length; i++) {
-			String[] columnas = filas[i].split(";");
+		for (String element : filas) {
+			String[] columnas = element.split(";");
 			String nombre = columnas[0];
 			String marca = columnas[1];
 			String tipoProducto = columnas[2];
@@ -156,5 +156,5 @@ public class MarcadorDAO implements OperacionDAO<MarcadorDTO, Marcador>{
 	public String getMARCADOR_FILE_NAME() {
 		return MARCADOR_FILE_NAME;
 	}
-	
+
 }
