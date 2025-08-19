@@ -42,7 +42,7 @@
 					<div class="product-item">
 						<div class="product-item-content">
 							<div class="mb-3">
-								<p:graphicImage name="/#{product.urlImagen}"
+								<p:graphicImage value="https://img.freepik.com/fotos-premium/pistola-agua-plastico-aislado-sobre-fondo-blanco_323015-8926.jpg"
 									styleClass="product-image" />
 							</div>
 							<div>
@@ -72,9 +72,11 @@
 									<h:outputText value="Alcance máximo"></h:outputText>
 								</h6>
 								<h:outputText value="#{product.alcanceMaximo}"></h:outputText>
+								<div class="mt-5">
 								<span> Agregar al Carrito <p:commandButton type="button"
 										icon="pi pi-cart-plus" styleClass="rounded-button mr-2" />
 								</span>
+								</div>
 
 							</div>
 						</div>

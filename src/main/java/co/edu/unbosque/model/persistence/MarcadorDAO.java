@@ -109,7 +109,7 @@ public class MarcadorDAO implements OperacionDAO<MarcadorDTO, Marcador>{
 			contenido += listaMarcadores.get(i).getTipoPresentacion() + ";";
 			contenido += listaMarcadores.get(i).getTipoPunta() + ";";
 			contenido += listaMarcadores.get(i).isPermanente() + ";";
-			contenido += listaMarcadores.get(i).getTipoMarcador() + ";";
+			contenido += listaMarcadores.get(i).getTipoMarcador() + "\n";
 		}
 		FileManager.escribirEnArchivoTexto(MARCADOR_FILE_NAME, contenido);
 	}

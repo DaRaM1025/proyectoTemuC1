@@ -111,7 +111,7 @@ public class SombraDAO implements OperacionDAO<SombraDTO, Sombra> {
 			contenido += listaSombras.get(i).isEsApruebaDeAgua() + ";";
 			contenido += listaSombras.get(i).getFechaVencimiento() + ";";
 			contenido += listaSombras.get(i).getCantidadColores() + ";";
-			contenido += listaSombras.get(i).getAcabado() + ";";
+			contenido += listaSombras.get(i).getAcabado() + "\n";
 		}
 		FileManager.escribirEnArchivoTexto(SOMBRAS_FILE_NAME, contenido);
 	}

@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import co.edu.unbosque.model.CintaAdhesivaDTO;
 import co.edu.unbosque.model.LegoDTO;
+import co.edu.unbosque.model.ModelFacade;
+import co.edu.unbosque.model.persistence.DataMapper;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
@@ -19,48 +22,60 @@ public class LegoService {
 	public void init() {
 		listaLegos= new ArrayList<>();
 
-		listaLegos.add(new LegoDTO("Lego Star Wars X-Wing", "LEGO", "Juguete",
-		        "Nave X-Wing de Star Wars con piezas detalladas", "https://example.com/lego_xwing.jpg",
-		        450000, 10, "LEGO001", 9, "Star Wars", 747, true));
-
-		listaLegos.add(new LegoDTO("Lego Harry Potter Castillo Hogwarts", "LEGO", "Juguete",
-		        "Castillo de Hogwarts con múltiples detalles mágicos", "https://example.com/lego_hogwarts.jpg",
-		        1200000, 5, "LEGO002", 12, "Harry Potter", 6020, true));
-
-		listaLegos.add(new LegoDTO("Lego Technic Bugatti Chiron", "LEGO", "Juguete",
-		        "Modelo detallado del Bugatti Chiron de la línea Technic", "https://example.com/lego_bugatti.jpg",
-		        1800000, 3, "LEGO003", 16, "Technic", 3599, false));
-
-		listaLegos.add(new LegoDTO("Lego City Estación de Bomberos", "LEGO", "Juguete",
-		        "Estación de bomberos con camión y helicóptero", "https://example.com/lego_bomberos.jpg",
-		        380000, 12, "LEGO004", 6, "City", 509, true));
-
-		listaLegos.add(new LegoDTO("Lego Friends Cafetería Heartlake", "LEGO", "Juguete",
-		        "Cafetería con personajes de la serie Friends de LEGO", "https://example.com/lego_cafe.jpg",
-		        280000, 15, "LEGO005", 7, "Friends", 315, true));
-
-		listaLegos.add(new LegoDTO("Lego Creator Casa Modular", "LEGO", "Juguete",
-		        "Casa modular 3 en 1 para armar diferentes estructuras", "https://example.com/lego_casa.jpg",
-		        520000, 8, "LEGO006", 8, "Creator", 1477, false));
-
-		listaLegos.add(new LegoDTO("Lego Marvel Iron Man Hall of Armor", "LEGO", "Juguete",
-		        "Sala de armaduras de Iron Man con minifiguras", "https://example.com/lego_ironman.jpg",
-		        390000, 9, "LEGO007", 9, "Marvel", 524, true));
-
-		listaLegos.add(new LegoDTO("Lego Ninjago Templo del Dragón", "LEGO", "Juguete",
-		        "Templo de los dragones de la serie Ninjago", "https://example.com/lego_ninjago.jpg",
-		        670000, 6, "LEGO008", 10, "Ninjago", 1171, true));
-
-		listaLegos.add(new LegoDTO("Lego Architecture Estatua de la Libertad", "LEGO", "Juguete",
-		        "Modelo detallado de la Estatua de la Libertad", "https://example.com/lego_liberty.jpg",
-		        950000, 4, "LEGO009", 16, "Architecture", 1685, false));
-
-		listaLegos.add(new LegoDTO("Lego Disney Castillo de Frozen", "LEGO", "Juguete",
-		        "Castillo de Elsa y Anna inspirado en Frozen", "https://example.com/lego_frozen.jpg",
-		        500000, 7, "LEGO010", 6, "Disney", 701, true));
-
+//		listaLegos.add(new LegoDTO("Lego Star Wars X-Wing", "LEGO", "Juguete",
+//		        "Nave X-Wing de Star Wars con piezas detalladas", "https://example.com/lego_xwing.jpg",
+//		        450000, 10, "LEGO001", 9, "Star Wars", 747, true));
+//
+//		listaLegos.add(new LegoDTO("Lego Harry Potter Castillo Hogwarts", "LEGO", "Juguete",
+//		        "Castillo de Hogwarts con múltiples detalles mágicos", "https://example.com/lego_hogwarts.jpg",
+//		        1200000, 5, "LEGO002", 12, "Harry Potter", 6020, true));
+//
+//		listaLegos.add(new LegoDTO("Lego Technic Bugatti Chiron", "LEGO", "Juguete",
+//		        "Modelo detallado del Bugatti Chiron de la línea Technic", "https://example.com/lego_bugatti.jpg",
+//		        1800000, 3, "LEGO003", 16, "Technic", 3599, false));
+//
+//		listaLegos.add(new LegoDTO("Lego City Estación de Bomberos", "LEGO", "Juguete",
+//		        "Estación de bomberos con camión y helicóptero", "https://example.com/lego_bomberos.jpg",
+//		        380000, 12, "LEGO004", 6, "City", 509, true));
+//
+//		listaLegos.add(new LegoDTO("Lego Friends Cafetería Heartlake", "LEGO", "Juguete",
+//		        "Cafetería con personajes de la serie Friends de LEGO", "https://example.com/lego_cafe.jpg",
+//		        280000, 15, "LEGO005", 7, "Friends", 315, true));
+//
+//		listaLegos.add(new LegoDTO("Lego Creator Casa Modular", "LEGO", "Juguete",
+//		        "Casa modular 3 en 1 para armar diferentes estructuras", "https://example.com/lego_casa.jpg",
+//		        520000, 8, "LEGO006", 8, "Creator", 1477, false));
+//
+//		listaLegos.add(new LegoDTO("Lego Marvel Iron Man Hall of Armor", "LEGO", "Juguete",
+//		        "Sala de armaduras de Iron Man con minifiguras", "https://example.com/lego_ironman.jpg",
+//		        390000, 9, "LEGO007", 9, "Marvel", 524, true));
+//
+//		listaLegos.add(new LegoDTO("Lego Ninjago Templo del Dragón", "LEGO", "Juguete",
+//		        "Templo de los dragones de la serie Ninjago", "https://example.com/lego_ninjago.jpg",
+//		        670000, 6, "LEGO008", 10, "Ninjago", 1171, true));
+//
+//		listaLegos.add(new LegoDTO("Lego Architecture Estatua de la Libertad", "LEGO", "Juguete",
+//		        "Modelo detallado de la Estatua de la Libertad", "https://example.com/lego_liberty.jpg",
+//		        950000, 4, "LEGO009", 16, "Architecture", 1685, false));
+//
+//		listaLegos.add(new LegoDTO("Lego Disney Castillo de Frozen", "LEGO", "Juguete",
+//		        "Castillo de Elsa y Anna inspirado en Frozen", "https://example.com/lego_frozen.jpg",
+//		        500000, 7, "LEGO010", 6, "Disney", 701, true));
+//		igualarListas();
+		leerLista();
+		
+	}
+	
+	public void igualarListas() {
+		ModelFacade.getLegoDAO().getListaLego()
+				.addAll(DataMapper.listaLegoDTOToListaLego((ArrayList<LegoDTO>) listaLegos));
+		ModelFacade.getLegoDAO().escribirEnArchivo();
 	}
 
+	public void leerLista() {
+		ModelFacade.getLegoDAO().cargarDesdeArchivo();
+		listaLegos = DataMapper.listaLegoToListaLegoDTO(ModelFacade.getLegoDAO().getListaLego());
+	}
 	public List<LegoDTO> getProducts() {
 		return new ArrayList<>(listaLegos);
 	}

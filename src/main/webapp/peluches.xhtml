@@ -25,8 +25,9 @@
 }
 
 .product-item .product-image {
-	width: 50%;
-	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+	width: 40%;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+	border-radius: 12px;
 }
 </style>
 
@@ -42,7 +43,7 @@
 					<div class="product-item">
 						<div class="product-item-content">
 							<div class="mb-3">
-								<p:graphicImage name="/#{product.urlImagen}"
+								<p:graphicImage value="https://img.freepik.com/foto-gratis/lindos-esponjosos-juguetes-mono_23-2149642406.jpg"
 									styleClass="product-image" />
 							</div>
 							<div>
@@ -76,9 +77,11 @@
 									<h:outputText value="¿Se puede lavar en maquina?"></h:outputText>
 								</h6>
 								<h:outputText value="#{product.lavadoMaquina}"></h:outputText>
+								<div class="mt-5">
 								<span> Agregar al Carrito <p:commandButton type="button"
 										icon="pi pi-cart-plus" styleClass="rounded-button mr-2" />
 								</span>
+								</div>
 
 							</div>
 						</div>

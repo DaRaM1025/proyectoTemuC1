@@ -111,7 +111,7 @@ public class LabialDAO implements OperacionDAO<LabialDTO, Labial> {
 			contenido += listaLabiales.get(i).isEsApruebaDeAgua() + ";";
 			contenido += listaLabiales.get(i).getFechaVencimiento() + ";";
 			contenido += listaLabiales.get(i).getDuracion() + ";";
-			contenido += listaLabiales.get(i).isEsHidratante() + ";";
+			contenido += listaLabiales.get(i).isEsHidratante() + "\n";
 		}
 		FileManager.escribirEnArchivoTexto(LABIAL_FILE_NAME, contenido);
 	}
