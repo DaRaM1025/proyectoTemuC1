@@ -111,8 +111,7 @@
 								chooseIcon="pi pi-download" />
 							<p:commandButton value="Export" icon="pi pi-upload"
 								styleClass="ui-button-help" ajax="false">
-								<p:dataExporter type="pdf" target="dt-products"
-									fileName="products" />
+								  <p:dataExporter type="pdf" target="dt-products" fileName="products"/>
 							</p:commandButton>
 						</p:toolbarGroup>
 					</p:toolbar>
@@ -148,27 +147,30 @@
 						filterBy="#{product.code}">
 						<h:outputText value="#{product.code}" />
 					</p:column>
-					<p:column headerText="Name" sortBy="#{product.name}"
-						filterBy="#{product.name}">
+					<p:column headerText="Name" exportable="true"
+						sortBy="#{product.name}" filterBy="#{product.name}">
 						<h:outputText value="#{product.name}" />
 					</p:column>
 					<p:column headerText="Image" exportable="false">
 						<p:graphicImage name="images/product/#{product.image}"
 							library="demo" styleClass="product-image" />
 					</p:column>
-					<p:column headerText="Price" sortBy="#{product.price}">
+					<p:column headerText="Price" exportable="true"
+						sortBy="#{product.price}">
 						<h:outputText value="#{product.price}" style="font-weight: 700">
 							<f:convertNumber currencySymbol="$" type="currency" />
 						</h:outputText>
 					</p:column>
-					<p:column headerText="Category" sortBy="#{product.category}"
-						filterBy="#{product.category}">
+					<p:column headerText="Category" exportable="true"
+						sortBy="#{product.category}" filterBy="#{product.category}">
 						<h:outputText value="#{product.category}" />
 					</p:column>
-					<p:column headerText="Reviews" sortBy="#{product.rating}">
+					<p:column headerText="Reviews" exportable="false"
+						sortBy="#{product.rating}">
 						<p:rating value="#{product.rating}" readonly="true" />
 					</p:column>
-					<p:column headerText="Status" sortBy="#{product.inventoryStatus}"
+					<p:column headerText="Status" exportable="true"
+						sortBy="#{product.inventoryStatus}"
 						filterBy="#{product.inventoryStatus}">
 						<h:outputText
 							styleClass="product-badge status-#{product.inventoryStatus.name().toLowerCase()}"
