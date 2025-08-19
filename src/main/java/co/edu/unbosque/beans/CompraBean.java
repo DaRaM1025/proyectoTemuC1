@@ -2,14 +2,20 @@ package co.edu.unbosque.beans;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Properties;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfWriter;
 
+import co.edu.unbosque.model.Usuario;
+import co.edu.unbosque.service.UsuarioService;
 import jakarta.annotation.ManagedBean;
+import jakarta.annotation.PostConstruct;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.mail.Authenticator;
 import jakarta.mail.Message;
@@ -33,8 +39,50 @@ public class CompraBean implements Serializable {
 	private String celular;
 	private String fechaNacimiento;
 
-	public void comprar() {
+	@Inject
+	private UsuarioService usuarioService;
 
+	
+	@PostConstruct
+	public void init() {
+		try {
+			Object obj = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioActual");
+
+			if (obj instanceof Usuario u) {
+				this.nombre = u.getNombre();
+				this.email = u.getEmail();
+				this.celular = u.getTelefono();
+				if (u.getFechaNacimiento() != null) {
+					this.fechaNacimiento = new SimpleDateFormat("yyyy-MM-dd").format(u.getFechaNacimiento());
+				}
+
+				System.out.println("[CompraBean] Usuario cargado de sesión: " + u.getUsername());
+				return;
+			}
+
+			Object usernameObj = FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+					.get("usuarioLogueado");
+
+			if (usernameObj instanceof String username && usuarioService != null) {
+				for (Usuario u : usuarioService.obtenerUsuarios()) {
+					if (u.getUsername().equalsIgnoreCase(username)) {
+						this.nombre = u.getNombre();
+						this.email = u.getEmail();
+						this.celular = u.getTelefono();
+						if (u.getFechaNacimiento() != null) {
+							this.fechaNacimiento = new SimpleDateFormat("yyyy-MM-dd").format(u.getFechaNacimiento());
+						}
+						System.out.println("[CompraBean] Usuario encontrado por username: " + username);
+						break;
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void comprar() {
 		try {
 			// Se crea el PDF del correo
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -51,7 +99,7 @@ public class CompraBean implements Serializable {
 
 			document.close();
 
-			// Configuracion del correo
+			// Configuración del correo
 			String remitente = "shoppingtemunotifications@gmail.com";
 			String clave = "ukwo ntjl vose wqeg";
 			String destinatario = email;
@@ -90,7 +138,7 @@ public class CompraBean implements Serializable {
 
 			message.setContent(multipart);
 
-			// Envio
+			// Envío
 			Transport.send(message);
 
 			System.out.println("Correo enviado correctamente a " + destinatario);
@@ -99,6 +147,8 @@ public class CompraBean implements Serializable {
 			e.printStackTrace();
 		}
 	}
+
+	// ==== Getters y Setters ====
 
 	public String getNombre() {
 		return nombre;

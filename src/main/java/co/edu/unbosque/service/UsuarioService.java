@@ -43,13 +43,13 @@ public class UsuarioService {
 		return usuarioDAO.mostrar();
 	}
 
-	public boolean validarCredenciales(String username, String password) {
-		for (Usuario u : usuarioDAO.getListaUsuarios()) {
-			if (u.getUsername().equalsIgnoreCase(username) && u.getPassword().equals(password)) {
-				return true;
-			}
-		}
-		return false;
+	public Usuario validarCredenciales(String username, String password) {
+	    for (Usuario u : usuarioDAO.getListaUsuarios()) {
+	        if (u.getUsername().equalsIgnoreCase(username) && u.getPassword().equals(password)) {
+	            return u;
+	        }
+	    }
+	    return null;
 	}
 
 	public Usuario buscarPorUsername(String username) {

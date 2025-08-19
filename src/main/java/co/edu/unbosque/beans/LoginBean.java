@@ -1,5 +1,6 @@
 package co.edu.unbosque.beans;
 
+import co.edu.unbosque.model.Usuario;
 import co.edu.unbosque.service.UsuarioService;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
@@ -18,21 +19,29 @@ public class LoginBean {
 	private UsuarioService usuarioService;
 
 	public String login() {
-		if (usuarioService.validarCredenciales(username, password)) {
+		 Usuario usuarioEncontrado = usuarioService.validarCredenciales(username, password);
+		  if (usuarioEncontrado != null) {
+		        
+		        FacesContext.getCurrentInstance().getExternalContext()
+		            .getSessionMap().put("usuarioLogueado", username);
 
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogueado", username);
+		        
+		        FacesContext.getCurrentInstance().getExternalContext()
+		            .getSessionMap().put("usuarioActual", usuarioEncontrado);
 
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "¡Bienvenido, " + username + "💗!", null));
+		        FacesContext.getCurrentInstance().addMessage(null,
+		            new FacesMessage(FacesMessage.SEVERITY_INFO,
+		                "¡Bienvenido, " + usuarioEncontrado.getNombre() + "💗!", null));
 
-			return "index?faces-redirect=true";
-		} else {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o contraseña incorrectos👺", null));
-			return null;
+		        return "index?faces-redirect=true";
+		    } else {
+		        FacesContext.getCurrentInstance().addMessage(null,
+		            new FacesMessage(FacesMessage.SEVERITY_ERROR,
+		                "Usuario o contraseña incorrectos👺", null));
+		        return null;
+		    }
 		}
-	}
-
+	
 	public String getUsername() {
 		return username;
 	}
