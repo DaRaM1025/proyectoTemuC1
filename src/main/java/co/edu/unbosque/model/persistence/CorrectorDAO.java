@@ -111,7 +111,7 @@ public class CorrectorDAO implements OperacionDAO<CorrectorDTO, Corrector> {
 			contenido += listaCorrectores.get(i).isEsApruebaDeAgua() + ";";
 			contenido += listaCorrectores.get(i).getFechaVencimiento() + ";";
 			contenido += listaCorrectores.get(i).getCobertura() + ";";
-			contenido += listaCorrectores.get(i).getFormato() + ";";
+			contenido += listaCorrectores.get(i).getFormato() + "\n";
 		}
 		FileManager.escribirEnArchivoTexto(CORRECTOR_FILE_NAME, contenido);
 	}

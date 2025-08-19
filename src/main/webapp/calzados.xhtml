@@ -43,48 +43,47 @@
 					<div class="product-item">
 						<div class="product-item-content">
 							<div class="mb-3">
-								<p:graphicImage name="/#{product.urlImagen}"
+								<p:graphicImage
+									value="https://exitocol.vtexassets.com/arquivos/ids/22228525/tenis-zapatillas-genericas-para-hombre.jpg?v=638471701718030000"
 									styleClass="product-image" />
 							</div>
 							<div>
 								<h4 class="mb-3">#{product.nombre}</h4>
-								
-								<h6 class="mt-1">
-									Precio
-								</h6>
-									<h:outputText value="#{product.precio}">
-										<f:convertNumber type="currency" pattern="¤#0"
-											currencySymbol="$" />
-									</h:outputText>
+
+								<h6 class="mt-1">Precio</h6>
+								<h:outputText value="#{product.precio}">
+									<f:convertNumber type="currency" pattern="¤#0"
+										currencySymbol="$" />
+								</h:outputText>
 								<h6 class="mt-1">
 									<h:outputText value="#{product.id}"></h:outputText>
 								</h6>
 								<h6 class="mt-1">
-								<h:outputText value="Genero"></h:outputText>
+									<h:outputText value="Genero"></h:outputText>
 								</h6>
-									<h:outputText value="#{product.genero}"></h:outputText>
+								<h:outputText value="#{product.genero}"></h:outputText>
 								<h6 class="mt-1">
-								<h:outputText value="Descripcion"></h:outputText>
+									<h:outputText value="Descripcion"></h:outputText>
 								</h6>
 								<h:outputText value="#{product.descripcion}"></h:outputText>
 								<h6 class="mt-1">
-								<h:outputText value="Talla"></h:outputText>
+									<h:outputText value="Talla"></h:outputText>
 								</h6>
 								<h:outputText value="#{product.talla}"></h:outputText>
 								<h6 class="mt-1">
-								<h:outputText value="Material"></h:outputText>
+									<h:outputText value="Material"></h:outputText>
 								</h6>
 								<h:outputText value="#{product.material}"></h:outputText>
 								<h6 class="mt-1">
-								<h:outputText value="MaterialSuela"></h:outputText>
+									<h:outputText value="MaterialSuela"></h:outputText>
 								</h6>
 								<h:outputText value="#{product.materialSuela}"></h:outputText>
 								<h6 class="mt-1">
-								<h:outputText value="Altura Suela"></h:outputText>
+									<h:outputText value="Altura Suela"></h:outputText>
 								</h6>
 								<h:outputText value="#{product.alturaSuela}"></h:outputText>
 								<h6 class="mt-1">
-								<h:outputText value="Ocasion"></h:outputText>
+									<h:outputText value="Ocasion"></h:outputText>
 								</h6>
 								<h:outputText value="#{product.ocasion}"></h:outputText>
 								<div class="mt-5">

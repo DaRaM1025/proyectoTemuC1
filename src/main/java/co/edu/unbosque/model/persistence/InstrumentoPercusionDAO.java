@@ -129,7 +129,7 @@ public class InstrumentoPercusionDAO implements OperacionDAO<InstrumentoPercusio
 			contenido += listaInstrumentoPercusion.get(i).getTipoInstrumentoPercusion() + ";";
 			contenido += listaInstrumentoPercusion.get(i).isUsoBaquetas() + ";";
 			contenido += listaInstrumentoPercusion.get(i).getTipoPercusion() + ";";
-			contenido += listaInstrumentoPercusion.get(i).getCantSuperficiesSonoras() + "\\n";
+			contenido += listaInstrumentoPercusion.get(i).getCantSuperficiesSonoras() + "\n";
 		}
 
 		FileManager.escribirEnArchivoTexto(CALZADO_FILE_NAME, contenido);

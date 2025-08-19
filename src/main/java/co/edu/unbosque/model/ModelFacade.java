@@ -1,7 +1,5 @@
 package co.edu.unbosque.model;
 
-import java.util.ArrayList;
-
 import co.edu.unbosque.model.persistence.CalzadoDAO;
 import co.edu.unbosque.model.persistence.CamisetaDAO;
 import co.edu.unbosque.model.persistence.CelularDAO;
@@ -22,39 +20,95 @@ import co.edu.unbosque.model.persistence.SombraDAO;
 import co.edu.unbosque.model.persistence.TelevisorDAO;
 
 public class ModelFacade {
-	private CalzadoDAO calzadoDAO;
-	private CamisetaDAO camisetaDAO;
-	private PantalonDAO pantalonDAO;
-	private PelucheDAO pelucuheDAO;
-	private PistolaAguaDAO pistolaDAO;
-	private LegoDAO legoDAO;
-	private CelularDAO celularDAO;
-	private TelevisorDAO televisorDAO;
-	private ComputadorDAO computadorDAO;
-	private InstrumentoVientoDAO vientoDAO;
-	private InstrumentoPercusionDAO percusionDAO;
-	private InstrumentoCuerdaDAO cuerdaDAO;
-	private SombraDAO sombraDAO;
-	private LabialDAO labialDAO;
-	private CorrectorDAO correctorDAO;
-	private CuadernoDAO cuadernoDAO;
-	private MarcadorDAO marcadorDAO;
-	private CintaAdhesivaDAO cintaDAO;
-	ArrayList<Ropa>listaRopa;
-	ArrayList<Juguete>listaJuguete;
-	ArrayList<DispositivoElectronico>listaElectronicos;
-	ArrayList<InstrumentoMusical>listaMusical;
-	ArrayList<Maquillaje>listaMaquillaje;
-	ArrayList<Papeleria>listaPapeleria;
-	ArrayList<Producto>listaProductos;
-	public ModelFacade() {
-		listaRopa= new ArrayList<>();
-		listaJuguete= new ArrayList<>();
-		listaElectronicos= new ArrayList<>();
-		listaPapeleria= new ArrayList<>();
-		listaMaquillaje= new ArrayList<>();
-		listaMusical= new ArrayList<>();
-		listaProductos= new ArrayList<>();
+
+	private static final CalzadoDAO calzadoDAO = new CalzadoDAO();
+	private static final CamisetaDAO camisetaDAO = new CamisetaDAO();
+	private static final PantalonDAO pantalonDAO = new PantalonDAO();
+	private static final PelucheDAO pelucheDAO = new PelucheDAO();
+	private static final PistolaAguaDAO pistolaDAO = new PistolaAguaDAO();
+	private static final LegoDAO legoDAO = new LegoDAO();
+	private static final CelularDAO celularDAO = new CelularDAO();
+	private static final TelevisorDAO televisorDAO = new TelevisorDAO();
+	private static final ComputadorDAO computadorDAO = new ComputadorDAO();
+	private static final InstrumentoVientoDAO vientoDAO = new InstrumentoVientoDAO();
+	private static final InstrumentoPercusionDAO percusionDAO = new InstrumentoPercusionDAO();
+	private static final InstrumentoCuerdaDAO cuerdaDAO = new InstrumentoCuerdaDAO();
+	private static final SombraDAO sombraDAO = new SombraDAO();
+	private static final LabialDAO labialDAO = new LabialDAO();
+	private static final CorrectorDAO correctorDAO = new CorrectorDAO();
+	private static final CuadernoDAO cuadernoDAO = new CuadernoDAO();
+	private static final MarcadorDAO marcadorDAO = new MarcadorDAO();
+	private static final CintaAdhesivaDAO cintaDAO = new CintaAdhesivaDAO();
+
+	public static CalzadoDAO getCalzadoDAO() {
+		return calzadoDAO;
 	}
 
+	public static CamisetaDAO getCamisetaDAO() {
+		return camisetaDAO;
+	}
+
+	public static PantalonDAO getPantalonDAO() {
+		return pantalonDAO;
+	}
+
+	public static PelucheDAO getPelucheDAO() {
+		return pelucheDAO;
+	}
+
+	public static PistolaAguaDAO getPistolaDAO() {
+		return pistolaDAO;
+	}
+
+	public static LegoDAO getLegoDAO() {
+		return legoDAO;
+	}
+
+	public static CelularDAO getCelularDAO() {
+		return celularDAO;
+	}
+
+	public static TelevisorDAO getTelevisorDAO() {
+		return televisorDAO;
+	}
+
+	public static ComputadorDAO getComputadorDAO() {
+		return computadorDAO;
+	}
+
+	public static InstrumentoVientoDAO getVientoDAO() {
+		return vientoDAO;
+	}
+
+	public static InstrumentoPercusionDAO getPercusionDAO() {
+		return percusionDAO;
+	}
+
+	public static InstrumentoCuerdaDAO getCuerdaDAO() {
+		return cuerdaDAO;
+	}
+
+	public static SombraDAO getSombraDAO() {
+		return sombraDAO;
+	}
+
+	public static LabialDAO getLabialDAO() {
+		return labialDAO;
+	}
+
+	public static CorrectorDAO getCorrectorDAO() {
+		return correctorDAO;
+	}
+
+	public static CuadernoDAO getCuadernoDAO() {
+		return cuadernoDAO;
+	}
+
+	public static MarcadorDAO getMarcadorDAO() {
+		return marcadorDAO;
+	}
+
+	public static CintaAdhesivaDAO getCintaDAO() {
+		return cintaDAO;
+	}
 }

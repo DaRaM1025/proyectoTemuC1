@@ -261,7 +261,7 @@ public class PistolaAguaDAO implements OperacionDAO<PistolaAguaDTO, PistolaAgua>
 			int cantidad = Integer.parseInt(columnas[6]);
 			String id = columnas[7];
 			int edadRecomendada = Integer.parseInt(columnas[8]);
-			int capacidadAgua = Integer.parseInt(columnas[9]);
+			double capacidadAgua = Double.parseDouble(columnas[9]);
 			int cantidadChorros = Integer.parseInt(columnas[10]);
 			double alcanceMaximo= Double.parseDouble(columnas[11])
 			;

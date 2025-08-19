@@ -110,7 +110,7 @@ public class CuadernoDAO implements OperacionDAO<CuadernoDTO, Cuaderno> {
 			contenido += listaCuadernos.get(i).getTipoPresentacion() + ";";
 			contenido += listaCuadernos.get(i).getTipoHojas() + ";";
 			contenido += listaCuadernos.get(i).getCantidadHojas() + ";";
-			contenido += listaCuadernos.get(i).isPastaDura() + ";";
+			contenido += listaCuadernos.get(i).isPastaDura() + "\n";
 		}
 		FileManager.escribirEnArchivoTexto(CUADERNO_FILE_NAME, contenido);
 	}
@@ -133,10 +133,10 @@ public class CuadernoDAO implements OperacionDAO<CuadernoDTO, Cuaderno> {
 			double precio = Double.parseDouble(columnas[5]);
 			int cantidad = Integer.parseInt(columnas[6]);
 			String id = columnas[7];
-			String tipoPresentacion = columnas[9];
-			String tipoHojas = columnas[10];
-			int cantidadHojas = Integer.parseInt(columnas[11]);
-			boolean pastaDura = Boolean.parseBoolean(columnas[12]);
+			String tipoPresentacion = columnas[8];
+			String tipoHojas = columnas[9];
+			int cantidadHojas = Integer.parseInt(columnas[10]);
+			boolean pastaDura = Boolean.parseBoolean(columnas[11]);
 			listaCuadernos.add(new Cuaderno(nombre, marca, tipoProducto, descripcion, urlImagen, precio, cantidad, id,
 					tipoPresentacion, tipoHojas, cantidadHojas, pastaDura));
 		}

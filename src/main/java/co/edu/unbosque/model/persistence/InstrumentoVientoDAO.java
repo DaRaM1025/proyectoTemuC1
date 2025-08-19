@@ -128,7 +128,7 @@ public class InstrumentoVientoDAO implements OperacionDAO<InstrumentoVientoDTO, 
 			contenido += listaInstrumentoViento.get(i).getTipoInstrumentoViento() + ";";
 			contenido += listaInstrumentoViento.get(i).getAfinacion() + ";";
 			contenido += listaInstrumentoViento.get(i).getNumeroValvulas() + ";";
-			contenido += listaInstrumentoViento.get(i).isRequiereBoquilla() + "\\n";
+			contenido += listaInstrumentoViento.get(i).isRequiereBoquilla() + "\n";
 		}
 
 		FileManager.escribirEnArchivoTexto(CALZADO_FILE_NAME, contenido);

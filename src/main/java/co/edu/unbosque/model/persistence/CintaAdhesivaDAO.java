@@ -109,7 +109,7 @@ public class CintaAdhesivaDAO implements OperacionDAO<CintaAdhesivaDTO, CintaAdh
 			contenido += listaCintaAdhesivas.get(i).getTipoPresentacion() + ";";
 			contenido += listaCintaAdhesivas.get(i).isEsAdhesivoReposicionable() + ";";
 			contenido += listaCintaAdhesivas.get(i).getAncho() + ";";
-			contenido += listaCintaAdhesivas.get(i).getTipoCinta() + ";";
+			contenido += listaCintaAdhesivas.get(i).getTipoCinta() + "\n";
 		}
 		FileManager.escribirEnArchivoTexto(CINTA_FILE_NAME, contenido);
 	}

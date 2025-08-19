@@ -128,7 +128,7 @@ public class InstrumentoCuerdaDAO implements OperacionDAO<InstrumentoCuerdaDTO, 
 			contenido += listaInstrumentoCuerda.get(i).getTipoInstrumentoCuerda() + ";";
 			contenido += listaInstrumentoCuerda.get(i).getNumeroCuerdas() + ";";
 			contenido += listaInstrumentoCuerda.get(i).getTipoCuerda() + ";";
-			contenido += listaInstrumentoCuerda.get(i).isTieneCajaResonancia() + "\\n";
+			contenido += listaInstrumentoCuerda.get(i).isTieneCajaResonancia() + "\n";
 		}
 
 		FileManager.escribirEnArchivoTexto(CALZADO_FILE_NAME, contenido);
