@@ -87,7 +87,9 @@
 								</h6>
 								<h:outputText value="#{product.ocasion}"></h:outputText>
 								<div class="mt-5">
-									<span> Agregar al Carrito <p:commandButton type="button"
+									<span> Agregar al Carrito <p:commandButton
+											update=":form"
+											actionListener="#{carritoBean.agregarProducto(product)}"
 											icon="pi pi-cart-plus" styleClass="rounded-button mr-2" />
 									</span>
 								</div>

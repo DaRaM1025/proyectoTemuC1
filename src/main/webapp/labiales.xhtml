@@ -49,28 +49,28 @@
 							</div>
 							<div>
 								<h4 class="mb-3">#{product.nombre}</h4>
-								
-								<h6 class="mt-1">
-									Precio
-								</h6>
-									<h:outputText value="#{product.precio}">
-										<f:convertNumber type="currency" pattern="¤#0"
-											currencySymbol="$" />
-									</h:outputText>
+
+								<h6 class="mt-1">Precio</h6>
+								<h:outputText value="#{product.precio}">
+									<f:convertNumber type="currency" pattern="¤#0"
+										currencySymbol="$" />
+								</h:outputText>
 								<h6 class="mt-1">
 									<h:outputText value="#{product.id}"></h:outputText>
 								</h6>
 								<h6 class="mt-1">
-								<h:outputText value="Fecha de Vencimiento"></h:outputText>
+									<h:outputText value="Fecha de Vencimiento"></h:outputText>
 								</h6>
-									<h:outputText value="#{product.fechaVencimiento}"></h:outputText>
+								<h:outputText value="#{product.fechaVencimiento}"></h:outputText>
 								<h6 class="mt-1">
-								<h:outputText value="Descripcion"></h:outputText>
+									<h:outputText value="Descripcion"></h:outputText>
 								</h6>
 								<h:outputText value="#{product.descripcion}"></h:outputText>
 
 								<div class="mt-5">
-									<span> Agregar al Carrito <p:commandButton type="button"
+									<span> Agregar al Carrito <p:commandButton
+											update=":form"
+											actionListener="#{carritoBean.agregarProducto(product)}"
 											icon="pi pi-cart-plus" styleClass="rounded-button mr-2" />
 									</span>
 								</div>

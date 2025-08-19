@@ -41,29 +41,32 @@
 	<ui:define name="content">
 		<h:form>
 			<div class="contenedor-panel">
-				<p:panel header="Catálogo de Productos" styleClass="tabla-productos">
-					<p:dataTable id="tablaProductos" var="producto"
-						value="#{productoBean.productos}" rows="4" paginator="false"
+				<p:panel header="Carrito de Compras" styleClass="tabla-productos">
+					<p:dataTable id="tablaCarrito" var="item"
+						value="#{carritoBean.productosCarrito}" rows="4" paginator="false"
 						style="width:100%">
 						<p:column headerText="Nombre">
-							<h:outputText value="#{producto.nombre}" />
+							<h:outputText value="#{item.nombre}" />
 						</p:column>
 
 						<p:column headerText="ID">
-							<h:outputText value="#{producto.id}" />
+							<h:outputText value="#{item.id}" />
 						</p:column>
 
 						<p:column headerText="Imagen">
-							<p:graphicImage value="#{producto.imagen}"
+							<p:graphicImage value="#{item.urlImagen}"
 								styleClass="imagen-producto" />
 						</p:column>
 
 						<p:column headerText="Cantidad">
-							<p:spinner value="#{producto.cantidad}" min="0" max="3"
+							<p:spinner value="#{item.cantidad}" min="0" max="3"
 								onchange="PF('cantidadAjax').click()" />
-							<p:commandButton id="cantidadAjax" style="display:none"
-								action="#{productoBean.verificarCantidad}"
-								update="tablaProductos" process="@this" />
+						</p:column>
+						
+						<p:column headerText="Acciones">
+							<p:commandButton value="Eliminar"
+								actionListener="#{carritoBean.removerProducto(item)}"
+								update="tablaCarrito" icon="pi pi-trash"/>
 						</p:column>
 
 					</p:dataTable>

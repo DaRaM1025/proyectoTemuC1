@@ -70,7 +70,9 @@
 								</h6>
 								<h:outputText value="#{product.cantidadHojas}"></h:outputText>
 								<div>
-									<span> Agregar al Carrito <p:commandButton type="button"
+									<span> Agregar al Carrito <p:commandButton
+											update=":form"
+											actionListener="#{carritoBean.agregarProducto(product)}"
 											icon="pi pi-cart-plus" styleClass="rounded-button mr-2" />
 									</span>
 								</div>
