@@ -10,10 +10,24 @@ import jakarta.inject.Named;
 
 @Named
 @ApplicationScoped
+/**
+ * Servicio para realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar)
+ * sobre una lista de productos (ProductoDTO).
+ * <p>
+ * Esta clase es un bean gestionado con ámbito de aplicación para mantener
+ * el estado de la lista de productos durante toda la vida de la aplicación.
+ * </p>
+ * 
+ * @author Nataly Rengifo
+ */
 public class CrudService {
-
+	/**
+     * Lista que contiene los productos disponibles para CRUD.
+     */
 private ArrayList<ProductoDTO> listaCrud;
-	
+/**
+ * Método de inicialización que se ejecuta después de la construcción del bean.
+ */
 	@PostConstruct
 	public void init() {
 		listaCrud = new ArrayList<>();
@@ -42,7 +56,11 @@ private ArrayList<ProductoDTO> listaCrud;
 		listaCrud.add(new ProductoDTO("Smart TV 50\" 4K UHD", "LG", "Televisor", "Televisor inteligente con resolución 4K, sistema webOS y control por voz.", "https://img.freepik.com/foto-gratis/gente-sale-collage-television_23-2150163651.jpg", 1519960.0, 8, UUID.randomUUID().toString()));
 		
 	}
-
+	/**
+     * Agrega un producto a la lista si no existe previamente.
+     * 
+     * @param producto El objeto ProductoDTO a agregar.
+     */
 	public void agregarProducto(ProductoDTO producto) {
 		if (producto == null) {
 			return;
@@ -54,19 +72,33 @@ private ArrayList<ProductoDTO> listaCrud;
 			System.out.println("Item repetido.");
 		}
 	}
-
+	 /**
+     * Remueve un producto específico de la lista.
+     * 
+     * @param producto El objeto ProductoDTO a remover.
+     */
 	public void removerProducto(ProductoDTO producto) {
 		listaCrud.remove(producto);
 	}
-
-	public void limpiarCarrito() {
+	/**
+     * Limpia todos los productos de la lista.
+     */
+	public void limpiarLista() {
 		listaCrud.clear();
 	}
-
+	/**
+     * Obtiene la lista de productos.
+     * 
+     * @return Una lista con los objetos ProductoDTO actuales.
+     */
 	public ArrayList<ProductoDTO> getListaCrud() {
 		return listaCrud;
 	}
-
+	/**
+     * Establece una nueva lista de productos.
+     * 
+     * @param listaCrud La nueva lista de ProductoDTO.
+     */
 	public void setListaCrud(ArrayList<ProductoDTO> listaCrud) {
 		this.listaCrud = listaCrud;
 	}
