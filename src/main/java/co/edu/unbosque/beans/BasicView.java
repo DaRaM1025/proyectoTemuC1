@@ -7,8 +7,8 @@ import org.primefaces.component.api.UIColumn;
 import org.primefaces.event.ColumnToggleEvent;
 import org.primefaces.model.Visibility;
 
-import co.edu.unbosque.model.Product;
-import co.edu.unbosque.service.ProductService;
+import co.edu.unbosque.model.ProductoDTO;
+import co.edu.unbosque.service.CarritoService;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -20,21 +20,21 @@ import jakarta.inject.Named;
 @ViewScoped
 public class BasicView implements Serializable {
 
-    private List<Product> products;
+    private List<ProductoDTO> products;
 
     @Inject
-    private ProductService service;
+    private CarritoService service;
 
     @PostConstruct
     public void init() {
-        products = service.getProducts(10);
+        products = service.getListaCarrito();
     }
 
-    public List<Product> getProducts() {
+    public List<ProductoDTO> getProducts() {
         return products;
     }
 
-    public void setService(ProductService service) {
+    public void setService(CarritoService service) {
         this.service = service;
     }
 

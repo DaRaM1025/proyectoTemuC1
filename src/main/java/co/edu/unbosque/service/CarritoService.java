@@ -1,14 +1,19 @@
 package co.edu.unbosque.service;
 
 import java.util.ArrayList;
-
 import co.edu.unbosque.model.ProductoDTO;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Named;
 
+@Named
+@ApplicationScoped
 public class CarritoService {
 
 	private ArrayList<ProductoDTO> listaCarrito;
-
-	public CarritoService() {
+	
+	@PostConstruct
+	public void init() {
 		listaCarrito = new ArrayList<>();
 	}
 
@@ -31,7 +36,8 @@ public class CarritoService {
 	public void limpiarCarrito() {
 		listaCarrito.clear();
 	}
-
+	
+	
 	public ArrayList<ProductoDTO> getListaCarrito() {
 		return listaCarrito;
 	}

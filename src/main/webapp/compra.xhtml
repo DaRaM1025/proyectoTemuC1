@@ -71,20 +71,26 @@ body .ui-panelgrid .ui-panelgrid-cell {
 
 			<div class="card p-4 mt-6">
 				<p:dataTable var="product" value="#{dtBasicView.products}">
-					<p:column headerText="Code">
-						<h:outputText value="#{product.code}" />
+					<p:column headerText="ID">
+						<h:outputText value="#{product.id}" />
 					</p:column>
 
-					<p:column headerText="Name">
-						<h:outputText value="#{product.name}" />
+					<p:column headerText="Nombre">
+						<h:outputText value="#{product.nombre}" />
 					</p:column>
 
-					<p:column headerText="Category">
-						<h:outputText value="#{product.category}" />
+					<p:column headerText="Descripcion">
+						<h:outputText value="#{product.descripcion}" />
 					</p:column>
 
-					<p:column headerText="Quantity">
-						<h:outputText value="#{product.quantity}" />
+					<p:column headerText="Cantidad">
+						<h:outputText value="#{product.cantidad}" />
+					</p:column>
+
+					<p:column headerText="Precio">
+						<h:outputText value="#{product.precio}">
+						<f:convertNumber type="currency" pattern="¤#0" currencySymbol="$" />
+						</h:outputText>
 					</p:column>
 				</p:dataTable>
 
@@ -101,8 +107,11 @@ body .ui-panelgrid .ui-panelgrid-cell {
 						<p:row
 							style="display:flex; justify-content: space-between; align-items:center; flex-wrap:nowrap;">
 							<p:outputLabel value="Total a Pagar" />
-							<h:outputText value="$123.312"
-								style="display:block; width:100%; text-align:right;" />
+							<h:outputText value="#{compraBean.total}"
+								style="display:block; width:100%; text-align:right;">
+								<f:convertNumber type="currency" pattern="¤#0"
+									currencySymbol="$" />
+							</h:outputText>
 						</p:row>
 					</p:panelGrid>
 				</div>

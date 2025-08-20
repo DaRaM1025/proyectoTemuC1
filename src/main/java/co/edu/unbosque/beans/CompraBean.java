@@ -3,14 +3,14 @@ package co.edu.unbosque.beans;
 import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Properties;
-
 import com.lowagie.text.Document;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfWriter;
-
 import co.edu.unbosque.model.Usuario;
 import co.edu.unbosque.service.UsuarioService;
+import co.edu.unbosque.model.ProductoDTO;
 import jakarta.annotation.ManagedBean;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.context.FacesContext;
@@ -38,11 +38,13 @@ public class CompraBean implements Serializable {
 	private String direccion;
 	private String celular;
 	private String fechaNacimiento;
+	private double total;
 
+	@Inject
+	private CarritoBean cb;
 	@Inject
 	private UsuarioService usuarioService;
 
-	
 	@PostConstruct
 	public void init() {
 		try {
@@ -84,6 +86,8 @@ public class CompraBean implements Serializable {
 
 	public void comprar() {
 		try {
+
+			ArrayList<ProductoDTO> listaProductos = cb.getProductosCarrito();
 			// Se crea el PDF del correo
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			Document document = new Document();
@@ -96,7 +100,13 @@ public class CompraBean implements Serializable {
 			document.add(new Paragraph("Celular: " + celular));
 			document.add(new Paragraph("Dirección: " + direccion));
 			document.add(new Paragraph("Fecha Nacimiento: " + fechaNacimiento));
+			document.add(new Paragraph("\n--- Productos comprados ---"));
 
+			for (ProductoDTO p : listaProductos) {
+				document.add(new Paragraph("Producto: " + p.getNombre() + " | Precio: $" + p.getPrecio()
+						+ " | Cantidad: " + p.getCantidad()));
+			}
+			document.add(new Paragraph("Total de Compra" + total));
 			document.close();
 
 			// Configuración del correo
@@ -117,7 +127,7 @@ public class CompraBean implements Serializable {
 				}
 			});
 
-			// Se crea el mensaje
+			// Crear mensaje
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(remitente));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
@@ -125,7 +135,7 @@ public class CompraBean implements Serializable {
 
 			// Texto del correo
 			MimeBodyPart texto = new MimeBodyPart();
-			texto.setText("Hola " + nombre + ",\n\nAdjunto encontrarás el comprobante de tu compra.");
+			texto.setText("Hola " + nombre + ",\nAdjunto encontrarás el comprobante de tu compra.");
 
 			// Adjuntar PDF
 			MimeBodyPart adjunto = new MimeBodyPart();
@@ -189,4 +199,14 @@ public class CompraBean implements Serializable {
 	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
+	   public double getTotal() {
+	        double suma = 0.0;
+	        if (cb != null && cb.getProductosCarrito() != null) {
+	            for (ProductoDTO producto : cb.getProductosCarrito()) {
+	                suma += producto.getPrecio();
+	            }
+	        }
+	        return suma;
+	    }
+
 }
