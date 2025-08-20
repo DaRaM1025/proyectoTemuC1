@@ -14,5 +14,10 @@
     <url-pattern>/faces/*</url-pattern>
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
+  <!-- <context-param>
+    <param-name>primefaces.THEME</param-name>
+    <param-value>#{themeSwitcher.theme}</param-value>
+</context-param>
+ -->
   
 </web-app>

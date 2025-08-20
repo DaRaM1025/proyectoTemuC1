@@ -26,6 +26,31 @@
 			padding-bottom: 80px; /* Altura aproximada de la barra fija */
 		}
 	</style>
+	 
+	   <h:outputScript>
+    function aplicarTema(modoOscuro) {
+        if (modoOscuro) {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+    }
+
+      window.addEventListener('load', function() { // Usar 'load' para asegurar que todos los elementos HTML, incluyendo los de PrimeFaces, estén disponibles.
+            // #{temaBean.modoOscuro} es el valor del bean cuando la página se renderiza.
+            aplicarTema(#{temaBean.modoOscuro});
+        });
+    // Cambiar tema dinámicamente con el botón del navbar
+    document.addEventListener('DOMContentLoaded', function() {
+        const btn = document.getElementById('btn-darkmode');
+        if (btn) {
+            btn.addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                // Aquí puedes llamar a un método del bean vía AJAX si quieres guardar el cambio
+            });
+        }
+    });
+</h:outputScript>
 </h:head>
 
 <h:body>
@@ -70,7 +95,18 @@
 		</div>
 
 		<div class="fixed-bottom-bar d-flex align-items-center">
-    <p:toggleSwitch value="#{selectBooleanView.value1}" styleClass="order-1" />
+    
+							<p:toggleSwitch id="toggleTema" value="#{temaBean.modoOscuro}"
+								offIcon="pi pi-moon" onIcon="pi pi-sun"  >
+								<p:ajax update="toggleTema"
+									oncomplete="
+                        if (#{temaBean.modoOscuro}) {
+                            document.body.classList.add('dark-mode');
+                        } else {
+                            document.body.classList.remove('dark-mode');
+                        }" />
+							</p:toggleSwitch>
+						
     <p:button icon="pi pi-cart-plus" styleClass="order-2 mx-auto rounded-button ui-button-outlined" href="carrito.xhtml"/>
     <p:button icon="pi pi-times" styleClass="order-3 rounded-button ui-button-danger ui-button-outlined" />
 </div>

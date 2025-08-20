@@ -10,10 +10,10 @@
 <h:head>
 	<meta charset="UTF-8"></meta>
 	<title>Administrador</title>
-	
+
 
 </h:head>
-<h:body >
+<h:body>
 	<ui:composition template="templates/template.xhtml">
 		<ui:define name="content">
 			<div class="card crud-demo">
@@ -209,18 +209,19 @@
 
 								<div class="field">
 									<p:outputLabel for="nombre" value="Nombre" />
-									<p:inputText id="nombre" />
+									<p:inputText id="nombre" value="#{camisetaBean.nombre}" />
 
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="marca" value="Marca" />
-									<p:inputText id="marca" />
+									<p:inputText id="marca" value="#{camisetaBean.marca}" />
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="descripcion" value="Descripción" />
-									<p:inputTextarea id="descripcion" autoResize="true" />
+									<p:inputTextarea id="descripcion"
+										value="#{camisetaBean.descripcion}" autoResize="true" />
 								</div>
 
 								<div class="field">
@@ -232,50 +233,56 @@
 								<div class="formgrid grid">
 									<div class="field col">
 										<p:outputLabel for="precio" value="Precio" />
-										<p:inputNumber id="precio" symbol="$" symbolPosition="p"
-											minValue="1" />
+										<p:inputNumber id="precio" value="#{camisetaBean.precio}"
+											symbol="$" symbolPosition="p" minValue="1" />
 									</div>
 									<div class="field col">
 										<p:outputLabel for="cantidad" value="Cantidad" />
-										<p:spinner id="cantidad" min="0" />
+										<p:spinner id="cantidad" value="#{camisetaBean.cantidad}"
+											min="0" />
 									</div>
 								</div>
 								<div class="field">
 									<p:outputLabel for="talla" value="Talla" />
-									<p:inputText id="talla" />
+									<p:inputText id="talla" value="#{camisetaBean.talla}" />
 								</div>
 								<div class="field">
 									<p:outputLabel for="genero" value="Género" />
-									<p:selectOneMenu id="genero">
-										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Mujer" itemValue="Mujer" />
-										<f:selectItem itemLabel="Hombre" itemValue="Hombre" />
-										<f:selectItem itemLabel="Niño" itemValue="Niño" />
-										<f:selectItem itemLabel="Niña" itemValue="Niña" />
+									<p:selectOneMenu id="genero" value="#{camisetaBean.genero}">
+										<f:selectItem itemLabel="Seleccione" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems value="#{camisetaBean.opcionesGenero}" var="g"
+											itemLabel="#{g}" itemValue="#{g}" />
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
 									<p:outputLabel for="material" value="Material" />
-									<p:inputText id="material" />
+									<p:inputText id="material" value="#{camisetaBean.material}" />
+
 								</div>
-								<p:outputLabel for="manga" value="Tipo Manga" />
-								<p:selectOneMenu id="manga">
-									<f:selectItem itemLabel="Seleccione" itemValue="" />
-									<f:selectItem itemLabel="Manga corta" itemValue="corta" />
-									<f:selectItem itemLabel="Manga larga" itemValue="larga" />
-									<f:selectItem itemLabel="Manga 3/4" itemValue="trescuartos" />
-									<f:selectItem itemLabel="Sin mangas" itemValue="sin" />
-								</p:selectOneMenu>
-								<p:outputLabel for="cuello" value="Tipo Cuello" />
-								<p:selectOneMenu id="cuello">
-									<f:selectItem itemLabel="Seleccione" itemValue="" />
-									<f:selectItem itemLabel="Cuello redondo" itemValue="redondo" />
-									<f:selectItem itemLabel="Cuello en V" itemValue="v" />
-									<f:selectItem itemLabel="Cuello polo" itemValue="polo" />
-									<f:selectItem itemLabel="Cuello tortuga" itemValue="tortuga" />
-								</p:selectOneMenu>
+								<div class="field">
+									<p:outputLabel for="manga" value="Tipo de Manga" />
+									<p:selectOneMenu id="manga"
+										value="#{camisetaBean.mangaCamiseta}">
+										<f:selectItem itemLabel="Seleccione" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems value="#{camisetaBean.opcionesManga}" var="m"
+											itemLabel="#{m}" itemValue="#{m}" />
+									</p:selectOneMenu>
+								</div>
+								<div class="field">
+									<p:outputLabel for="cuello" value="Tipo de Cuello" />
+									<p:selectOneMenu id="cuello" value="#{camisetaBean.cuelloCamiseta}">
+										<f:selectItem itemLabel="Seleccione" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems value="#{camisetaBean.opcionesCuello}" var="c"
+											itemLabel="#{c}" itemValue="#{c}" />
+									</p:selectOneMenu>
+								</div>
 								<div>
-									<p:selectBooleanCheckbox itemLabel="¿Tiene estampado?" />
+									<p:outputLabel for="estampado" value="¿Tiene estampado?" />
+									<p:selectBooleanCheckbox id="estampado"
+										value="#{camisetaBean.estampada}" />
 								</div>
 							</p:panel>
 						</p:outputPanel>
@@ -283,7 +290,8 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								onclick="PF('dlgCamiseta').hide()" />
+								action="#{camisetaBean.guardar()}" process="@form"
+								update="@form" resetValues="true" />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgCamiseta').hide()" class="ui-button-secondary"
 								type="button" />
@@ -305,18 +313,18 @@
 
 								<div class="field">
 									<p:outputLabel for="nombre" value="Nombre" />
-									<p:inputText id="nombre" />
+									<p:inputText id="nombre" value="#{calzadoBean.nombre}" />
 
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="marca" value="Marca" />
-									<p:inputText id="marca" />
+									<p:inputText id="marca" value="#{calzadoBean.marca}"/>
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="descripcion" value="Descripción" />
-									<p:inputTextarea id="descripcion" autoResize="true" />
+									<p:inputTextarea id="descripcion" value="#{calzadoBean.descripcion}" autoResize="true" />
 								</div>
 
 								<div class="field">
@@ -328,75 +336,68 @@
 								<div class="formgrid grid">
 									<div class="field col">
 										<p:outputLabel for="precio" value="Precio" />
-										<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+										<p:inputNumber id="precio" value="#{calzadoBean.precio}" symbol="$" symbolPosition="p"
 											minValue="1" />
 									</div>
 									<div class="field col">
 										<p:outputLabel for="cantidad" value="Cantidad" />
-										<p:spinner id="cantidad" min="0" />
+										<p:spinner id="cantidad" value="#{calzadoBean.cantidad}" min="0" />
 									</div>
 								</div>
 								<div class="field">
 									<p:outputLabel for="talla" value="Talla" />
-									<p:inputText id="talla" />
+									<p:inputText id="talla" value="#{calzadoBean.talla}"/>
 								</div>
 								<div class="field">
 									<p:outputLabel for="genero" value="Género" />
-									<p:selectOneMenu id="genero">
-										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Mujer" itemValue="Mujer" />
-										<f:selectItem itemLabel="Hombre" itemValue="Hombre" />
-										<f:selectItem itemLabel="Niño" itemValue="Niño" />
-										<f:selectItem itemLabel="Niña" itemValue="Niña" />
+									<p:selectOneMenu id="genero" value="#{calzadoBean.genero}">
+										<f:selectItem itemLabel="Seleccione" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems value="#{calzadoBean.opcionesGenero}" var="g"
+											itemLabel="#{g}" itemValue="#{g}" />
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
 									<p:outputLabel for="material" value="Material" />
-									<p:inputText id="material" />
+									<p:inputText id="material" value="#{calzadoBean.material}" />
+									</div>
+									<div class="field">
 									<p:outputLabel for="tipoZapato" value="Tipo Zapato" />
-									<p:selectOneMenu id="tipoZapato">
-										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Tennis" itemValue="tennis" />
-										<f:selectItem itemLabel="Sandalia" itemValue="sandalia" />
-										<f:selectItem itemLabel="Bota" itemValue="bota" />
-										<f:selectItem itemLabel="Tacón" itemValue="tacon" />
-										<f:selectItem itemLabel="Mocasín" itemValue="mocasin" />
+									<p:selectOneMenu id="tipoZapato" value="#{calzadoBean.tipoCalzado}">
+										<f:selectItem itemLabel="Seleccione" itemValue="" noSelectionOption="true"/>
+										<f:selectItems value="#{calzadoBean.opcionesTipo}" var="t"
+											itemLabel="#{t}" itemValue="#{t}"  />
 									</p:selectOneMenu>
+									</div>
+									<div class="field">
 									<p:outputLabel for="ocasion" value="Ocasión" />
-									<p:selectOneMenu id="ocasion">
-										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Casual" itemValue="casual" />
-										<f:selectItem itemLabel="Fiesta" itemValue="fiesta" />
-										<f:selectItem itemLabel="Formal" itemValue="formal" />
-										<f:selectItem itemLabel="Deportiva" itemValue="deportiva" />
+									<p:selectOneMenu id="ocasion" value="#{calzadoBean.ocasionCalzado}">
+										<f:selectItem itemLabel="Seleccione" itemValue="" noSelctionOption="true"/>
+										<f:selectItems value="#{calzadoBean.opcionesOcasion}" var="o"
+											itemLabel="#{o}" itemValue="#{o}"  />
 									</p:selectOneMenu>
+									</div>
+									<div class="field">
 									<p:outputLabel for="materialSuela" value="Material Suela" />
-									<p:selectOneMenu id="materialSuela">
-										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Poliuterano" itemValue="poliuterano" />
-										<f:selectItem itemLabel="Policloruro de vinilo"
-											itemValue="policlorurodevinilo" />
-										<f:selectItem itemLabel="Neopreno" itemValue="neopreno" />
-										<f:selectItem itemLabel="Yute" itemValue="yute" />
-										<f:selectItem itemLabel="Cuero" itemValue="cuero" />
-										<f:selectItem itemLabel="Corcho" itemValue="corcho" />
-										<f:selectItem itemLabel="Thermo Rubber"
-											itemValue="thermorubber" />
-										<f:selectItem itemLabel="Espuma" itemValue="espuma" />
+									<p:selectOneMenu id="materialSuela" value="#{calzadoBean.suelaCalzado}">
+										<f:selectItem itemLabel="Seleccione" itemValue="" noSelectionOption="true" />
+										<f:selectItems value="#{calzadoBean.opcionesMaterial}" var="s"
+											itemLabel="#{s}" itemValue="#{s}"  />
 									</p:selectOneMenu>
+									</div>
 									<div class="field col">
 										<p:outputLabel for="alturaSuela" value="Altura Suela" />
-										<p:inputNumber id="alturaSuela" decimalPlaces="2"
+										<p:inputNumber id="alturaSuela" value="#{calzadoBean.alturaSuela}" decimalPlaces="2"
 											minValue="0.1" symbol=" cm" symbolPosition="s" />
 									</div>
-								</div>
+								
 							</p:panel>
 						</p:outputPanel>
 
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								onclick="PF('dlgCalzado').hide()" />
+								action="#{calzadoBean.guardar()}" process="@form" update="@form" resetValues="true"/>
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgCalzado').hide()" class="ui-button-secondary"
 								type="button" />
@@ -418,18 +419,18 @@
 
 								<div class="field">
 									<p:outputLabel for="nombre" value="Nombre" />
-									<p:inputText id="nombre" />
+									<p:inputText id="nombre" value="#{pantalonBean.nombre}"/>
 
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="marca" value="Marca" />
-									<p:inputText id="marca" />
+									<p:inputText id="marca" value="#{pantalonBean.marca}" />
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="descripcion" value="Descripción" />
-									<p:inputTextarea id="descripcion" autoResize="true" />
+									<p:inputTextarea id="descripcion" value="#{pantalonBean.descripcion}" autoResize="true" />
 								</div>
 
 								<div class="field">
@@ -441,58 +442,53 @@
 								<div class="formgrid grid">
 									<div class="field col">
 										<p:outputLabel for="precio" value="Precio" />
-										<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+										<p:inputNumber id="precio" value="#{pantalonBean.precio}" symbol="$" symbolPosition="p"
 											minValue="1" />
 									</div>
 									<div class="field col">
 										<p:outputLabel for="cantidad" value="Cantidad" />
-										<p:spinner id="cantidad" min="0" />
+										<p:spinner id="cantidad" value="#{pantalonBean.cantidad}" min="0" />
 									</div>
 								</div>
 								<div class="field">
 									<p:outputLabel for="talla" value="Talla" />
-									<p:inputText id="talla" />
+									<p:inputText id="talla" value="#{pantalonBean.talla}" />
 								</div>
 								<div class="field">
 									<p:outputLabel for="genero" value="Género" />
-									<p:selectOneMenu id="genero">
-										<f:selectItem itemLabel="Selecciona" itemValue="" />
-										<f:selectItem itemLabel="Mujer" itemValue="Mujer" />
-										<f:selectItem itemLabel="Hombre" itemValue="Hombre" />
-										<f:selectItem itemLabel="Niño" itemValue="Niño" />
-										<f:selectItem itemLabel="Niña" itemValue="Niña" />
+									<p:selectOneMenu id="genero" value="#{pantalonBean.genero}">
+										<f:selectItem itemLabel="Seleccione" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems value="#{pantalonBean.opcionesGenero}" var="g"
+											itemLabel="#{g}" itemValue="#{g}" />
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
 									<p:outputLabel for="material" value="Material" />
 									<p:inputText id="material" />
+									</div>
+									<div class="field">
 									<p:outputLabel for="tipoPantalon" value="Tipo Pantalón" />
-									<p:selectOneMenu id="tipoPantalon">
+									<p:selectOneMenu id="tipoPantalon" value="#{pantalonBean.tipoPantalon}" >
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Jeans" itemValue="jeans" />
-										<f:selectItem itemLabel="Cargo" itemValue="cargo" />
-										<f:selectItem itemLabel="Chino" itemValue="chino" />
-										<f:selectItem itemLabel="Jogger" itemValue="jogger" />
-										<f:selectItem itemLabel="De vestir" itemValue="vestir" />
+										<f:selectItems value="#{pantalonBean.opcionesTipo}" var="g"
+											itemLabel="#{g}" itemValue="#{g}"  />
 									</p:selectOneMenu>
+									</div>
+									<div class="field">
 									<p:outputLabel for="corte" value="Corte" />
-									<p:selectOneMenu id="corte">
+									<p:selectOneMenu id="corte" value="#{pantalonBean.cortePantalon}" >
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Boyfriend" itemValue="boyfriend" />
-										<f:selectItem itemLabel="Skinny" itemValue="skinny" />
-										<f:selectItem itemLabel="Slim fit" itemValue="slimfit" />
-										<f:selectItem itemLabel="Recto" itemValue="recto" />
-										<f:selectItem itemLabel="Bootcut" itemValue="bootcut" />
-										<f:selectItem itemLabel="Wide leg" itemValue="wideleg" />
+										<f:selectItems value="#{pantalonBean.opcionesCorte}" var="g"
+											itemLabel="#{g}" itemValue="#{g}"  />
 									</p:selectOneMenu>
+									</div>
+									<div class="field">
 									<p:outputLabel for="largo" value="Largo" />
-									<p:selectOneMenu id="largo">
+									<p:selectOneMenu id="largo" value="#{pantalonBean.largoPantalon}">
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Corto" itemValue="corto" />
-										<f:selectItem itemLabel="Capri" itemValue="capri" />
-										<f:selectItem itemLabel="Tobillero" itemValue="tobillero" />
-										<f:selectItem itemLabel="Normal" itemValue="normal" />
-										<f:selectItem itemLabel="Extra Largo" itemValue="extralargo" />
+										<f:selectItems value="#{pantalonBean.opcionesLargo}" var="g"
+											itemLabel="#{g}" itemValue="#{g}"  />
 
 									</p:selectOneMenu>
 								</div>
@@ -502,7 +498,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								onclick="PF('dlgPantalon').hide()" />
+								action="#{pantalonBean.guardar()}" process="@form" update="@form" resetValues="true"/>
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgPantalon').hide()" class="ui-button-secondary"
 								type="button" />
@@ -524,18 +520,18 @@
 
 								<div class="field">
 									<p:outputLabel for="nombre" value="Nombre" />
-									<p:inputText id="nombre" />
+									<p:inputText id="nombre" value="#{celularBean.nombre}"/>
 
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="marca" value="Marca" />
-									<p:inputText id="marca" />
+									<p:inputText id="marca" value="#{celularBean.marca}" />
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="descripcion" value="Descripción" />
-									<p:inputTextarea id="descripcion" autoResize="true" />
+									<p:inputTextarea id="descripcion" value="#{celularBean.descripcion}" autoResize="true" />
 								</div>
 
 								<div class="field">
@@ -547,64 +543,62 @@
 								<div class="formgrid grid">
 									<div class="field col">
 										<p:outputLabel for="precio" value="Precio" />
-										<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+										<p:inputNumber id="precio" value="#{celularBean.precio}" symbol="$" symbolPosition="p"
 											minValue="1" />
 									</div>
 									<div class="field col">
 										<p:outputLabel for="cantidad" value="Cantidad" />
-										<p:spinner id="cantidad" min="0" />
+										<p:spinner id="cantidad" value="#{celularBean.cantidad}" min="0" />
 									</div>
 								</div>
 								<div class="field">
 									<p:outputLabel for="pulgadas" value="Pulgadas:" />
-									<p:inputNumber id="pulgadas" minValue="1" maxValue="100"
+									<p:inputNumber id="pulgadas" value="#{celularBean.pulgadas}" minValue="1" maxValue="100"
 										suffix='"' />
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="resolucion" value="Resolución:" />
-									<p:selectOneMenu id="resolucion">
+									<p:selectOneMenu id="resolucion" value="#{celularBean.resolucion}" >
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="HD (1280×720)" itemValue="HD" />
-										<f:selectItem itemLabel="Full HD (1920×1080)"
-											itemValue="FullHD" />
-										<f:selectItem itemLabel="2K / QHD (2560×1440)" itemValue="2K" />
-										<f:selectItem itemLabel="4K UHD (3840×2160)" itemValue="4K" />
-										<f:selectItem itemLabel="8K UHD (7680×4320)" itemValue="8K" />
+										<f:selectItems  value="#{celularBean.opcionesResolucion}" var="r"
+											itemLabel="#{r}" itemValue="#{r}"  />
 									</p:selectOneMenu>
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="sistema" value="Sistema Operativo:" />
-									<p:selectOneMenu id="sistema">
+									<p:selectOneMenu id="sistema" value="#{celularBean.sistemaOperativo}">
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
 										<f:selectItems
-											value="#{['Android','iOS','HarmonyOS','KaiOS','Windows','macOS','Linux','ChromeOS','Android TV','webOS','Tizen','Fire OS']}" />
+											 value="#{celularBean.opcionesSistema}" var="g"
+											itemLabel="#{g}" itemValue="#{g}"  />
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
 									<p:outputLabel for="almacenamientoCel" value="Almacenamiento:" />
-									<p:selectOneMenu id="almacenamientoCel">
+									<p:selectOneMenu id="almacenamientoCel" value="#{celularBean.almacenamientoCel}">
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
 										<f:selectItems
-											value="#{['64 GB','128 GB','256 GB','512 GB','1 TB']}" />
+											 value="#{celularBean.opcionesAlmacenamiento}" var="g"
+											itemLabel="#{g}" itemValue="#{g}"  />
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
 									<p:outputLabel for="ramCel" value="RAM:" />
-									<p:selectOneMenu id="ramCel">
+									<p:selectOneMenu id="ramCel" value="#{celularBean.ramCel}" >
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItems
-											value="#{['4 GB','6 GB','8 GB','12 GB','16 GB']}" />
+										<f:selectItems  value="#{celularBean.opcionesRam}" var="g"
+											itemLabel="#{g}" itemValue="#{g}"  />
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
 									<p:outputLabel for="camara" value="Cantidad de cámaras:" />
-									<p:spinner id="camara" min="1" max="10" />
+									<p:spinner id="camara" value="#{celularBean.camaras}" min="1" max="10" />
 								</div>
 								<div class="field">
-									<p:selectBooleanCheckbox id="dualSim"
-										itemLabel="¿Tiene Dual SIM?" />
+								<p:outputLabel for="dualSim" value="¿Tiene dualSim?" />
+									<p:selectBooleanCheckbox id="dualSim" value="#{celularBean.dualSim}" />
 								</div>
 
 
@@ -614,7 +608,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								onclick="PF('dlgCelular').hide()" />
+								action="#{celularBean.guardar()}" process="@form" update="@form" resetValues="true" />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgCelular').hide()" class="ui-button-secondary"
 								type="button" />
@@ -636,18 +630,18 @@
 
 								<div class="field">
 									<p:outputLabel for="nombre" value="Nombre" />
-									<p:inputText id="nombre" />
+									<p:inputText id="nombre" value="#{computadorBean.nombre}" />
 
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="marca" value="Marca" />
-									<p:inputText id="marca" />
+									<p:inputText id="marca" value="#{computadorBean.marca}"  />
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="descripcion" value="Descripción" />
-									<p:inputTextarea id="descripcion" autoResize="true" />
+									<p:inputTextarea id="descripcion" value="#{computadorBean.descripcion}"  autoResize="true" />
 								</div>
 
 								<div class="field">
@@ -659,71 +653,70 @@
 								<div class="formgrid grid">
 									<div class="field col">
 										<p:outputLabel for="precio" value="Precio" />
-										<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+										<p:inputNumber id="precio" value="#{computadorBean.precio}"  symbol="$" symbolPosition="p"
 											minValue="1" />
 									</div>
 									<div class="field col">
 										<p:outputLabel for="cantidad" value="Cantidad" />
-										<p:spinner id="cantidad" min="0" />
+										<p:spinner id="cantidad" value="#{computadorBean.cantidad}"  min="0" />
 									</div>
 								</div>
 								<div class="field">
 									<p:outputLabel for="pulgadas" value="Pulgadas:" />
-									<p:inputNumber id="pulgadas" minValue="1" maxValue="100"
+									<p:inputNumber id="pulgadas" value="#{computadorBean.pulgadas}"  minValue="1" maxValue="100"
 										suffix='"' />
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="resolucion" value="Resolución:" />
-									<p:selectOneMenu id="resolucion">
+									<p:selectOneMenu id="resolucion" value="#{computadorBean.resolucion}" >
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="HD (1280×720)" itemValue="HD" />
-										<f:selectItem itemLabel="Full HD (1920×1080)"
-											itemValue="FullHD" />
-										<f:selectItem itemLabel="2K / QHD (2560×1440)" itemValue="2K" />
-										<f:selectItem itemLabel="4K UHD (3840×2160)" itemValue="4K" />
-										<f:selectItem itemLabel="8K UHD (7680×4320)" itemValue="8K" />
+										<f:selectItems  value="#{computadorBean.opcionesResolucion}" var="r"
+											itemLabel="#{r}" itemValue="#{r}"  />
 									</p:selectOneMenu>
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="sistema" value="Sistema Operativo:" />
-									<p:selectOneMenu id="sistema">
+									<p:selectOneMenu id="sistema" value="#{computadorBean.sistemaOperativo}">
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
 										<f:selectItems
-											value="#{['Android','iOS','HarmonyOS','KaiOS','Windows','macOS','Linux','ChromeOS','Android TV','webOS','Tizen','Fire OS']}" />
+											 value="#{computadorBean.opcionesSistema}" var="g"
+											itemLabel="#{g}" itemValue="#{g}"   />
 									</p:selectOneMenu>
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="almacenamientoPc" value="Almacenamiento:" />
-									<p:selectOneMenu id="almacenamientoPc">
+									<p:selectOneMenu id="almacenamientoPc" value="#{computadorBean.almacenamientoPc}">
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
 										<f:selectItems
-											value="#{['SSD_256GB','SSD_512GB','SSD_1TB','SSD_2TB','HDD_1TB']}" />
+											 value="#{computadorBean.opcionesAlmacenamiento}" var="g"
+											itemLabel="#{g}" itemValue="#{g}"   />
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
 									<p:outputLabel for="ramPc" value="RAM:" />
-									<p:selectOneMenu id="ramPc">
+									<p:selectOneMenu id="ramPc" value="#{computadorBean.ramPc}" >
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItems value="#{['_4GB','_8GB','16GB','32GB','64GB']}" />
+										<f:selectItems  value="#{computadorBean.opcionesRam}" var="g"
+											itemLabel="#{g}" itemValue="#{g}"  />
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
 									<p:outputLabel for="procesador" value="Procesador:" />
-									<p:selectOneMenu id="procesador">
+									<p:selectOneMenu id="procesador" value="#{computadorBean.procesadorPc}" >
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
 										<f:selectItems
-											value="#{['INTEL_I3','INTEL_I5','INTEL_I7','AMD_RYZEN5','AMD_RYZEN7']}" />
+											value="#{computadorBean.opcionesProcesador}" var="g" itemLabel="#{g}" itemValue="#{g}" />
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
 									<p:outputLabel for="grafica" value="Tarjeta Gráfica:" />
-									<p:selectOneMenu id="grafica">
+									<p:selectOneMenu id="grafica" value="#{computadorBean.graficaPc}">
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
 										<f:selectItems
-											value="#{['INTEGRADA_INTEL','NVIDIA_GTX_1650','NVIDIA_RTX_3050','NVIDIA_RTX_4060','AMD_RX_6600M']}" />
+											value="#{computadorBean.opcionesTarjeta}" var="r" itemLabel="#{r}" itemValue="#{r}" />
 									</p:selectOneMenu>
 								</div>
 
@@ -733,7 +726,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								onclick="PF('dlgComputador').hide()" />
+								action="#{computadorBean.guardar()}" process="@form" update="@form" resetValues="true"  />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgComputador').hide()" class="ui-button-secondary"
 								type="button" />
@@ -754,18 +747,18 @@
 
 								<div class="field">
 									<p:outputLabel for="nombre" value="Nombre" />
-									<p:inputText id="nombre" />
+									<p:inputText id="nombre" value="#{televisorBean.nombre}"/>
 
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="marca" value="Marca" />
-									<p:inputText id="marca" />
+									<p:inputText id="marca" value="#{televisorBean.marca}"/>
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="descripcion" value="Descripción" />
-									<p:inputTextarea id="descripcion" autoResize="true" />
+									<p:inputTextarea id="descripcion" value="#{televisorBean.descripcion}" autoResize="true" />
 								</div>
 
 								<div class="field">
@@ -777,56 +770,53 @@
 								<div class="formgrid grid">
 									<div class="field col">
 										<p:outputLabel for="precio" value="Precio" />
-										<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+										<p:inputNumber id="precio" value="#{televisorBean.precio}" symbol="$" symbolPosition="p"
 											minValue="1" />
 									</div>
 									<div class="field col">
 										<p:outputLabel for="cantidad" value="Cantidad" />
-										<p:spinner id="cantidad" min="0" />
+										<p:spinner id="cantidad" value="#{televisorBean.cantidad}" min="0" />
 									</div>
 								</div>
 								<div class="field">
 									<p:outputLabel for="pulgadas" value="Pulgadas:" />
-									<p:inputNumber id="pulgadas" minValue="1" maxValue="100"
+									<p:inputNumber id="pulgadas" value="#{televisorBean.pulgadas}" minValue="1" maxValue="100"
 										suffix='"' />
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="resolucion" value="Resolución:" />
-									<p:selectOneMenu id="resolucion">
+									<p:selectOneMenu id="resolucion" value="#{televisorBean.resolucion}" >
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="HD (1280×720)" itemValue="HD" />
-										<f:selectItem itemLabel="Full HD (1920×1080)"
-											itemValue="FullHD" />
-										<f:selectItem itemLabel="2K / QHD (2560×1440)" itemValue="2K" />
-										<f:selectItem itemLabel="4K UHD (3840×2160)" itemValue="4K" />
-										<f:selectItem itemLabel="8K UHD (7680×4320)" itemValue="8K" />
+										<f:selectItems  value="#{televisorBean.opcionesResolucion}" var="r"
+											itemLabel="#{r}" itemValue="#{r}"  />
 									</p:selectOneMenu>
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="sistema" value="Sistema Operativo:" />
-									<p:selectOneMenu id="sistema">
+									<p:selectOneMenu id="sistema" value="#{televisorBean.sistemaOperativo}">
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
 										<f:selectItems
-											value="#{['Android','iOS','HarmonyOS','KaiOS','Windows','macOS','Linux','ChromeOS','Android TV','webOS','Tizen','Fire OS']}" />
+											 value="#{televisorBean.opcionesSistema}" var="g"
+											itemLabel="#{g}" itemValue="#{g}"   />
 									</p:selectOneMenu>
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="puertosHdmi" value="Puertos HDMI:" />
-									<p:spinner id="puertosHdmi" min="1" max="10" />
+									<p:spinner id="puertosHdmi" value="#{televisorBean.puertosHdmi}" min="1" max="10" />
 								</div>
 								<div class="field">
 									<p:outputLabel for="frecuenciaHz" value="Frecuencia (Hz):" />
-									<p:inputNumber id="frecuenciaHz" minValue="30" maxValue="240" />
+									<p:inputNumber id="frecuenciaHz" value="#{televisorBean.frecuenciaHz}"  minValue="30" maxValue="240" />
 								</div>
 								<div class="field">
 									<p:outputLabel for="asistente" value="Asistente Virtual:" />
-									<p:selectOneMenu id="asistente">
+									<p:selectOneMenu id="asistente" value="#{televisorBean.asistenteVirtual}">
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
 										<f:selectItems
-											value="#{['GOOGLE_ASSISTANT','AMAZON_ALEXA','APPLE_SIRI','BIXBY','CORTANA','LG_THINQ','XIAOMI_XIAOAI','NINGUNO']}" />
+											value="#{televisorBean.opcionesAsistente}" var="g" itemLabel="#{g}" itemValue="#{g}"/>
 									</p:selectOneMenu>
 								</div>
 
@@ -836,7 +826,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								onclick="PF('dlgTelevisor').hide()" />
+								action="#{televisorBean.guardar()}" process="@form" update="@form" resetValues="true"  />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgTelevisor').hide()" class="ui-button-secondary"
 								type="button" />
@@ -858,18 +848,18 @@
 
 								<div class="field">
 									<p:outputLabel for="nombre" value="Nombre" />
-									<p:inputText id="nombre" />
+									<p:inputText id="nombre" value ="#{legoBean.nombre}" />
 
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="marca" value="Marca" />
-									<p:inputText id="marca" />
+									<p:inputText id="marca" value ="#{legoBean.marca}" />
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="descripcion" value="Descripción" />
-									<p:inputTextarea id="descripcion" autoResize="true" />
+									<p:inputTextarea id="descripcion" value ="#{legoBean.descripcion}"  autoResize="true" />
 								</div>
 
 								<div class="field">
@@ -881,33 +871,34 @@
 								<div class="formgrid grid">
 									<div class="field col">
 										<p:outputLabel for="precio" value="Precio" />
-										<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+										<p:inputNumber id="precio" value ="#{legoBean.precio}"  symbol="$" symbolPosition="p"
 											minValue="1" />
 									</div>
 									<div class="field col">
 										<p:outputLabel for="cantidad" value="Cantidad" />
-										<p:spinner id="cantidad" min="0" />
+										<p:spinner id="cantidad" value ="#{legoBean.cantidad}"  min="0" />
 									</div>
 								</div>
 								<div class="field">
 									<p:outputLabel for="edad" value="Edad recomendada:" />
-									<p:spinner id="edad" min="1" max="18" suffix=" años" />
+									<p:spinner id="edad" value ="#{legoBean.edadRecomendada}"  min="1" max="18" suffix=" años" />
 								</div>
 								<div class="field">
 									<p:outputLabel for="temaLego" value="Tema:" />
-									<p:selectOneMenu id="temaLego">
+									<p:selectOneMenu id="temaLego" value="#{legoBean.temaLego}">
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItems
-											value="#{['Ciudad','Amigos','Ninjago','STAR_WARS','Harry Potter','Técnicos (mecánica)','Construcciones libres','Super héroes','Arquitectura','Jurassic World']}" />
+										<f:selectItems value="#{legoBean.opcionesTema}" var="g"
+											itemLabel="#{g}" itemValue="#{g}" />
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
 									<p:outputLabel for="piezas" value="Cantidad de piezas:" />
-									<p:spinner id="piezas" min="1" max="10000" />
+									<p:spinner id="piezas" value ="#{legoBean.piezasLego}"  min="1" max="10000" />
 								</div>
 								<div class="field">
+								<p:outputLabel for="minifiguras" value="¿Incluye minifiguras?" />
 									<p:selectBooleanCheckbox id="minifiguras"
-										itemLabel="¿Incluye minifiguras?" />
+										value="#{legoBean.minifiguras}" />
 								</div>
 							</p:panel>
 						</p:outputPanel>
@@ -916,7 +907,8 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								onclick="PF('dlgLego').hide()" />
+								action="#{legoBean.guardar()}" process="@form" update="@form"
+								resetValues="true"  />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgLego').hide()" class="ui-button-secondary"
 								type="button" />
@@ -937,19 +929,20 @@
 
 
 								<div class="field">
-									<p:outputLabel for="nombre" value="Nombre" />
-									<p:inputText id="nombre" />
+									<p:outputLabel for="nombre" value="Nombre: " />
+									<p:inputText id="nombre" value="#{pelucheBean.nombre}" />
 
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="marca" value="Marca" />
-									<p:inputText id="marca" />
+									<p:inputText id="marca" value="#{pelucheBean.marca}" />
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="descripcion" value="Descripción" />
-									<p:inputTextarea id="descripcion" autoResize="true" />
+									<p:inputTextarea id="descripcion"
+										value="#{pelucheBean.descripcion}" autoResize="true" />
 								</div>
 
 								<div class="field">
@@ -961,33 +954,40 @@
 								<div class="formgrid grid">
 									<div class="field col">
 										<p:outputLabel for="precio" value="Precio" />
-										<p:inputNumber id="precio" symbol="$" symbolPosition="p"
-											minValue="1" />
+										<p:inputNumber id="precio" value="#{pelucheBean.precio}"
+											symbol="$" symbolPosition="p" minValue="1" />
 									</div>
 									<div class="field col">
 										<p:outputLabel for="cantidad" value="Cantidad" />
-										<p:spinner id="cantidad" min="0" />
+										<p:spinner id="cantidad" value="#{pelucheBean.cantidad}"
+											min="0" />
 									</div>
 								</div>
 								<div class="field">
-									<p:outputLabel for="edad" value="Edad recomendada:" />
-									<p:spinner id="edad" min="1" max="18" suffix=" años" />
+									<p:outputLabel for="edad" value="Edad Recomendada " />
+									<p:spinner id="edad" value="#{pelucheBean.edadRecomendada}"
+										min="1" max="18" suffix=" años" />
 								</div>
 								<div class="field">
-									<p:selectBooleanCheckbox id="sonidoPeluche"
-										itemLabel="¿Tiene sonido?" />
+
+									<p:outputLabel for="sonido" value="Incluye sonido" />
+									<p:selectBooleanCheckbox id="sonido"
+										value="#{pelucheBean.sonidoPeluche}" />
 								</div>
 								<div class="field">
 									<p:outputLabel for="relleno" value="Tipo de relleno:" />
-									<p:selectOneMenu id="relleno">
-										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItems
-											value="#{['Algodón sintético','Microperlas de poliestireno','Espuma','Algodón natural','Gel / bolitas térmicas']}" />
+									<p:selectOneMenu id="relleno"
+										value="#{pelucheBean.rellenoPeluche}">
+										<f:selectItem itemLabel="Seleccione" itemValue=""
+											noSelectionOption="true" />
+										<f:selectItems value="#{pelucheBean.opcionesRelleno}" />
 									</p:selectOneMenu>
+
 								</div>
 								<div class="field">
-									<p:selectBooleanCheckbox id="lavadora"
-										itemLabel="¿Se puede lavar en lavadora?" />
+									<p:outputLabel for="lavable" value="Lavable" />
+									<p:selectBooleanCheckbox id="lavable"
+										value="#{pelucheBean.lavable}" />
 								</div>
 							</p:panel>
 						</p:outputPanel>
@@ -995,10 +995,11 @@
 
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
-							<p:commandButton value="Aceptar" icon="pi pi-check"
-								onclick="PF('dlgPeluche').hide()" />
+							<p:commandButton value="Guardar" icon="pi pi-check"
+								action="#{pelucheBean.guardar()}" process="@form" update="@form"
+								resetValues="true" />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
-								onclick="PF('dlgPeluche').hide()" class="ui-button-secondary"
+								onclick="PF('dlgPeluche').hide()" Sclass="ui-button-secondary"
 								type="button" />
 						</f:facet>
 					</p:dialog>
@@ -1017,18 +1018,18 @@
 
 								<div class="field">
 									<p:outputLabel for="nombre" value="Nombre" />
-									<p:inputText id="nombre" />
+									<p:inputText id="nombre" value="#{pistolaBean.nombre}"/>
 
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="marca" value="Marca" />
-									<p:inputText id="marca" />
+									<p:inputText id="marca" value="#{pistolaBean.marca}"/>
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="descripcion" value="Descripción" />
-									<p:inputTextarea id="descripcion" autoResize="true" />
+									<p:inputTextarea id="descripcion" value="#{pistolaBean.descripcion}" autoResize="true" />
 								</div>
 
 								<div class="field">
@@ -1040,30 +1041,30 @@
 								<div class="formgrid grid">
 									<div class="field col">
 										<p:outputLabel for="precio" value="Precio" />
-										<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+										<p:inputNumber id="precio" value="#{pistolaBean.precio}" symbol="$" symbolPosition="p"
 											minValue="1" />
 									</div>
 									<div class="field col">
 										<p:outputLabel for="cantidad" value="Cantidad" />
-										<p:spinner id="cantidad" min="0" />
+										<p:spinner id="cantidad" value="#{pistolaBean.cantidad}" min="0" />
 									</div>
 								</div>
 								<div class="field">
 									<p:outputLabel for="edad" value="Edad recomendada:" />
-									<p:spinner id="edad" min="1" max="18" suffix=" años" />
+									<p:spinner id="edad" value="#{pistolaBean.edadRecomendada}" min="1" max="18" suffix=" años" />
 								</div>
 								<div class="field">
 									<p:outputLabel for="capacidad" value="Capacidad de agua (ml):" />
-									<p:inputNumber id="capacidad" minValue="50" maxValue="5000"
+									<p:inputNumber id="capacidad" value="#{pistolaBean.capacidadAgua}" minValue="50" maxValue="5000"
 										suffix=" ml" />
 								</div>
 								<div class="field">
 									<p:outputLabel for="chorros" value="Cantidad de chorros:" />
-									<p:spinner id="chorros" min="1" max="10" />
+									<p:spinner id="chorros" value="#{pistolaBean.cantidadChorros}" min="1" max="10" />
 								</div>
 								<div class="field">
 									<p:outputLabel for="alcance" value="Alcance máximo (metros):" />
-									<p:inputNumber id="alcance" minValue="1" maxValue="100"
+									<p:inputNumber id="alcance" value="#{pistolaBean.alcanceChorro}" minValue="1" maxValue="100"
 										suffix=" m" />
 								</div>
 							</p:panel>
@@ -1073,7 +1074,8 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								onclick="PF('dlgPistola').hide()" />
+								action="#{pistolaBean.guardar()}" process="@form" update="@form"
+								resetValues="true" />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgPistola').hide()" class="ui-button-secondary"
 								type="button" />
@@ -1094,18 +1096,18 @@
 
 								<div class="field">
 									<p:outputLabel for="nombre" value="Nombre" />
-									<p:inputText id="nombre" />
+									<p:inputText id="nombre" value="#{cuadernoBean.nombre}"/>
 
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="marca" value="Marca" />
-									<p:inputText id="marca" />
+									<p:inputText id="marca" value="#{cuadernoBean.marca}" />
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="descripcion" value="Descripción" />
-									<p:inputTextarea id="descripcion" autoResize="true" />
+									<p:inputTextarea id="descripcion" value="#{cuadernoBean.descripcion}" autoResize="true" />
 								</div>
 
 								<div class="field">
@@ -1117,45 +1119,35 @@
 								<div class="formgrid grid">
 									<div class="field col">
 										<p:outputLabel for="precio" value="Precio" />
-										<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+										<p:inputNumber id="precio" value="#{cuadernoBean.precio}" symbol="$" symbolPosition="p"
 											minValue="1" />
 									</div>
 									<div class="field col">
 										<p:outputLabel for="cantidad" value="Cantidad" />
-										<p:spinner id="cantidad" min="0" />
+										<p:spinner id="cantidad" value="#{cuadernoBean.cantidad}" min="0" />
 									</div>
 								</div>
 								<div class="field">
 									<p:outputLabel for="presentacion" value="Tipo de presentación:" />
-									<p:selectOneMenu id="presentacion">
-										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Unidad" itemValue="unidad" />
-										<f:selectItem itemLabel="Paquete / Blíster"
-											itemValue="paquete" />
-										<f:selectItem itemLabel="Caja" itemValue="caja" />
-										<f:selectItem itemLabel="Rollos" itemValue="rollos" />
-										<f:selectItem itemLabel="Kit" itemValue="kit" />
+									<p:selectOneMenu id="presentacion" value="#{cuadernoBean.presentacion}">
+									<f:selectItem itemLabel="Seleccione" itemValue=""/>
+										<f:selectItems value="#{cuadernoBean.opcionesPresentacion}" var="g" itemLabel="#{g}" itemValue="#{g}" />
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
 									<p:outputLabel for="tipoHojas" value="Tipo de hojas:" />
-									<p:selectOneMenu id="tipoHojas">
+									<p:selectOneMenu id="tipoHojas" value="#{cuadernoBean.tipoHoja}">
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Rayadas" itemValue="rayadas" />
-										<f:selectItem itemLabel="Cuadriculadas"
-											itemValue="cuadriculadas" />
-										<f:selectItem itemLabel="Blancas" itemValue="blancas" />
-										<f:selectItem itemLabel="Punteadas" itemValue="punteadas" />
-										<f:selectItem itemLabel="Doble reglón" itemValue="doblereglon" />
+										<f:selectItems value="#{cuadernoBean.opcionesHojas}" var="r" itemLabel="#{r}" itemValue="#{r}" />
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
 									<p:outputLabel for="cantidadHojas" value="Cantidad de hojas:" />
-									<p:spinner id="cantidadHojas" min="10" max="500" />
+									<p:spinner id="cantidadHojas" value="#{cuadernoBean.cantidadHojas}" min="10" max="500" />
 								</div>
 								<div class="field">
-									<p:selectBooleanCheckbox id="pastaDura"
-										itemLabel="¿Es pasta dura?" />
+								<p:outputLabel for="pastaDura" value="¿Es pasta dura?"/>
+									<p:selectBooleanCheckbox id="pastaDura" value="#{cuadernoBean.pastaDura}" />
 								</div>
 
 							</p:panel>
@@ -1165,7 +1157,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								onclick="PF('dlgCuaderno').hide()" />
+								action="#{cuadernoBean.guardar()}" process="@form" update="@form" resetValues="true" />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgCuaderno').hide()" class="ui-button-secondary"
 								type="button" />
@@ -1186,18 +1178,18 @@
 
 								<div class="field">
 									<p:outputLabel for="nombre" value="Nombre" />
-									<p:inputText id="nombre" />
+									<p:inputText id="nombre" value="#{marcadorBean.nombre}" />
 
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="marca" value="Marca" />
-									<p:inputText id="marca" />
+									<p:inputText id="marca" value="#{marcadorBean.marca}"  />
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="descripcion" value="Descripción" />
-									<p:inputTextarea id="descripcion" autoResize="true" />
+									<p:inputTextarea id="descripcion" value="#{marcadorBean.descripcion}"  autoResize="true" />
 								</div>
 
 								<div class="field">
@@ -1209,50 +1201,38 @@
 								<div class="formgrid grid">
 									<div class="field col">
 										<p:outputLabel for="precio" value="Precio" />
-										<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+										<p:inputNumber id="precio" value="#{marcadorBean.precio}"  symbol="$" symbolPosition="p"
 											minValue="1" />
 									</div>
 									<div class="field col">
 										<p:outputLabel for="cantidad" value="Cantidad" />
-										<p:spinner id="cantidad" min="0" />
+										<p:spinner id="cantidad" value="#{marcadorBean.cantidad}"  min="0" />
 									</div>
 								</div>
 								<div class="field">
 									<p:outputLabel for="presentacion" value="Tipo de presentación:" />
-									<p:selectOneMenu id="presentacion">
+									<p:selectOneMenu id="presentacion" value="#{marcadorBean.presentacion}" >
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Unidad" itemValue="unidad" />
-										<f:selectItem itemLabel="Paquete / Blíster"
-											itemValue="paquete" />
-										<f:selectItem itemLabel="Caja" itemValue="caja" />
-										<f:selectItem itemLabel="Rollos" itemValue="rollos" />
-										<f:selectItem itemLabel="Kit" itemValue="kit" />
+										<f:selectItems value="#{marcadorBean.opcionesPresentacion}" var="f" itemLabel="#{f}" itemValue="#{f}"  />
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
 									<p:outputLabel for="tipoPunta" value="Tipo de punta:" />
-									<p:selectOneMenu id="tipoPunta">
+									<p:selectOneMenu id="tipoPunta" value="#{marcadorBean.tipoPunta}" >
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Redonda" itemValue="redonda" />
-										<f:selectItem itemLabel="Cónica" itemValue="conica" />
-										<f:selectItem itemLabel="Plana" itemValue="plana" />
-										<f:selectItem itemLabel="Fina" itemValue="fina" />
-										<f:selectItem itemLabel="Pincel" itemValue="pincel" />
+										<f:selectItems value="#{marcadorBean.opcionesPunta}" var="g" itemLabel="#{g}" itemValue="#{g}"  />
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
+								<p:outputLabel for="permanente" value="¿Es permanente?"/>
 									<p:selectBooleanCheckbox id="permanente"
-										itemLabel="¿Es permanente?" />
+										value="#{marcadorBean.permanente}"  />
 								</div>
 								<div class="field">
 									<p:outputLabel for="tipoMarcador" value="Tipo de marcador:" />
-									<p:selectOneMenu id="tipoMarcador">
+									<p:selectOneMenu id="tipoMarcador" value="#{marcadorBean.tipoMarcador}" >
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Permanente" itemValue="permanente" />
-										<f:selectItem itemLabel="Borrable" itemValue="borrable" />
-										<f:selectItem itemLabel="Textil" itemValue="textil" />
-										<f:selectItem itemLabel="Resaltador" itemValue="resaltador" />
-										<f:selectItem itemLabel="Acuarelable" itemValue="acuarelable" />
+										<f:selectItems value="#{marcadorBean.opcionesTipo}" var="g" itemLabel="#{g}" itemValue="#{g}" />
 									</p:selectOneMenu>
 								</div>
 							</p:panel>
@@ -1262,7 +1242,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								onclick="PF('dlgMarcador').hide()" />
+								action="#{marcadorBean.guardar()}" process="@form" update="@form" resetValues="true"  />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgMarcador').hide()" class="ui-button-secondary"
 								type="button" />
@@ -1284,18 +1264,18 @@
 
 								<div class="field">
 									<p:outputLabel for="nombre" value="Nombre" />
-									<p:inputText id="nombre" />
+									<p:inputText id="nombre" value="#{cintaBean.nombre}" />
 
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="marca" value="Marca" />
-									<p:inputText id="marca" />
+									<p:inputText id="marca" value="#{cintaBean.marca}"  />
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="descripcion" value="Descripción" />
-									<p:inputTextarea id="descripcion" autoResize="true" />
+									<p:inputTextarea id="descripcion" value="#{cintaBean.descripcion}"  autoResize="true" />
 								</div>
 
 
@@ -1308,47 +1288,36 @@
 								<div class="formgrid grid">
 									<div class="field col">
 										<p:outputLabel for="precio" value="Precio" />
-										<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+										<p:inputNumber id="precio" value="#{cintaBean.precio}"  symbol="$" symbolPosition="p"
 											minValue="1" />
 									</div>
 									<div class="field col">
 										<p:outputLabel for="cantidad" value="Cantidad" />
-										<p:spinner id="cantidad" min="0" />
+										<p:spinner id="cantidad" value="#{cintaBean.cantidad}"  min="0" />
 									</div>
 								</div>
 								<div class="field">
 									<p:outputLabel for="presentacion" value="Tipo de presentación:" />
-									<p:selectOneMenu id="presentacion">
+									<p:selectOneMenu id="presentacion" value="#{cintaBean.presentacion}" >
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Unidad" itemValue="unidad" />
-										<f:selectItem itemLabel="Paquete / Blíster"
-											itemValue="paquete" />
-										<f:selectItem itemLabel="Caja" itemValue="caja" />
-										<f:selectItem itemLabel="Rollos" itemValue="rollos" />
-										<f:selectItem itemLabel="Kit" itemValue="kit" />
+										<f:selectItems value="#{cintaBean.opcionesPresentacion}" var="g" itemLabel="#{g}" itemValue="#{g}" />
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
+								<p:outputLabel for="reposicionable" value="¿Es reposicionable?"/>
 									<p:selectBooleanCheckbox id="reposicionable"
-										itemLabel="¿Adhesivo reposicionable?" />
+										value="#{cintaBean.reposicionable}"  />
 								</div>
 								<div class="field">
 									<p:outputLabel for="anchoCinta" value="Ancho de la cinta (mm):" />
-									<p:inputNumber id="anchoCinta" minValue="5" maxValue="200"
+									<p:inputNumber id="anchoCinta" value="#{cintaBean.anchoCinta}"  minValue="5" maxValue="200"
 										suffix=" mm" />
 								</div>
 								<div class="field">
 									<p:outputLabel for="tipoCinta" value="Tipo de cinta:" />
-									<p:selectOneMenu id="tipoCinta">
+									<p:selectOneMenu id="tipoCinta" value="#{cintaBean.tipoCinta}" >
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Cinta transparente"
-											itemValue="transparente" />
-										<f:selectItem itemLabel="Cinta de enmascarar"
-											itemValue="enmascarar" />
-										<f:selectItem itemLabel="Cinta doble faz" itemValue="doblefaz" />
-										<f:selectItem itemLabel="Cinta de embalaje"
-											itemValue="embalaje" />
-										<f:selectItem itemLabel="Cinta térmica" itemValue="termica" />
+										<f:selectItems value="#{cintaBean.opcionesTipo}" var="g" itemLabel="#{g}" itemValue="#{g}"  />
 									</p:selectOneMenu>
 								</div>
 							</p:panel>
@@ -1358,7 +1327,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								onclick="PF('dlgCinta').hide()" />
+								action="#{cintaBean.guardar()}" process="@form" update="@form" resetValues="true"  />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgCinta').hide()" class="ui-button-secondary"
 								type="button" />
@@ -1380,18 +1349,18 @@
 
 								<div class="field">
 									<p:outputLabel for="nombre" value="Nombre" />
-									<p:inputText id="nombre" />
+									<p:inputText id="nombre" value="#{sombraBean.nombre}"/>
 
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="marca" value="Marca" />
-									<p:inputText id="marca" />
+									<p:inputText id="marca" value="#{sombraBean.marca}" />
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="descripcion" value="Descripción" />
-									<p:inputTextarea id="descripcion" autoResize="true" />
+									<p:inputTextarea id="descripcion" value="#{sombraBean.descripcion}" autoResize="true" />
 								</div>
 
 								<div class="field">
@@ -1403,49 +1372,43 @@
 								<div class="formgrid grid">
 									<div class="field col">
 										<p:outputLabel for="precio" value="Precio" />
-										<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+										<p:inputNumber id="precio" value="#{sombraBean.precio}" symbol="$" symbolPosition="p"
 											minValue="1" />
 									</div>
 									<div class="field col">
 										<p:outputLabel for="cantidad" value="Cantidad" />
-										<p:spinner id="cantidad" min="0" />
+										<p:spinner id="cantidad" value="#{sombraBean.cantidad}"  min="0" />
 									</div>
 								</div>
 								<div class="field">
 									<p:outputLabel for="tipoPiel" value="Tipo de piel:" />
-									<p:selectOneMenu id="tipoPiel">
+									<p:selectOneMenu id="tipoPiel" value="#{sombraBean.tipoPiel}">
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Grasa" itemValue="grasa" />
-										<f:selectItem itemLabel="Seca" itemValue="seca" />
-										<f:selectItem itemLabel="Mixta" itemValue="mixta" />
+										<f:selectItems value="#{sombraBean.opcionesPiel}" var="g" itemLabel="#{g}" itemValue="#{g}"/>
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
+								<p:outputLabel for="apruebaAgua" value="¿Es Apruebda de Agua?"/>
 									<p:selectBooleanCheckbox id="apruebaAgua"
-										itemLabel="¿Es a prueba de agua?" />
+										value="#{sombraBean.pruebaAgua}" />
 								</div>
 								<div class="field">
 
 									<p:outputLabel for="fechaVencimiento"
 										value="Fecha de vencimiento:" />
-									<p:inputMask id="fechaVencimiento" mask="99/99/9999" />
+									<p:inputMask id="fechaVencimiento" value="#{sombraBean.fechaVencimiento}" mask="99/99/9999" />
 
 								</div>
 								<div class="field">
 									<p:outputLabel for="cantidadColores"
 										value="Cantidad de colores:" />
-									<p:spinner id="cantidadColores" min="1" max="100" />
+									<p:spinner id="cantidadColores" value="#{sombraBean.cantidadColores}" min="1" max="100" />
 								</div>
 								<div class="field">
 									<p:outputLabel for="acabado" value="Acabado:" />
-									<p:selectOneMenu id="acabado">
+									<p:selectOneMenu id="acabado" value="#{sombraBean.acabadoSombras}">
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Mate" itemValue="mate" />
-										<f:selectItem itemLabel="Satinado" itemValue="satinado" />
-										<f:selectItem itemLabel="Shimmer" itemValue="shimmer" />
-										<f:selectItem itemLabel="Holográfico" itemValue="holografico" />
-										<f:selectItem itemLabel="Perlado" itemValue="perlado" />
-										<f:selectItem itemLabel="Metálico" itemValue="metalico" />
+										<f:selectItems value="#{sombraBean.opcionesAcabado}" var="g" itemLabel="#{g}" itemValue="#{g}" />
 									</p:selectOneMenu>
 								</div>
 							</p:panel>
@@ -1457,7 +1420,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								onclick="PF('dlgSombra').hide()" />
+								action="#{sombraBean.guardar()}" process="@form" update="@form" resetValues="true"  />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgSombra').hide()" class="ui-button-secondary"
 								type="button" />
@@ -1479,18 +1442,18 @@
 
 								<div class="field">
 									<p:outputLabel for="nombre" value="Nombre" />
-									<p:inputText id="nombre" />
+									<p:inputText id="nombre" value="#{labialBean.nombre}"/>
 
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="marca" value="Marca" />
-									<p:inputText id="marca" />
+									<p:inputText id="marca" value="#{labialBean.marca}" />
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="descripcion" value="Descripción" />
-									<p:inputTextarea id="descripcion" autoResize="true" />
+									<p:inputTextarea id="descripcion" value="#{labialBean.descripcion}" autoResize="true" />
 								</div>
 
 								<div class="field">
@@ -1502,51 +1465,44 @@
 								<div class="formgrid grid">
 									<div class="field col">
 										<p:outputLabel for="precio" value="Precio" />
-										<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+										<p:inputNumber id="precio" value="#{labialBean.precio}" symbol="$" symbolPosition="p"
 											minValue="1" />
 									</div>
 									<div class="field col">
 										<p:outputLabel for="cantidad" value="Cantidad" />
-										<p:spinner id="cantidad" min="0" />
+										<p:spinner id="cantidad" value="#{labialBean.cantidad}" min="0" />
 									</div>
 								</div>
 								<div class="field">
 									<p:outputLabel for="tipoPiel" value="Tipo de piel:" />
-									<p:selectOneMenu id="tipoPiel">
+									<p:selectOneMenu id="tipoPiel" value="#{labialBean.tipoPiel}">
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Grasa" itemValue="grasa" />
-										<f:selectItem itemLabel="Seca" itemValue="seca" />
-										<f:selectItem itemLabel="Mixta" itemValue="mixta" />
+										<f:selectItems value="#{labialBean.opcionesPiel}" var="g" itemLabel="#{g}" itemValue="#{g}"/>
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
+								<p:outputLabel for="apruebaAgua" value="¿Es aprueba de agua?"/>
 									<p:selectBooleanCheckbox id="apruebaAgua"
-										itemLabel="¿Es a prueba de agua?" />
+										value="#{labialBean.pruebaAgua}" />
 								</div>
 								<div class="field">
 
 									<p:outputLabel for="fechaVencimiento"
 										value="Fecha de vencimiento:" />
-									<p:inputMask id="fechaVencimiento" mask="99/99/9999" />
+									<p:inputMask id="fechaVencimiento" value="#{labialBean.fechaVencimiento}" mask="99/99/9999" />
 
 								</div>
 								<div class="field">
 									<p:outputLabel for="duracion" value="Duración:" />
-									<p:selectOneMenu id="duracion">
+									<p:selectOneMenu id="duracion" value="#{labialBean.duracionLabial}">
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Corta (1 a 2 horas)"
-											itemValue="corta" />
-										<f:selectItem itemLabel="Media (3 a 5 horas)"
-											itemValue="media" />
-										<f:selectItem itemLabel="Larga (6 a 8 horas)"
-											itemValue="larga" />
-										<f:selectItem itemLabel="Ultra (24 horas)" itemValue="ultra" />
-										<f:selectItem itemLabel="No Transfer" itemValue="notransfer" />
+										<f:selectItems value="#{labialBean.opcionesDuracion}" var="g" itemLabel="#{g}" itemValue="#{g}" />
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
+								<p:outputLabel for="hidratante" value="¿Es hidratante?"/>
 									<p:selectBooleanCheckbox id="hidratante"
-										itemLabel="¿Es hidratante?" />
+										value="#{hidratante}"/>
 								</div>
 							</p:panel>
 						</p:outputPanel>
@@ -1555,7 +1511,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								onclick="PF('dlgLabial').hide()" />
+								action="#{labialBean.guardar()}" process="@form" update="@form" resetValues="true"  />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgLabial').hide()" class="ui-button-secondary"
 								type="button" />
@@ -1577,18 +1533,18 @@
 
 								<div class="field">
 									<p:outputLabel for="nombre" value="Nombre" />
-									<p:inputText id="nombre" />
+									<p:inputText id="nombre" value="#{correctorBean.nombre}" />
 
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="marca" value="Marca" />
-									<p:inputText id="marca" />
+									<p:inputText id="marca" value="#{correctorBean.marca}"  />
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="descripcion" value="Descripción" />
-									<p:inputTextarea id="descripcion" autoResize="true" />
+									<p:inputTextarea id="descripcion" value="#{correctorBean.descripcion}"  autoResize="true" />
 								</div>
 
 								<div class="field">
@@ -1600,53 +1556,45 @@
 								<div class="formgrid grid">
 									<div class="field col">
 										<p:outputLabel for="precio" value="Precio" />
-										<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+										<p:inputNumber id="precio" value="#{correctorBean.precio}"  symbol="$" symbolPosition="p"
 											minValue="1" />
 									</div>
 									<div class="field col">
 										<p:outputLabel for="cantidad" value="Cantidad" />
-										<p:spinner id="cantidad" min="0" />
+										<p:spinner id="cantidad" value="#{correctorBean.cantidad}"  min="0" />
 									</div>
 								</div>
 								<div class="field">
 									<p:outputLabel for="tipoPiel" value="Tipo de piel:" />
-									<p:selectOneMenu id="tipoPiel">
+									<p:selectOneMenu id="tipoPiel" value="#{correctorBean.tipoPiel}" >
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Grasa" itemValue="grasa" />
-										<f:selectItem itemLabel="Seca" itemValue="seca" />
-										<f:selectItem itemLabel="Mixta" itemValue="mixta" />
+										<f:selectItems value="#{correctorBean.opcionesPiel}" var="g" itemLabel="#{g}" itemValue="#{g}" />
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
+								<p:outputLabel for="apruebaAgua" value="¿Es Aprueba de Agua?"/>
 									<p:selectBooleanCheckbox id="apruebaAgua"
-										itemLabel="¿Es a prueba de agua?" />
+										value="#{correctorBean.pruebaAgua}"  />
 								</div>
 								<div class="field">
 
 									<p:outputLabel for="fechaVencimiento"
 										value="Fecha de vencimiento:" />
-									<p:inputMask id="fechaVencimiento" mask="99/99/9999" />
+									<p:inputMask id="fechaVencimiento" value="#{correctorBean.fechaVencimiento}"  mask="99/99/9999" />
 
 								</div>
 								<div class="field">
 									<p:outputLabel for="cobertura" value="Cobertura:" />
-									<p:selectOneMenu id="cobertura">
+									<p:selectOneMenu id="cobertura" value="#{correctorBean.coberturaCorrector}" >
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Ligera" itemValue="ligera" />
-										<f:selectItem itemLabel="Media" itemValue="media" />
-										<f:selectItem itemLabel="Alta" itemValue="alta" />
-										<f:selectItem itemLabel="Total" itemValue="total" />
+										<f:selectItems value="#{correctorBean.opcionesCobertura}" var="f" itemLabel="#{f}" itemValue="#{f}"/>
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
 									<p:outputLabel for="formato" value="Formato:" />
-									<p:selectOneMenu id="formato">
+									<p:selectOneMenu id="formato" value="#{correctorBean.formatoCorrector}">
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Líquido" itemValue="liquido" />
-										<f:selectItem itemLabel="Crema" itemValue="crema" />
-										<f:selectItem itemLabel="Barra" itemValue="barra" />
-										<f:selectItem itemLabel="Mousse" itemValue="mousse" />
-										<f:selectItem itemLabel="Cushion" itemValue="cushion" />
+										<f:selectItems value="#{correctorBean.opcionesFormato}" var="h" itemLabel="#{h}" itemValue="#{h}"/>
 									</p:selectOneMenu>
 								</div>
 							</p:panel>
@@ -1656,7 +1604,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								onclick="PF('dlgCorrector').hide()" />
+								action="#{correctorBean.guardar()}" process="@form" update="@form" resetValues="true"  />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgCorrector').hide()" class="ui-button-secondary"
 								type="button" />
@@ -1679,18 +1627,18 @@
 
 								<div class="field">
 									<p:outputLabel for="nombre" value="Nombre" />
-									<p:inputText id="nombre" />
+									<p:inputText id="nombre" value="#{vientoBean.nombre}"/>
 
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="marca" value="Marca" />
-									<p:inputText id="marca" />
+									<p:inputText id="marca" value="#{vientoBean.marca}" />
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="descripcion" value="Descripción" />
-									<p:inputTextarea id="descripcion" autoResize="true" />
+									<p:inputTextarea id="descripcion" value="#{vientoBean.descripcion}" autoResize="true" />
 								</div>
 
 								<div class="field">
@@ -1702,54 +1650,42 @@
 								<div class="formgrid grid">
 									<div class="field col">
 										<p:outputLabel for="precio" value="Precio" />
-										<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+										<p:inputNumber id="precio" value="#{vientoBean.precio}" symbol="$" symbolPosition="p"
 											minValue="1" />
 									</div>
 									<div class="field col">
 										<p:outputLabel for="cantidad" value="Cantidad" />
-										<p:spinner id="cantidad" min="0" />
+										<p:spinner id="cantidad" value="#{vientoBean.cantidad}" min="0" />
 									</div>
 								</div>
 								<div class="field">
+								<p:outputLabel for="incluyeEstuche" value="¿Incluye Estuche?"/>
 									<p:selectBooleanCheckbox id="incluyeEstuche"
-										itemLabel="¿Incluye estuche?" />
+										value="#{vientoBean.incluyeEstuche}" />
 								</div>
 								<div class="field">
 									<p:outputLabel for="tipoViento"
 										value="Tipo de instrumento de viento:" />
-									<p:selectOneMenu id="tipoViento">
+									<p:selectOneMenu id="tipoViento" value="#{vientoBean.tipoInstrumentoViento}">
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Trompeta" itemValue="trompeta" />
-										<f:selectItem itemLabel="Trombón" itemValue="trombon" />
-										<f:selectItem itemLabel="Tuba" itemValue="tuba" />
-										<f:selectItem itemLabel="Saxofón" itemValue="saxofon" />
-										<f:selectItem itemLabel="Clarinete" itemValue="clarinete" />
-										<f:selectItem itemLabel="Flauta" itemValue="flauta" />
-										<f:selectItem itemLabel="Oboe" itemValue="oboe" />
-										<f:selectItem itemLabel="Fagot" itemValue="fagot" />
-										<f:selectItem itemLabel="Corneta" itemValue="corneta" />
-										<f:selectItem itemLabel="Corno Francés" itemValue="corno" />
+										<f:selectItems value="#{vientoBean.opcionesInstrumento}"  var="g" itemLabel="#{g}" itemValue="#{g}"/>
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
 									<p:outputLabel for="afinacion" value="Afinación:" />
-									<p:selectOneMenu id="afinacion">
+									<p:selectOneMenu id="afinacion" value="#{vientoBean.afinacion}">
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Do (C)" itemValue="do" />
-										<f:selectItem itemLabel="Re (D)" itemValue="re" />
-										<f:selectItem itemLabel="Mi♭ (Eb)" itemValue="mib" />
-										<f:selectItem itemLabel="Fa (F)" itemValue="fa" />
-										<f:selectItem itemLabel="Sol (G)" itemValue="sol" />
-										<f:selectItem itemLabel="Si♭ (Bb)" itemValue="sib" />
+										<f:selectItems value="#{vientoBean.opcionesAfinacion}" var="g" itemLabel="#{g}" itemValue="#{g}" />
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
 									<p:outputLabel for="numValvulas" value="Número de válvulas:" />
-									<p:spinner id="numValvulas" min="0" max="10" />
+									<p:spinner id="numValvulas" value="#{vientoBean.numValvulas}" min="0" max="10" />
 								</div>
 								<div class="field">
+								<p:outputLabel for="boquillas" value="¿Tiene boquillas?"/>
 									<p:selectBooleanCheckbox id="boquillas"
-										itemLabel="¿Incluye boquillas?" />
+										value="#{vientoBean.boquillas}" />
 								</div>
 							</p:panel>
 						</p:outputPanel>
@@ -1758,7 +1694,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								onclick="PF('dlgViento').hide()" />
+								action="#{vientoBean.guardar()}" process="@form" update="@form" resetValues="true"  />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgViento').hide()" class="ui-button-secondary"
 								type="button" />
@@ -1781,18 +1717,18 @@
 
 								<div class="field">
 									<p:outputLabel for="nombre" value="Nombre" />
-									<p:inputText id="nombre" />
+									<p:inputText id="nombre" value="#{cuerdaBean.nombre}"/>
 
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="marca" value="Marca" />
-									<p:inputText id="marca" />
+									<p:inputText id="marca" value="#{cuerdaBean.marca}" />
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="descripcion" value="Descripción" />
-									<p:inputTextarea id="descripcion" autoResize="true" />
+									<p:inputTextarea id="descripcion" value="#{cuerdaBean.descripcion}" autoResize="true" />
 								</div>
 
 								<div class="field">
@@ -1804,53 +1740,42 @@
 								<div class="formgrid grid">
 									<div class="field col">
 										<p:outputLabel for="precio" value="Precio" />
-										<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+										<p:inputNumber id="precio" value="#{cuerdaBean.precio}" symbol="$" symbolPosition="p"
 											minValue="1" />
 									</div>
 									<div class="field col">
 										<p:outputLabel for="cantidad" value="Cantidad" />
-										<p:spinner id="cantidad" min="0" />
+										<p:spinner id="cantidad" value="#{cuerdaBean.cantidad}" min="0" />
 									</div>
 								</div>
 								<div class="field">
+								<p:outputLabel for="incluyeEstuche" value="¿Incluye Estuche?"/>
 									<p:selectBooleanCheckbox id="incluyeEstuche"
-										itemLabel="¿Incluye estuche?" />
+										value="#{cuerdaBean.incluyeEstuche}" />
 								</div>
 								<div class="field">
 									<p:outputLabel for="tipoCuerda"
 										value="Tipo de instrumento de cuerda:" />
-									<p:selectOneMenu id="tipoCuerda">
+									<p:selectOneMenu id="tipoCuerda" value="#{cuerdaBean.tipoInstrumentoCuerda}" >
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Guitarra" itemValue="guitarra" />
-										<f:selectItem itemLabel="Bajo" itemValue="bajo" />
-										<f:selectItem itemLabel="Violín" itemValue="violin" />
-										<f:selectItem itemLabel="Viola" itemValue="viola" />
-										<f:selectItem itemLabel="Violonchelo" itemValue="violonchelo" />
-										<f:selectItem itemLabel="Contrabajo" itemValue="contrabajo" />
-										<f:selectItem itemLabel="Arpa" itemValue="arpa" />
-										<f:selectItem itemLabel="Ukelele" itemValue="ukelele" />
-										<f:selectItem itemLabel="Banjo" itemValue="banjo" />
-										<f:selectItem itemLabel="Mandolina" itemValue="mandolina" />
+										<f:selectItems value="#{cuerdaBean.opcionesInstrumento}" var="g" itemLabel="#{g}" itemValue="#{g}"/>
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
 									<p:outputLabel for="numCuerdas" value="Número de cuerdas:" />
-									<p:spinner id="numCuerdas" min="1" max="20" />
+									<p:spinner id="numCuerdas" value="#{cuerdaBean.numeroCuerdas}" min="1" max="20" />
 								</div>
 								<div class="field">
 									<p:outputLabel for="tipoCuerdas" value="Tipo de cuerdas:" />
-									<p:selectOneMenu id="tipoCuerdas">
+									<p:selectOneMenu id="tipoCuerdas" value="#{cuerdaBean.tipoCuerda}">
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Nylon" itemValue="nylon" />
-										<f:selectItem itemLabel="Acero" itemValue="acero" />
-										<f:selectItem itemLabel="Tripas" itemValue="tripas" />
-										<f:selectItem itemLabel="Entorchadas" itemValue="entorchadas" />
-										<f:selectItem itemLabel="Carbono" itemValue="carbono" />
+										<f:selectItems value="#{cuerdaBean.opcionesTipo}" var="g" itemLabel="#{g}" itemValue="#{g}" />
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
+								<p:outputLabel for="cajaResonancia" value="¿Tiene caja de resonancia?"/>
 									<p:selectBooleanCheckbox id="cajaResonancia"
-										itemLabel="¿Tiene caja de resonancia?" />
+										value="#{cuerdaBean.cajaResonancia}" />
 								</div>
 							</p:panel>
 						</p:outputPanel>
@@ -1859,7 +1784,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								onclick="PF('dlgCuerda').hide()" />
+								action="#{cuerdaBean.guardar()}" process="@form" update="@form" resetValues="true"  />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgCuerda').hide()" class="ui-button-secondary"
 								type="button" />
@@ -1881,18 +1806,18 @@
 
 								<div class="field">
 									<p:outputLabel for="nombre" value="Nombre" />
-									<p:inputText id="nombre" />
+									<p:inputText id="nombre" value="#{percusionBean.nombre}" />
 
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="marca" value="Marca" />
-									<p:inputText id="marca" />
+									<p:inputText id="marca" value="#{percusionBean.marca}" />
 								</div>
 
 								<div class="field">
 									<p:outputLabel for="descripcion" value="Descripción" />
-									<p:inputTextarea id="descripcion" autoResize="true" />
+									<p:inputTextarea id="descripcion" value="#{percusionBean.descripcion}" autoResize="true" />
 								</div>
 
 								<div class="field">
@@ -1904,55 +1829,44 @@
 								<div class="formgrid grid">
 									<div class="field col">
 										<p:outputLabel for="precio" value="Precio" />
-										<p:inputNumber id="precio" symbol="$" symbolPosition="p"
+										<p:inputNumber id="precio" value="#{percusionBean.precio}" symbol="$" symbolPosition="p"
 											minValue="1" />
 									</div>
 									<div class="field col">
 										<p:outputLabel for="cantidad" value="Cantidad" />
-										<p:spinner id="cantidad" min="0" />
+										<p:spinner id="cantidad" value="#{percusionBean.cantidad}" min="0" />
 									</div>
 								</div>
 								<div class="field">
+								<p:outputLabel for="incluyeEstuche" value="¿Incluye Estuche?"/>
 									<p:selectBooleanCheckbox id="incluyeEstuche"
-										itemLabel="¿Incluye estuche?" />
+										value="#{percusionBean.incluyeEstuche}" />
 								</div>
 								<div class="field">
 									<p:outputLabel for="tipoPercusion"
 										value="Tipo de instrumento de percusión:" />
-									<p:selectOneMenu id="tipoPercusion">
+									<p:selectOneMenu id="tipoPercusion" value="#{percusionBean.tipoInstrumentoPercusion}">
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Batería" itemValue="bateria" />
-										<f:selectItem itemLabel="Tambor" itemValue="tambor" />
-										<f:selectItem itemLabel="Bongó" itemValue="bongo" />
-										<f:selectItem itemLabel="Conga" itemValue="conga" />
-										<f:selectItem itemLabel="Cajón" itemValue="cajon" />
-										<f:selectItem itemLabel="Timbal" itemValue="timbal" />
-										<f:selectItem itemLabel="Xilófono" itemValue="xilofono" />
-										<f:selectItem itemLabel="Marimba" itemValue="marimba" />
-										<f:selectItem itemLabel="Platillos" itemValue="platillos" />
-										<f:selectItem itemLabel="Triángulo" itemValue="triangulo" />
+										<f:selectItems value="#{percusionBean.opcionesInstrumento}" var="g" itemLabel="#{g}" itemValue="#{g}" />
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
+								<p:outputLabel for="usaBaquetas" value="¿Usa Baquetas?"/>
 									<p:selectBooleanCheckbox id="usaBaquetas"
-										itemLabel="¿Usa baquetas?" />
+										value="#{percusionBean.usoBaquetas}" />
 								</div>
 								<div class="field">
 									<p:outputLabel for="tipoPercusionDet"
 										value="Tipo de percusión:" />
-									<p:selectOneMenu id="tipoPercusionDet">
+									<p:selectOneMenu id="tipoPercusionDet" value="#{percusionBean.tipoPercusion}">
 										<f:selectItem itemLabel="Seleccione" itemValue="" />
-										<f:selectItem itemLabel="Membranófonos"
-											itemValue="membranofonos" />
-										<f:selectItem itemLabel="Idiófonos" itemValue="idiofonos" />
-										<f:selectItem itemLabel="Electrónicos"
-											itemValue="electronicos" />
+										<f:selectItems value="#{percusionBean.opcionesTipo}" var="g" itemLabel="#{g}" itemValue="#{g}"/>
 									</p:selectOneMenu>
 								</div>
 								<div class="field">
 									<p:outputLabel for="superficies"
 										value="Cantidad de superficies sonoras:" />
-									<p:spinner id="superficies" min="1" max="50" />
+									<p:spinner id="superficies" value="#{percusionBean.cantSuperficiesSonoras}" min="1" max="50" />
 								</div>
 							</p:panel>
 						</p:outputPanel>
@@ -1961,7 +1875,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								onclick="PF('dlgPercusion').hide()" />
+								action="#{percusionBean.guardar()}" process="@form" update="@form" resetValues="true" />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgPercusion').hide()" class="ui-button-secondary"
 								type="button" />
