@@ -25,8 +25,9 @@
 }
 
 .product-item .product-image {
-	width: 50%;
-	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+	width: 60%;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+	border-radius: 12px;
 }
 </style>
 
@@ -43,52 +44,52 @@
 					<div class="product-item">
 						<div class="product-item-content">
 							<div class="mb-3">
-								<p:graphicImage name="/#{product.urlImagen}"
+								<p:graphicImage value="https://img.freepik.com/fotos-premium/pantalon-corto-blanco_1339-28861.jpg"
 									styleClass="product-image" />
 							</div>
 							<div>
 								<h4 class="mb-3">#{product.nombre}</h4>
-								
-								<h6 class="mt-1">
-									Precio
-								</h6>
-									<h:outputText value="#{product.precio}">
-										<f:convertNumber type="currency" pattern="¤#0"
-											currencySymbol="$" />
-									</h:outputText>
+
+								<h6 class="mt-1">Precio</h6>
+								<h:outputText value="#{product.precio}">
+									<f:convertNumber type="currency" pattern="¤#0"
+										currencySymbol="$" />
+								</h:outputText>
 								<h6 class="mt-1">
 									<h:outputText value="#{product.id}"></h:outputText>
 								</h6>
 								<h6 class="mt-1">
-								<h:outputText value="Genero"></h:outputText>
+									<h:outputText value="Genero"></h:outputText>
 								</h6>
-									<h:outputText value="#{product.genero}"></h:outputText>
+								<h:outputText value="#{product.genero}"></h:outputText>
 								<h6 class="mt-1">
-								<h:outputText value="Descripcion"></h:outputText>
+									<h:outputText value="Descripcion"></h:outputText>
 								</h6>
 								<h:outputText value="#{product.descripcion}"></h:outputText>
 								<h6 class="mt-1">
-								<h:outputText value="Material"></h:outputText>
+									<h:outputText value="Material"></h:outputText>
 								</h6>
 								<h:outputText value="#{product.material}"></h:outputText>
 								<h6 class="mt-1">
-								<h:outputText value="Talla"></h:outputText>
+									<h:outputText value="Talla"></h:outputText>
 								</h6>
 								<h:outputText value="#{product.talla}"></h:outputText>
 								<h6 class="mt-1">
-								<h:outputText value="Tipo"></h:outputText>
+									<h:outputText value="Tipo"></h:outputText>
 								</h6>
 								<h:outputText value="#{product.tipoPantalon}"></h:outputText>
 								<h6 class="mt-1">
-								<h:outputText value="Corte"></h:outputText>
+									<h:outputText value="Corte"></h:outputText>
 								</h6>
 								<h:outputText value="#{product.corte}"></h:outputText>
 								<h6 class="mt-1">
-								<h:outputText value="Largo"></h:outputText>
+									<h:outputText value="Largo"></h:outputText>
 								</h6>
 								<h:outputText value="#{product.largo}"></h:outputText>
 								<div class="mt-5">
-									<span> Agregar al Carrito <p:commandButton type="button"
+									<span> Agregar al Carrito <p:commandButton
+											update=":form"
+											actionListener="#{carritoBean.agregarProducto(product)}"
 											icon="pi pi-cart-plus" styleClass="rounded-button mr-2" />
 									</span>
 								</div>

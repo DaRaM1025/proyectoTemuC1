@@ -123,11 +123,11 @@
 			<f:convertDateTime pattern="yyyy-MM-dd" />
 		</p:datePicker> </div>
 
-	
+
 		<div style="position: relative; height: 0;"> <div
 			style="position: absolute; top: 3vh; left: 25vw;"> <p:commandButton
 			id="btnSiguiente" value="🌷SIGUIENTE🌷"
-			action="#{informacionusuariobean.probar}" update="msgs"
+			action="#{informacionusuariobean.guardar}" update="msgs"
 			process="@form" ajax="false"
 			style="
                         width: clamp(510px, 40vw, 610px);

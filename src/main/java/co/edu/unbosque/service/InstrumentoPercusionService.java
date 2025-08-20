@@ -6,6 +6,8 @@ import java.util.Random;
 import java.util.UUID;
 
 import co.edu.unbosque.model.InstrumentoPercusionDTO;
+import co.edu.unbosque.model.ModelFacade;
+import co.edu.unbosque.model.persistence.DataMapper;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
@@ -49,7 +51,20 @@ public class InstrumentoPercusionService {
 		listaInstrumentosPercusion.add(new InstrumentoPercusionDTO("Caja Redoblante", "Mapex",
 				"Instrumento de Percusión", "Caja de concierto", "https://example.com/redoblante.jpg", 1300000, 3,
 				"IP010", true, "Redoblante", true, "Membranófono", 1));
+		igualarListas();
+		leerLista();
 
+	}
+
+	public void igualarListas() {
+		ModelFacade.getPercusionDAO().getListaInstrumentoPercusion()
+				.addAll(DataMapper.listaInstrumentoPercusionDTOToListaInstrumentoPercusion((ArrayList<InstrumentoPercusionDTO>) listaInstrumentosPercusion));
+		ModelFacade.getPercusionDAO().escribirEnArchivo();
+	}
+
+	public void leerLista() {
+		ModelFacade.getPercusionDAO().cargarDesdeArchivo();
+		listaInstrumentosPercusion = DataMapper.listaInstrumentoPercusionToListaInstrumentoPercusionDTO(ModelFacade.getPercusionDAO().getListaInstrumentoPercusion());
 	}
 
 	public List<InstrumentoPercusionDTO> getProducts() {

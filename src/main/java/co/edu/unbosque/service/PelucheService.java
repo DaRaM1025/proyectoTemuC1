@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import co.edu.unbosque.model.ModelFacade;
 import co.edu.unbosque.model.PelucheDTO;
+import co.edu.unbosque.model.persistence.DataMapper;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
@@ -58,9 +60,21 @@ public class PelucheService {
 		listaPeluches.add(new PelucheDTO("Zorro Naranja", "Fisher Price", "Peluche",
 		        "Zorro de pelaje esponjoso", "https://example.com/zorro.jpg",
 		        50000, 20, "PEL010", 4, false, "Poliéster", true));
+		igualarListas();
+		leerLista();
 
 	}
 
+	public void igualarListas() {
+		ModelFacade.getPelucheDAO().getListaPeluches()
+				.addAll(DataMapper.listaPelucheDTOToListaPeluche((ArrayList<PelucheDTO>) listaPeluches));
+		ModelFacade.getPelucheDAO().escribirEnArchivo();
+	}
+
+	public void leerLista() {
+		ModelFacade.getPelucheDAO().cargarDesdeArchivo();
+		listaPeluches = DataMapper.listaPelucheToListaPelucheDTO(ModelFacade.getPelucheDAO().getListaPeluches());
+	}
 	public List<PelucheDTO> getProducts() {
 		return new ArrayList<>(listaPeluches);
 	}

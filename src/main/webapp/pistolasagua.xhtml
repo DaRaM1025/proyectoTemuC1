@@ -33,8 +33,8 @@
 		<h:form id="form">
 
 			<div class="card">
-				<p:carousel value="#{carouselViewPistolasAgua.products}" var="product"
-					numVisible="3" numScroll="3"
+				<p:carousel value="#{carouselViewPistolasAgua.products}"
+					var="product" numVisible="3" numScroll="3"
 					responsiveOptions="#{carouselViewPistolasAgua.responsiveOptions}">
 					<f:facet name="header">
 						<h5 class="col-4">Pistolas de Agua de Temporada:</h5>
@@ -42,7 +42,8 @@
 					<div class="product-item">
 						<div class="product-item-content">
 							<div class="mb-3">
-								<p:graphicImage name="/#{product.urlImagen}"
+								<p:graphicImage
+									value="https://img.freepik.com/fotos-premium/pistola-agua-plastico-aislado-sobre-fondo-blanco_323015-8926.jpg"
 									styleClass="product-image" />
 							</div>
 							<div>
@@ -72,10 +73,13 @@
 									<h:outputText value="Alcance máximo"></h:outputText>
 								</h6>
 								<h:outputText value="#{product.alcanceMaximo}"></h:outputText>
-								<span> Agregar al Carrito <p:commandButton type="button"
-										icon="pi pi-cart-plus" styleClass="rounded-button mr-2" />
-								</span>
-
+								<div class="mt-5">
+									<span> Agregar al Carrito <p:commandButton
+											update=":form"
+											actionListener="#{carritoBean.agregarProducto(product)}"
+											icon="pi pi-cart-plus" styleClass="rounded-button mr-2" />
+									</span>
+								</div>
 							</div>
 						</div>
 					</div>

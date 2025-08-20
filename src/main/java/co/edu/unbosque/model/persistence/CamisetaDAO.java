@@ -18,7 +18,7 @@ import co.edu.unbosque.model.CamisetaDTO;
  *   <li>Sincroniza automáticamente los cambios con los archivos de persistencia.</li>
  *   <li>El criterio de unicidad de una camiseta está dado por su campo {@code id}.</li>
  * </ul>
- * 
+ *
  * @author Nataly Rengifo
  * @version 1.0
  */
@@ -39,10 +39,10 @@ public class CamisetaDAO implements OperacionDAO<CamisetaDTO, Camiseta> {
 		listaCamiseta = new ArrayList<>();
 		cargarDesdeArchivo();
 	}
-	
+
 	/**
      * Obtiene la lista completa de camisetas en memoria.
-     * 
+     *
      * @return lista de camisetas.
      */
 	public ArrayList<Camiseta> getListaCamiseta() {
@@ -51,7 +51,7 @@ public class CamisetaDAO implements OperacionDAO<CamisetaDTO, Camiseta> {
 
 	/**
      * Establece una nueva lista de camisetas.
-     * 
+     *
      * @param listaCamiseta lista de camisetas a asignar.
      */
 	public void setListaCamiseta(ArrayList<Camiseta> listaCamiseta) {
@@ -60,7 +60,7 @@ public class CamisetaDAO implements OperacionDAO<CamisetaDTO, Camiseta> {
 
 	/**
      * Obtiene el nombre del archivo serializado.
-     * 
+     *
      * @return nombre del archivo serializado.
      */
 	public String getSERIAL_FILE_NAME() {
@@ -69,7 +69,7 @@ public class CamisetaDAO implements OperacionDAO<CamisetaDTO, Camiseta> {
 
 	/**
      * Obtiene el nombre del archivo CSV.
-     * 
+     *
      * @return nombre del archivo CSV.
      */
 	public String getTEXT_FILE_NAME() {
@@ -214,21 +214,21 @@ public class CamisetaDAO implements OperacionDAO<CamisetaDTO, Camiseta> {
      */
 	public void escribirEnArchivo() {
 		String contenido = "";
-		for (int i = 0; i < listaCamiseta.size(); i++) {
-			contenido += listaCamiseta.get(i).getNombre() + ";";
-			contenido += listaCamiseta.get(i).getMarca() + ";";
-			contenido += listaCamiseta.get(i).getTipoProducto() + ";";
-			contenido += listaCamiseta.get(i).getDescripcion() + ";";
-			contenido += listaCamiseta.get(i).getUrlImagen() + ";";
-			contenido += listaCamiseta.get(i).getPrecio() + ";";
-			contenido += listaCamiseta.get(i).getCantidad() + ";";
-			contenido += listaCamiseta.get(i).getId() + ";";
-			contenido += listaCamiseta.get(i).getTalla() + ";";
-			contenido += listaCamiseta.get(i).getGenero() + ";";
-			contenido += listaCamiseta.get(i).getMaterial() + ";";
-			contenido += listaCamiseta.get(i).getTipoManga() + ";";
-			contenido += listaCamiseta.get(i).getCuello() + ";";
-			contenido += listaCamiseta.get(i).isEstampado() + "\n";
+		for (Camiseta element : listaCamiseta) {
+			contenido += element.getNombre() + ";";
+			contenido += element.getMarca() + ";";
+			contenido += element.getTipoProducto() + ";";
+			contenido += element.getDescripcion() + ";";
+			contenido += element.getUrlImagen() + ";";
+			contenido += element.getPrecio() + ";";
+			contenido += element.getCantidad() + ";";
+			contenido += element.getId() + ";";
+			contenido += element.getTalla() + ";";
+			contenido += element.getGenero() + ";";
+			contenido += element.getMaterial() + ";";
+			contenido += element.getTipoManga() + ";";
+			contenido += element.getCuello() + ";";
+			contenido += element.isEstampado() + "\n";
 
 		}
 
@@ -252,8 +252,8 @@ public class CamisetaDAO implements OperacionDAO<CamisetaDTO, Camiseta> {
 		}
 
 		String[] filas = contenido.split("\n");
-		for (int i = 0; i < filas.length; i++) {
-			String[] columnas = filas[i].split(";");
+		for (String element : filas) {
+			String[] columnas = element.split(";");
 			String nombre = columnas[0];
 			String marca = columnas[1];
 			String tipoProducto = columnas[2];
@@ -269,9 +269,9 @@ public class CamisetaDAO implements OperacionDAO<CamisetaDTO, Camiseta> {
 			String cuello = columnas[12];
 			boolean isEstampado = Boolean.parseBoolean(columnas[13]);
 
-			;
+
 			listaCamiseta.add(new Camiseta(nombre, marca, tipoProducto, descripcion, urlImagen, precio, cantidad, id, talla, genero, material, tipoManga, cuello, isEstampado));
-					
+
 		}
 	}
 

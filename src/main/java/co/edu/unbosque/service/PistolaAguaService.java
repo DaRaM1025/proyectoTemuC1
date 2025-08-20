@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import co.edu.unbosque.model.ModelFacade;
 import co.edu.unbosque.model.PistolaAguaDTO;
+import co.edu.unbosque.model.persistence.DataMapper;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
@@ -58,7 +60,21 @@ public class PistolaAguaService {
 		listaPistolasAgua.add(new PistolaAguaDTO("Hydro Blaster Mini", "Hasbro", "Juguete",
 				"Pistola económica y compacta con buen disparo", "https://example.com/hydro_blaster_mini.jpg", 55000,
 				40, "PA010", 5, 0.6, 1, 5.5));
+		igualarListas();
+		leerLista();
 
+	}
+
+	public void igualarListas() {
+		ModelFacade.getPistolaDAO().getListaPistola().addAll(
+				DataMapper.listaPistolaAguaDTOToListaPistolaAgua((ArrayList<PistolaAguaDTO>) listaPistolasAgua));
+		ModelFacade.getPistolaDAO().escribirEnArchivo();
+	}
+
+	public void leerLista() {
+		ModelFacade.getPistolaDAO().cargarDesdeArchivo();
+		listaPistolasAgua = DataMapper
+				.listaPistolaAguaToListaPistolaAguaDTO(ModelFacade.getPistolaDAO().getListaPistola());
 	}
 
 	public List<PistolaAguaDTO> getProducts() {

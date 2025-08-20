@@ -16,38 +16,24 @@ import co.edu.unbosque.model.Corrector;
 import co.edu.unbosque.model.CorrectorDTO;
 import co.edu.unbosque.model.Cuaderno;
 import co.edu.unbosque.model.CuadernoDTO;
-import co.edu.unbosque.model.DispositivoElectronico;
-import co.edu.unbosque.model.DispositivoElectronicoDTO;
 import co.edu.unbosque.model.InstrumentoCuerda;
 import co.edu.unbosque.model.InstrumentoCuerdaDTO;
-import co.edu.unbosque.model.InstrumentoMusical;
-import co.edu.unbosque.model.InstrumentoMusicalDTO;
 import co.edu.unbosque.model.InstrumentoPercusion;
 import co.edu.unbosque.model.InstrumentoPercusionDTO;
 import co.edu.unbosque.model.InstrumentoViento;
 import co.edu.unbosque.model.InstrumentoVientoDTO;
-import co.edu.unbosque.model.Juguete;
-import co.edu.unbosque.model.JugueteDTO;
 import co.edu.unbosque.model.Labial;
 import co.edu.unbosque.model.LabialDTO;
 import co.edu.unbosque.model.Lego;
 import co.edu.unbosque.model.LegoDTO;
-import co.edu.unbosque.model.Maquillaje;
-import co.edu.unbosque.model.MaquillajeDTO;
 import co.edu.unbosque.model.Marcador;
 import co.edu.unbosque.model.MarcadorDTO;
 import co.edu.unbosque.model.Pantalon;
 import co.edu.unbosque.model.PantalonDTO;
-import co.edu.unbosque.model.Papeleria;
-import co.edu.unbosque.model.PapeleriaDTO;
 import co.edu.unbosque.model.Peluche;
 import co.edu.unbosque.model.PelucheDTO;
 import co.edu.unbosque.model.PistolaAgua;
 import co.edu.unbosque.model.PistolaAguaDTO;
-import co.edu.unbosque.model.Producto;
-import co.edu.unbosque.model.ProductoDTO;
-import co.edu.unbosque.model.Ropa;
-import co.edu.unbosque.model.RopaDTO;
 import co.edu.unbosque.model.Sombra;
 import co.edu.unbosque.model.SombraDTO;
 import co.edu.unbosque.model.Televisor;
@@ -1056,7 +1042,7 @@ public class DataMapper {
 		}
 		return listaEntidad;
 	}
-	
+
 	/**
 	 * Convierte un PelucheDTO a un Peluche.
 	 *
@@ -1123,7 +1109,7 @@ public class DataMapper {
 		}
 		return listaEntidad;
 	}
-	
+
 	/**
 	 * Convierte un PistolaAguaDTO a un PistolaAgua.
 	 *
@@ -1190,7 +1176,7 @@ public class DataMapper {
 		}
 		return listaEntidad;
 	}
-	
+
 	/**
 	 * Convierte un TelevisorDTO a un Televisor.
 	 *
@@ -1206,7 +1192,7 @@ public class DataMapper {
 				dto.getUrlImagen(), dto.getPrecio(), dto.getCantidad(), dto.getId(), dto.getPulgadas(),
 				dto.getResolucion(),dto.getSistemaOperativo(), dto.getCantPuertosHDMI(), dto.getFrecuenciaHz(), dto.getAsistenteVirtual());
 	}
-	
+
 	/**
 	 * Convierte un Televisor a un TelevisorDTO.
 	 *
@@ -1257,7 +1243,7 @@ public class DataMapper {
 		}
 		return listaEntidad;
 	}
-	
+
 	/**
 	 * Convierte un SombraDTO a un Sombra.
 	 *
@@ -1273,7 +1259,7 @@ public class DataMapper {
 				dto.getUrlImagen(), dto.getPrecio(), dto.getCantidad(), dto.getId(), dto.getTipoPiel(), dto.isEsApruebaDeAgua(),
 				dto.getFechaVencimiento(),dto.getCantidadColores(), dto.getAcabado());
 	}
-	
+
 	/**
 	 * Convierte un Sombra a un SombraDTO.
 	 *
@@ -1324,210 +1310,6 @@ public class DataMapper {
 		}
 		return listaEntidad;
 	}
-	
-	// metodos realizados por David, no modificar nada
-	
-	//Este metodo convierte todos los subproductos en forma de DTO en productos Entidad
-	public static Producto productoDTOToEntity(ProductoDTO dto) {
-			return switch (dto) {
-			case RopaDTO ropaDto -> dtoToRopa((RopaDTO) dto);
-			case JugueteDTO jugueteDto -> dtoToJuguete((JugueteDTO)dto);
-			case MaquillajeDTO maquillajeDto -> dtoToMaquillaje((MaquillajeDTO) dto);
-			case PapeleriaDTO papeleriaDto -> dtoToPapeleria((PapeleriaDTO) dto);
-			case InstrumentoMusicalDTO insMusicalDto -> dtoToInstrumentoMusical((InstrumentoMusicalDTO)dto);
-			case DispositivoElectronicoDTO dispElectronicoDto -> dtoToDispositivoElectronico((DispositivoElectronicoDTO) dto);
-			default ->
-			throw new IllegalArgumentException("Unexpected value: " + dto.getClass().getName());
-			};
-	}
-	
-	public static Ropa dtoToRopa(RopaDTO dto) {
-		 return switch (dto) {
-		case CalzadoDTO calzDto -> { 
-			Ropa ropa = (dtoToCalzado((CalzadoDTO) dto));
-			yield ropa;
-		}
-		case CamisetaDTO camistaDto -> { 
-			Ropa ropa = dtoToCamiseta((CamisetaDTO) dto);
-			yield ropa;
-		}
-		case PantalonDTO pantsDto -> { 
-			Ropa ropa = (dtoToPantalon((PantalonDTO) dto));
-			yield ropa;
-		}
-		default ->
-		throw new IllegalArgumentException("Unexpected value: " + dto.getClass().getName());
-		};
-	}
-	public static Juguete dtoToJuguete(JugueteDTO dto) {
-		return switch (dto) {
-		case PelucheDTO pelucheDto -> { 
-			Juguete juguete = (dtoToPeluche((PelucheDTO) dto));
-			yield juguete;
-		}
-		case LegoDTO legoDto -> { 
-			Juguete juguete = (dtoToLego((LegoDTO) dto));
-			yield juguete;
-		}
-		case PistolaAguaDTO pAguaDto -> { 
-			Juguete juguete = (dtoToPistolaAgua((PistolaAguaDTO) dto));
-			yield juguete;
-		}
-		default ->
-		throw new IllegalArgumentException("Unexpected value: " + dto.getClass().getName());
-		};
-	}
-	
-	public static Maquillaje dtoToMaquillaje(MaquillajeDTO dto) {
-		return switch (dto) {
-		case SombraDTO sombraDto -> { 
-			Maquillaje maquillaje = (dtoToSombra((SombraDTO) dto));
-			yield maquillaje;
-		}
-		case LabialDTO labialDto -> { 
-			Maquillaje maquillaje = (dtoToLabial((LabialDTO) dto));
-			yield maquillaje;
-		}
-		case CorrectorDTO correctorDto -> { 
-			Maquillaje maquillaje = (dtoToCorrector((CorrectorDTO) dto));
-			yield maquillaje;
-		}
-		default ->
-		throw new IllegalArgumentException("Unexpected value: " + dto.getClass().getName());
-		};
-	}
-	public static Papeleria dtoToPapeleria(PapeleriaDTO dto) {
-		return switch (dto) {
-		case MarcadorDTO marcadorDto -> { 
-			Papeleria papeleria = (dtoToMarcador((MarcadorDTO) dto));
-			yield papeleria;
-		}
-		case CintaAdhesivaDTO cintaDto -> { 
-			Papeleria papeleria = (dtoToCintaAdhesiva((CintaAdhesivaDTO) dto));
-			yield papeleria;
-		}
-		case CuadernoDTO cuadernoDto -> { 
-			Papeleria papeleria = (dtoToCuaderno((CuadernoDTO) dto));
-			yield papeleria;
-		}
-		default ->
-		throw new IllegalArgumentException("Unexpected value: " + dto.getClass().getName());
-		};
-	}
-	public static InstrumentoMusical dtoToInstrumentoMusical(InstrumentoMusicalDTO dto) {
-		return switch (dto) {
-		case InstrumentoCuerdaDTO instMusicalDto -> { 
-			InstrumentoMusical instrumento = (dtoToInstrumentoCuerda((InstrumentoCuerdaDTO) dto));
-			yield instrumento;
-		}
-		case InstrumentoPercusionDTO insPerscusionDto -> { 
-			InstrumentoMusical instrumento = (dtoToInstrumentoPercusion((InstrumentoPercusionDTO) dto));
-			yield instrumento;
-		}
-		case InstrumentoVientoDTO cuadernoDto -> { 
-			InstrumentoMusical instrumento = (dtoToInstrumentoViento((InstrumentoVientoDTO) dto));
-			yield instrumento;
-		}
-		default ->
-		throw new IllegalArgumentException("Unexpected value: " + dto.getClass().getName());
-		};
-	}
-	public static DispositivoElectronico dtoToDispositivoElectronico(DispositivoElectronicoDTO dto) {
-		return switch (dto) {
-		case CelularDTO celularDto -> { 
-			DispositivoElectronico dispElectronico = (dtoToCelular((CelularDTO) dto));
-			yield dispElectronico;
-		}
-		case ComputadorDTO computadorDto -> { 
-			DispositivoElectronico dispElectronico = (dtoToComputador((ComputadorDTO)dto));
-			yield dispElectronico;
-		}
-		case TelevisorDTO televisorDto -> { 
-			DispositivoElectronico dispElectronico = (dtoToTelevisor((TelevisorDTO)dto));
-			yield dispElectronico;
-		}
-		default ->
-		throw new IllegalArgumentException("Unexpected value: " + dto.getClass().getName());
-		};
-	}
-	
-	//conversion de entidad a dtos
-	public static ProductoDTO productoEntityToDTO(Producto entity) {
-	    return switch (entity) {
-	        case Ropa ropa -> ropaToDTO(ropa);
-	        case Juguete juguete -> jugueteToDTO(juguete);
-	        case Maquillaje maquillaje -> maquillajeToDTO(maquillaje);
-	        case Papeleria papeleria -> papeleriaToDTO(papeleria);
-	        case InstrumentoMusical instrumento -> instrumentoMusicalToDTO(instrumento);
-	        case DispositivoElectronico dispElectronico -> dispositivoElectronicoToDTO(dispElectronico);
-	        default ->
-	            throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
-	    };
-	}
 
-	// ================== ROPA ==================
-	public static RopaDTO ropaToDTO(Ropa entity) {
-	    return switch (entity) {
-	        case Calzado calzado -> entityToCalzadoDTO(calzado);
-	        case Camiseta camiseta -> entityToCamisetaDTO(camiseta);
-	        case Pantalon pantalon -> entityToPantalonDTO(pantalon);
-	        default ->
-	            throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
-	    };
-	}
 
-	// ================== JUGUETE ==================
-	public static JugueteDTO jugueteToDTO(Juguete entity) {
-	    return switch (entity) {
-	        case Peluche peluche -> entityToPelucheDTO(peluche);
-	        case Lego lego -> entityToLegoDTO(lego);
-	        case PistolaAgua pistolaAgua -> entityToPistolaAguaDTO(pistolaAgua);
-	        default ->
-	            throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
-	    };
-	}
-
-	// ================== MAQUILLAJE ==================
-	public static MaquillajeDTO maquillajeToDTO(Maquillaje entity) {
-	    return switch (entity) {
-	        case Sombra sombra -> entityToSombraDTO(sombra);
-	        case Labial labial -> entityToLabialDTO(labial);
-	        case Corrector corrector -> entityToCorrectorDTO(corrector);
-	        default ->
-	            throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
-	    };
-	}
-
-	// ================== PAPELERIA ==================
-	public static PapeleriaDTO papeleriaToDTO(Papeleria entity) {
-	    return switch (entity) {
-	        case Marcador marcador -> entityToMarcadorDTO(marcador);
-	        case CintaAdhesiva cinta -> entityToCintaAdhesivaDTO(cinta);
-	        case Cuaderno cuaderno -> entityToCuadernoDTO(cuaderno);
-	        default ->
-	            throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
-	    };
-	}
-
-	// ================== INSTRUMENTO MUSICAL ==================
-	public static InstrumentoMusicalDTO instrumentoMusicalToDTO(InstrumentoMusical entity) {
-	    return switch (entity) {
-	        case InstrumentoCuerda instCuerda -> entityToInstrumentoCuerdaDTO(instCuerda);
-	        case InstrumentoPercusion instPercusion -> entityToInstrumentoPercusionDTO(instPercusion);
-	        case InstrumentoViento instViento -> entityToInstrumentoVientoDTO(instViento);
-	        default ->
-	            throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
-	    };
-	}
-
-	// ================== DISPOSITIVO ELECTRONICO ==================
-	public static DispositivoElectronicoDTO dispositivoElectronicoToDTO(DispositivoElectronico entity) {
-	    return switch (entity) {
-	        case Celular celular -> entityToCelularDTO(celular);
-	        case Computador computador -> entityToComputadorDTO(computador);
-	        case Televisor televisor -> entityToTelevisorDTO(televisor);
-	        default ->
-	            throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
-	    };
-	}
 }

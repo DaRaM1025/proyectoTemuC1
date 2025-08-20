@@ -34,7 +34,9 @@ public class FileManager {
 	/*
 	 * Ubicación de donde se van a crear los archivos
 	 */
-	private static final String RUTA_CARPETA = System.getProperty("user.home") + File.separator + "Documents";
+
+	private static final String RUTA_CARPETA =
+	        System.getProperty("user.home") + File.separator + "Documents";
 
 	/**
 	 * Flujo de salida de archivo utilizado para escribir objetos en un archivo.
@@ -60,11 +62,14 @@ public class FileManager {
 	/**
 	 * Método que crea la carpeta especificada en la ruta, en caso de que no exista.
 	 */
-	public static void crearCarpeta() {
-		archivo = new File(RUTA_CARPETA);
-		if (!archivo.exists() || !archivo.isDirectory()) {
-			archivo.mkdir();
-		}
+	private static void crearCarpeta() {
+	    File carpeta = new File(RUTA_CARPETA);
+	    if (!carpeta.exists()) {
+	        boolean creada = carpeta.mkdirs();
+	        System.out.println("¿Carpeta si se creo?: " + creada + " ->aqui " + carpeta.getAbsolutePath());
+	    } else {
+	        System.out.println("la carpeta existe en la ruta: " + carpeta.getAbsolutePath());
+	    }
 	}
 
 	/**
@@ -102,23 +107,31 @@ public class FileManager {
 	 * @param contenido     El objeto que se escribirá en el archivo.
 	 */
 	public static void escribirArchivoSerializado(String nombreArchivo, Object contenido) {
+	    try {
+	        crearCarpeta();
+	        File archivo = new File(RUTA_CARPETA, nombreArchivo);
 
-		try {
-			archivo = new File(RUTA_CARPETA + File.separator + nombreArchivo);
-			if (!archivo.exists()) {
-				archivo.createNewFile();
-			}
-			fos = new FileOutputStream(archivo);
-			oos = new ObjectOutputStream(fos);
-			oos.writeObject(contenido);
-			oos.close();
-			fos.close();
-		} catch (Exception e) {
-			System.out.println("Error en la escritura del archivo serializado");
-			e.printStackTrace();
-		}
 
+	        System.out.println("Guardando en: " + archivo.getAbsolutePath());
+
+	        if (!archivo.exists()) {
+	            archivo.createNewFile();
+	            System.out.println("Archivo creado en: " + archivo.getAbsolutePath());
+	        }
+
+	        fos = new FileOutputStream(archivo);
+	        oos = new ObjectOutputStream(fos);
+	        oos.writeObject(contenido);
+	        oos.close();
+	        fos.close();
+
+	        System.out.println("Escritura corrcta (" + nombreArchivo + ")");
+	    } catch (Exception e) {
+	        System.out.println("Error en la escritura del archivo serializado");
+	        e.printStackTrace();
+	    }
 	}
+
 
 	/**
 	 * Método para leer el contenido de un archivo de texto y lo devuelve como una
@@ -162,24 +175,34 @@ public class FileManager {
 	 *         vacío.
 	 */
 	public static Object leerArchivoSerializado(String nombreArchivo) {
-		Object contenido = null;
-		try {
-			archivo = new File(RUTA_CARPETA + File.separator + nombreArchivo);
-			if (!archivo.exists() || archivo.length() == 0) {
-				return null;
-			}
-			fis = new FileInputStream(archivo);
-			ois = new ObjectInputStream(fis);
-			contenido = ois.readObject();
-			fis.close();
-			ois.close();
-		} catch (IOException e) {
-			System.out.println("Error al leer archivo serializado");
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			System.out.println("Error: Clase no encontrada en el archivo");
-			e.printStackTrace();
-		}
-		return contenido;
+	    Object contenido = null;
+	    try {
+	        crearCarpeta();
+	        File archivo = new File(RUTA_CARPETA, nombreArchivo);
+
+
+	        System.out.println("Leyendo desde: " + archivo.getAbsolutePath());
+
+	        if (!archivo.exists() || archivo.length() == 0) {
+	            System.out.println("el Archivo no existe o está vacío");
+	            return null;
+	        }
+
+	        fis = new FileInputStream(archivo);
+	        ois = new ObjectInputStream(fis);
+	        contenido = ois.readObject();
+	        fis.close();
+	        ois.close();
+
+	        System.out.println("lectura correcta (" + nombreArchivo + ")");
+	    } catch (IOException e) {
+	        System.out.println("Error al leer archivo serializado");
+	        e.printStackTrace();
+	    } catch (ClassNotFoundException e) {
+	        System.out.println("Error: Clase no encontrada en el archivo");
+	        e.printStackTrace();
+	    }
+	    return contenido;
+
 	}
 }

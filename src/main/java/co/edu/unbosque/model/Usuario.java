@@ -1,8 +1,9 @@
 package co.edu.unbosque.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Usuario {
+public class Usuario implements Serializable{
 	private String nombre;
 	private String telefono;
 	private String email;

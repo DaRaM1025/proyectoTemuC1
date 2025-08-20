@@ -6,6 +6,8 @@ import java.util.Random;
 import java.util.UUID;
 
 import co.edu.unbosque.model.CintaAdhesivaDTO;
+import co.edu.unbosque.model.ModelFacade;
+import co.edu.unbosque.model.persistence.DataMapper;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
@@ -58,9 +60,21 @@ public class CintaAdhesivaService {
 		listaCintasAdhesivas.add(new CintaAdhesivaDTO("Cinta Reposicionable 12mm Pack x3", "Scotch", "Cinta Adhesiva",
 				"Adhesivo removible para papel", "https://example.com/cinta_repo.jpg", 9000, 65, "CIN010", "Pack x3",
 				true, 1.2, "Transparente"));
+		igualarListas();
+		leerLista();
 
 	}
 
+	public void igualarListas() {
+		ModelFacade.getCintaDAO().getlistaCintaAdhesivas()
+				.addAll(DataMapper.listaCintaAdhesivaDTOToListaCintaAdhesiva((ArrayList<CintaAdhesivaDTO>) listaCintasAdhesivas));
+		ModelFacade.getCintaDAO().escribirEnArchivo();
+	}
+
+	public void leerLista() {
+		ModelFacade.getCintaDAO().cargarDesdeArchivo();
+		listaCintasAdhesivas = DataMapper.listaCintaAdhesivaToListaCintaAdhesivaDTO(ModelFacade.getCintaDAO().getlistaCintaAdhesivas());
+	}
 	public List<CintaAdhesivaDTO> getProducts() {
 		return new ArrayList<>(listaCintasAdhesivas);
 	}

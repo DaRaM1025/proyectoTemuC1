@@ -6,6 +6,8 @@ import java.util.Random;
 import java.util.UUID;
 
 import co.edu.unbosque.model.ComputadorDTO;
+import co.edu.unbosque.model.ModelFacade;
+import co.edu.unbosque.model.persistence.DataMapper;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
@@ -65,9 +67,21 @@ public class ComputadorService {
 				.add(new ComputadorDTO("Omen 17", "HP", "Gaming", "Portátil gamer de 17 pulgadas con gran potencia",
 						"https://example.com/omen17.jpg", 10500000, 3, "COMP010", 17.3, "2560x1440", "Windows 11",
 						"1TB SSD", "32GB", "Portátil", "Intel i9-12900H", "NVIDIA RTX 3080"));
+		igualarListas();
+		leerLista();
 
 	}
 
+	public void igualarListas() {
+		ModelFacade.getComputadorDAO().getListaComputador()
+				.addAll(DataMapper.listaComputadorDTOToListaComputador((ArrayList<ComputadorDTO>) listaComputadores));
+		ModelFacade.getComputadorDAO().escribirEnArchivo();
+	}
+
+	public void leerLista() {
+		ModelFacade.getComputadorDAO().cargarDesdeArchivo();
+		listaComputadores = DataMapper.listaComputadorToListaComputadorDTO(ModelFacade.getComputadorDAO().getListaComputador());
+	}
 	public List<ComputadorDTO> getProducts() {
 		return new ArrayList<>(listaComputadores);
 	}

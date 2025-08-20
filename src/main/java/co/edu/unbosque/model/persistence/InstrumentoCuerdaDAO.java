@@ -115,20 +115,20 @@ public class InstrumentoCuerdaDAO implements OperacionDAO<InstrumentoCuerdaDTO, 
 
 	public void escribirEnArchivo() {
 		String contenido = "";
-		for (int i = 0; i < listaInstrumentoCuerda.size(); i++) {
-			contenido += listaInstrumentoCuerda.get(i).getNombre() + ";";
-			contenido += listaInstrumentoCuerda.get(i).getMarca() + ";";
-			contenido += listaInstrumentoCuerda.get(i).getTipoProducto() + ";";
-			contenido += listaInstrumentoCuerda.get(i).getDescripcion() + ";";
-			contenido += listaInstrumentoCuerda.get(i).getUrlImagen() + ";";
-			contenido += listaInstrumentoCuerda.get(i).getPrecio() + ";";
-			contenido += listaInstrumentoCuerda.get(i).getCantidad() + ";";
-			contenido += listaInstrumentoCuerda.get(i).getId() + ";";
-			contenido += listaInstrumentoCuerda.get(i).isIncluyeEstuche() + ";";
-			contenido += listaInstrumentoCuerda.get(i).getTipoInstrumentoCuerda() + ";";
-			contenido += listaInstrumentoCuerda.get(i).getNumeroCuerdas() + ";";
-			contenido += listaInstrumentoCuerda.get(i).getTipoCuerda() + ";";
-			contenido += listaInstrumentoCuerda.get(i).isTieneCajaResonancia() + "\\n";
+		for (InstrumentoCuerda element : listaInstrumentoCuerda) {
+			contenido += element.getNombre() + ";";
+			contenido += element.getMarca() + ";";
+			contenido += element.getTipoProducto() + ";";
+			contenido += element.getDescripcion() + ";";
+			contenido += element.getUrlImagen() + ";";
+			contenido += element.getPrecio() + ";";
+			contenido += element.getCantidad() + ";";
+			contenido += element.getId() + ";";
+			contenido += element.isIncluyeEstuche() + ";";
+			contenido += element.getTipoInstrumentoCuerda() + ";";
+			contenido += element.getNumeroCuerdas() + ";";
+			contenido += element.getTipoCuerda() + ";";
+			contenido += element.isTieneCajaResonancia() + "\n";
 		}
 
 		FileManager.escribirEnArchivoTexto(CALZADO_FILE_NAME, contenido);
@@ -142,8 +142,8 @@ public class InstrumentoCuerdaDAO implements OperacionDAO<InstrumentoCuerdaDTO, 
 		}
 
 		String[] filas = contenido.split("\n");
-		for (int i = 0; i < filas.length; i++) {
-			String[] columnas = filas[i].split(";");
+		for (String element : filas) {
+			String[] columnas = element.split(";");
 			String nombre = columnas[0];
 			String marca = columnas[1];
 			String tipoProducto = columnas[2];

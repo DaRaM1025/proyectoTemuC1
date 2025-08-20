@@ -8,14 +8,14 @@ import co.edu.unbosque.model.CalzadoDTO;
 /**
  * Clase que implementa el patrón DAO (Data Access Object) para gestionar
  * las operaciones CRUD relacionadas con la entidad {@link Calzado}.
- * 
+ *
  * Esta clase permite persistir la información en archivos de texto y archivos
  * serializados, además de proporcionar mecanismos para crear, eliminar, actualizar
  * y consultar calzados.
- * 
+ *
  * Implementa la interfaz {@link OperacionDAO} utilizando {@link CalzadoDTO} como
  * objeto de transferencia de datos y {@link Calzado} como entidad.
- * 
+ *
  * @author Nataly Rengifo
  * @version 1.0
  */
@@ -40,7 +40,7 @@ public class CalzadoDAO implements OperacionDAO<CalzadoDTO, Calzado> {
 
     /**
      * Obtiene la lista completa de calzados en memoria.
-     * 
+     *
      * @return lista de calzados.
      */
 	public ArrayList<Calzado> getListaCalzado() {
@@ -49,7 +49,7 @@ public class CalzadoDAO implements OperacionDAO<CalzadoDTO, Calzado> {
 
     /**
      * Establece una nueva lista de calzados.
-     * 
+     *
      * @param listaCalzado lista de calzados a asignar.
      */
 	public void setListaCalzado(ArrayList<Calzado> listaCalzado) {
@@ -57,7 +57,7 @@ public class CalzadoDAO implements OperacionDAO<CalzadoDTO, Calzado> {
 	}
 	 /**
      * Obtiene el nombre del archivo serializado.
-     * 
+     *
      * @return nombre del archivo serializado.
      */
 	public String getSERIAL_FILE_NAME() {
@@ -65,7 +65,7 @@ public class CalzadoDAO implements OperacionDAO<CalzadoDTO, Calzado> {
 	}
 	 /**
      * Obtiene el nombre del archivo CSV.
-     * 
+     *
      * @return nombre del archivo CSV.
      */
 	public String getCALZADO_FILE_NAME() {
@@ -73,7 +73,7 @@ public class CalzadoDAO implements OperacionDAO<CalzadoDTO, Calzado> {
 	}
 	 /**
      * Crea un nuevo calzado en la lista y lo persiste en los archivos.
-     * 
+     *
      * @param nuevo objeto {@link CalzadoDTO} con la información del calzado a crear.
      * @return true si el calzado fue creado exitosamente, false si ya existía.
      */
@@ -81,7 +81,7 @@ public class CalzadoDAO implements OperacionDAO<CalzadoDTO, Calzado> {
 	public boolean crear(CalzadoDTO nuevo) {
 		Calzado entidad = DataMapper.dtoToCalzado(nuevo);
 	   Calzado encontrado = find(entidad);
-	    
+
 	    if (encontrado == null) {
 	        listaCalzado.add(entidad);
 	        System.out.println("EXITO" + listaCalzado.size());
@@ -94,7 +94,7 @@ public class CalzadoDAO implements OperacionDAO<CalzadoDTO, Calzado> {
 	}
 	/**
      * Elimina un calzado de la lista y actualiza los archivos de persistencia.
-     * 
+     *
      * @param eliminado objeto {@link CalzadoDTO} con el identificador del calzado a eliminar.
      * @return true si se eliminó exitosamente, false si no se encontró.
      */
@@ -112,7 +112,7 @@ public class CalzadoDAO implements OperacionDAO<CalzadoDTO, Calzado> {
 	}
 	/**
      * Busca un calzado en la lista a partir de su identificador.
-     * 
+     *
      * @param toFind objeto {@link Calzado} con el ID a buscar.
      * @return el calzado encontrado, o null si no existe.
      */
@@ -130,7 +130,7 @@ public class CalzadoDAO implements OperacionDAO<CalzadoDTO, Calzado> {
 	}
 	 /**
      * Actualiza un calzado en la lista y refleja el cambio en los archivos de persistencia.
-     * 
+     *
      * @param previo calzado existente a reemplazar.
      * @param nuevo nuevo calzado que sustituye al anterior.
      * @return true si la actualización fue exitosa, false si no se encontró el calzado previo.
@@ -151,7 +151,7 @@ public class CalzadoDAO implements OperacionDAO<CalzadoDTO, Calzado> {
 	}
 	 /**
      * Devuelve una representación en texto de todos los calzados registrados.
-     * 
+     *
      * @return cadena con la información de todos los calzados, o un mensaje si la lista está vacía.
      */
 	@Override
@@ -186,7 +186,7 @@ public class CalzadoDAO implements OperacionDAO<CalzadoDTO, Calzado> {
 		if (listaCalzado == null) {
 			listaCalzado = new ArrayList<>();
 		}
-		
+
 	}
 	/**
      * Escribe el contenido de la lista en un archivo de texto (CSV).
@@ -196,22 +196,22 @@ public class CalzadoDAO implements OperacionDAO<CalzadoDTO, Calzado> {
      */
 	public void escribirEnArchivo() {
 		String contenido = "";
-		for (int i = 0; i < listaCalzado.size(); i++) {
-			contenido += listaCalzado.get(i).getNombre() + ";";
-			contenido += listaCalzado.get(i).getMarca() + ";";
-			contenido += listaCalzado.get(i).getTipoProducto() + ";";
-			contenido += listaCalzado.get(i).getDescripcion() + ";";
-			contenido += listaCalzado.get(i).getUrlImagen() + ";";
-			contenido += listaCalzado.get(i).getPrecio() + ";";
-			contenido += listaCalzado.get(i).getCantidad() + ";";
-			contenido += listaCalzado.get(i).getId() + ";";
-			contenido += listaCalzado.get(i).getTalla() + ";";
-			contenido += listaCalzado.get(i).getGenero() + ";";
-			contenido += listaCalzado.get(i).getMaterial() + ";";
-			contenido += listaCalzado.get(i).getTipoCalzado() + ";";
-			contenido += listaCalzado.get(i).getOcasion() + ";";
-			contenido += listaCalzado.get(i).getMaterialSuela() + ";";
-			contenido += listaCalzado.get(i).getAlturaSuela() + "\n";
+		for (Calzado element : listaCalzado) {
+			contenido += element.getNombre() + ";";
+			contenido += element.getMarca() + ";";
+			contenido += element.getTipoProducto() + ";";
+			contenido += element.getDescripcion() + ";";
+			contenido += element.getUrlImagen() + ";";
+			contenido += element.getPrecio() + ";";
+			contenido += element.getCantidad() + ";";
+			contenido += element.getId() + ";";
+			contenido += element.getTalla() + ";";
+			contenido += element.getGenero() + ";";
+			contenido += element.getMaterial() + ";";
+			contenido += element.getTipoCalzado() + ";";
+			contenido += element.getOcasion() + ";";
+			contenido += element.getMaterialSuela() + ";";
+			contenido += element.getAlturaSuela() + "\n";
 		}
 
 		FileManager.escribirEnArchivoTexto(CALZADO_FILE_NAME, contenido);
@@ -233,8 +233,8 @@ public class CalzadoDAO implements OperacionDAO<CalzadoDTO, Calzado> {
 		}
 
 		String[] filas = contenido.split("\n");
-		for (int i = 0; i < filas.length; i++) {
-			String[] columnas = filas[i].split(";");
+		for (String element : filas) {
+			String[] columnas = element.split(";");
 			String nombre = columnas[0];
 			String marca = columnas[1];
 			String tipoProducto = columnas[2];
@@ -250,9 +250,9 @@ public class CalzadoDAO implements OperacionDAO<CalzadoDTO, Calzado> {
 			String ocasion = columnas[12];
 			String materialSuela = columnas[13];
 			double alturaSuela = Double.parseDouble(columnas[14]);
-			;
+
 			listaCalzado.add(new Calzado(nombre, marca, tipoProducto, descripcion, urlImagen, precio, cantidad, id, talla, genero, material, tipoCalzado, ocasion, materialSuela, alturaSuela));
 		}
 	}
-	
+
 }

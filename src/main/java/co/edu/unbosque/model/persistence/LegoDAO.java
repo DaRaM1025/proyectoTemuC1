@@ -204,19 +204,19 @@ public class LegoDAO implements OperacionDAO<LegoDTO, Lego> {
      */
 	public void escribirEnArchivo() {
 		String contenido = "";
-		for (int i = 0; i < listaLego.size(); i++) {
-			contenido += listaLego.get(i).getNombre() + ";";
-			contenido += listaLego.get(i).getMarca() + ";";
-			contenido += listaLego.get(i).getTipoProducto() + ";";
-			contenido += listaLego.get(i).getDescripcion() + ";";
-			contenido += listaLego.get(i).getUrlImagen() + ";";
-			contenido += listaLego.get(i).getPrecio() + ";";
-			contenido += listaLego.get(i).getCantidad() + ";";
-			contenido += listaLego.get(i).getId() + ";";
-			contenido += listaLego.get(i).getEdadRecomendada() + ";";
-			contenido += listaLego.get(i).getTema() + ";";
-			contenido += listaLego.get(i).getNumeroPiezas() + ";";
-			contenido += listaLego.get(i).isTieneMinifiguras() +"\n";
+		for (Lego element : listaLego) {
+			contenido += element.getNombre() + ";";
+			contenido += element.getMarca() + ";";
+			contenido += element.getTipoProducto() + ";";
+			contenido += element.getDescripcion() + ";";
+			contenido += element.getUrlImagen() + ";";
+			contenido += element.getPrecio() + ";";
+			contenido += element.getCantidad() + ";";
+			contenido += element.getId() + ";";
+			contenido += element.getEdadRecomendada() + ";";
+			contenido += element.getTema() + ";";
+			contenido += element.getNumeroPiezas() + ";";
+			contenido += element.isTieneMinifiguras() +"\n";
 
 		}
 
@@ -239,8 +239,8 @@ public class LegoDAO implements OperacionDAO<LegoDTO, Lego> {
 		}
 
 		String[] filas = contenido.split("\n");
-		for (int i = 0; i < filas.length; i++) {
-			String[] columnas = filas[i].split(";");
+		for (String element : filas) {
+			String[] columnas = element.split(";");
 			String nombre = columnas[0];
 			String marca = columnas[1];
 			String tipoProducto = columnas[2];
@@ -255,8 +255,8 @@ public class LegoDAO implements OperacionDAO<LegoDTO, Lego> {
 			boolean tieneMinifiguras= Boolean.parseBoolean(columnas[11])
 			;
 			listaLego.add(new Lego(nombre, marca, tipoProducto, descripcion, urlImagen, precio, cantidad, id, edadRecomendada, tema, numeroPiezas, tieneMinifiguras));
-					
+
 		}
 	}
-	
+
 }

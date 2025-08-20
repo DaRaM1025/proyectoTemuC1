@@ -16,13 +16,10 @@ import jakarta.inject.Named;
 @ApplicationScoped
 public class CalzadoService {
 	private List<CalzadoDTO> listaCalzados;
-	private ModelFacade mf;
 
 	@PostConstruct
 	public void init() {
 		listaCalzados = new ArrayList<>();
-		mf = new ModelFacade();
-
 		listaCalzados.add(new CalzadoDTO("Zapatillas Running Air", "Nike", "Deportivo",
 				"Zapatillas para correr con tecnología Air", "https://example.com/nike_air.jpg", 320000, 20, "CAL001",
 				"42", "Hombre", "Sintético", "Zapatillas", "Deporte", "Goma", 3.5));
@@ -62,7 +59,6 @@ public class CalzadoService {
 		listaCalzados.add(new CalzadoDTO("Zapatillas Skate", "Vans", "Urbano", "Zapatillas de lona clásicas para skate",
 				"https://example.com/vans_skate.jpg", 260000, 22, "CAL010", "41", "Unisex", "Lona", "Zapatillas",
 				"Casual", "Goma", 2.5));
-
 		igualarListas();
 		leerLista();
 	}
@@ -93,14 +89,14 @@ public class CalzadoService {
 	}
 
 	public void igualarListas() {
-		mf.getCalzadoDAO().getListaCalzado()
+		ModelFacade.getCalzadoDAO().getListaCalzado()
 				.addAll(DataMapper.listaCalzadoDTOToListaCalzado((ArrayList<CalzadoDTO>) listaCalzados));
-		mf.getCalzadoDAO().escribirEnArchivo();
+		ModelFacade.getCalzadoDAO().escribirEnArchivo();
 	}
 
 	public void leerLista() {
-		mf.getCalzadoDAO().cargarDesdeArchivo();
-		listaCalzados = DataMapper.listaCalzadoToListaCalzadoDTO(mf.getCalzadoDAO().getListaCalzado());
+		ModelFacade.getCalzadoDAO().cargarDesdeArchivo();
+		listaCalzados = DataMapper.listaCalzadoToListaCalzadoDTO(ModelFacade.getCalzadoDAO().getListaCalzado());
 	}
 
 	public List<CalzadoDTO> getClonedProducts(int size) {

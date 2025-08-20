@@ -6,6 +6,8 @@ import java.util.Random;
 import java.util.UUID;
 
 import co.edu.unbosque.model.MarcadorDTO;
+import co.edu.unbosque.model.ModelFacade;
+import co.edu.unbosque.model.persistence.DataMapper;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
@@ -58,9 +60,21 @@ public class MarcadorService {
 		listaMarcadores.add(new MarcadorDTO("Marcador Permanente Rojo", "Pilot", "Marcador",
 				"Marcador rojo resistente y permanente", "https://example.com/marcador_rojo.jpg", 4600, 75, "MAR010",
 				"Unidad", "Mediana", true, "Permanente"));
+		igualarListas();
+		leerLista();
 
 	}
 
+	public void igualarListas() {
+		ModelFacade.getMarcadorDAO().getlistaMarcadores()
+				.addAll(DataMapper.listaMarcadorDTOToListaMarcador((ArrayList<MarcadorDTO>) listaMarcadores));
+		ModelFacade.getMarcadorDAO().escribirEnArchivo();
+	}
+
+	public void leerLista() {
+		ModelFacade.getMarcadorDAO().cargarDesdeArchivo();
+		listaMarcadores = DataMapper.listaMarcadorToListaMarcadorDTO(ModelFacade.getMarcadorDAO().getlistaMarcadores());
+	}
 	public List<MarcadorDTO> getProducts() {
 		return new ArrayList<>(listaMarcadores);
 	}

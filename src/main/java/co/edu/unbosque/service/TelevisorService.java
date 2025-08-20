@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import co.edu.unbosque.model.ModelFacade;
 import co.edu.unbosque.model.TelevisorDTO;
+import co.edu.unbosque.model.persistence.DataMapper;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
@@ -57,7 +59,20 @@ public class TelevisorService {
 		listaTelevisores.add(new TelevisorDTO("NanoCell NANO75", "LG", "Televisor",
 				"Televisor NanoCell con HDR10 Pro y sonido envolvente", "https://example.com/lg_nano75.jpg", 1700000,
 				18, "TV010", 50, "3840x2160", "webOS", 3, 60, "Alexa"));
+		igualarListas();
+		leerLista();
 
+	}
+
+	public void igualarListas() {
+		ModelFacade.getTelevisorDAO().getListaCalzado()
+				.addAll(DataMapper.listaTelevisorDTOToListaTelevisor((ArrayList<TelevisorDTO>) listaTelevisores));
+		ModelFacade.getTelevisorDAO().escribirEnArchivo();
+	}
+
+	public void leerLista() {
+		ModelFacade.getTelevisorDAO().cargarDesdeArchivo();
+		listaTelevisores = DataMapper.listaToListaTelevisorDTO(ModelFacade.getTelevisorDAO().getListaCalzado());
 	}
 
 	public List<TelevisorDTO> getProducts() {

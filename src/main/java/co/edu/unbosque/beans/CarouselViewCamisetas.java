@@ -16,7 +16,7 @@ import jakarta.inject.Named;
 @Named
 @ViewScoped
 public class CarouselViewCamisetas implements Serializable {
-	
+
 	private List<CamisetaDTO> products;
 
     private List<ResponsiveOption> responsiveOptions;

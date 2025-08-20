@@ -24,8 +24,9 @@
 }
 
 .product-item .product-image {
-	width: 50%;
-	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+	width: 40%;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+	border-radius: 12px;
 }
 </style>
 
@@ -33,8 +34,8 @@
 		<h:form id="form">
 
 			<div class="card">
-				<p:carousel value="#{carouselViewCorrectores.products}" var="product"
-					numVisible="3" numScroll="3"
+				<p:carousel value="#{carouselViewCorrectores.products}"
+					var="product" numVisible="3" numScroll="3"
 					responsiveOptions="#{carouselViewCorrectores.responsiveOptions}">
 					<f:facet name="header">
 						<h5 class="col-4">Correctores de Temporada:</h5>
@@ -47,31 +48,31 @@
 							</div>
 							<div>
 								<h4 class="mb-3">#{product.nombre}</h4>
-								
-								<h6 class="mt-1">
-									Precio
-								</h6>
-									<h:outputText value="#{product.precio}">
-										<f:convertNumber type="currency" pattern="¤#0"
-											currencySymbol="$" />
-									</h:outputText>
+
+								<h6 class="mt-1">Precio</h6>
+								<h:outputText value="#{product.precio}">
+									<f:convertNumber type="currency" pattern="¤#0"
+										currencySymbol="$" />
+								</h:outputText>
 								<h6 class="mt-1">
 									<h:outputText value="#{product.id}"></h:outputText>
 								</h6>
 								<h6 class="mt-1">
-								<h:outputText value="Fecha de Vencimiento"></h:outputText>
+									<h:outputText value="Fecha de Vencimiento"></h:outputText>
 								</h6>
-									<h:outputText value="#{product.fechaVencimiento}"></h:outputText>
+								<h:outputText value="#{product.fechaVencimiento}"></h:outputText>
 								<h6 class="mt-1">
-								<h:outputText value="Descripcion"></h:outputText>
+									<h:outputText value="Descripcion"></h:outputText>
 								</h6>
 								<h:outputText value="#{product.descripcion}"></h:outputText>
 								<h6 class="mt-1">
-								<h:outputText value="Tipo de Piel"></h:outputText>
+									<h:outputText value="Tipo de Piel"></h:outputText>
 								</h6>
 								<h:outputText value="#{product.tipoPiel}"></h:outputText>
 								<div class="mt-5">
-									<span> Agregar al Carrito <p:commandButton type="button"
+									<span> Agregar al Carrito <p:commandButton
+											update=":form"
+											actionListener="#{carritoBean.agregarProducto(product)}"
 											icon="pi pi-cart-plus" styleClass="rounded-button mr-2" />
 									</span>
 								</div>

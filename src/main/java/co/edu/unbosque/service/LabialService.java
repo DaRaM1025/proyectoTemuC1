@@ -6,6 +6,8 @@ import java.util.Random;
 import java.util.UUID;
 
 import co.edu.unbosque.model.LabialDTO;
+import co.edu.unbosque.model.ModelFacade;
+import co.edu.unbosque.model.persistence.DataMapper;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
@@ -14,10 +16,10 @@ import jakarta.inject.Named;
 @ApplicationScoped
 public class LabialService {
 	private List<LabialDTO> listaLabial;
-	
+
 	@PostConstruct
 	public void init() {
-		listaLabial = new ArrayList<LabialDTO>();
+		listaLabial = new ArrayList<>();
 		listaLabial.add(new LabialDTO("Labial Rojo", "L'Oréal", "Labial", "Labial color rojo intenso para que luzcas increible en todo momento ", "assets/labial1.jpeg", 25000, 50, "L001", "Mixta", true, "2026-05-01"));
         listaLabial.add(new LabialDTO("Labial Nude", "Maybelline", "Labial", "Tono nude", "assets/labial2.jpg", 23000, 30, "L002", "Seca", false, "2025-12-31"));
         listaLabial.add(new LabialDTO("Labial Rosa", "Revlon", "Labial", "Rosa suave", "assets/labial3.png", 27000, 20, "L003", "Grasa", true, "2026-02-15"));
@@ -28,8 +30,21 @@ public class LabialService {
         listaLabial.add(new LabialDTO("Labial Durazno", "Sephora", "Labial", "Durazno pastel", "assets/labial8.jpeg", 35000, 12, "L008", "Grasa", false, "2025-09-25"));
         listaLabial.add(new LabialDTO("Labial Morado", "Estée Lauder", "Labial", "Morado elegante", "assets/labial9.jpeg", 52000, 10, "L009", "Normal", true, "2027-04-12"));
         listaLabial.add(new LabialDTO("Labial Transparente", "E.L.F.", "Labial", "Gloss transparente", "assets/labial10.jpeg", 15000, 35, "L010", "Mixta", false, "2026-08-18"));
+        igualarListas();
+		leerLista();
+
 	}
-	
+
+	public void igualarListas() {
+		ModelFacade.getLabialDAO().getListaLabiales()
+				.addAll(DataMapper.listaLabialDTOToListaLabial((ArrayList<LabialDTO>) listaLabial));
+		ModelFacade.getLabialDAO().escribirEnArchivo();
+	}
+
+	public void leerLista() {
+		ModelFacade.getLabialDAO().cargarDesdeArchivo();
+		listaLabial = DataMapper.listaLabialToListaLabialDTO(ModelFacade.getLabialDAO().getListaLabiales());
+	}
 	 public List<LabialDTO> getProducts() {
 	        return new ArrayList<>(listaLabial);
 	    }
@@ -68,6 +83,6 @@ public class LabialService {
 
 	        return results;
 	    }
-	
+
 
 }

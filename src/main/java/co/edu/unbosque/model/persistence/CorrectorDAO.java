@@ -12,7 +12,7 @@ public class CorrectorDAO implements OperacionDAO<CorrectorDTO, Corrector> {
 	private final String CORRECTOR_FILE_NAME = "Corrector.csv";
 
 	public CorrectorDAO() {
-		listaCorrectores = new ArrayList<Corrector>();
+		listaCorrectores = new ArrayList<>();
 		cargarDesdeArchivo();
 	}
 
@@ -98,20 +98,20 @@ public class CorrectorDAO implements OperacionDAO<CorrectorDTO, Corrector> {
 
 	public void escribirEnArchivo() {
 		String contenido = "";
-		for (int i = 0; i < listaCorrectores.size(); i++) {
-			contenido += listaCorrectores.get(i).getNombre() + ";";
-			contenido += listaCorrectores.get(i).getMarca() + ";";
-			contenido += listaCorrectores.get(i).getTipoProducto() + ";";
-			contenido += listaCorrectores.get(i).getDescripcion() + ";";
-			contenido += listaCorrectores.get(i).getUrlImagen() + ";";
-			contenido += listaCorrectores.get(i).getPrecio() + ";";
-			contenido += listaCorrectores.get(i).getCantidad() + ";";
-			contenido += listaCorrectores.get(i).getId() + ";";
-			contenido += listaCorrectores.get(i).getTipoPiel() + ";";
-			contenido += listaCorrectores.get(i).isEsApruebaDeAgua() + ";";
-			contenido += listaCorrectores.get(i).getFechaVencimiento() + ";";
-			contenido += listaCorrectores.get(i).getCobertura() + ";";
-			contenido += listaCorrectores.get(i).getFormato() + ";";
+		for (Corrector listaCorrectore : listaCorrectores) {
+			contenido += listaCorrectore.getNombre() + ";";
+			contenido += listaCorrectore.getMarca() + ";";
+			contenido += listaCorrectore.getTipoProducto() + ";";
+			contenido += listaCorrectore.getDescripcion() + ";";
+			contenido += listaCorrectore.getUrlImagen() + ";";
+			contenido += listaCorrectore.getPrecio() + ";";
+			contenido += listaCorrectore.getCantidad() + ";";
+			contenido += listaCorrectore.getId() + ";";
+			contenido += listaCorrectore.getTipoPiel() + ";";
+			contenido += listaCorrectore.isEsApruebaDeAgua() + ";";
+			contenido += listaCorrectore.getFechaVencimiento() + ";";
+			contenido += listaCorrectore.getCobertura() + ";";
+			contenido += listaCorrectore.getFormato() + "\n";
 		}
 		FileManager.escribirEnArchivoTexto(CORRECTOR_FILE_NAME, contenido);
 	}
@@ -124,8 +124,8 @@ public class CorrectorDAO implements OperacionDAO<CorrectorDTO, Corrector> {
 		}
 
 		String[] filas = contenido.split("\n");
-		for (int i = 0; i < filas.length; i++) {
-			String[] columnas = filas[i].split(";");
+		for (String element : filas) {
+			String[] columnas = element.split(";");
 			String nombre = columnas[0];
 			String marca = columnas[1];
 			String tipoProducto = columnas[2];
@@ -160,6 +160,6 @@ public class CorrectorDAO implements OperacionDAO<CorrectorDTO, Corrector> {
 	public String getCORRECTOR_FILE_NAME() {
 		return CORRECTOR_FILE_NAME;
 	}
-	
+
 
 }

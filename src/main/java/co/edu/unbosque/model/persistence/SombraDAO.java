@@ -12,7 +12,7 @@ public class SombraDAO implements OperacionDAO<SombraDTO, Sombra> {
 	private final String SOMBRAS_FILE_NAME = "Sombra.csv";
 
 	public SombraDAO() {
-		listaSombras = new ArrayList<Sombra>();
+		listaSombras = new ArrayList<>();
 		cargarDesdeArchivo();
 	}
 
@@ -98,20 +98,20 @@ public class SombraDAO implements OperacionDAO<SombraDTO, Sombra> {
 
 	public void escribirEnArchivo() {
 		String contenido = "";
-		for (int i = 0; i < listaSombras.size(); i++) {
-			contenido += listaSombras.get(i).getNombre() + ";";
-			contenido += listaSombras.get(i).getMarca() + ";";
-			contenido += listaSombras.get(i).getTipoProducto() + ";";
-			contenido += listaSombras.get(i).getDescripcion() + ";";
-			contenido += listaSombras.get(i).getUrlImagen() + ";";
-			contenido += listaSombras.get(i).getPrecio() + ";";
-			contenido += listaSombras.get(i).getCantidad() + ";";
-			contenido += listaSombras.get(i).getId() + ";";
-			contenido += listaSombras.get(i).getTipoPiel() + ";";
-			contenido += listaSombras.get(i).isEsApruebaDeAgua() + ";";
-			contenido += listaSombras.get(i).getFechaVencimiento() + ";";
-			contenido += listaSombras.get(i).getCantidadColores() + ";";
-			contenido += listaSombras.get(i).getAcabado() + ";";
+		for (Sombra element : listaSombras) {
+			contenido += element.getNombre() + ";";
+			contenido += element.getMarca() + ";";
+			contenido += element.getTipoProducto() + ";";
+			contenido += element.getDescripcion() + ";";
+			contenido += element.getUrlImagen() + ";";
+			contenido += element.getPrecio() + ";";
+			contenido += element.getCantidad() + ";";
+			contenido += element.getId() + ";";
+			contenido += element.getTipoPiel() + ";";
+			contenido += element.isEsApruebaDeAgua() + ";";
+			contenido += element.getFechaVencimiento() + ";";
+			contenido += element.getCantidadColores() + ";";
+			contenido += element.getAcabado() + "\n";
 		}
 		FileManager.escribirEnArchivoTexto(SOMBRAS_FILE_NAME, contenido);
 	}
@@ -124,8 +124,8 @@ public class SombraDAO implements OperacionDAO<SombraDTO, Sombra> {
 		}
 
 		String[] filas = contenido.split("\n");
-		for (int i = 0; i < filas.length; i++) {
-			String[] columnas = filas[i].split(";");
+		for (String element : filas) {
+			String[] columnas = element.split(";");
 			String nombre = columnas[0];
 			String marca = columnas[1];
 			String tipoProducto = columnas[2];

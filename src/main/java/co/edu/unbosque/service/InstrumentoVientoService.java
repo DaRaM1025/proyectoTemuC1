@@ -6,6 +6,8 @@ import java.util.Random;
 import java.util.UUID;
 
 import co.edu.unbosque.model.InstrumentoVientoDTO;
+import co.edu.unbosque.model.ModelFacade;
+import co.edu.unbosque.model.persistence.DataMapper;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
@@ -47,9 +49,21 @@ public class InstrumentoVientoService {
 		listaInstrumentosViento
 				.add(new InstrumentoVientoDTO("Corneta", "Getzen", "Instrumento de Viento", "Corneta de latón",
 						"https://example.com/corneta.jpg", 1800000, 2, "IV010", true, "Corneta", "Si bemol", 3, true));
+		igualarListas();
+		leerLista();
 
 	}
 
+	public void igualarListas() {
+		ModelFacade.getVientoDAO().getListaInstrumentoViento()
+				.addAll(DataMapper.listaInstrumentoVientoDTOToListaInstrumentoViento((ArrayList<InstrumentoVientoDTO>) listaInstrumentosViento));
+		ModelFacade.getVientoDAO().escribirEnArchivo();
+	}
+
+	public void leerLista() {
+		ModelFacade.getVientoDAO().cargarDesdeArchivo();
+		listaInstrumentosViento = DataMapper.listaInstrumentoVientoToListaInstrumentoVientoDTO(ModelFacade.getVientoDAO().getListaInstrumentoViento());
+	}
 	public List<InstrumentoVientoDTO> getProducts() {
 		return new ArrayList<>(listaInstrumentosViento);
 	}

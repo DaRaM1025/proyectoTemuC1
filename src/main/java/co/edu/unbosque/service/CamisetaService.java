@@ -6,6 +6,8 @@ import java.util.Random;
 import java.util.UUID;
 
 import co.edu.unbosque.model.CamisetaDTO;
+import co.edu.unbosque.model.ModelFacade;
+import co.edu.unbosque.model.persistence.DataMapper;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
@@ -13,7 +15,7 @@ import jakarta.inject.Named;
 @Named
 @ApplicationScoped
 public class CamisetaService {
-	
+
 	private List<CamisetaDTO> listaCamisetas;
 
 	@PostConstruct
@@ -59,8 +61,22 @@ public class CamisetaService {
 		listaCamisetas.add(new CamisetaDTO("Camiseta Termica", "The North Face", "Outdoor",
 				"Camiseta térmica para climas fríos", "https://example.com/camiseta_termica.jpg", 130000, 6, "CAM010",
 				"M", "Unisex", "Poliéster térmico", "Manga larga", "Redondo", false));
+
+		igualarListas();
+		leerLista();
+
 	}
 
+	public void igualarListas() {
+		ModelFacade.getCamisetaDAO().getListaCamiseta()
+				.addAll(DataMapper.listaCamisetaDTOToListaCamiseta((ArrayList<CamisetaDTO>) listaCamisetas));
+		ModelFacade.getCamisetaDAO().escribirEnArchivo();
+	}
+
+	public void leerLista() {
+		ModelFacade.getCamisetaDAO().cargarDesdeArchivo();
+		listaCamisetas = DataMapper.listaCamisetaToListaCamisetaDTO(ModelFacade.getCamisetaDAO().getListaCamiseta());
+	}
 	public List<CamisetaDTO> getProducts() {
 		return new ArrayList<>(listaCamisetas);
 	}

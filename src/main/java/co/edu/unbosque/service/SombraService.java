@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import co.edu.unbosque.model.ModelFacade;
 import co.edu.unbosque.model.SombraDTO;
+import co.edu.unbosque.model.persistence.DataMapper;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
@@ -17,7 +19,7 @@ public class SombraService {
 
 	@PostConstruct
 	public void init() {
-		listaSombras = new ArrayList<SombraDTO>();
+		listaSombras = new ArrayList<>();
 		listaSombras.add(
 				new SombraDTO("Sombra Nude", "Maybelline", "Polvo compacto", "Paleta de tonos nude para uso diario",
 						"assets/sombra1.jpeg", 45000, 20, "S001", "Mixta", true, "2026-05-12", 12, "Mate"));
@@ -39,8 +41,21 @@ public class SombraService {
 						"assets/sombra9.jpeg", 30000, 30, "S009", "Normal", false, "2026-11-30", 4, "Mate"));
 		listaSombras.add(new SombraDTO("Sombra Glam", "Huda Beauty", "Paleta", "Sombras glamorosas con acabado satinado",
 						"assets/sombra10.jpeg", 135000, 6, "S010", "Seca", true, "2027-08-10", 28, "Satinado"));
+		igualarListas();
+		leerLista();
+
 	}
 
+	public void igualarListas() {
+		ModelFacade.getSombraDAO().getlistaSombras()
+				.addAll(DataMapper.listaSombraDTOToListaTelevisor((ArrayList<SombraDTO>) listaSombras));
+		ModelFacade.getSombraDAO().escribirEnArchivo();
+	}
+
+	public void leerLista() {
+		ModelFacade.getSombraDAO().cargarDesdeArchivo();
+		listaSombras = DataMapper.listaSombraToListaSombraDTO(ModelFacade.getSombraDAO().getlistaSombras());
+	}
 	public List<SombraDTO> getProducts() {
 		return new ArrayList<>(listaSombras);
 	}

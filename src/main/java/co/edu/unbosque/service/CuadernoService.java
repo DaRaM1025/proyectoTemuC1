@@ -6,6 +6,8 @@ import java.util.Random;
 import java.util.UUID;
 
 import co.edu.unbosque.model.CuadernoDTO;
+import co.edu.unbosque.model.ModelFacade;
+import co.edu.unbosque.model.persistence.DataMapper;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
@@ -54,9 +56,21 @@ public class CuadernoService {
 
 		listaCuadernos.add(new CuadernoDTO("Cuaderno Escolar 100 Hojas", "Kores", "Cuaderno", "Cosido, uso escolar",
 				"https://example.com/cuaderno_escolar.jpg", 8200, 80, "CUA010", "Cosido", "Rayadas", 100, false));
+		igualarListas();
+		leerLista();
 
 	}
 
+	public void igualarListas() {
+		ModelFacade.getCuadernoDAO().getlistaCuadernos()
+				.addAll(DataMapper.listaCuadernoDTOToListaCuaderno((ArrayList<CuadernoDTO>) listaCuadernos));
+		ModelFacade.getCuadernoDAO().escribirEnArchivo();
+	}
+
+	public void leerLista() {
+		ModelFacade.getCorrectorDAO().cargarDesdeArchivo();
+		listaCuadernos = DataMapper.listaCuadernoToListaCuadernoDTO(ModelFacade.getCuadernoDAO().getlistaCuadernos());
+	}
 	public List<CuadernoDTO> getProducts() {
 		return new ArrayList<>(listaCuadernos);
 	}

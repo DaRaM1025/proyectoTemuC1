@@ -6,6 +6,8 @@ import java.util.Random;
 import java.util.UUID;
 
 import co.edu.unbosque.model.LegoDTO;
+import co.edu.unbosque.model.ModelFacade;
+import co.edu.unbosque.model.persistence.DataMapper;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
@@ -58,9 +60,21 @@ public class LegoService {
 		listaLegos.add(new LegoDTO("Lego Disney Castillo de Frozen", "LEGO", "Juguete",
 		        "Castillo de Elsa y Anna inspirado en Frozen", "https://example.com/lego_frozen.jpg",
 		        500000, 7, "LEGO010", 6, "Disney", 701, true));
+		igualarListas();
+		leerLista();
 
 	}
 
+	public void igualarListas() {
+		ModelFacade.getLegoDAO().getListaLego()
+				.addAll(DataMapper.listaLegoDTOToListaLego((ArrayList<LegoDTO>) listaLegos));
+		ModelFacade.getLegoDAO().escribirEnArchivo();
+	}
+
+	public void leerLista() {
+		ModelFacade.getLegoDAO().cargarDesdeArchivo();
+		listaLegos = DataMapper.listaLegoToListaLegoDTO(ModelFacade.getLegoDAO().getListaLego());
+	}
 	public List<LegoDTO> getProducts() {
 		return new ArrayList<>(listaLegos);
 	}

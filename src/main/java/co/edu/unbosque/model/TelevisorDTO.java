@@ -69,11 +69,11 @@ public class TelevisorDTO extends DispositivoElectronicoDTO {
 	public void setAsistenteVirtual(String asistenteVirtual) {
 		this.asistenteVirtual = asistenteVirtual;
 	}
-	
+
 	@Override
 	public TelevisorDTO clone() {
 		return new TelevisorDTO(getNombre(), getMarca(), getTipoProducto(), getDescripcion(), getUrlImagen(), getPrecio(),
 				getCantidad(), getId(), getPulgadas(), getResolucion(), getSistemaOperativo(), getCantPuertosHDMI(), getFrecuenciaHz(), getAsistenteVirtual());
 	}
-	
+
 }

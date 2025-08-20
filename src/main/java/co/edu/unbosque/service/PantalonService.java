@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import co.edu.unbosque.model.ModelFacade;
 import co.edu.unbosque.model.PantalonDTO;
+import co.edu.unbosque.model.persistence.DataMapper;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
@@ -59,8 +61,21 @@ public class PantalonService {
 		listaPantalones.add(new PantalonDTO("Jogger Estampado", "Forever21", "Urbano", "Jogger estampado juvenil",
 				"https://example.com/jogger_estampado.jpg", 130000, 19, "PAN010", "L", "Unisex", "Poliéster", "Jogger",
 				"Regular", "Largo"));
+		igualarListas();
+		leerLista();
+
 	}
 
+	public void igualarListas() {
+		ModelFacade.getPantalonDAO().getListaPantalon()
+				.addAll(DataMapper.listaPantalonDTOToListaPantalon((ArrayList<PantalonDTO>) listaPantalones));
+		ModelFacade.getPantalonDAO().escribirEnArchivo();
+	}
+
+	public void leerLista() {
+		ModelFacade.getPantalonDAO().cargarDesdeArchivo();
+		listaPantalones = DataMapper.listaPantalonToListaPantalonDTO(ModelFacade.getPantalonDAO().getListaPantalon());
+	}
 	public List<PantalonDTO> getProducts() {
 		return new ArrayList<>(listaPantalones);
 	}

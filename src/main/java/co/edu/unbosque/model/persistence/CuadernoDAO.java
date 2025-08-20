@@ -12,7 +12,7 @@ public class CuadernoDAO implements OperacionDAO<CuadernoDTO, Cuaderno> {
 	private final String CUADERNO_FILE_NAME = "Cuaderno.csv";
 
 	public CuadernoDAO() {
-		listaCuadernos = new ArrayList<Cuaderno>();
+		listaCuadernos = new ArrayList<>();
 		cargarDesdeArchivo();
 	}
 
@@ -98,19 +98,19 @@ public class CuadernoDAO implements OperacionDAO<CuadernoDTO, Cuaderno> {
 
 	public void escribirEnArchivo() {
 		String contenido = "";
-		for (int i = 0; i < listaCuadernos.size(); i++) {
-			contenido += listaCuadernos.get(i).getNombre() + ";";
-			contenido += listaCuadernos.get(i).getMarca() + ";";
-			contenido += listaCuadernos.get(i).getTipoProducto() + ";";
-			contenido += listaCuadernos.get(i).getDescripcion() + ";";
-			contenido += listaCuadernos.get(i).getUrlImagen() + ";";
-			contenido += listaCuadernos.get(i).getPrecio() + ";";
-			contenido += listaCuadernos.get(i).getCantidad() + ";";
-			contenido += listaCuadernos.get(i).getId() + ";";
-			contenido += listaCuadernos.get(i).getTipoPresentacion() + ";";
-			contenido += listaCuadernos.get(i).getTipoHojas() + ";";
-			contenido += listaCuadernos.get(i).getCantidadHojas() + ";";
-			contenido += listaCuadernos.get(i).isPastaDura() + ";";
+		for (Cuaderno element : listaCuadernos) {
+			contenido += element.getNombre() + ";";
+			contenido += element.getMarca() + ";";
+			contenido += element.getTipoProducto() + ";";
+			contenido += element.getDescripcion() + ";";
+			contenido += element.getUrlImagen() + ";";
+			contenido += element.getPrecio() + ";";
+			contenido += element.getCantidad() + ";";
+			contenido += element.getId() + ";";
+			contenido += element.getTipoPresentacion() + ";";
+			contenido += element.getTipoHojas() + ";";
+			contenido += element.getCantidadHojas() + ";";
+			contenido += element.isPastaDura() + "\n";
 		}
 		FileManager.escribirEnArchivoTexto(CUADERNO_FILE_NAME, contenido);
 	}
@@ -123,8 +123,8 @@ public class CuadernoDAO implements OperacionDAO<CuadernoDTO, Cuaderno> {
 		}
 
 		String[] filas = contenido.split("\n");
-		for (int i = 0; i < filas.length; i++) {
-			String[] columnas = filas[i].split(";");
+		for (String element : filas) {
+			String[] columnas = element.split(";");
 			String nombre = columnas[0];
 			String marca = columnas[1];
 			String tipoProducto = columnas[2];
@@ -133,10 +133,10 @@ public class CuadernoDAO implements OperacionDAO<CuadernoDTO, Cuaderno> {
 			double precio = Double.parseDouble(columnas[5]);
 			int cantidad = Integer.parseInt(columnas[6]);
 			String id = columnas[7];
-			String tipoPresentacion = columnas[9];
-			String tipoHojas = columnas[10];
-			int cantidadHojas = Integer.parseInt(columnas[11]);
-			boolean pastaDura = Boolean.parseBoolean(columnas[12]);
+			String tipoPresentacion = columnas[8];
+			String tipoHojas = columnas[9];
+			int cantidadHojas = Integer.parseInt(columnas[10]);
+			boolean pastaDura = Boolean.parseBoolean(columnas[11]);
 			listaCuadernos.add(new Cuaderno(nombre, marca, tipoProducto, descripcion, urlImagen, precio, cantidad, id,
 					tipoPresentacion, tipoHojas, cantidadHojas, pastaDura));
 		}

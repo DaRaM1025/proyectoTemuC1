@@ -18,7 +18,7 @@ import co.edu.unbosque.model.PantalonDTO;
  *   <li>Sincroniza automáticamente los cambios con los archivos de persistencia.</li>
  *   <li>El criterio de unicidad de un pantalón está dado por su campo {@code id}.</li>
  * </ul>
- * 
+ *
  * @author Nataly Rengifo
  * @version 1.0
  */
@@ -28,7 +28,7 @@ public class PantalonDAO implements OperacionDAO<PantalonDTO, Pantalon> {
     private ArrayList<Pantalon> listaPantalon;
 
     /** Nombre del archivo serializado donde se almacenan los objetos. */
-    private final String SERIAL_FILE_NAME = "pantaon.dat"; // Ojo: posible error de escritura ("pantalon.dat") 
+    private final String SERIAL_FILE_NAME = "pantaon.dat"; // Ojo: posible error de escritura ("pantalon.dat")
 
     /** Nombre del archivo de texto (CSV) donde se almacenan los objetos. */
     private final String TEXT_FILE_NAME = "pantalon.csv";
@@ -36,15 +36,15 @@ public class PantalonDAO implements OperacionDAO<PantalonDTO, Pantalon> {
     /**
      * Constructor que inicializa la lista y carga los datos desde el archivo CSV.
       */
-    
+
 	public PantalonDAO() {
 		listaPantalon= new ArrayList<>();
 		cargarDesdeArchivo();
 	}
-	
+
 	 /**
      * Obtiene la lista completa de pistolas de agua en memoria.
-     * 
+     *
      * @return lista de pistolas de agua.
      */
 		public ArrayList<Pantalon> getListaPantalon() {
@@ -53,7 +53,7 @@ public class PantalonDAO implements OperacionDAO<PantalonDTO, Pantalon> {
 
 	 /**
 	     * Establece una nueva lista de pantalones.
-	     * 
+	     *
 	     * @param listaPantalon lista de pantalones a asignar.
 	     */
 	public void setListaPantalon(ArrayList<Pantalon> listaPantalon) {
@@ -63,7 +63,7 @@ public class PantalonDAO implements OperacionDAO<PantalonDTO, Pantalon> {
 
 	 /**
     * Obtiene el nombre del archivo serializado.
-    * 
+    *
     * @return nombre del archivo serializado.
     */
 	public String getSERIAL_FILE_NAME() {
@@ -73,7 +73,7 @@ public class PantalonDAO implements OperacionDAO<PantalonDTO, Pantalon> {
 
 	/**
      * Obtiene el nombre del archivo CSV.
-     * 
+     *
      * @return nombre del archivo CSV.
      */
 	public String getTEXT_FILE_NAME() {
@@ -95,7 +95,7 @@ public class PantalonDAO implements OperacionDAO<PantalonDTO, Pantalon> {
 	public boolean crear(PantalonDTO nuevo) {
 		Pantalon entidad = DataMapper.dtoToPantalon(nuevo);
 		   Pantalon encontrado = find(entidad);
-		    
+
 		    if (encontrado == null) {
 		        listaPantalon.add(entidad);
 		        System.out.println("EXITO" + listaPantalon.size());
@@ -209,7 +209,7 @@ public class PantalonDAO implements OperacionDAO<PantalonDTO, Pantalon> {
 		if (listaPantalon == null) {
 			listaPantalon = new ArrayList<>();
 		}
-		
+
 	}
 	  /**
      * Escribe el contenido de la lista en un archivo de texto (CSV).
@@ -221,22 +221,22 @@ public class PantalonDAO implements OperacionDAO<PantalonDTO, Pantalon> {
      */
 	public void escribirEnArchivo() {
 		String contenido = "";
-		for (int i = 0; i < listaPantalon.size(); i++) {
-			contenido += listaPantalon.get(i).getNombre() + ";";
-			contenido += listaPantalon.get(i).getMarca() + ";";
-			contenido += listaPantalon.get(i).getTipoProducto() + ";";
-			contenido += listaPantalon.get(i).getDescripcion() + ";";
-			contenido += listaPantalon.get(i).getUrlImagen() + ";";
-			contenido += listaPantalon.get(i).getPrecio() + ";";
-			contenido += listaPantalon.get(i).getCantidad() + ";";
-			contenido += listaPantalon.get(i).getId() + ";";
-			contenido += listaPantalon.get(i).getTalla() + ";";
-			contenido += listaPantalon.get(i).getGenero() + ";";
-			contenido += listaPantalon.get(i).getMaterial() + ";";
-			contenido += listaPantalon.get(i).getTipoPantalon() + ";";
-			contenido += listaPantalon.get(i).getCorte() + ";";
-			contenido += listaPantalon.get(i).getLargo() + "\n";
-			
+		for (Pantalon element : listaPantalon) {
+			contenido += element.getNombre() + ";";
+			contenido += element.getMarca() + ";";
+			contenido += element.getTipoProducto() + ";";
+			contenido += element.getDescripcion() + ";";
+			contenido += element.getUrlImagen() + ";";
+			contenido += element.getPrecio() + ";";
+			contenido += element.getCantidad() + ";";
+			contenido += element.getId() + ";";
+			contenido += element.getTalla() + ";";
+			contenido += element.getGenero() + ";";
+			contenido += element.getMaterial() + ";";
+			contenido += element.getTipoPantalon() + ";";
+			contenido += element.getCorte() + ";";
+			contenido += element.getLargo() + "\n";
+
 		}
 
 		FileManager.escribirEnArchivoTexto(TEXT_FILE_NAME, contenido);
@@ -260,8 +260,8 @@ public class PantalonDAO implements OperacionDAO<PantalonDTO, Pantalon> {
 		}
 
 		String[] filas = contenido.split("\n");
-		for (int i = 0; i < filas.length; i++) {
-			String[] columnas = filas[i].split(";");
+		for (String element : filas) {
+			String[] columnas = element.split(";");
 			String nombre = columnas[0];
 			String marca = columnas[1];
 			String tipoProducto = columnas[2];
@@ -276,10 +276,10 @@ public class PantalonDAO implements OperacionDAO<PantalonDTO, Pantalon> {
 			String tipoPantalon = columnas[11];
 			String corte = columnas[12];
 			String largo = columnas[13];
-			
-			;
+
+
 			listaPantalon.add(new Pantalon(nombre, marca, tipoProducto, descripcion, urlImagen, precio, cantidad, id, talla, genero, material, tipoPantalon, corte, largo));
 		}
 	}
-	
+
 }
