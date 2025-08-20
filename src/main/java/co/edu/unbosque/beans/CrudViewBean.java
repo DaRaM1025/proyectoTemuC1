@@ -11,6 +11,7 @@ import co.edu.unbosque.model.ProductoDTO;
 import co.edu.unbosque.service.CrudService;
 import co.edu.unbosque.service.ProductService;
 import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
@@ -125,6 +126,7 @@ public class CrudViewBean implements Serializable{
     }
 
     public void deleteSelectedProducts() {
+    	System.out.println("Deleting selected products: " + selectedProducts);
         this.products.removeAll(this.selectedProducts);
         this.selectedProduct = null;
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Products Removed"));

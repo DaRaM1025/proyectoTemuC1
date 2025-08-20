@@ -25,7 +25,7 @@ public class FormCorrectorBean implements Serializable{
     private String id=UUID.randomUUID().toString();
     private String tipoPiel;
     private boolean pruebaAgua;
-    private LocalDate fechaVencimiento;
+    private String fechaVencimiento;
     private String coberturaCorrector;
     private String formatoCorrector;
     private ArrayList<String>opcionesPiel;
@@ -106,10 +106,10 @@ public class FormCorrectorBean implements Serializable{
 	public void setPruebaAgua(boolean pruebaAgua) {
 		this.pruebaAgua = pruebaAgua;
 	}
-	public LocalDate getFechaVencimiento() {
+	public String getFechaVencimiento() {
 		return fechaVencimiento;
 	}
-	public void setFechaVencimiento(LocalDate fechaVencimiento) {
+	public void setFechaVencimiento(String fechaVencimiento) {
 		this.fechaVencimiento = fechaVencimiento;
 	}
 	public String getCoberturaCorrector() {
