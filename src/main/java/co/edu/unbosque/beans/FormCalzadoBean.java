@@ -2,31 +2,39 @@ package co.edu.unbosque.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
+import co.edu.unbosque.model.CalzadoDTO;
+import co.edu.unbosque.service.CrudService;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 @Named(value="calzadoBean")
 @ViewScoped
 public class FormCalzadoBean implements Serializable {
 	private String nombre;
 	private String marca;
+	 private final String tipoProducto="Calzado";
 	private String descripcion;
-	private String imagen;
+	private String imagen="https://img.freepik.com/foto-gratis/zapatos-cuero-marron_1203-8175.jpg";
 	private double precio;
 	private int cantidad;
+	private String id=UUID.randomUUID().toString();
 	private String talla;
     private String genero;
     private String material;
     private String tipoCalzado;
     private String ocasionCalzado;
     private String suelaCalzado;
-    private String alturaSuela;
+    private double alturaSuela;
     
     private ArrayList<String> opcionesGenero;
     private ArrayList<String> opcionesTipo;
     private ArrayList<String> opcionesOcasion;
     private ArrayList<String> opcionesMaterial;
+    @Inject
+    private CrudService crudSer;
     @PostConstruct
     public void init() {
     	opcionesGenero = new ArrayList<>();
@@ -59,6 +67,7 @@ public class FormCalzadoBean implements Serializable {
     
     public void guardar() {
     	System.out.println(toString());
+    	crudSer.agregarProducto(new CalzadoDTO(nombre, marca, tipoProducto, descripcion, imagen, precio, cantidad, id, talla, genero, material, tipoCalzado, ocasionCalzado, suelaCalzado, alturaSuela));
     }
 	public String getNombre() {
 		return nombre;
@@ -132,10 +141,10 @@ public class FormCalzadoBean implements Serializable {
 	public void setSuelaCalzado(String suelaCalzado) {
 		this.suelaCalzado = suelaCalzado;
 	}
-	public String getAlturaSuela() {
+	public double getAlturaSuela() {
 		return alturaSuela;
 	}
-	public void setAlturaSuela(String alturaSuela) {
+	public void setAlturaSuela(double alturaSuela) {
 		this.alturaSuela = alturaSuela;
 	}
 
@@ -177,6 +186,31 @@ public class FormCalzadoBean implements Serializable {
 
 	public void setOpcionesMaterial(ArrayList<String> opcionesMaterial) {
 		this.opcionesMaterial = opcionesMaterial;
+	}
+
+
+	public String getId() {
+		return id;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
+	public String getTipoProducto() {
+		return tipoProducto;
+	}
+
+
+	public CrudService getCrudSer() {
+		return crudSer;
+	}
+
+
+	public void setCrudSer(CrudService crudSer) {
+		this.crudSer = crudSer;
 	}
 
 

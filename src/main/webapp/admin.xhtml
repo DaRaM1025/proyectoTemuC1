@@ -13,6 +13,15 @@
 
 
 </h:head>
+<style>
+.product-image {
+	width: 15px;
+	height: 20px;
+	object-fit: cover;
+	border-radius: 5px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+</style>
 <h:body>
 	<ui:composition template="templates/template.xhtml">
 		<ui:define name="content">
@@ -97,10 +106,10 @@
 
 
 							<p:commandButton id="delete-products-button"
-								value="#{crudView.deleteButtonMessage}" icon="pi pi-trash"
-								actionListener="#{crudView.deleteSelectedProducts}"
+								value="#{crudViewBean.deleteButtonMessage}" icon="pi pi-trash"
+								actionListener="#{crudViewBean.deleteSelectedProducts}"
 								styleClass="ui-button-danger"
-								disabled="#{!crudView.hasSelectedProducts()}" update="@this">
+								disabled="#{!crudViewBean.hasSelectedProducts()}" update="@this">
 								<p:confirm header="Confirmation"
 									message="Delete the selected products?"
 									icon="pi pi-exclamation-triangle" />
@@ -118,9 +127,9 @@
 					</p:toolbar>
 				</h:form>
 				<p:dataTable id="dt-products" widgetVar="dtProducts" var="product"
-					value="#{crudView.products}" reflow="true"
+					value="#{crudViewBean.products}" reflow="true"
 					styleClass="products-table" selectionMode="multiple"
-					selection="#{crudView.selectedProducts}" rowKey="#{product.code}"
+					selection="#{crudViewBean.selectedProducts}" rowKey="#{product.id}"
 					paginator="true" rows="10" selectionRowMode="add"
 					paginatorPosition="bottom">
 					<f:facet name="header">
@@ -144,54 +153,44 @@
 
 					<p:column selectionBox="true" exportable="false"></p:column>
 
-					<p:column headerText="Code" sortBy="#{product.code}"
-						filterBy="#{product.code}">
-						<h:outputText value="#{product.code}" />
+					<p:column headerText="Code" sortBy="#{product.id}"
+						filterBy="#{product.id}">
+						<h:outputText value="#{product.id}" />
 					</p:column>
 					<p:column headerText="Name" exportable="true"
-						sortBy="#{product.name}" filterBy="#{product.name}">
-						<h:outputText value="#{product.name}" />
+						sortBy="#{product.nombre}" filterBy="#{product.nombre}">
+						<h:outputText value="#{product.nombre}" />
 					</p:column>
 					<p:column headerText="Image" exportable="false">
-						<p:graphicImage name="images/product/#{product.image}"
+						<p:graphicImage value="#{product.urlImagen}"
 							library="demo" styleClass="product-image" />
 					</p:column>
 					<p:column headerText="Price" exportable="true"
-						sortBy="#{product.price}">
-						<h:outputText value="#{product.price}" style="font-weight: 700">
+						sortBy="#{product.precio}">
+						<h:outputText value="#{product.precio}" style="font-weight: 700">
 							<f:convertNumber currencySymbol="$" type="currency" />
 						</h:outputText>
 					</p:column>
 					<p:column headerText="Category" exportable="true"
-						sortBy="#{product.category}" filterBy="#{product.category}">
-						<h:outputText value="#{product.category}" />
+						sortBy="#{product.tipoProducto}" filterBy="#{product.tipoProducto}">
+						<h:outputText value="#{product.tipoProducto}" />
 					</p:column>
-					<p:column headerText="Reviews" exportable="false"
-						sortBy="#{product.rating}">
-						<p:rating value="#{product.rating}" readonly="true" />
-					</p:column>
-					<p:column headerText="Status" exportable="true"
-						sortBy="#{product.inventoryStatus}"
-						filterBy="#{product.inventoryStatus}">
-						<h:outputText
-							styleClass="product-badge status-#{product.inventoryStatus.name().toLowerCase()}"
-							value="#{product.inventoryStatus.text}" />
-					</p:column>
-					<!-- <p:column exportable="false" ariaHeaderText="Actions">
+										<!--  <p:column exportable="false" ariaHeaderText="Actions">
 					<p:commandButton icon="pi pi-pencil"
 						update=":dialogs:manage-product-content"
 						oncomplete="PF('manageProductDialog').show()"
 						styleClass="edit-button rounded-button ui-button-success"
 						process="@this">
 						<f:setPropertyActionListener value="#{product}"
-							target="#{crudView.selectedProduct}" />
+							target="#{crudViewBean.selectedProduct}" />
 						<p:resetInput target=":dialogs:manage-product-content" />
-					</p:commandButton> -->
+					</p:commandButton> 
+					-->
 					<p:commandButton class="ui-button-warning rounded-button"
 						icon="pi pi-trash" process="@this"
 						oncomplete="PF('deleteProductDialog').show()">
 						<f:setPropertyActionListener value="#{product}"
-							target="#{crudView.selectedProduct}" />
+							target="#{crudViewBean.selectedProduct}" />
 					</p:commandButton>
 					<!-- </p:column> -->
 
@@ -291,7 +290,7 @@
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
 								action="#{camisetaBean.guardar()}" process="@form"
-								update="@form" resetValues="true" />
+								update="@form, @dt-products" resetValues="true" />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgCamiseta').hide()" class="ui-button-secondary"
 								type="button" />
@@ -397,7 +396,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								action="#{calzadoBean.guardar()}" process="@form" update="@form" resetValues="true"/>
+								action="#{calzadoBean.guardar()}" process="@form" update="@form, @dt-products" resetValues="true"/>
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgCalzado').hide()" class="ui-button-secondary"
 								type="button" />
@@ -498,7 +497,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								action="#{pantalonBean.guardar()}" process="@form" update="@form" resetValues="true"/>
+								action="#{pantalonBean.guardar()}" process="@form" update="@form, @dt-products" resetValues="true"/>
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgPantalon').hide()" class="ui-button-secondary"
 								type="button" />
@@ -608,7 +607,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								action="#{celularBean.guardar()}" process="@form" update="@form" resetValues="true" />
+								action="#{celularBean.guardar()}" process="@form" update="@form, @dt-products " resetValues="true" />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgCelular').hide()" class="ui-button-secondary"
 								type="button" />
@@ -726,7 +725,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								action="#{computadorBean.guardar()}" process="@form" update="@form" resetValues="true"  />
+								action="#{computadorBean.guardar()}" process="@form" update="@form, @dt-products " resetValues="true"  />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgComputador').hide()" class="ui-button-secondary"
 								type="button" />
@@ -826,7 +825,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								action="#{televisorBean.guardar()}" process="@form" update="@form" resetValues="true"  />
+								action="#{televisorBean.guardar()}" process="@form" update="@form, @dt-products" resetValues="true"  />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgTelevisor').hide()" class="ui-button-secondary"
 								type="button" />
@@ -907,7 +906,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								action="#{legoBean.guardar()}" process="@form" update="@form"
+								action="#{legoBean.guardar()}" process="@form" update="@form, @dt-products"
 								resetValues="true"  />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgLego').hide()" class="ui-button-secondary"
@@ -996,7 +995,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Guardar" icon="pi pi-check"
-								action="#{pelucheBean.guardar()}" process="@form" update="@form"
+								action="#{pelucheBean.guardar()}" process="@form" update="@form, @dt-products"
 								resetValues="true" />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgPeluche').hide()" Sclass="ui-button-secondary"
@@ -1074,7 +1073,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								action="#{pistolaBean.guardar()}" process="@form" update="@form"
+								action="#{pistolaBean.guardar()}" process="@form" update="@form, @dt-products"
 								resetValues="true" />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgPistola').hide()" class="ui-button-secondary"
@@ -1157,7 +1156,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								action="#{cuadernoBean.guardar()}" process="@form" update="@form" resetValues="true" />
+								action="#{cuadernoBean.guardar()}" process="@form" update="@form, @dt-products" resetValues="true" />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgCuaderno').hide()" class="ui-button-secondary"
 								type="button" />
@@ -1242,7 +1241,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								action="#{marcadorBean.guardar()}" process="@form" update="@form" resetValues="true"  />
+								action="#{marcadorBean.guardar()}" process="@form" update="@form, @dt-products" resetValues="true"  />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgMarcador').hide()" class="ui-button-secondary"
 								type="button" />
@@ -1327,7 +1326,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								action="#{cintaBean.guardar()}" process="@form" update="@form" resetValues="true"  />
+								action="#{cintaBean.guardar()}" process="@form" update="@form, @dt-products" resetValues="true"  />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgCinta').hide()" class="ui-button-secondary"
 								type="button" />
@@ -1420,7 +1419,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								action="#{sombraBean.guardar()}" process="@form" update="@form" resetValues="true"  />
+								action="#{sombraBean.guardar()}" process="@form" update="@form, @dt-products" resetValues="true"  />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgSombra').hide()" class="ui-button-secondary"
 								type="button" />
@@ -1511,7 +1510,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								action="#{labialBean.guardar()}" process="@form" update="@form" resetValues="true"  />
+								action="#{labialBean.guardar()}" process="@form" update="@form, @dt-products" resetValues="true"  />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgLabial').hide()" class="ui-button-secondary"
 								type="button" />
@@ -1604,7 +1603,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								action="#{correctorBean.guardar()}" process="@form" update="@form" resetValues="true"  />
+								action="#{correctorBean.guardar()}" process="@form" update="@form, @dt-products" resetValues="true"  />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgCorrector').hide()" class="ui-button-secondary"
 								type="button" />
@@ -1694,7 +1693,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								action="#{vientoBean.guardar()}" process="@form" update="@form" resetValues="true"  />
+								action="#{vientoBean.guardar()}" process="@form" update="@form, @dt-products" resetValues="true"  />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgViento').hide()" class="ui-button-secondary"
 								type="button" />
@@ -1784,7 +1783,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								action="#{cuerdaBean.guardar()}" process="@form" update="@form" resetValues="true"  />
+								action="#{cuerdaBean.guardar()}" process="@form" update="@form, @dt-products" resetValues="true"  />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgCuerda').hide()" class="ui-button-secondary"
 								type="button" />
@@ -1875,7 +1874,7 @@
 						<!-- ==================== BOTONES FOOTER ==================== -->
 						<f:facet name="footer">
 							<p:commandButton value="Aceptar" icon="pi pi-check"
-								action="#{percusionBean.guardar()}" process="@form" update="@form" resetValues="true" />
+								action="#{percusionBean.guardar()}" process="@form" update="@form, @dt-products" resetValues="true" />
 							<p:commandButton value="Cancelar" icon="pi pi-times"
 								onclick="PF('dlgPercusion').hide()" class="ui-button-secondary"
 								type="button" />

@@ -2,9 +2,13 @@ package co.edu.unbosque.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
+import co.edu.unbosque.model.TelevisorDTO;
+import co.edu.unbosque.service.CrudService;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 @Named("televisorBean")
@@ -13,12 +17,15 @@ public class FormTelevisorBean implements Serializable{
 
 	private String nombre;
     private String marca;
+    private final String tipoProducto="Televisor";
     private String descripcion;
-    private String imagen; 
+    private String imagen="https://img.freepik.com/foto-gratis/diseno-interior-habitacion_23-2148899490.jpg"; 
     private double precio;
     private int cantidad;
+    private String id=UUID.randomUUID().toString();
     private double pulgadas;
     private String resolucion;
+    private final String tipoProductoT="SmartTv";
     private String sistemaOperativo;
     private int puertosHdmi;
     private int frecuenciaHz;
@@ -27,6 +34,8 @@ public class FormTelevisorBean implements Serializable{
     private ArrayList<String>opcionesResolucion;
     private ArrayList<String>opcionesSistema;
     private ArrayList<String>opcionesAsistente;
+    @Inject
+    private CrudService crudSer;
     @PostConstruct
     
     public void init() {
@@ -62,6 +71,7 @@ public class FormTelevisorBean implements Serializable{
     
     public void guardar() {
     	System.out.println(toString());
+    	crudSer.agregarProducto(new TelevisorDTO(nombre, marca, tipoProducto, descripcion, imagen, precio, cantidad, id, pulgadas, resolucion, sistemaOperativo, puertosHdmi, frecuenciaHz, asistenteVirtual));
     }
     
 	@Override
@@ -168,6 +178,30 @@ public class FormTelevisorBean implements Serializable{
 
 	public void setOpcionesAsistente(ArrayList<String> opcionesAsistente) {
 		this.opcionesAsistente = opcionesAsistente;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public CrudService getCrudSer() {
+		return crudSer;
+	}
+
+	public void setCrudSer(CrudService crudSer) {
+		this.crudSer = crudSer;
+	}
+
+	public String getTipoProducto() {
+		return tipoProducto;
+	}
+
+	public String getTipoProductoT() {
+		return tipoProductoT;
 	}
     
 	

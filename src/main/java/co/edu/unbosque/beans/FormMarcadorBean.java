@@ -2,9 +2,13 @@ package co.edu.unbosque.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
+import co.edu.unbosque.model.MarcadorDTO;
+import co.edu.unbosque.service.CrudService;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 @Named("marcadorBean")
@@ -13,10 +17,12 @@ public class FormMarcadorBean implements Serializable {
 
 	private String nombre;
     private String marca;
+    private String tipoProducto="Marcador";
     private String descripcion;
-    private String imagen; 
+    private String imagen="https://img.freepik.com/foto-gratis/rotulador-negro-aislado-fondo-whtie_53876-18006.jpg"; 
     private double precio;
     private int cantidad;
+    private String id=UUID.randomUUID().toString();
     private String presentacion;
     private String tipoPunta;
     private boolean permanente;
@@ -24,6 +30,8 @@ public class FormMarcadorBean implements Serializable {
     private ArrayList<String>opcionesPresentacion;
     private ArrayList<String>opcionesPunta;
     private ArrayList<String>opcionesTipo;
+    @Inject
+    private CrudService crudSer;
     @PostConstruct
     public void init() {
     opcionesPresentacion= new ArrayList<String>();
@@ -49,6 +57,7 @@ public class FormMarcadorBean implements Serializable {
     
     public void guardar() {
     	System.out.println(toString());
+    	crudSer.agregarProducto(new MarcadorDTO(nombre, marca, tipoProducto, descripcion, imagen, precio, cantidad, id, presentacion, tipoPunta, permanente, tipoMarcador));
     }
     
 	public String getNombre() {
@@ -140,6 +149,30 @@ public class FormMarcadorBean implements Serializable {
 
 	public void setOpcionesTipo(ArrayList<String> opcionesTipo) {
 		this.opcionesTipo = opcionesTipo;
+	}
+
+	public String getTipoProducto() {
+		return tipoProducto;
+	}
+
+	public void setTipoProducto(String tipoProducto) {
+		this.tipoProducto = tipoProducto;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public CrudService getCrudSer() {
+		return crudSer;
+	}
+
+	public void setCrudSer(CrudService crudSer) {
+		this.crudSer = crudSer;
 	}
     
     

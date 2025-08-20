@@ -3,19 +3,25 @@ package co.edu.unbosque.beans;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.UUID;
 
+import co.edu.unbosque.model.SombraDTO;
+import co.edu.unbosque.service.CrudService;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 @Named("sombraBean")
 @ViewScoped
 public class FormSombraBean implements Serializable {
 	private String nombre;
     private String marca;
+    private String tipoProducto="Sombra";
     private String descripcion;
-    private String imagen; 
+    private String imagen="https://img.freepik.com/foto-gratis/vista-paleta-sombras-ojos-polvo-cosmetico_23-2150260878.jpg"; 
     private double precio;
     private int cantidad;
+    private String id=UUID.randomUUID().toString();
     private String tipoPiel;
     private boolean pruebaAgua;
     private LocalDate fechaVencimiento;
@@ -23,6 +29,8 @@ public class FormSombraBean implements Serializable {
     private String acabadoSombras;
     private ArrayList<String>opcionesPiel;
     private ArrayList<String>opcionesAcabado;
+    @Inject
+    private CrudService crudSer;
     @PostConstruct
     public void init() {
     	opcionesPiel= new ArrayList<String>();
@@ -42,6 +50,7 @@ public class FormSombraBean implements Serializable {
     
     public void guardar() {
     	System.out.println(toString());
+    	crudSer.agregarProducto(new SombraDTO(nombre, marca, tipoProducto, descripcion, imagen, precio, cantidad, id, tipoPiel, pruebaAgua, descripcion, cantidadColores, acabadoSombras));
     }
 	public String getNombre() {
 		return nombre;
@@ -137,6 +146,36 @@ public class FormSombraBean implements Serializable {
 				+ imagen + ", precio=" + precio + ", cantidad=" + cantidad + ", tipoPiel=" + tipoPiel + ", pruebaAgua="
 				+ pruebaAgua + ", fechaVencimiento=" + fechaVencimiento + ", cantidadColores=" + cantidadColores
 				+ ", acabadoSombras=" + acabadoSombras + "]";
+	}
+
+
+	public String getTipoProducto() {
+		return tipoProducto;
+	}
+
+
+	public void setTipoProducto(String tipoProducto) {
+		this.tipoProducto = tipoProducto;
+	}
+
+
+	public String getId() {
+		return id;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
+	public CrudService getCrudSer() {
+		return crudSer;
+	}
+
+
+	public void setCrudSer(CrudService crudSer) {
+		this.crudSer = crudSer;
 	}
     
     

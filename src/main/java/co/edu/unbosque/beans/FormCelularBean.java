@@ -2,9 +2,13 @@ package co.edu.unbosque.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
+import co.edu.unbosque.model.CelularDTO;
+import co.edu.unbosque.service.CrudService;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 @Named("celularBean")
 @ViewScoped
@@ -12,12 +16,15 @@ public class FormCelularBean implements Serializable{
 
 	private String nombre;
     private String marca;
+    private String tipoProducto="Celular";
     private String descripcion;
-    private String imagen; 
+    private String imagen="https://img.freepik.com/foto-gratis/composicion-elegante-telefono-inteligente_23-2149437106.jpg"; 
     private double precio;
     private int cantidad;
+    private String id=UUID.randomUUID().toString();
     private double pulgadas;
     private String resolucion;
+    private String tipoProductoC="SmartPhone";
     private String sistemaOperativo;
     private String almacenamientoCel;
     private String ramCel;
@@ -27,6 +34,9 @@ public class FormCelularBean implements Serializable{
     private ArrayList<String>opcionesSistema;
     private ArrayList<String>opcionesAlmacenamiento;
     private ArrayList<String>opcionesRam;
+    @Inject
+    private CrudService crudSer;
+    
     @PostConstruct
     public void init() {
     	opcionesResolucion=new ArrayList<String>();
@@ -64,6 +74,7 @@ public class FormCelularBean implements Serializable{
     
     public void guardar() {
     	System.out.println(toString());
+    	crudSer.agregarProducto(new CelularDTO(nombre, marca, tipoProducto, descripcion, imagen, precio, cantidad, id, pulgadas, resolucion, sistemaOperativo, almacenamientoCel, ramCel, camaras, dualSim));
     }
 	public String getNombre() {
 		return nombre;
@@ -174,6 +185,31 @@ public class FormCelularBean implements Serializable{
 
 	public void setOpcionesRam(ArrayList<String> opcionesRam) {
 		this.opcionesRam = opcionesRam;
+	}
+
+	
+	public String getTipoProducto() {
+		return tipoProducto;
+	}
+
+	public void setTipoProducto(String tipoProducto) {
+		this.tipoProducto = tipoProducto;
+	}
+
+	public String getTipoProductoC() {
+		return tipoProductoC;
+	}
+
+	public void setTipoProductoC(String tipoProductoC) {
+		this.tipoProductoC = tipoProductoC;
+	}
+
+	public CrudService getCrudSer() {
+		return crudSer;
+	}
+
+	public void setCrudSer(CrudService crudSer) {
+		this.crudSer = crudSer;
 	}
 
 	@Override

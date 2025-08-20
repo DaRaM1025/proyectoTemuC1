@@ -7,6 +7,8 @@ import java.util.UUID;
 import org.primefaces.PrimeFaces;
 
 import co.edu.unbosque.model.Product;
+import co.edu.unbosque.model.ProductoDTO;
+import co.edu.unbosque.service.CrudService;
 import co.edu.unbosque.service.ProductService;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
@@ -17,63 +19,63 @@ import jakarta.inject.Named;
 
 @Named
 @ViewScoped
-public class crudView implements Serializable{
+public class CrudViewBean implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
-    private ArrayList<Product> products;
+    private ArrayList<ProductoDTO> products;
 
-    private Product selectedProduct;
+    private ProductoDTO selectedProduct;
 
-    private ArrayList<Product> selectedProducts;
+    private ArrayList<ProductoDTO> selectedProducts;
 
     @Inject
     //Pasar las referencnias de una clase ya creada e inyectarla dentro de esta otra clase "injection of dependencies"
-    private ProductService productService;
+    private CrudService productService;
 
     @PostConstruct
     public void init() {
-        this.products = (ArrayList<Product>) this.productService.getClonedProducts(100);
+        this.products = productService.getListaCrud();
         this.selectedProducts = new ArrayList<>();
     }
 
 
-    public ArrayList<Product> getProducts() {
+    public ArrayList<ProductoDTO> getProducts() {
 		return products;
 	}
 
 
-	public void setProducts(ArrayList<Product> products) {
+	public void setProducts(ArrayList<ProductoDTO> products) {
 		this.products = products;
 	}
 
 
-	public Product getSelectedProduct() {
+	public ProductoDTO getSelectedProduct() {
 		return selectedProduct;
 	}
 
 
-	public void setSelectedProduct(Product selectedProduct) {
+	public void setSelectedProduct(ProductoDTO selectedProduct) {
 		this.selectedProduct = selectedProduct;
 	}
 
 
-	public ArrayList<Product> getSelectedProducts() {
+	public ArrayList<ProductoDTO> getSelectedProducts() {
 		return selectedProducts;
 	}
 
 
-	public void setSelectedProducts(ArrayList<Product> selectedProducts) {
+	public void setSelectedProducts(ArrayList<ProductoDTO> selectedProducts) {
 		this.selectedProducts = selectedProducts;
 	}
 
 
-	public ProductService getProductService() {
+	public CrudService getProductService() {
 		return productService;
 	}
 
 
-	public void setProductService(ProductService productService) {
+	public void setProductService(CrudService productService) {
 		this.productService = productService;
 	}
 
@@ -84,12 +86,12 @@ public class crudView implements Serializable{
 
 
 	public void openNew() {
-        this.selectedProduct = new Product();
+        this.selectedProduct = new ProductoDTO();
     }
 
     public void saveProduct() {
-        if (this.selectedProduct.getCode() == null) {
-            this.selectedProduct.setCode(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9));
+        if (this.selectedProduct.getId() == null) {
+            this.selectedProduct.setId(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9));
             this.products.add(this.selectedProduct);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Product Added"));
         }

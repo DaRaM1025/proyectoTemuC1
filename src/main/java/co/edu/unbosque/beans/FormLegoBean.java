@@ -2,9 +2,13 @@ package co.edu.unbosque.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
+import co.edu.unbosque.model.LegoDTO;
+import co.edu.unbosque.service.CrudService;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 @Named(value="legoBean")
 @ViewScoped
@@ -12,16 +16,19 @@ public class FormLegoBean implements Serializable{
 
 	 private String nombre;
 	    private String marca;
+	    private String tipoProducto="Lego";
 	    private String descripcion;
-	    private String imagen; 
+	    private String imagen="https://img.freepik.com/foto-gratis/conjunto-eccano-plastico_1398-2177.jpg"; 
 	    private double precio;
 	    private int cantidad;
+	    private String id=UUID.randomUUID().toString();
 	    private int edadRecomendada;
 	    private String temaLego;
 	    private int piezasLego;
 	    private boolean minifiguras;
 		private ArrayList<String> opcionesTema;
-		
+		@Inject
+	    private CrudService crudSer;
 		@PostConstruct
 		public void init() {
 			opcionesTema = new ArrayList<>();
@@ -38,6 +45,7 @@ public class FormLegoBean implements Serializable{
 		}
 	    public void guardar() {
 	    	System.out.println(toString());
+	    	crudSer.agregarProducto(new LegoDTO(nombre, marca, tipoProducto, descripcion, imagen, precio, cantidad, id, edadRecomendada, temaLego, piezasLego, minifiguras));
 	    }
 	    
 		public ArrayList<String> getOpcionesTema() {
@@ -107,6 +115,26 @@ public class FormLegoBean implements Serializable{
 		}
 		public void setMinifiguras(boolean minifiguras) {
 			this.minifiguras = minifiguras;
+		}
+		
+		
+		public String getTipoProducto() {
+			return tipoProducto;
+		}
+		public void setTipoProducto(String tipoProducto) {
+			this.tipoProducto = tipoProducto;
+		}
+		public String getId() {
+			return id;
+		}
+		public void setId(String id) {
+			this.id = id;
+		}
+		public CrudService getCrudSer() {
+			return crudSer;
+		}
+		public void setCrudSer(CrudService crudSer) {
+			this.crudSer = crudSer;
 		}
 		@Override
 		public String toString() {

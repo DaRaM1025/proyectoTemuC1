@@ -2,9 +2,13 @@ package co.edu.unbosque.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
+import co.edu.unbosque.model.InstrumentoVientoDTO;
+import co.edu.unbosque.service.CrudService;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 @Named("vientoBean")
@@ -13,10 +17,12 @@ public class FormVientoBean implements Serializable {
 
 	private String nombre;
 	private String marca;
+	private String tipoProducto="Instrumento de Viento";
 	private String descripcion;
-	private String imagen;
+	private String imagen="https://img.freepik.com/foto-gratis/trompeta-manos_23-2147624318.jpg";
 	private double precio;
 	private int cantidad;
+	private String id=UUID.randomUUID().toString();
 	private boolean incluyeEstuche;
 	private String tipoInstrumentoViento;
 	private String afinacion;
@@ -25,6 +31,9 @@ public class FormVientoBean implements Serializable {
 
 	private ArrayList<String> opcionesInstrumento;
 	private ArrayList<String> opcionesAfinacion;
+	 @Inject
+	    private CrudService crudSer;
+	    
 	@PostConstruct
 	public void init() {
 		opcionesInstrumento = new ArrayList<String>();
@@ -49,6 +58,7 @@ public class FormVientoBean implements Serializable {
 
 	public void guardar() {
 		System.out.println(toString());
+		crudSer.agregarProducto(new InstrumentoVientoDTO(nombre, marca, tipoProducto, descripcion, imagen, precio, cantidad, id, incluyeEstuche, tipoInstrumentoViento, afinacion, numValvulas, boquillas));
 	}
 
 	public String getMarca() {
@@ -153,6 +163,32 @@ public class FormVientoBean implements Serializable {
 
 	public void setOpcionesAfinacion(ArrayList<String> opcionesAfinacion) {
 		this.opcionesAfinacion = opcionesAfinacion;
+	}
+
+	
+	
+	public String getTipoProducto() {
+		return tipoProducto;
+	}
+
+	public void setTipoProducto(String tipoProducto) {
+		this.tipoProducto = tipoProducto;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public CrudService getCrudSer() {
+		return crudSer;
+	}
+
+	public void setCrudSer(CrudService crudSer) {
+		this.crudSer = crudSer;
 	}
 
 	@Override

@@ -3,9 +3,13 @@ package co.edu.unbosque.beans;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.UUID;
 
+import co.edu.unbosque.model.LabialDTO;
+import co.edu.unbosque.service.CrudService;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 @Named("labialBean")
 @ViewScoped
@@ -13,10 +17,12 @@ public class FormLabialBean implements Serializable{
 
 	private String nombre;
     private String marca;
+    private String tipoProducto="Labial";
     private String descripcion;
-    private String imagen; 
+    private String imagen="https://img.freepik.com/foto-gratis/vista-frontal-lapiz-labial-rojo-sobre-fondo-rosa_23-2148320952.jpg"; 
     private double precio;
     private int cantidad;
+    private String id=UUID.randomUUID().toString();
     private String tipoPiel;
     private boolean pruebaAgua;
     private LocalDate fechaVencimiento;
@@ -24,6 +30,8 @@ public class FormLabialBean implements Serializable{
     private boolean hidratante;
     private ArrayList<String>opcionesPiel;
     private ArrayList<String>opcionesDuracion;
+    @Inject
+    private CrudService crudSer;
    @PostConstruct
     public void init() {
     	opcionesPiel=new ArrayList<String>();
@@ -40,6 +48,7 @@ public class FormLabialBean implements Serializable{
     
     public void guardar() {
     	System.out.println(toString());
+    	crudSer.agregarProducto(new LabialDTO(nombre, marca, tipoProducto, descripcion, imagen, precio, cantidad, id, tipoPiel, pruebaAgua, descripcion, duracionLabial, hidratante));
     }
     
 	public String getNombre() {
@@ -131,6 +140,30 @@ public class FormLabialBean implements Serializable{
 				+ imagen + ", precio=" + precio + ", cantidad=" + cantidad + ", tipoPiel=" + tipoPiel + ", pruebaAgua="
 				+ pruebaAgua + ", fechaVencimiento=" + fechaVencimiento + ", duracionLabial=" + duracionLabial
 				+ ", hidratante=" + hidratante + "]";
+	}
+
+	public String getTipoProducto() {
+		return tipoProducto;
+	}
+
+	public void setTipoProducto(String tipoProducto) {
+		this.tipoProducto = tipoProducto;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public CrudService getCrudSer() {
+		return crudSer;
+	}
+
+	public void setCrudSer(CrudService crudSer) {
+		this.crudSer = crudSer;
 	}
     
     

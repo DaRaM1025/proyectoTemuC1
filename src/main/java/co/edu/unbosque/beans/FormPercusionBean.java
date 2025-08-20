@@ -2,9 +2,13 @@ package co.edu.unbosque.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
+import co.edu.unbosque.model.InstrumentoPercusionDTO;
+import co.edu.unbosque.service.CrudService;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 @Named("percusionBean")
@@ -13,10 +17,12 @@ public class FormPercusionBean implements Serializable{
 
 	 private String nombre;
 	    private String marca;
+	    private String tipoProducto="Instrumento de Percusión";
 	    private String descripcion;
-	    private String imagen; 
+	    private String imagen="https://img.freepik.com/foto-gratis/mujer-joven-instrumentos-percusion_23-2148289064.jpg"; 
 	    private double precio;
 	    private int cantidad;
+	    private String id=UUID.randomUUID().toString();
 	    private boolean incluyeEstuche;
 	    private String tipoInstrumentoPercusion;
 	    private boolean usoBaquetas;
@@ -25,6 +31,9 @@ public class FormPercusionBean implements Serializable{
 	    
 	    private ArrayList<String> opcionesInstrumento;
 	    private ArrayList<String> opcionesTipo;
+	    @Inject
+	    private CrudService crudSer;
+	    
 	    @PostConstruct
 	     public void init() {
 	    	opcionesInstrumento= new ArrayList<String>();
@@ -46,6 +55,7 @@ public class FormPercusionBean implements Serializable{
 	    
 	    public void guardar() {
 	    	System.out.println(toString());
+	    	crudSer.agregarProducto(new InstrumentoPercusionDTO(nombre, marca, tipoProducto, descripcion, imagen, precio, cantidad, id, incluyeEstuche, tipoInstrumentoPercusion, usoBaquetas, tipoPercusion, cantSuperficiesSonoras));
 	    }
 	    
 		public String getNombre() {
@@ -129,6 +139,32 @@ public class FormPercusionBean implements Serializable{
 
 		public void setOpcionesTipo(ArrayList<String> opcionesTipo) {
 			this.opcionesTipo = opcionesTipo;
+		}
+		
+		
+		
+		public String getTipoProducto() {
+			return tipoProducto;
+		}
+
+		public void setTipoProducto(String tipoProducto) {
+			this.tipoProducto = tipoProducto;
+		}
+
+		public String getId() {
+			return id;
+		}
+
+		public void setId(String id) {
+			this.id = id;
+		}
+
+		public CrudService getCrudSer() {
+			return crudSer;
+		}
+
+		public void setCrudSer(CrudService crudSer) {
+			this.crudSer = crudSer;
 		}
 
 		@Override

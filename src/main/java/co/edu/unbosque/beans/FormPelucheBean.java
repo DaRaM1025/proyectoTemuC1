@@ -3,9 +3,13 @@ package co.edu.unbosque.beans;
 import java.awt.List;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
+import co.edu.unbosque.model.PelucheDTO;
+import co.edu.unbosque.service.CrudService;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 @Named(value="pelucheBean")
@@ -14,15 +18,18 @@ public class FormPelucheBean implements Serializable {
 
 	private String nombre;
 	private String marca;
+	 private String tipoProducto="Peluche";
 	private String descripcion;
-	private String imagen;
+	private String imagen="https://img.freepik.com/foto-gratis/juguetes-osos-lindos-esponjosos_23-2149642403.jpg";
 	private double precio;
 	private int cantidad;
+	 private String id=UUID.randomUUID().toString();
 	private int edadRecomendada;
 	private boolean sonidoPeluche;
 	private String rellenoPeluche;
 	private boolean lavable;
-
+	@Inject
+    private CrudService crudSer;
 	private ArrayList<String> opcionesRelleno;
 
 	public FormPelucheBean() {
@@ -127,10 +134,34 @@ public class FormPelucheBean implements Serializable {
 		this.opcionesRelleno = opcionesRelleno;
 	}
 
+	public String getTipoProducto() {
+		return tipoProducto;
+	}
+
+	public void setTipoProducto(String tipoProducto) {
+		this.tipoProducto = tipoProducto;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public CrudService getCrudSer() {
+		return crudSer;
+	}
+
+	public void setCrudSer(CrudService crudSer) {
+		this.crudSer = crudSer;
+	}
+
 	public void guardar() {
 		System.out.println("Peluche guardado: " +"Nombre: " + nombre +" Marca: "+ marca +" Descrip: "+ descripcion + "Imagen: " + imagen +" precio: " + precio + "Cantidad " +cantidad
 				+ "Edad Recomendad:" + edadRecomendada +"donido: "+ sonidoPeluche +" relleno: "+ rellenoPeluche + "lavar"  +  lavable);
-		
+		crudSer.agregarProducto(new PelucheDTO(nombre, marca, tipoProducto, descripcion, imagen, precio, cantidad, id, edadRecomendada, sonidoPeluche, rellenoPeluche, lavable));
 	}
 
 //Metodo que limpie los campos del form sin guardar nada

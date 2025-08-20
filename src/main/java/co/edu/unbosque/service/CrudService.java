@@ -1,6 +1,7 @@
 package co.edu.unbosque.service;
 
 import java.util.ArrayList;
+
 import co.edu.unbosque.model.ProductoDTO;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -8,13 +9,13 @@ import jakarta.inject.Named;
 
 @Named
 @ApplicationScoped
-public class CarritoService {
+public class CrudService {
 
-	private ArrayList<ProductoDTO> listaCarrito;
+private ArrayList<ProductoDTO> listaCrud;
 	
 	@PostConstruct
 	public void init() {
-		listaCarrito = new ArrayList<>();
+		listaCrud = new ArrayList<>();
 	}
 
 	public void agregarProducto(ProductoDTO producto) {
@@ -22,30 +23,29 @@ public class CarritoService {
 			return;
 		}
 
-		if (!listaCarrito.contains(producto)) {
-			listaCarrito.add(producto);
+		if (!listaCrud.contains(producto)) {
+			listaCrud.add(producto);
 		} else {
 			System.out.println("Item repetido.");
 		}
 	}
 
 	public void removerProducto(ProductoDTO producto) {
-		listaCarrito.remove(producto);
+		listaCrud.remove(producto);
 	}
 
 	public void limpiarCarrito() {
-		listaCarrito.clear();
+		listaCrud.clear();
+	}
+
+	public ArrayList<ProductoDTO> getListaCrud() {
+		return listaCrud;
+	}
+
+	public void setListaCrud(ArrayList<ProductoDTO> listaCrud) {
+		this.listaCrud = listaCrud;
 	}
 	
 	
-	public ArrayList<ProductoDTO> getListaCarrito() {
-		return listaCarrito;
-	}
-
-	public void setListaCarrito(ArrayList<ProductoDTO> listaCarrito) {
-		this.listaCarrito = listaCarrito;
-	}
-
-
-
+	
 }

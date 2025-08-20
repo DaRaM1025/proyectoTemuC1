@@ -2,9 +2,13 @@ package co.edu.unbosque.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
+import co.edu.unbosque.model.CuadernoDTO;
+import co.edu.unbosque.service.CrudService;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 @Named("cuadernoBean")
@@ -13,16 +17,20 @@ public class FormCuadernoBean implements Serializable {
 
 	private String nombre;
 	private String marca;
+	private String tipoProducto="Cuaderno";
 	private String descripcion;
-	private String imagen;
+	private String imagen="https://img.freepik.com/foto-gratis/concepto-adorable-flores-libreta-hojas_23-2148007116.jpg";
 	private double precio;
 	private int cantidad;
+	private String id=UUID.randomUUID().toString();
 	private String presentacion;
 	private String tipoHoja;
 	private int cantidadHojas;
 	private boolean pastaDura;
 	private ArrayList<String> opcionesPresentacion;
 	private ArrayList<String> opcionesHojas;
+	 @Inject
+	    private CrudService crudSer;
 	 @PostConstruct
 	public void init() {
 		opcionesPresentacion = new ArrayList<String>();
@@ -41,6 +49,7 @@ public class FormCuadernoBean implements Serializable {
 
 	public void guardar() {
 		System.out.println(toString());
+		crudSer.agregarProducto(new CuadernoDTO(nombre, marca, tipoProducto, descripcion, imagen, precio, cantidad, id, presentacion, tipoHoja, cantidadHojas, pastaDura));
 	}
 
 	public String getNombre() {
@@ -138,6 +147,32 @@ public class FormCuadernoBean implements Serializable {
 
 	public void setOpcionesHojas(ArrayList<String> opcionesHojas) {
 		this.opcionesHojas = opcionesHojas;
+	}
+
+	
+	
+	public String getTipoProducto() {
+		return tipoProducto;
+	}
+
+	public void setTipoProducto(String tipoProducto) {
+		this.tipoProducto = tipoProducto;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public CrudService getCrudSer() {
+		return crudSer;
+	}
+
+	public void setCrudSer(CrudService crudSer) {
+		this.crudSer = crudSer;
 	}
 
 	@Override

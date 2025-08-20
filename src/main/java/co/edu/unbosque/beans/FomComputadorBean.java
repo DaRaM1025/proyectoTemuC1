@@ -2,9 +2,13 @@ package co.edu.unbosque.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
+import co.edu.unbosque.model.ComputadorDTO;
+import co.edu.unbosque.service.CrudService;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 @Named("computadorBean")
@@ -13,12 +17,15 @@ public class FomComputadorBean implements Serializable {
 
 	private String nombre;
     private String marca;
+    private final String tipoProducto="Computador";
     private String descripcion;
-    private String imagen; 
+    private String imagen="https://img.freepik.com/foto-gratis/jugador-alto-angulo-jugando-computadora-portatil_23-2149829167.jpg";
     private double precio;
     private int cantidad;
+    private String id=UUID.randomUUID().toString();
     private double pulgadas;
     private String resolucion;
+    private final String tipoProductoP="Portátil";
     private String sistemaOperativo;
     private String almacenamientoPc;
     private String ramPc;
@@ -31,6 +38,9 @@ public class FomComputadorBean implements Serializable {
     private ArrayList<String>opcionesRam;
     private ArrayList<String>opcionesProcesador;
     private ArrayList<String>opcionesTarjeta;
+    @Inject
+    private CrudService crudSer;
+    
     @PostConstruct
     public void init() {
     	opcionesResolucion=new ArrayList<String>();
@@ -83,6 +93,7 @@ public class FomComputadorBean implements Serializable {
     
     public void guardar() {
     	System.out.println(toString());
+    	crudSer.agregarProducto(new ComputadorDTO(nombre, marca, tipoProducto, descripcion, imagen, precio, cantidad, id, pulgadas, resolucion, sistemaOperativo, almacenamientoPc, ramPc, tipoProductoP, procesadorPc, graficaPc));
     }
     
 	public String getNombre() {
@@ -210,6 +221,30 @@ public class FomComputadorBean implements Serializable {
 
 	public void setOpcionesTarjeta(ArrayList<String> opcionesTarjeta) {
 		this.opcionesTarjeta = opcionesTarjeta;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public CrudService getCrudSer() {
+		return crudSer;
+	}
+
+	public void setCrudSer(CrudService crudSer) {
+		this.crudSer = crudSer;
+	}
+
+	public String getTipoProducto() {
+		return tipoProducto;
+	}
+
+	public String getTipoProductoP() {
+		return tipoProductoP;
 	}
 
 	@Override

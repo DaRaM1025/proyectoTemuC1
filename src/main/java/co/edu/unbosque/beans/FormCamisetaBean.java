@@ -2,9 +2,13 @@ package co.edu.unbosque.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
+import co.edu.unbosque.model.CamisetaDTO;
+import co.edu.unbosque.service.CrudService;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 @Named(value="camisetaBean")
@@ -13,10 +17,12 @@ public class FormCamisetaBean implements Serializable {
 
 	private String nombre;
 	private String marca;
+	 private final String tipoProducto="Camiseta";
 	private String descripcion;
-	private String imagen;
+	private String imagen="https://img.freepik.com/foto-gratis/camisa-limpia-blanco-percha_23-2149347514.jpg";
 	private double precio;
 	private int cantidad;
+	private String id=UUID.randomUUID().toString();
 	private String talla;
     private String genero;
     private String material;
@@ -27,6 +33,8 @@ public class FormCamisetaBean implements Serializable {
     private ArrayList<String> opcionesGenero;
     private ArrayList<String> opcionesManga;
     private ArrayList<String> opcionesCuello;
+    @Inject
+    private CrudService crudSer;
     @PostConstruct
     public void init() {
     	opcionesGenero = new ArrayList<>();
@@ -48,6 +56,7 @@ public class FormCamisetaBean implements Serializable {
     
     public void guardar() {
     	System.out.println(toString());
+    	crudSer.agregarProducto(new CamisetaDTO(nombre, marca, tipoProducto, descripcion, imagen, precio, cantidad, id, talla, genero, material, descripcion, cuelloCamiseta, estampada));
     }
     
 	@Override
@@ -152,6 +161,26 @@ public class FormCamisetaBean implements Serializable {
 
 	public void setOpcionesCuello(ArrayList<String> opcionesCuello) {
 		this.opcionesCuello = opcionesCuello;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getTipoProducto() {
+		return tipoProducto;
+	}
+
+	public CrudService getCrudSer() {
+		return crudSer;
+	}
+
+	public void setCrudSer(CrudService crudSer) {
+		this.crudSer = crudSer;
 	}
     
     

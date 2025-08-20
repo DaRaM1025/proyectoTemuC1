@@ -2,9 +2,13 @@ package co.edu.unbosque.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
+import co.edu.unbosque.model.CintaAdhesivaDTO;
+import co.edu.unbosque.service.CrudService;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 @Named("cintaBean")
 @ViewScoped
@@ -12,10 +16,12 @@ public class FormCintaAdhesiva implements Serializable{
 
 	private String nombre;
 	private String marca;
+	private String tipoProducto="Cinta Adhesiva";
 	private String descripcion;
-	private String imagen;
+	private String imagen="https://img.freepik.com/foto-gratis/arreglo-escritorio-alto-angulo-cinta-colores_23-2149009460.jpg";
 	private double precio;
 	private int cantidad;
+	private String id=UUID.randomUUID().toString();
 	private String presentacion;
 	private boolean reposicionable;
     private double anchoCinta;
@@ -23,6 +29,8 @@ public class FormCintaAdhesiva implements Serializable{
     
     private ArrayList<String>opcionesPresentacion;
     private ArrayList<String>opcionesTipo;
+    @Inject
+    private CrudService crudSer;
     @PostConstruct
     public void init() {
     	opcionesPresentacion= new ArrayList<String>();
@@ -42,6 +50,7 @@ public class FormCintaAdhesiva implements Serializable{
     
     public void guardar() {
     	System.out.println(toString());
+    	crudSer.agregarProducto(new CintaAdhesivaDTO(nombre, marca, tipoProducto, descripcion, imagen, precio, cantidad, id, presentacion, reposicionable, anchoCinta, tipoCinta));
     }
     
 	public String getNombre() {
@@ -120,6 +129,30 @@ public class FormCintaAdhesiva implements Serializable{
 
 	public void setOpcionesTipo(ArrayList<String> opcionesTipo) {
 		this.opcionesTipo = opcionesTipo;
+	}
+
+	public String getTipoProducto() {
+		return tipoProducto;
+	}
+
+	public void setTipoProducto(String tipoProducto) {
+		this.tipoProducto = tipoProducto;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public CrudService getCrudSer() {
+		return crudSer;
+	}
+
+	public void setCrudSer(CrudService crudSer) {
+		this.crudSer = crudSer;
 	}
 
 	@Override
