@@ -200,6 +200,7 @@ public class CompraBean implements Serializable {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 	   public double getTotal() {
+		   
 	        double suma = 0.0;
 	        if (cb != null && cb.getProductosCarrito() != null) {
 	            for (ProductoDTO producto : cb.getProductosCarrito()) {
