@@ -2,82 +2,176 @@ package co.edu.unbosque.model;
 
 import java.util.Date;
 
+/**
+ * Clase que representa un Data Transfer Object (DTO) de Usuario.
+ * Contiene información básica de un usuario para ser transferida entre capas.
+ */
 public class UsuarioDTO {
-	private String nombre;
-	private String telefono;
-	private String email;
-	private String username;
-	private String password;
-	private Date fechaNacimiento;
 
-	public UsuarioDTO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    /** Nombre completo del usuario */
+    private String nombre;
 
-	public UsuarioDTO(String nombre, String telefono, String email, String username, String password,
-			Date fechaNacimiento) {
-		super();
-		this.nombre = nombre;
-		this.telefono = telefono;
-		this.email = email;
-		this.username = username;
-		this.password = password;
-		this.fechaNacimiento = fechaNacimiento;
-	}
+    /** Número de teléfono del usuario */
+    private String telefono;
 
-	public String getNombre() {
-		return nombre;
-	}
+    /** Correo electrónico del usuario */
+    private String email;
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    /** Nombre de usuario para inicio de sesión */
+    private String username;
 
-	public String getTelefono() {
-		return telefono;
-	}
+    /** Contraseña del usuario */
+    private String password;
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
+    /** Fecha de nacimiento del usuario */
+    private Date fechaNacimiento;
 
-	public String getEmail() {
-		return email;
-	}
+    /**
+     * Constructor por defecto de UsuarioDTO.
+     */
+    public UsuarioDTO() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    /**
+     * Constructor que inicializa todos los atributos de UsuarioDTO.
+     *
+     * @param nombre Nombre completo del usuario
+     * @param telefono Teléfono del usuario
+     * @param email Correo electrónico del usuario
+     * @param username Nombre de usuario
+     * @param password Contraseña del usuario
+     * @param fechaNacimiento Fecha de nacimiento del usuario
+     */
+    public UsuarioDTO(String nombre, String telefono, String email, String username, String password,
+                      Date fechaNacimiento) {
+        super();
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.fechaNacimiento = fechaNacimiento;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    /**
+     * Obtiene el nombre del usuario.
+     *
+     * @return nombre del usuario
+     */
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    /**
+     * Establece el nombre del usuario.
+     *
+     * @param nombre Nombre completo del usuario
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    /**
+     * Obtiene el teléfono del usuario.
+     *
+     * @return teléfono del usuario
+     */
+    public String getTelefono() {
+        return telefono;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    /**
+     * Establece el teléfono del usuario.
+     *
+     * @param telefono Teléfono del usuario
+     */
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 
-	public Date getFechaNacimiento() {
-		return fechaNacimiento;
-	}
+    /**
+     * Obtiene el correo electrónico del usuario.
+     *
+     * @return correo electrónico del usuario
+     */
+    public String getEmail() {
+        return email;
+    }
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}
+    /**
+     * Establece el correo electrónico del usuario.
+     *
+     * @param email Correo electrónico del usuario
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	@Override
-	public String toString() {
-		return "UsuarioDTO [nombre=" + nombre + ", telefono=" + telefono + ", email=" + email + ", username=" + username
-				+ ", password=" + password + ", fechaNacimiento=" + fechaNacimiento + "]";
-	}
+    /**
+     * Obtiene el nombre de usuario.
+     *
+     * @return nombre de usuario
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * Establece el nombre de usuario.
+     *
+     * @param username Nombre de usuario
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * Obtiene la contraseña del usuario.
+     *
+     * @return contraseña del usuario
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * Establece la contraseña del usuario.
+     *
+     * @param password Contraseña del usuario
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * Obtiene la fecha de nacimiento del usuario.
+     *
+     * @return fecha de nacimiento
+     */
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    /**
+     * Establece la fecha de nacimiento del usuario.
+     *
+     * @param fechaNacimiento Fecha de nacimiento del usuario
+     */
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    /**
+     * Devuelve una representación en cadena del objeto UsuarioDTO.
+     *
+     * @return cadena con la información del usuario
+     */
+    @Override
+    public String toString() {
+        return "UsuarioDTO [nombre=" + nombre + ", telefono=" + telefono + ", email=" + email + ", username=" + username
+                + ", password=" + password + ", fechaNacimiento=" + fechaNacimiento + "]";
+    }
 
 }

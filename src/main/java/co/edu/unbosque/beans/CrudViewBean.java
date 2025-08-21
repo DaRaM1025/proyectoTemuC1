@@ -6,12 +6,9 @@ import java.util.UUID;
 
 import org.primefaces.PrimeFaces;
 
-import co.edu.unbosque.model.Product;
 import co.edu.unbosque.model.ProductoDTO;
 import co.edu.unbosque.service.CrudService;
-import co.edu.unbosque.service.ProductService;
 import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;

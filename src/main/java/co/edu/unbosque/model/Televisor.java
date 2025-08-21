@@ -1,73 +1,189 @@
 package co.edu.unbosque.model;
 
+/**
+ * Clase que representa un televisor como un tipo de DispositivoElectronico.
+ * Incluye atributos específicos como cantidad de puertos HDMI, frecuencia y asistente virtual.
+ */
 public class Televisor extends DispositivoElectronico {
-	private int cantPuertosHDMI;
-	private int frecuenciaHz;
-	private String asistenteVirtual;
 
-	public Televisor() {
-		// TODO Auto-generated constructor stub
-	}
-	public Televisor(double pulgadas, String resolucion, String sistemaOperativo, int cantPuertosHDMI, int frecuenciaHz,
-			String asistenteVirtual) {
-		super(pulgadas, resolucion, sistemaOperativo);
-		this.cantPuertosHDMI = cantPuertosHDMI;
-		this.frecuenciaHz = frecuenciaHz;
-		this.asistenteVirtual = asistenteVirtual;
-	}
-	public Televisor(int cantPuertosHDMI, int frecuenciaHz, String asistenteVirtual) {
-		super();
-		this.cantPuertosHDMI = cantPuertosHDMI;
-		this.frecuenciaHz = frecuenciaHz;
-		this.asistenteVirtual = asistenteVirtual;
-	}
-	public Televisor(double pulgadas, String resolucion, String sistemaOperativo) {
-		super(pulgadas, resolucion, sistemaOperativo);
-		// TODO Auto-generated constructor stub
-	}
-	public Televisor(String nombre, String marca, String tipoProducto, String descripcion, String urlImagen,
-			double precio, int cantidad, String id, double pulgadas, String resolucion, String sistemaOperativo) {
-		super(nombre, marca, tipoProducto, descripcion, urlImagen, precio, cantidad, id, pulgadas, resolucion,
-				sistemaOperativo);
-		// TODO Auto-generated constructor stub
-	}
-	public Televisor(String nombre, String marca, String tipoProducto, String descripcion, String urlImagen,
-			double precio, int cantidad, String id) {
-		super(nombre, marca, tipoProducto, descripcion, urlImagen, precio, cantidad, id);
-		// TODO Auto-generated constructor stub
-	}
-	public Televisor(String nombre, String marca, String tipoProducto, String descripcion, String urlImagen,
-			double precio, int cantidad, String id, double pulgadas, String resolucion, String sistemaOperativo,
-			int cantPuertosHDMI, int frecuenciaHz, String asistenteVirtual) {
-		super(nombre, marca, tipoProducto, descripcion, urlImagen, precio, cantidad, id, pulgadas, resolucion,
-				sistemaOperativo);
-		this.cantPuertosHDMI = cantPuertosHDMI;
-		this.frecuenciaHz = frecuenciaHz;
-		this.asistenteVirtual = asistenteVirtual;
-	}
+    /** Cantidad de puertos HDMI disponibles en el televisor. */
+    private int cantPuertosHDMI;
 
-	public int getCantPuertosHDMI() {
-		return cantPuertosHDMI;
-	}
+    /** Frecuencia de actualización de la pantalla en Hz. */
+    private int frecuenciaHz;
 
-	public void setCantPuertosHDMI(int cantPuertosHDMI) {
-		this.cantPuertosHDMI = cantPuertosHDMI;
-	}
+    /** Asistente virtual integrado en el televisor. */
+    private String asistenteVirtual;
 
-	public int getFrecuenciaHz() {
-		return frecuenciaHz;
-	}
+    /**
+     * Constructor por defecto de la clase Televisor.
+     */
+    public Televisor() {
+        // TODO Auto-generated constructor stub
+    }
 
-	public void setFrecuenciaHz(int frecuenciaHz) {
-		this.frecuenciaHz = frecuenciaHz;
-	}
+    /**
+     * Constructor que inicializa los atributos de DispositivoElectronico y los específicos de Televisor.
+     *
+     * @param pulgadas Tamaño de la pantalla en pulgadas
+     * @param resolucion Resolución de la pantalla
+     * @param sistemaOperativo Sistema operativo del televisor
+     * @param cantPuertosHDMI Cantidad de puertos HDMI
+     * @param frecuenciaHz Frecuencia de actualización
+     * @param asistenteVirtual Asistente virtual integrado
+     */
+    public Televisor(double pulgadas, String resolucion, String sistemaOperativo, int cantPuertosHDMI, int frecuenciaHz,
+                     String asistenteVirtual) {
+        super(pulgadas, resolucion, sistemaOperativo);
+        this.cantPuertosHDMI = cantPuertosHDMI;
+        this.frecuenciaHz = frecuenciaHz;
+        this.asistenteVirtual = asistenteVirtual;
+    }
 
-	public String getAsistenteVirtual() {
-		return asistenteVirtual;
-	}
+    /**
+     * Constructor que inicializa solo los atributos específicos de Televisor.
+     *
+     * @param cantPuertosHDMI Cantidad de puertos HDMI
+     * @param frecuenciaHz Frecuencia de actualización
+     * @param asistenteVirtual Asistente virtual integrado
+     */
+    public Televisor(int cantPuertosHDMI, int frecuenciaHz, String asistenteVirtual) {
+        super();
+        this.cantPuertosHDMI = cantPuertosHDMI;
+        this.frecuenciaHz = frecuenciaHz;
+        this.asistenteVirtual = asistenteVirtual;
+    }
 
-	public void setAsistenteVirtual(String asistenteVirtual) {
-		this.asistenteVirtual = asistenteVirtual;
-	}
+    /**
+     * Constructor que inicializa los atributos heredados de DispositivoElectronico.
+     *
+     * @param pulgadas Tamaño de la pantalla en pulgadas
+     * @param resolucion Resolución de la pantalla
+     * @param sistemaOperativo Sistema operativo del televisor
+     */
+    public Televisor(double pulgadas, String resolucion, String sistemaOperativo) {
+        super(pulgadas, resolucion, sistemaOperativo);
+        // TODO Auto-generated constructor stub
+    }
+
+    /**
+     * Constructor que inicializa atributos heredados de Producto y DispositivoElectronico.
+     *
+     * @param nombre Nombre del producto
+     * @param marca Marca del producto
+     * @param tipoProducto Tipo de producto
+     * @param descripcion Descripción
+     * @param urlImagen URL de la imagen
+     * @param precio Precio
+     * @param cantidad Cantidad disponible
+     * @param id Identificador único
+     * @param pulgadas Tamaño de la pantalla
+     * @param resolucion Resolución de la pantalla
+     * @param sistemaOperativo Sistema operativo
+     */
+    public Televisor(String nombre, String marca, String tipoProducto, String descripcion, String urlImagen,
+                     double precio, int cantidad, String id, double pulgadas, String resolucion, String sistemaOperativo) {
+        super(nombre, marca, tipoProducto, descripcion, urlImagen, precio, cantidad, id, pulgadas, resolucion, sistemaOperativo);
+        // TODO Auto-generated constructor stub
+    }
+
+    /**
+     * Constructor que inicializa solo los atributos heredados de Producto.
+     *
+     * @param nombre Nombre del producto
+     * @param marca Marca del producto
+     * @param tipoProducto Tipo de producto
+     * @param descripcion Descripción
+     * @param urlImagen URL de la imagen
+     * @param precio Precio
+     * @param cantidad Cantidad disponible
+     * @param id Identificador único
+     */
+    public Televisor(String nombre, String marca, String tipoProducto, String descripcion, String urlImagen,
+                     double precio, int cantidad, String id) {
+        super(nombre, marca, tipoProducto, descripcion, urlImagen, precio, cantidad, id);
+        // TODO Auto-generated constructor stub
+    }
+
+    /**
+     * Constructor que inicializa todos los atributos heredados y específicos de Televisor.
+     *
+     * @param nombre Nombre del producto
+     * @param marca Marca del producto
+     * @param tipoProducto Tipo de producto
+     * @param descripcion Descripción
+     * @param urlImagen URL de la imagen
+     * @param precio Precio
+     * @param cantidad Cantidad disponible
+     * @param id Identificador único
+     * @param pulgadas Tamaño de la pantalla
+     * @param resolucion Resolución de la pantalla
+     * @param sistemaOperativo Sistema operativo
+     * @param cantPuertosHDMI Cantidad de puertos HDMI
+     * @param frecuenciaHz Frecuencia de actualización
+     * @param asistenteVirtual Asistente virtual integrado
+     */
+    public Televisor(String nombre, String marca, String tipoProducto, String descripcion, String urlImagen,
+                     double precio, int cantidad, String id, double pulgadas, String resolucion, String sistemaOperativo,
+                     int cantPuertosHDMI, int frecuenciaHz, String asistenteVirtual) {
+        super(nombre, marca, tipoProducto, descripcion, urlImagen, precio, cantidad, id, pulgadas, resolucion, sistemaOperativo);
+        this.cantPuertosHDMI = cantPuertosHDMI;
+        this.frecuenciaHz = frecuenciaHz;
+        this.asistenteVirtual = asistenteVirtual;
+    }
+
+    /**
+     * Obtiene la cantidad de puertos HDMI.
+     *
+     * @return Cantidad de puertos HDMI
+     */
+    public int getCantPuertosHDMI() {
+        return cantPuertosHDMI;
+    }
+
+    /**
+     * Establece la cantidad de puertos HDMI.
+     *
+     * @param cantPuertosHDMI Cantidad de puertos HDMI
+     */
+    public void setCantPuertosHDMI(int cantPuertosHDMI) {
+        this.cantPuertosHDMI = cantPuertosHDMI;
+    }
+
+    /**
+     * Obtiene la frecuencia de actualización en Hz.
+     *
+     * @return Frecuencia en Hz
+     */
+    public int getFrecuenciaHz() {
+        return frecuenciaHz;
+    }
+
+    /**
+     * Establece la frecuencia de actualización en Hz.
+     *
+     * @param frecuenciaHz Frecuencia en Hz
+     */
+    public void setFrecuenciaHz(int frecuenciaHz) {
+        this.frecuenciaHz = frecuenciaHz;
+    }
+
+    /**
+     * Obtiene el asistente virtual integrado en el televisor.
+     *
+     * @return Asistente virtual
+     */
+    public String getAsistenteVirtual() {
+        return asistenteVirtual;
+    }
+
+    /**
+     * Establece el asistente virtual integrado en el televisor.
+     *
+     * @param asistenteVirtual Asistente virtual
+     */
+    public void setAsistenteVirtual(String asistenteVirtual) {
+        this.asistenteVirtual = asistenteVirtual;
+    }
 
 }

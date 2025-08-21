@@ -1,95 +1,210 @@
 package co.edu.unbosque.model;
 
+/**
+ * Clase que representa un Data Transfer Object (DTO) para un producto.
+ * Contiene atributos comunes a todos los productos, como nombre, marca, tipo de producto,
+ * descripción, URL de imagen, precio, cantidad e identificador único.
+ * Esta clase se utiliza para transportar datos entre capas sin exponer la lógica de negocio.
+ */
 public class ProductoDTO {
-	protected String nombre;
-	protected String marca;
-	protected String tipoProducto; //Posible enum
-	protected String descripcion;
-	protected String urlImagen;
-	protected double precio;
-	protected int cantidad;
-	protected String id;
 
-	public ProductoDTO() {
-		// TODO Auto-generated constructor stub
-	}
+    /** Nombre del producto. */
+    protected String nombre;
 
-	public ProductoDTO(String nombre, String marca, String tipoProducto, String descripcion, String urlImagen,
-			double precio, int cantidad, String id) {
-		super();
-		this.nombre = nombre;
-		this.marca = marca;
-		this.tipoProducto = tipoProducto;
-		this.descripcion = descripcion;
-		this.urlImagen = urlImagen;
-		this.precio = precio;
-		this.cantidad = cantidad;
-		this.id = id;
-	}
+    /** Marca del producto. */
+    protected String marca;
 
-	public String getNombre() {
-		return nombre;
-	}
+    /** Tipo de producto. Se puede considerar un posible enum. */
+    protected String tipoProducto;
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    /** Descripción del producto. */
+    protected String descripcion;
 
-	public String getMarca() {
-		return marca;
-	}
+    /** URL de la imagen que representa el producto. */
+    protected String urlImagen;
 
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
+    /** Precio del producto. */
+    protected double precio;
 
-	public String getTipoProducto() {
-		return tipoProducto;
-	}
+    /** Cantidad disponible del producto. */
+    protected int cantidad;
 
-	public void setTipoProducto(String tipoProducto) {
-		this.tipoProducto = tipoProducto;
-	}
+    /** Identificador único del producto. */
+    protected String id;
 
-	public String getDescripcion() {
-		return descripcion;
-	}
+    /**
+     * Constructor por defecto de la clase ProductoDTO.
+     */
+    public ProductoDTO() {
+        // TODO Auto-generated constructor stub
+    }
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+    /**
+     * Constructor que inicializa todos los atributos del producto DTO.
+     *
+     * @param nombre       Nombre del producto
+     * @param marca        Marca del producto
+     * @param tipoProducto Tipo de producto
+     * @param descripcion  Descripción del producto
+     * @param urlImagen    URL de la imagen del producto
+     * @param precio       Precio del producto
+     * @param cantidad     Cantidad disponible del producto
+     * @param id           Identificador único del producto
+     */
+    public ProductoDTO(String nombre, String marca, String tipoProducto, String descripcion, String urlImagen,
+                       double precio, int cantidad, String id) {
+        super();
+        this.nombre = nombre;
+        this.marca = marca;
+        this.tipoProducto = tipoProducto;
+        this.descripcion = descripcion;
+        this.urlImagen = urlImagen;
+        this.precio = precio;
+        this.cantidad = cantidad;
+        this.id = id;
+    }
 
-	public String getUrlImagen() {
-		return urlImagen;
-	}
+    /**
+     * Obtiene el nombre del producto.
+     *
+     * @return Nombre del producto
+     */
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setUrlImagen(String urlImagen) {
-		this.urlImagen = urlImagen;
-	}
+    /**
+     * Establece el nombre del producto.
+     *
+     * @param nombre Nombre del producto
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public double getPrecio() {
-		return precio;
-	}
+    /**
+     * Obtiene la marca del producto.
+     *
+     * @return Marca del producto
+     */
+    public String getMarca() {
+        return marca;
+    }
 
-	public void setPrecio(double precio) {
-		this.precio = precio;
-	}
+    /**
+     * Establece la marca del producto.
+     *
+     * @param marca Marca del producto
+     */
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
 
-	public int getCantidad() {
-		return cantidad;
-	}
+    /**
+     * Obtiene el tipo de producto.
+     *
+     * @return Tipo de producto
+     */
+    public String getTipoProducto() {
+        return tipoProducto;
+    }
 
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
-	}
+    /**
+     * Establece el tipo de producto.
+     *
+     * @param tipoProducto Tipo de producto
+     */
+    public void setTipoProducto(String tipoProducto) {
+        this.tipoProducto = tipoProducto;
+    }
 
-	public String getId() {
-		return id;
-	}
+    /**
+     * Obtiene la descripción del producto.
+     *
+     * @return Descripción del producto
+     */
+    public String getDescripcion() {
+        return descripcion;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    /**
+     * Establece la descripción del producto.
+     *
+     * @param descripcion Descripción del producto
+     */
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
+    /**
+     * Obtiene la URL de la imagen del producto.
+     *
+     * @return URL de la imagen
+     */
+    public String getUrlImagen() {
+        return urlImagen;
+    }
+
+    /**
+     * Establece la URL de la imagen del producto.
+     *
+     * @param urlImagen URL de la imagen
+     */
+    public void setUrlImagen(String urlImagen) {
+        this.urlImagen = urlImagen;
+    }
+
+    /**
+     * Obtiene el precio del producto.
+     *
+     * @return Precio del producto
+     */
+    public double getPrecio() {
+        return precio;
+    }
+
+    /**
+     * Establece el precio del producto.
+     *
+     * @param precio Precio del producto
+     */
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    /**
+     * Obtiene la cantidad disponible del producto.
+     *
+     * @return Cantidad disponible
+     */
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    /**
+     * Establece la cantidad disponible del producto.
+     *
+     * @param cantidad Cantidad disponible
+     */
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    /**
+     * Obtiene el identificador único del producto.
+     *
+     * @return Identificador del producto
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Establece el identificador único del producto.
+     *
+     * @param id Identificador del producto
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
 }
-
