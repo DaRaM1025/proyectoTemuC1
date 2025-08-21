@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+  <meta charset="UTF-8"></meta>
+  <title>Compra (Debug Leaflet)</title>
+
+  <!-- Leaflet CSS/JS desde CDN (HTTPS) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <style type="text/css">
+    /* Evita pantalla en blanco por falta de altura */
+    html, body { height: 100%; margin: 0; padding: 0; }
+    #map { width: 100%; height: 360px; min-height: 320px; border: 1px solid #ccc; border-radius: 8px; }
+    .row { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
+    .row label { min-width: 90px; font-weight: bold; }
+  </style>
+</h:head>
+
+<h:body>
+  <h:form id="compraForm">
+    <div class="row">
+      <label for="direccion">Dirección</label>
+      <p:inputText id="direccion" value="#{compraBean.direccion}" style="width: 280px;" />
+      <p:commandButton type="button" value="Buscar en mapa" icon="pi pi-search"
+                       onclick="geocodeDireccionLeaflet();return false;" />
+    </div>
+
+    <div id="map"></div>
+  </h:form>
+
+  <!-- Script robusto (CDATA) -->
+  <h:outputScript target="body">
+  //<![CDATA[
+    (function(){
+      // Inicializa mapa
+      var map = L.map('map');
+      var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap'
+      }).addTo(map);
+
+      // Bogotá por defecto
+      var initial = [4.7110, -74.0721];
+      map.setView(initial, 12);
+      var marker = L.marker(initial).addTo(map);
+
+      // Forzar recálculo si el contenedor se montó oculto
+      setTimeout(function(){ map.invalidateSize(); }, 350);
+
+      // Exponer función en window para el botón
+      window.geocodeDireccionLeaflet = function(){
+        var input = document.querySelector("[id$='direccion']"); // clientId seguro
+        if(!input || !input.value || !input.value.trim()){
+          if (window.PF && PF('growl')) {
+            PF('growl').renderMessage({summary:'Dirección vacía', detail:'Escribe una dirección.', severity:'warn'});
+          } else {
+            alert('Escribe una dirección.');
+          }
+          return;
+        }
+        var q = encodeURIComponent(input.value.trim());
+        // Nominatim (política: añadir user-agent via header; aquí navegadores envían UA automáticamente)
+        fetch('https://nominatim.openstreetmap.org/search?q=' + q + '&format=json&limit=1')
+          .then(function(r){ return r.json(); })
+          .then(function(arr){
+            if(!arr || !arr.length){
+              alert('No se encontró la dirección.');
+              return;
+            }
+            var r = arr[0];
+            var lat = parseFloat(r.lat), lon = parseFloat(r.lon);
+            var ll = [lat, lon];
+            map.setView(ll, 16);
+            if (marker) { map.removeLayer(marker); }
+            marker = L.marker(ll).addTo(map).bindPopup(r.display_name);
+          })
+          .catch(function(err){
+            console.error('Geocoding error', err);
+            alert('Error geocodificando la dirección.');
+          });
+      };
+    })();
+  //]]>
+  </h:outputScript>
+</h:body>
+</html>

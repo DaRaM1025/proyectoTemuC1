@@ -1,3 +1,4 @@
+
 package co.edu.unbosque.beans;
 
 import java.io.ByteArrayOutputStream;
@@ -39,6 +40,8 @@ public class CompraBean implements Serializable {
 	private String celular;
 	private String fechaNacimiento;
 	private double total;
+	private Double latitud;
+	private Double longitud;
 
 	@Inject
 	private CarritoBean cb;
@@ -82,6 +85,29 @@ public class CompraBean implements Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	public void recibirGeocoding() {
+	    try {
+	        var params = FacesContext.getCurrentInstance()
+	                .getExternalContext()
+	                .getRequestParameterMap();
+
+	        String lat = params.get("lat");
+	        String lng = params.get("lng");
+	        String formatted = params.get("formatted");
+
+	        if (lat != null && lng != null) {
+	            this.latitud = Double.valueOf(lat);
+	            this.longitud = Double.valueOf(lng);
+	        }
+	        if (formatted != null && !formatted.isBlank()) {
+	            this.direccion = formatted; // guarda dirección normalizada
+	        }
+
+	        System.out.println("[CompraBean] Geo OK -> " + latitud + ", " + longitud + " | " + this.direccion);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
 
 	public void comprar() {
@@ -209,5 +235,33 @@ public class CompraBean implements Serializable {
 	        }
 	        return suma;
 	    }
+	   public Double getLatitud() {
+		   return latitud;
+	   }
+	   public void setLatitud(Double latitud) {
+		   this.latitud = latitud;
+	   }
+	   public Double getLongitud() {
+		   return longitud;
+	   }
+	   public void setLongitud(Double longitud) {
+		   this.longitud = longitud;
+	   }
+	   public CarritoBean getCb() {
+		   return cb;
+	   }
+	   public void setCb(CarritoBean cb) {
+		   this.cb = cb;
+	   }
+	   public UsuarioService getUsuarioService() {
+		   return usuarioService;
+	   }
+	   public void setUsuarioService(UsuarioService usuarioService) {
+		   this.usuarioService = usuarioService;
+	   }
+	   public void setTotal(double total) {
+		   this.total = total;
+	   }
+	   
 
 }
