@@ -13,7 +13,7 @@ import jakarta.inject.Named;
 
 @Named("computadorBean")
 @ViewScoped
-public class FromComputadorBean implements Serializable {
+public class FormComputadorBean implements Serializable {
 
 	private String nombre;
     private String marca;
