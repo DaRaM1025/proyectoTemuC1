@@ -12,105 +12,152 @@ import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
 
+/**
+ * Servicio para la gestión de productos tipo Peluche.
+ * <p>
+ * Esta clase administra una lista de {@link PelucheDTO}, permitiendo inicializar,
+ * clonar, leer desde almacenamiento persistente y obtener sublistas o listas completas de peluches.
+ * </p>
+ * <p>
+ * Se encuentra en un contexto de aplicación y se gestiona como bean CDI mediante
+ * las anotaciones {@link Named} y {@link ApplicationScoped}.
+ * </p>
+ */
 @Named
 @ApplicationScoped
 public class PelucheService {
-	private List<PelucheDTO> listaPeluches;
+    
+    /** Lista que almacena los productos tipo Peluche disponibles */
+    private List<PelucheDTO> listaPeluches;
 
-	@PostConstruct
-	public void init() {
-		listaPeluches = new ArrayList<>();
+    /**
+     * Inicializa la lista de peluches con datos de ejemplo y sincroniza con el DAO.
+     * <p>
+     * Se ejecuta automáticamente después de la construcción del bean gracias a la anotación {@link PostConstruct}.
+     * </p>
+     */
+    @PostConstruct
+    public void init() {
+        listaPeluches = new ArrayList<>();
 
-		listaPeluches.add(new PelucheDTO("Osito Teddy", "Hasbro", "Peluche",
-		        "Clásico oso de felpa marrón", "https://example.com/osito_teddy.jpg",
-		        45000, 15, "PEL001", 3, false, "Algodón", true));
+        listaPeluches.add(new PelucheDTO("Osito Teddy", "Hasbro", "Peluche",
+                "Clásico oso de felpa marrón", "https://example.com/osito_teddy.jpg",
+                45000, 15, "PEL001", 3, false, "Algodón", true));
 
-		listaPeluches.add(new PelucheDTO("Perrito Dormilón", "Fisher Price", "Peluche",
-		        "Perrito suave con orejas largas", "https://example.com/perrito.jpg",
-		        52000, 10, "PEL002", 2, true, "Poliéster", true));
+        listaPeluches.add(new PelucheDTO("Perrito Dormilón", "Fisher Price", "Peluche",
+                "Perrito suave con orejas largas", "https://example.com/perrito.jpg",
+                52000, 10, "PEL002", 2, true, "Poliéster", true));
 
-		listaPeluches.add(new PelucheDTO("Gato Gris", "Ty", "Peluche",
-		        "Gato de felpa con ojos grandes", "https://example.com/gato.jpg",
-		        38000, 25, "PEL003", 4, false, "Algodón", false));
+        listaPeluches.add(new PelucheDTO("Gato Gris", "Ty", "Peluche",
+                "Gato de felpa con ojos grandes", "https://example.com/gato.jpg",
+                38000, 25, "PEL003", 4, false, "Algodón", false));
 
-		listaPeluches.add(new PelucheDTO("Conejo Blanco", "Disney", "Peluche",
-		        "Conejo inspirado en personajes clásicos", "https://example.com/conejo.jpg",
-		        60000, 8, "PEL004", 5, false, "Algodón", true));
+        listaPeluches.add(new PelucheDTO("Conejo Blanco", "Disney", "Peluche",
+                "Conejo inspirado en personajes clásicos", "https://example.com/conejo.jpg",
+                60000, 8, "PEL004", 5, false, "Algodón", true));
 
-		listaPeluches.add(new PelucheDTO("Dinosaurio Verde", "Mattel", "Peluche",
-		        "Dino suave y divertido", "https://example.com/dino.jpg",
-		        70000, 12, "PEL005", 6, true, "Espuma", false));
+        listaPeluches.add(new PelucheDTO("Dinosaurio Verde", "Mattel", "Peluche",
+                "Dino suave y divertido", "https://example.com/dino.jpg",
+                70000, 12, "PEL005", 6, true, "Espuma", false));
 
-		listaPeluches.add(new PelucheDTO("Unicornio Rosa", "Ty", "Peluche",
-		        "Unicornio con cuerno brillante", "https://example.com/unicornio.jpg",
-		        85000, 9, "PEL006", 5, false, "Poliéster", true));
+        listaPeluches.add(new PelucheDTO("Unicornio Rosa", "Ty", "Peluche",
+                "Unicornio con cuerno brillante", "https://example.com/unicornio.jpg",
+                85000, 9, "PEL006", 5, false, "Poliéster", true));
 
-		listaPeluches.add(new PelucheDTO("Panda Gigante", "Hasbro", "Peluche",
-		        "Panda suave tamaño XL", "https://example.com/panda.jpg",
-		        120000, 5, "PEL007", 7, false, "Algodón", false));
+        listaPeluches.add(new PelucheDTO("Panda Gigante", "Hasbro", "Peluche",
+                "Panda suave tamaño XL", "https://example.com/panda.jpg",
+                120000, 5, "PEL007", 7, false, "Algodón", false));
 
-		listaPeluches.add(new PelucheDTO("Dragón Azul", "Disney", "Peluche",
-		        "Dragón de alas suaves", "https://example.com/dragon.jpg",
-		        95000, 6, "PEL008", 8, true, "Espuma", true));
+        listaPeluches.add(new PelucheDTO("Dragón Azul", "Disney", "Peluche",
+                "Dragón de alas suaves", "https://example.com/dragon.jpg",
+                95000, 6, "PEL008", 8, true, "Espuma", true));
 
-		listaPeluches.add(new PelucheDTO("Elefante Gris", "Mattel", "Peluche",
-		        "Elefante orejudo con colmillos", "https://example.com/elefante.jpg",
-		        65000, 14, "PEL009", 3, false, "Algodón", true));
+        listaPeluches.add(new PelucheDTO("Elefante Gris", "Mattel", "Peluche",
+                "Elefante orejudo con colmillos", "https://example.com/elefante.jpg",
+                65000, 14, "PEL009", 3, false, "Algodón", true));
 
-		listaPeluches.add(new PelucheDTO("Zorro Naranja", "Fisher Price", "Peluche",
-		        "Zorro de pelaje esponjoso", "https://example.com/zorro.jpg",
-		        50000, 20, "PEL010", 4, false, "Poliéster", true));
-		igualarListas();
-		leerLista();
+        listaPeluches.add(new PelucheDTO("Zorro Naranja", "Fisher Price", "Peluche",
+                "Zorro de pelaje esponjoso", "https://example.com/zorro.jpg",
+                50000, 20, "PEL010", 4, false, "Poliéster", true));
 
-	}
+        igualarListas();
+        leerLista();
+    }
 
-	public void igualarListas() {
-		ModelFacade.getPelucheDAO().getListaPeluches()
-				.addAll(DataMapper.listaPelucheDTOToListaPeluche((ArrayList<PelucheDTO>) listaPeluches));
-		ModelFacade.getPelucheDAO().escribirEnArchivo();
-	}
+    /**
+     * Sincroniza la lista de peluches con el DAO persistente.
+     * <p>
+     * Convierte los {@link PelucheDTO} a entidades y los agrega al DAO.
+     * </p>
+     */
+    public void igualarListas() {
+        ModelFacade.getPelucheDAO().getListaPeluches()
+                .addAll(DataMapper.listaPelucheDTOToListaPeluche((ArrayList<PelucheDTO>) listaPeluches));
+        ModelFacade.getPelucheDAO().escribirEnArchivo();
+    }
 
-	public void leerLista() {
-		ModelFacade.getPelucheDAO().cargarDesdeArchivo();
-		listaPeluches = DataMapper.listaPelucheToListaPelucheDTO(ModelFacade.getPelucheDAO().getListaPeluches());
-	}
-	public List<PelucheDTO> getProducts() {
-		return new ArrayList<>(listaPeluches);
-	}
+    /**
+     * Lee la lista de peluches desde el DAO persistente y la convierte a DTO.
+     */
+    public void leerLista() {
+        ModelFacade.getPelucheDAO().cargarDesdeArchivo();
+        listaPeluches = DataMapper.listaPelucheToListaPelucheDTO(ModelFacade.getPelucheDAO().getListaPeluches());
+    }
 
-	public List<PelucheDTO> getProducts(int size) {
+    /**
+     * Obtiene la lista completa de peluches.
+     * 
+     * @return {@link List} de {@link PelucheDTO} con todos los productos
+     */
+    public List<PelucheDTO> getProducts() {
+        return new ArrayList<>(listaPeluches);
+    }
 
-		if (size > listaPeluches.size()) {
-			Random rand = new Random();
+    /**
+     * Obtiene una sublista de peluches o una lista aleatoria si el tamaño solicitado
+     * es mayor al tamaño disponible.
+     * 
+     * @param size Número de productos a obtener
+     * @return {@link List} de {@link PelucheDTO} con los productos seleccionados
+     */
+    public List<PelucheDTO> getProducts(int size) {
 
-			List<PelucheDTO> randomList = new ArrayList<>();
-			for (int i = 0; i < size; i++) {
-				int randomIndex = rand.nextInt(listaPeluches.size());
-				randomList.add(listaPeluches.get(randomIndex));
-			}
+        if (size > listaPeluches.size()) {
+            Random rand = new Random();
 
-			return randomList;
-		}
+            List<PelucheDTO> randomList = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                int randomIndex = rand.nextInt(listaPeluches.size());
+                randomList.add(listaPeluches.get(randomIndex));
+            }
 
-		else {
-			return new ArrayList<>(listaPeluches.subList(0, size));
-		}
+            return randomList;
+        }
 
-	}
+        else {
+            return new ArrayList<>(listaPeluches.subList(0, size));
+        }
 
-	public List<PelucheDTO> getClonedProducts(int size) {
-		List<PelucheDTO> results = new ArrayList<>();
-		List<PelucheDTO> originals = getProducts(size);
-		for (PelucheDTO original : originals) {
-			results.add(original.clone());
-		}
+    }
 
-		// make sure to have unique codes
-		for (PelucheDTO product : results) {
-			product.setId(UUID.randomUUID().toString().replace("-", "").substring(0, 8));
-		}
+    /**
+     * Clona los productos obtenidos y asegura códigos únicos.
+     * 
+     * @param size Número de productos a clonar
+     * @return {@link List} de {@link PelucheDTO} con los productos clonados y con ID único
+     */
+    public List<PelucheDTO> getClonedProducts(int size) {
+        List<PelucheDTO> results = new ArrayList<>();
+        List<PelucheDTO> originals = getProducts(size);
+        for (PelucheDTO original : originals) {
+            results.add(original.clone());
+        }
 
-		return results;
-	}
+        // make sure to have unique codes
+        for (PelucheDTO product : results) {
+            product.setId(UUID.randomUUID().toString().replace("-", "").substring(0, 8));
+        }
+
+        return results;
+    }
 }
