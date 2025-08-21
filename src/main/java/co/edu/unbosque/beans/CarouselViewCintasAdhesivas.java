@@ -13,39 +13,71 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+/**
+ * Clase que gestiona la vista de carrusel para productos de cintas adhesivas
+ * @author Nataly Vanessa Rengifo Bautista
+ */
 @Named
 @ViewScoped
 public class CarouselViewCintasAdhesivas implements Serializable {
-	private List<CintaAdhesivaDTO> products;
+    /**
+     * Lista de productos de cintas adhesivas
+     */
+    private List<CintaAdhesivaDTO> products;
 
-	private List<ResponsiveOption> responsiveOptions;
+    /**
+     * Opciones de diseño responsive para el carrusel
+     */
+    private List<ResponsiveOption> responsiveOptions;
 
-	@Inject
-	private CintaAdhesivaService service;
+    /**
+     * Servicio para manejar operaciones de cintas adhesivas
+     */
+    @Inject
+    private CintaAdhesivaService service;
 
-	@PostConstruct
-	public void init() {
-		products = service.getProducts(10);
-		responsiveOptions = new ArrayList<>();
-		responsiveOptions.add(new ResponsiveOption("1024px", 3, 3));
-		responsiveOptions.add(new ResponsiveOption("768px", 2, 2));
-		responsiveOptions.add(new ResponsiveOption("560px", 1, 1));
-	}
+    /**
+     * Método de inicialización que carga productos y configura opciones responsive
+     */
+    @PostConstruct
+    public void init() {
+        products = service.getProducts(10);
+        responsiveOptions = new ArrayList<>();
+        responsiveOptions.add(new ResponsiveOption("1024px", 3, 3));
+        responsiveOptions.add(new ResponsiveOption("768px", 2, 2));
+        responsiveOptions.add(new ResponsiveOption("560px", 1, 1));
+    }
 
-	public List<CintaAdhesivaDTO> getProducts() {
-		return products;
-	}
+    /**
+     * Obtiene la lista de productos de cintas adhesivas
+     * @return Lista de productos
+     */
+    public List<CintaAdhesivaDTO> getProducts() {
+        return products;
+    }
 
-	public void setService(CintaAdhesivaService service) {
-		this.service = service;
-	}
+    /**
+     * Establece el servicio de cintas adhesivas
+     * @param service Servicio a inyectar
+     */
+    public void setService(CintaAdhesivaService service) {
+        this.service = service;
+    }
 
-	public List<ResponsiveOption> getResponsiveOptions() {
-		return responsiveOptions;
-	}
+    /**
+     * Obtiene las opciones de diseño responsive
+     * @return Lista de opciones responsive
+     */
+    public List<ResponsiveOption> getResponsiveOptions() {
+        return responsiveOptions;
+    }
 
-	public void setResponsiveOptions(List<ResponsiveOption> responsiveOptions) {
-		this.responsiveOptions = responsiveOptions;
-	}
+    /**
+     * Establece las opciones de diseño responsive
+     * @param responsiveOptions Lista de opciones a establecer
+     */
+    public void setResponsiveOptions(List<ResponsiveOption> responsiveOptions) {
+        this.responsiveOptions = responsiveOptions;
+    }
 
 }

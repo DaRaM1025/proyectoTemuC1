@@ -1,3 +1,8 @@
+/**
+ * Clase que representa el bean de la vista para la gestión de productos de pistola de agua
+ * Permite registrar y gestionar los atributos de un producto de pistola de agua
+ * @author Nataly Vanessa Rengifo Bautista
+ */
 package co.edu.unbosque.beans;
 
 import java.io.Serializable;
@@ -8,123 +13,305 @@ import co.edu.unbosque.service.CrudService;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+
+/**
+ * Bean de vista para la gestión de formularios de pistola de agua
+ */
 @Named(value="pistolaBean")
 @ViewScoped
 public class FormPistolaBean implements Serializable {
 
-	 private String nombre;
-	    private String marca;
-	    private String tipoProducto="Pistola de Agua";
-	    private String descripcion;
-	    private String imagen="https://img.freepik.com/foto-gratis/hermosa-presentacion-arte-unas_23-2149295395.jpg"; 
-	    private double precio;
-	    private int cantidad;
-	    private String id=UUID.randomUUID().toString();
-	    private int edadRecomendada;
-	    private int capacidadAgua;
-	    private int cantidadChorros;
-	    private double alcanceChorro;
-	    
-	    @Inject
-	    private CrudService crudSer;
-	    
-	    public void guardar() {
-	    	System.out.println(toString());
-	    	crudSer.agregarProducto(new PistolaAguaDTO(nombre, marca, tipoProducto, descripcion, imagen, precio, cantidad, id, edadRecomendada, capacidadAgua, cantidadChorros, alcanceChorro));
-	    }
-	    
-		public String getNombre() {
-			return nombre;
-		}
-		public void setNombre(String nombre) {
-			this.nombre = nombre;
-		}
-		public String getMarca() {
-			return marca;
-		}
-		public void setMarca(String marca) {
-			this.marca = marca;
-		}
-		public String getDescripcion() {
-			return descripcion;
-		}
-		public void setDescripcion(String descripcion) {
-			this.descripcion = descripcion;
-		}
-		public String getImagen() {
-			return imagen;
-		}
-		public void setImagen(String imagen) {
-			this.imagen = imagen;
-		}
-		public double getPrecio() {
-			return precio;
-		}
-		public void setPrecio(double precio) {
-			this.precio = precio;
-		}
-		public int getCantidad() {
-			return cantidad;
-		}
-		public void setCantidad(int cantidad) {
-			this.cantidad = cantidad;
-		}
-		public int getEdadRecomendada() {
-			return edadRecomendada;
-		}
-		public void setEdadRecomendada(int edadRecomendada) {
-			this.edadRecomendada = edadRecomendada;
-		}
-		public int getCapacidadAgua() {
-			return capacidadAgua;
-		}
-		public void setCapacidadAgua(int capacidadAgua) {
-			this.capacidadAgua = capacidadAgua;
-		}
-		public int getCantidadChorros() {
-			return cantidadChorros;
-		}
-		public void setCantidadChorros(int cantidadChorros) {
-			this.cantidadChorros = cantidadChorros;
-		}
-		public double getAlcanceChorro() {
-			return alcanceChorro;
-		}
-		public void setAlcanceChorro(double alcanceChorro) {
-			this.alcanceChorro = alcanceChorro;
-		}
+	/**
+	 * Nombre del producto de pistola de agua
+	 */
+	private String nombre;
 
-		public String getTipoProducto() {
-			return tipoProducto;
-		}
+	/**
+	 * Marca del producto de pistola de agua
+	 */
+	private String marca;
 
-		public void setTipoProducto(String tipoProducto) {
-			this.tipoProducto = tipoProducto;
-		}
+	/**
+	 * Tipo de producto, fijo como "Pistola de Agua"
+	 */
+	private String tipoProducto="Pistola de Agua";
 
-		public String getId() {
-			return id;
-		}
+	/**
+	 * Descripción del producto de pistola de agua
+	 */
+	private String descripcion;
 
-		public void setId(String id) {
-			this.id = id;
-		}
+	/**
+	 * URL de la imagen del producto de pistola de agua
+	 */
+	private String imagen="https://img.freepik.com/foto-gratis/hermosa-presentacion-arte-unas_23-2149295395.jpg";
 
-		public CrudService getCrudSer() {
-			return crudSer;
-		}
+	/**
+	 * Precio del producto de pistola de agua
+	 */
+	private double precio;
 
-		public void setCrudSer(CrudService crudSer) {
-			this.crudSer = crudSer;
-		}
+	/**
+	 * Cantidad disponible del producto de pistola de agua
+	 */
+	private int cantidad;
 
-		@Override
-		public String toString() {
-			return "FormPistolaBean [nombre=" + nombre + ", marca=" + marca + ", descripcion=" + descripcion
-					+ ", imagen=" + imagen + ", precio=" + precio + ", cantidad=" + cantidad + ", edadRecomendada="
-					+ edadRecomendada + ", capacidadAgua=" + capacidadAgua + ", cantidadChorros=" + cantidadChorros
-					+ ", alcanceChorro=" + alcanceChorro + "]";
-		}
-	    
-		
+	/**
+	 * Identificador único del producto de pistola de agua
+	 */
+	private String id=UUID.randomUUID().toString();
+
+	/**
+	 * Edad recomendada para el producto de pistola de agua
+	 */
+	private int edadRecomendada;
+
+	/**
+	 * Capacidad de agua de la pistola en mililitros
+	 */
+	private int capacidadAgua;
+
+	/**
+	 * Cantidad de chorros que puede disparar la pistola
+	 */
+	private int cantidadChorros;
+
+	/**
+	 * Alcance del chorro de la pistola en metros
+	 */
+	private double alcanceChorro;
+
+	/**
+	 * Servicio para operaciones CRUD inyectado
+	 */
+	@Inject
+	private CrudService crudSer;
+
+	/**
+	 * Guarda un nuevo producto de pistola de agua utilizando el servicio CRUD
+	 */
+	public void guardar() {
+		System.out.println(toString());
+		crudSer.agregarProducto(new PistolaAguaDTO(nombre, marca, tipoProducto, descripcion, imagen, precio, cantidad, id, edadRecomendada, capacidadAgua, cantidadChorros, alcanceChorro));
+	}
+
+	/**
+	 * Obtiene el nombre del producto de pistola de agua
+	 * @return El nombre del producto
+	 */
+	public String getNombre() {
+		return nombre;
+	}
+
+	/**
+	 * Establece el nombre del producto de pistola de agua
+	 * @param nombre El nombre del producto
+	 */
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	/**
+	 * Obtiene la marca del producto de pistola de agua
+	 * @return La marca del producto
+	 */
+	public String getMarca() {
+		return marca;
+	}
+
+	/**
+	 * Establece la marca del producto de pistola de agua
+	 * @param marca La marca del producto
+	 */
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+
+	/**
+	 * Obtiene la descripción del producto de pistola de agua
+	 * @return La descripción del producto
+	 */
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	/**
+	 * Establece la descripción del producto de pistola de agua
+	 * @param descripcion La descripción del producto
+	 */
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	/**
+	 * Obtiene la URL de la imagen del producto de pistola de agua
+	 * @return La URL de la imagen
+	 */
+	public String getImagen() {
+		return imagen;
+	}
+
+	/**
+	 * Establece la URL de la imagen del producto de pistola de agua
+	 * @param imagen La URL de la imagen
+	 */
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+
+	/**
+	 * Obtiene el precio del producto de pistola de agua
+	 * @return El precio del producto
+	 */
+	public double getPrecio() {
+		return precio;
+	}
+
+	/**
+	 * Establece el precio del producto de pistola de agua
+	 * @param precio El precio del producto
+	 */
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+
+	/**
+	 * Obtiene la cantidad disponible del producto de pistola de agua
+	 * @return La cantidad disponible
+	 */
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	/**
+	 * Establece la cantidad disponible del producto de pistola de agua
+	 * @param cantidad La cantidad disponible
+	 */
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+
+	/**
+	 * Obtiene la edad recomendada para el producto de pistola de agua
+	 * @return La edad recomendada
+	 */
+	public int getEdadRecomendada() {
+		return edadRecomendada;
+	}
+
+	/**
+	 * Establece la edad recomendada para el producto de pistola de agua
+	 * @param edadRecomendada La edad recomendada
+	 */
+	public void setEdadRecomendada(int edadRecomendada) {
+		this.edadRecomendada = edadRecomendada;
+	}
+
+	/**
+	 * Obtiene la capacidad de agua de la pistola en mililitros
+	 * @return La capacidad de agua
+	 */
+	public int getCapacidadAgua() {
+		return capacidadAgua;
+	}
+
+	/**
+	 * Establece la capacidad de agua de la pistola en mililitros
+	 * @param capacidadAgua La capacidad de agua
+	 */
+	public void setCapacidadAgua(int capacidadAgua) {
+		this.capacidadAgua = capacidadAgua;
+	}
+
+	/**
+	 * Obtiene la cantidad de chorros que puede disparar la pistola
+	 * @return La cantidad de chorros
+	 */
+	public int getCantidadChorros() {
+		return cantidadChorros;
+	}
+
+	/**
+	 * Establece la cantidad de chorros que puede disparar la pistola
+	 * @param cantidadChorros La cantidad de chorros
+	 */
+	public void setCantidadChorros(int cantidadChorros) {
+		this.cantidadChorros = cantidadChorros;
+	}
+
+	/**
+	 * Obtiene el alcance del chorro de la pistola en metros
+	 * @return El alcance del chorro
+	 */
+	public double getAlcanceChorro() {
+		return alcanceChorro;
+	}
+
+	/**
+	 * Establece el alcance del chorro de la pistola en metros
+	 * @param alcanceChorro El alcance del chorro
+	 */
+	public void setAlcanceChorro(double alcanceChorro) {
+		this.alcanceChorro = alcanceChorro;
+	}
+
+	/**
+	 * Obtiene el tipo de producto
+	 * @return El tipo de producto
+	 */
+	public String getTipoProducto() {
+		return tipoProducto;
+	}
+
+	/**
+	 * Establece el tipo de producto
+	 * @param tipoProducto El tipo de producto
+	 */
+	public void setTipoProducto(String tipoProducto) {
+		this.tipoProducto = tipoProducto;
+	}
+
+	/**
+	 * Obtiene el identificador único del producto
+	 * @return El identificador único
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * Establece el identificador único del producto
+	 * @param id El identificador único
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	/**
+	 * Obtiene el servicio CRUD
+	 * @return El servicio CRUD
+	 */
+	public CrudService getCrudSer() {
+		return crudSer;
+	}
+
+	/**
+	 * Establece el servicio CRUD
+	 * @param crudSer El servicio CRUD
+	 */
+	public void setCrudSer(CrudService crudSer) {
+		this.crudSer = crudSer;
+	}
+
+	/**
+	 * Representación en cadena del objeto FormPistolaBean
+	 * @return La representación en cadena del objeto
+	 */
+	@Override
+	public String toString() {
+		return "FormPistolaBean [nombre=" + nombre + ", marca=" + marca + ", descripcion=" + descripcion
+				+ ", imagen=" + imagen + ", precio=" + precio + ", cantidad=" + cantidad + ", edadRecomendada="
+				+ edadRecomendada + ", capacidadAgua=" + capacidadAgua + ", cantidadChorros=" + cantidadChorros
+				+ ", alcanceChorro=" + alcanceChorro + "]";
+	}
 }

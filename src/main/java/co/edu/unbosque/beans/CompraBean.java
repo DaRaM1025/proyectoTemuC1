@@ -1,4 +1,8 @@
-
+/**
+ * Clase que representa el bean de la vista de compra
+ * Gestiona la información del usuario y el proceso de compra, incluyendo la generación de facturas en PDF y el envío de correos electrónicos
+ * @author Nataly Vanessa Rengifo Bautista
+ */
 package co.edu.unbosque.beans;
 
 import java.io.ByteArrayOutputStream;
@@ -34,20 +38,72 @@ import jakarta.mail.internet.MimeMultipart;
 @ViewScoped
 public class CompraBean implements Serializable {
 
+	/**
+	 * Nombre del usuario
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	private String nombre;
+
+	/**
+	 * Correo electrónico del usuario
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	private String email;
+
+	/**
+	 * Dirección del usuario
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	private String direccion;
+
+	/**
+	 * Número de celular del usuario
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	private String celular;
+
+	/**
+	 * Fecha de nacimiento del usuario
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	private String fechaNacimiento;
+
+	/**
+	 * Total de la compra
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	private double total;
+
+	/**
+	 * Latitud de la ubicación del usuario
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	private Double latitud;
+
+	/**
+	 * Longitud de la ubicación del usuario
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	private Double longitud;
 
+	/**
+	 * Bean del carrito de compras inyectado
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	@Inject
 	private CarritoBean cb;
+
+	/**
+	 * Servicio para gestionar usuarios
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	@Inject
 	private UsuarioService usuarioService;
 
+	/**
+	 * Inicializa el bean cargando la información del usuario desde la sesión
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	@PostConstruct
 	public void init() {
 		try {
@@ -86,6 +142,11 @@ public class CompraBean implements Serializable {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Recibe y procesa la información de geolocalización enviada desde el cliente
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	public void recibirGeocoding() {
 	    try {
 	        var params = FacesContext.getCurrentInstance()
@@ -110,9 +171,12 @@ public class CompraBean implements Serializable {
 	    }
 	}
 
+	/**
+	 * Procesa la compra, genera una factura en PDF y envía un correo al usuario con el comprobante
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	public void comprar() {
 		try {
-
 			ArrayList<ProductoDTO> listaProductos = cb.getProductosCarrito();
 			// Se crea el PDF del correo
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -184,84 +248,189 @@ public class CompraBean implements Serializable {
 		}
 	}
 
-	// ==== Getters y Setters ====
-
+	/**
+	 * Obtiene el nombre del usuario
+	 * @return El nombre del usuario
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	public String getNombre() {
 		return nombre;
 	}
 
+	/**
+	 * Establece el nombre del usuario
+	 * @param nombre El nombre del usuario
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
+	/**
+	 * Obtiene el correo electrónico del usuario
+	 * @return El correo electrónico del usuario
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * Establece el correo electrónico del usuario
+	 * @param email El correo electrónico del usuario
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * Obtiene la dirección del usuario
+	 * @return La dirección del usuario
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	public String getDireccion() {
 		return direccion;
 	}
 
+	/**
+	 * Establece la dirección del usuario
+	 * @param direccion La dirección del usuario
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
 
+	/**
+	 * Obtiene el número de celular del usuario
+	 * @return El número de celular del usuario
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	public String getCelular() {
 		return celular;
 	}
 
+	/**
+	 * Establece el número de celular del usuario
+	 * @param celular El número de celular del usuario
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	public void setCelular(String celular) {
 		this.celular = celular;
 	}
 
+	/**
+	 * Obtiene la fecha de nacimiento del usuario
+	 * @return La fecha de nacimiento del usuario
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
+	/**
+	 * Establece la fecha de nacimiento del usuario
+	 * @param fechaNacimiento La fecha de nacimiento del usuario
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
 	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-	   public double getTotal() {
-		   
-	        double suma = 0.0;
-	        if (cb != null && cb.getProductosCarrito() != null) {
-	            for (ProductoDTO producto : cb.getProductosCarrito()) {
-	                suma += producto.getPrecio();
-	            }
-	        }
-	        return suma;
-	    }
-	   public Double getLatitud() {
-		   return latitud;
-	   }
-	   public void setLatitud(Double latitud) {
-		   this.latitud = latitud;
-	   }
-	   public Double getLongitud() {
-		   return longitud;
-	   }
-	   public void setLongitud(Double longitud) {
-		   this.longitud = longitud;
-	   }
-	   public CarritoBean getCb() {
-		   return cb;
-	   }
-	   public void setCb(CarritoBean cb) {
-		   this.cb = cb;
-	   }
-	   public UsuarioService getUsuarioService() {
-		   return usuarioService;
-	   }
-	   public void setUsuarioService(UsuarioService usuarioService) {
-		   this.usuarioService = usuarioService;
-	   }
-	   public void setTotal(double total) {
-		   this.total = total;
-	   }
-	   
 
+	/**
+	 * Calcula el total de la compra sumando los precios de los productos en el carrito
+	 * @return El total de la compra
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
+	public double getTotal() {
+		double suma = 0.0;
+		if (cb != null && cb.getProductosCarrito() != null) {
+			for (ProductoDTO producto : cb.getProductosCarrito()) {
+				suma += producto.getPrecio();
+			}
+		}
+		return suma;
+	}
+
+	/**
+	 * Obtiene la latitud de la ubicación del usuario
+	 * @return La latitud de la ubicación
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
+	public Double getLatitud() {
+		return latitud;
+	}
+
+	/**
+	 * Establece la latitud de la ubicación del usuario
+	 * @param latitud La latitud de la ubicación
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
+	public void setLatitud(Double latitud) {
+		this.latitud = latitud;
+	}
+
+	/**
+	 * Obtiene la longitud de la ubicación del usuario
+	 * @return La longitud de la ubicación
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
+	public Double getLongitud() {
+		return longitud;
+	}
+
+	/**
+	 * Establece la longitud de la ubicación del usuario
+	 * @param longitud La longitud de la ubicación
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
+	public void setLongitud(Double longitud) {
+		this.longitud = longitud;
+	}
+
+	/**
+	 * Obtiene el bean del carrito de compras
+	 * @return El bean del carrito de compras
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
+	public CarritoBean getCb() {
+		return cb;
+	}
+
+	/**
+	 * Establece el bean del carrito de compras
+	 * @param cb El bean del carrito de compras
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
+	public void setCb(CarritoBean cb) {
+		this.cb = cb;
+	}
+
+	/**
+	 * Obtiene el servicio de usuarios
+	 * @return El servicio de usuarios
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
+	public UsuarioService getUsuarioService() {
+		return usuarioService;
+	}
+
+	/**
+	 * Establece el servicio de usuarios
+	 * @param usuarioService El servicio de usuarios
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
+	public void setUsuarioService(UsuarioService usuarioService) {
+		this.usuarioService = usuarioService;
+	}
+
+	/**
+	 * Establece el total de la compra
+	 * @param total El total de la compra
+	 * @author Nataly Vanessa Rengifo Bautista
+	 */
+	public void setTotal(double total) {
+		this.total = total;
+	}
 }

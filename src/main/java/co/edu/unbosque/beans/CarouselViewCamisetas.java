@@ -13,17 +13,33 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+/**
+ * Clase que gestiona la vista de carrusel para productos de camisetas
+ * @author Nataly Vanessa Rengifo Bautista
+ */
 @Named
 @ViewScoped
 public class CarouselViewCamisetas implements Serializable {
 
-	private List<CamisetaDTO> products;
+    /**
+     * Lista de productos de camisetas
+     */
+    private List<CamisetaDTO> products;
 
+    /**
+     * Opciones de diseño responsive para el carrusel
+     */
     private List<ResponsiveOption> responsiveOptions;
 
+    /**
+     * Servicio para manejar operaciones de camisetas
+     */
     @Inject
     private CamisetaService service;
 
+    /**
+     * Método de inicialización que carga productos y configura opciones responsive
+     */
     @PostConstruct
     public void init() {
         products = service.getProducts(10);
@@ -33,18 +49,34 @@ public class CarouselViewCamisetas implements Serializable {
         responsiveOptions.add(new ResponsiveOption("560px", 1, 1));
     }
 
+    /**
+     * Obtiene la lista de productos de camisetas
+     * @return Lista de productos
+     */
     public List<CamisetaDTO> getProducts() {
         return products;
     }
 
+    /**
+     * Establece el servicio de camisetas
+     * @param service Servicio a inyectar
+     */
     public void setService(CamisetaService service) {
         this.service = service;
     }
 
+    /**
+     * Obtiene las opciones de diseño responsive
+     * @return Lista de opciones responsive
+     */
     public List<ResponsiveOption> getResponsiveOptions() {
         return responsiveOptions;
     }
 
+    /**
+     * Establece las opciones de diseño responsive
+     * @param responsiveOptions Lista de opciones a establecer
+     */
     public void setResponsiveOptions(List<ResponsiveOption> responsiveOptions) {
         this.responsiveOptions = responsiveOptions;
     }

@@ -5,45 +5,62 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 import java.io.Serializable;
-import java.util.Map; // Importa Map para leer parámetros de la petición
+import java.util.Map;
 
+/**
+ * Administra la configuración del tema (modo claro u oscuro) de la aplicación.
+ * Permite alternar entre modos y sincronizar el estado del tema con el cliente.
+ * @author David Santiago Ramirez Arevalo
+ */
 @Named("temaBean")
 @SessionScoped
 public class TemaBean implements Serializable {
 
-	private boolean modoOscuro;
+    private boolean modoOscuro;
 
-	@PostConstruct
-	public void init() {
-		modoOscuro = false;
-	}
+    /**
+     * Inicializa el estado del tema con el modo oscuro desactivado.
+     */
+    @PostConstruct
+    public void init() {
+        modoOscuro = false;
+    }
 
-	public void alternarTema() {
-		modoOscuro = !modoOscuro;
-		System.out.println("Modo oscuro cambiado a: " + modoOscuro + " (desde p:toggleSwitch)");
+    /**
+     * Alterna entre el modo claro y oscuro, actualizando el estado y enviando una llamada JavaScript para aplicar el tema.
+     */
+    public void alternarTema() {
+        modoOscuro = !modoOscuro;
+        System.out.println("Modo oscuro cambiado a: " + modoOscuro + " (desde p:toggleSwitch)");
+        FacesContext.getCurrentInstance().getPartialViewContext().getEvalScripts()
+                .add("aplicarTema(" + modoOscuro + ");");
+    }
 
-		// Envía una llamada a la función JavaScript 'aplicarTema'.
-		FacesContext.getCurrentInstance().getPartialViewContext().getEvalScripts()
-				.add("aplicarTema(" + modoOscuro + ");");
-	}
+    /**
+     * Sincroniza el estado del modo oscuro con el valor recibido desde el cliente (localStorage).
+     */
+    public void sincronizarModoOscuroDesdeCliente() {
+        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String clientStateStr = params.get("clientDarkModeState");
+        if (clientStateStr != null) {
+            this.modoOscuro = Boolean.parseBoolean(clientStateStr);
+            System.out.println("Modo oscuro sincronizado desde cliente (localStorage): " + this.modoOscuro);
+        }
+    }
 
-	public void sincronizarModoOscuroDesdeCliente() {
-		// Accede a los parámetros enviados por el p:remoteCommand
-		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-		String clientStateStr = params.get("clientDarkModeState"); // 'clientDarkModeState' es el nombre del parámetro
-																	// que enviaremos desde JS
+    /**
+     * Obtiene el estado actual del modo oscuro.
+     * @return true si el modo oscuro está activado, false en caso claro
+     */
+    public boolean isModoOscuro() {
+        return modoOscuro;
+    }
 
-		if (clientStateStr != null) {
-			this.modoOscuro = Boolean.parseBoolean(clientStateStr);
-			System.out.println("Modo oscuro sincronizado desde cliente (localStorage): " + this.modoOscuro);
-		}
-	}
-
-	public boolean isModoOscuro() {
-		return modoOscuro;
-	}
-
-	public void setModoOscuro(boolean modoOscuro) {
-		this.modoOscuro = modoOscuro;
-	}
+    /**
+     * Establece el estado del modo oscuro.
+     * @param modoOscuro El estado del modo oscuro a establecer
+     */
+    public void setModoOscuro(boolean modoOscuro) {
+        this.modoOscuro = modoOscuro;
+    }
 }

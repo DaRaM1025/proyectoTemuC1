@@ -13,17 +13,33 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+/**
+ * Clase que gestiona la vista de carrusel para productos de labiales
+ * @author Nataly Vanessa Rengifo Bautista
+ */
 @Named
 @ViewScoped
 public class CarouselViewLabiales implements Serializable {
 
+    /**
+     * Lista de productos de labiales
+     */
     private List<LabialDTO> products;
 
+    /**
+     * Opciones de diseño responsive para el carrusel
+     */
     private List<ResponsiveOption> responsiveOptions;
 
+    /**
+     * Servicio para manejar operaciones de labiales
+     */
     @Inject
     private LabialService service;
 
+    /**
+     * Método de inicialización que carga productos y configura opciones responsive
+     */
     @PostConstruct
     public void init() {
         products = service.getProducts(10);
@@ -33,18 +49,34 @@ public class CarouselViewLabiales implements Serializable {
         responsiveOptions.add(new ResponsiveOption("560px", 1, 1));
     }
 
+    /**
+     * Obtiene la lista de productos de labiales
+     * @return Lista de productos
+     */
     public List<LabialDTO> getProducts() {
         return products;
     }
 
+    /**
+     * Establece el servicio de labiales
+     * @param service Servicio a inyectar
+     */
     public void setService(LabialService service) {
         this.service = service;
     }
 
+    /**
+     * Obtiene las opciones de diseño responsive
+     * @return Lista de opciones responsive
+     */
     public List<ResponsiveOption> getResponsiveOptions() {
         return responsiveOptions;
     }
 
+    /**
+     * Establece las opciones de diseño responsive
+     * @param responsiveOptions Lista de opciones a establecer
+     */
     public void setResponsiveOptions(List<ResponsiveOption> responsiveOptions) {
         this.responsiveOptions = responsiveOptions;
     }
