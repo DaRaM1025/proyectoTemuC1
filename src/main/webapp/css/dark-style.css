@@ -1,70 +1,95 @@
-/* General body and HTML styles for dark mode */
-body, html {
+
+body.dark-mode {
     background-color: #1a1a1a !important;
     color: #f0f0f0 !important;
 }
 
-/* PrimeFaces general component styles */
-.ui-widget, .ui-widget-content {
+/* PrimeFaces base */
+body.dark-mode .ui-widget,
+body.dark-mode .ui-widget-content {
     background-color: #1e1e1e !important;
     color: #f0f0f0 !important;
     border-color: #333 !important;
 }
 
-.ui-widget-header {
+body.dark-mode .ui-widget-header {
     background-color: #2a2a2a !important;
     color: #f0f0f0 !important;
     border-color: #444 !important;
 }
 
-/* Styles for forms and input fields */
-.ui-inputtext, .ui-inputfield {
+/* Inputs */
+body.dark-mode .ui-inputtext,
+body.dark-mode .ui-inputfield,
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
     background-color: #2b2b2b !important;
     color: #f0f0f0 !important;
     border-color: #444 !important;
 }
 
-/* Styles for buttons */
-.ui-button, .ui-button.ui-state-default {
+/* Botones */
+body.dark-mode .ui-button,
+body.dark-mode .ui-button.ui-state-default {
     background-color: #444 !important;
     color: #f0f0f0 !important;
     border-color: #555 !important;
 }
-
-.ui-button:hover, .ui-button:focus {
+body.dark-mode .ui-button:hover,
+body.dark-mode .ui-button:focus {
     background-color: #555 !important;
     color: #fff !important;
 }
-
-.ui-button.ui-button-outlined {
+body.dark-mode .ui-button.ui-button-outlined {
     background-color: transparent !important;
     color: orange !important;
     border-color: orange !important;
 }
 
-/* Specific styles for the menubar */
-.ui-menubar {
+/* Menubar */
+body.dark-mode .ui-menubar {
     background-color: #1a1a1a !important;
     border: 1px solid #333 !important;
     color: #f0f0f0 !important;
 }
-
-.ui-menubar .ui-menuitem-link,
-.ui-menubar .ui-submenu-link {
+body.dark-mode .ui-menubar .ui-menuitem-link,
+body.dark-mode .ui-menubar .ui-submenu-link {
     color: #f0f0f0 !important;
 }
-
-.ui-menubar .ui-menuitem-link:hover,
-.ui-menubar .ui-submenu-link:hover {
+body.dark-mode .ui-menubar .ui-menuitem-link:hover,
+body.dark-mode .ui-menubar .ui-submenu-link:hover {
     background-color: #2b2b2b !important;
 }
-
-.ui-menu-list {
+body.dark-mode .ui-menu-list {
     background-color: #1e1e1e !important;
     border: 1px solid #444 !important;
 }
 
-/* Styles for dividers */
-.ui-divider {
+/* Divisores */
+body.dark-mode .ui-divider {
     border-color: #555 !important;
+}
+
+/* Cards y contenedores */
+body.dark-mode .card {
+    background: #1e1e1e !important;
+    color: #f0f0f0 !important;
+    border-color: #333 !important;
+}
+
+/* DataTable */
+body.dark-mode .ui-datatable { background: #1e1e1e !important; }
+body.dark-mode .ui-datatable thead th {
+    background: #2a2a2a !important;
+    border-color: #444 !important;
+    color: #f0f0f0 !important;
+}
+body.dark-mode .ui-datatable tbody td { border-color: #333 !important; }
+
+/* Barra inferior fija */
+body.dark-mode .fixed-bottom-bar {
+    background: #1e1e1e !important;
+    color: #f0f0f0 !important;
+    border-color: orange !important;
 }

@@ -1,123 +1,37 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-	<style>
-		.fixed-bottom-bar {
-			position: fixed;
-			bottom: 0;
-			left: 0;
-			width: 100%;
-			background: #fff; /* Fondo para que no se mezcle con el contenido */
-			padding: 1rem;
-			box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
-			z-index: 1000;
-			display: flex;
-			justify-content: center;
-			gap: 0.5rem;
-			border-radius: 8px;
-			border: solid orange 2px;
-		}
-
-		.page-content {
-			padding-bottom: 80px; /* Altura aproximada de la barra fija */
-		}
-	</style>
-	 
-	   <h:outputScript>
-    function aplicarTema(modoOscuro) {
-        if (modoOscuro) {
-            document.body.classList.add('dark-mode');
-        } else {
-            document.body.classList.remove('dark-mode');
+    <style>
+        .fixed-bottom-bar {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: #fff; padding: 1rem;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+            z-index: 1000; display: flex; justify-content: center; gap: .5rem;
+            border-radius: 8px; border: solid orange 2px;
         }
-    }
-
-      window.addEventListener('load', function() { // Usar 'load' para asegurar que todos los elementos HTML, incluyendo los de PrimeFaces, estén disponibles.
-            // #{temaBean.modoOscuro} es el valor del bean cuando la página se renderiza.
-            aplicarTema(#{temaBean.modoOscuro});
-        });
-    // Cambiar tema dinámicamente con el botón del navbar
-    document.addEventListener('DOMContentLoaded', function() {
-        const btn = document.getElementById('btn-darkmode');
-        if (btn) {
-            btn.addEventListener('click', function() {
-                document.body.classList.toggle('dark-mode');
-                // Aquí puedes llamar a un método del bean vía AJAX si quieres guardar el cambio
-            });
-        }
-    });
-</h:outputScript>
-</h:head>
-
-<h:body>
-	<h:form>
-
-		<!-- Contenido con margen inferior -->
-		<div class="page-content">
-			<div class="card p-4">
-				<div class="grid justify-content-between">
-					<div class="card col-2 md:col-4 flex flex-column align-items-start text-left border-transparent">
-						<h3>Ropa</h3>
-						<a href="#">Camisetas</a>
-						<a href="#">Pantalones</a>
-						<a href="#">Calzado</a>
-					</div>
-					<div class="card col-2 md:col-4 flex flex-column align-items-start text-left border-transparent">
-						<h3>Juguetes</h3>
-						<a href="#">Lego</a>
-						<a href="#">Pistolas de Agua </a>
-						<a href="#">Peluches</a>
-					</div>
-					<div class="card col-2 md:col-4 flex flex-column align-items-start text-left border-transparent">
-						<h3>Dispositivos Electronicos</h3>
-						<a href="#">Celulares</a>
-						<a href="#">Computacion</a>
-						<a href="#">Televisores</a>
-					</div>
-					<div class="card col-2 md:col-4 flex flex-column align-items-start text-left border-transparent">
-						<h3>Maquillaje</h3>
-						<a href="#">Labiales</a>
-						<a href="#">Bases</a>
-						<a href="#">Correctores</a>
-					</div>
-					<div class="card col-2 md:col-4 flex flex-column align-items-start text-left border-transparent">
-						<h3> Papeleria</h3>
-						<a href="#">Cuadernos</a>
-						<a href="#">Cintas Adhesivas</a>
-						<a href="#">Marcadores</a>
-					</div>
-					<div class="card col-2 md:col-4 flex flex-column align-items-start text-left border-transparent">
-						<h3>Instrumentos</h3>
-						<a href="instrumentosviento.xhtml">Instrumentos de Viento</a>
-						<a href="instrumentospercusion.xhtml">Instrumentos de Percusion</a>
-						<a href="instrumentoscuerda.xhtml">Instrumentos de Cuerdas</a>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="fixed-bottom-bar d-flex align-items-center">
-    
-							<p:toggleSwitch id="toggleTema" value="#{temaBean.modoOscuro}"
-								offIcon="pi pi-moon" onIcon="pi pi-sun"  >
-								<p:ajax update="toggleTema"
-									oncomplete="
-                        if (#{temaBean.modoOscuro}) {
-                            document.body.classList.add('dark-mode');
-                        } else {
-                            document.body.classList.remove('dark-mode');
-                        }" />
-							</p:toggleSwitch>
-						
-    <p:button icon="pi pi-cart-plus" styleClass="order-2 mx-auto rounded-button ui-button-outlined" href="carrito.xhtml"/>
-    <p:button icon="pi pi-times" styleClass="order-3 rounded-button ui-button-danger ui-button-outlined" />
-</div>
+        .page-content { padding-bottom: 80px; }
+    </style>
 
 
-	</h:form>
-</h:body>
-</html>
+    <div class="page-content">
+        <div class="card p-4"></div>
+    </div>
+
+    <div class="fixed-bottom-bar d-flex align-items-center">
+        
+        <button type="button"
+                class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                onclick="forzarToggleDark()">
+            <span class="ui-button-text">Modo Oscuro</span>
+        </button>
+
+        <p:button icon="pi pi-cart-plus"
+                  styleClass="order-2 mx-auto rounded-button ui-button-outlined"
+                  href="carrito.xhtml" />
+        <p:button icon="pi pi-times"
+                  styleClass="order-3 rounded-button ui-button-danger ui-button-outlined" />
+    </div>
+</ui:composition>
